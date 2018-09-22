@@ -14,10 +14,20 @@ class template{
 	/* show - нарисовать/показать шаблон 
 	*	arr - массив с данными для шаблона
 	*/
-	public function show($arr){
+	/*public function show($arr){
 		$arRes = $arr;
 		include $this->template_url;
 		// TODO как то по красивее сделать
+	}*/
+
+	/** 
+	 * show - нарисовать/показать шаблон 
+	 * @param $arRes - массив с данными для шаблона // array for template
+	 * 
+	 * @return void - ничего не вернёт, подключится файл шаблона // include template
+	 */
+	public function show($arRes){
+		include $this->template_url;
 	}
 }
 

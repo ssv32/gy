@@ -18,7 +18,7 @@ class component{
 		$errText = '';
 
 		if (($err == 0) && file_exists($url.'/component/'.$name.'/teplates/'.$template.'/template.php' ) ){ 
-			$this->template = new template($url.'/component/'.$name.'/teplates/'.$template );
+			$template = new template($url.'/component/'.$name.'/teplates/'.$template );
 		} else {
 			$err = 1;
 			$errText = $this->lang->GetMessage('err_not_controller');
@@ -44,6 +44,8 @@ class component{
 		if ($err != 0){ // если есть ошибки 
 			$this->ShowErr($errText);
 		} else { // иначе запускаем компонент
+			
+			$this->controller->SetTemplate($template); // задать шаблон
 			$this->run();
 		}
 
@@ -52,7 +54,7 @@ class component{
 
 	public function run(){
 		$arRes = $this->controller->run();
-		$this->template->show($arRes);
+		//$this->template->show($arRes);
 	}
 
 	public function ShowErr($err){ // TODO вынести в отдельный класс про ошибки

@@ -3,6 +3,7 @@ class controller{
 	public $model;
 	public $controller; // ссылка для запуска выбранного контроллера компонента
 	public $lang;
+	public $template; // обьект шаблона 
 
 	public function __construct($url){
 		global $app;
@@ -12,6 +13,10 @@ class controller{
 	
 	public function SetModel($model){ // установить ссылку на модель если есть
 		$this->model = $model;
+	}
+
+	public function SetTemplate($template){ // задать шаблон
+		$this->template = $template;	
 	}
 
 	public function run(){

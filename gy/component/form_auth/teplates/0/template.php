@@ -1,4 +1,5 @@
-<?if ( empty($arRes["auth_ok"]) ) :?>
+<? // шаблон компонента // template component form_auth
+if ( empty($arRes["auth_ok"]) ) :?>
 	<form>
 		<? 
 		foreach ($arRes as $key => $value) {

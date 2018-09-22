@@ -7,20 +7,8 @@ class lang{
 		$result = false; 
 		
 		if ( !empty($url) && !empty($fileName) && !empty($lang) ) {
-
-			// если есть файл с языковыми параметрами
-			if ( file_exists($url.'/lang_'.$fileName.'.php' ) ){
-
-				include $url.'/lang_'.$fileName.'.php';
-
-				if ( !empty($mess[$lang]) ) {
-					$this->textLang = $mess[$lang];
-				}
-
-				unset($mess); // TODO перепроверить надо ли это делать
-			}
-
-			// $this->textLang = $url;
+			//load array text language
+			$this->textLang = $this->GetArrLangFromFilre( $url.'/lang_'.$fileName.'.php', $lang );
 		}
 
 		return $result;
@@ -47,5 +35,24 @@ class lang{
 		return $result;
 	}
 
+	
+	/**
+	 * GetArrLangFromFilre pагрузить массив с текстом нужного языка // load array text language
+	 * @param $urlFile ссылка на загружаемый файл // url load file
+	 * @param $lang - нужный язык // language // rus, eng ...
+	 * 
+	 * @return массив с текстом на выбранном языке // language text array 
+	 */
+	function GetArrLangFromFilre( $urlFile, $lang ){
+		$mess = array();
+	
+		// если есть файл с языковыми параметрами
+		if ( file_exists($urlFile) ){	
+			include $urlFile;
+		}
+
+		return $mess[$lang];
+	}
+	
 }
 ?>

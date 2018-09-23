@@ -4,6 +4,7 @@ class controller{
 	public $controller; // ссылка для запуска выбранного контроллера компонента
 	public $lang;
 	public $template; // обьект шаблона 
+	public $arParam;
 
 	public function __construct($url){
 		global $app;
@@ -19,18 +20,12 @@ class controller{
 		$this->template = $template;	
 	}
 
-	public function run(){
-		$arRes = false;
+	public function SetArParam($arParam){ // задать параметры компонента // set array property component
+		$this->arParam = $arParam;
+	}
 
-		// TODO надо сделать лучше
-		if (empty($model)){
-			include $this->controller;
-		}else{
-			$model = $this->model;
-			include $this->controller;
-		}
-	
-		return $arRes;
+	public function run(){		
+		include $this->controller;
 	}
 
 }

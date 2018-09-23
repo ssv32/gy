@@ -16,8 +16,9 @@
 	$app->component(
 		'form_auth',
 		'0',
-		'',
-		array(),
+		array( 
+			'test' => 'asd',
+		),
 		$app->url
 	);
 ?>

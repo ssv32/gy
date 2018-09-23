@@ -3,11 +3,11 @@ class component{
 
 	public $template; // тут будут объект класса template
 	public $controller;
-	public $modele;
+	public $model;
 	public $url;
 	public $lang; 
 
-	public function __construct( $name, $template, $arr, $url ){
+	public function __construct( $name, $template, $arParam, $url ){
 		global $app;
 		$this->lang = new lang($url.'/class/', 'component', $app->options['lang']);
 
@@ -31,21 +31,21 @@ class component{
 			$errText = $this->lang->GetMessage('err_not_controller') ;
 		}
 
-/* TODO !!! это ещё не протестировано
-		if ( ($err == 0) && file_exists($url.'/component/'.$name.'/'.$template.'/modele.php' ) ){ 
-			$this->modele = new modele($url.'/component/'.$name.'/modele.php'); // может и не быть
-			$this->controller->SetModel($this->modele);
-		} else {
-			//$err = 3; // это не ошибка
-		}
-*/
+
+		if ( ($err == 0) && file_exists($url.'/component/'.$name.'/model.php' ) ){ 
+			$model = new model($url.'/component/'.$name.'/model.php'); // может и не быть
+			$this->controller->SetModel($model);
+		} 
+
 		// TODO вывести ошибку если что то не найдено // значит файлы не все есть
 
 		if ($err != 0){ // если есть ошибки 
 			$this->ShowErr($errText);
 		} else { // иначе запускаем компонент
 			
-			$this->controller->SetTemplate($template); // задать шаблон
+			$this->controller->SetTemplate($template); // задать шаблон	
+			$this->controller->SetArParam($arParam); // передать параметры компонента // set array property component 
+			
 			$this->run();
 		}
 
@@ -53,7 +53,7 @@ class component{
 	}
 
 	public function run(){
-		$arRes = $this->controller->run();
+		$this->controller->run();
 		//$this->template->show($arRes);
 	}
 

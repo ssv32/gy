@@ -25,9 +25,13 @@ class app{
 	* 	$arr - параметры компонента (параметры кеша и прочие нюансы) // array component config
 	* 
 	* 	вернёт объект компонент
+	* 
+	* 	TODO возможно понадобится сделать подключение модели // если делать универсальные модели для компонентов
+	* 		или возможность подключать много моделей разных
+	* 		maybe includ many model in component
 	*/
-	public function component($name, $template, $model, $arr, $url ){
-		$component = new component($name, $template, $model, $url);
+	public function component($name, $template, $arParam, $url ){
+		$component = new component($name, $template, $arParam, $url);
 		return $component;
 	}
 

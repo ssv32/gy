@@ -2,6 +2,8 @@
 // контроллер компонента form_auth (форма авторизации)
 
 // были доступны параметры
+//echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';
+
 
 // $model - теоретически должно быть тут доступно
 if (!empty($_REQUEST['auth'])){

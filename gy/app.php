@@ -26,8 +26,8 @@ class app{
 	* 
 	* 	вернёт объект компонент
 	*/
-	public function component($name, $template, $model, $arr, $url ){
-		$component = new component($name, $template, $model, $url);
+	public function component($name, $template, $model, $arParam, $url ){
+		$component = new component($name, $template, $model, $arParam, $url);
 		return $component;
 	}
 

@@ -4,6 +4,7 @@ class controller{
 	public $controller; // ссылка для запуска выбранного контроллера компонента
 	public $lang;
 	public $template; // обьект шаблона 
+	public $arParam;
 
 	public function __construct($url){
 		global $app;
@@ -17,6 +18,10 @@ class controller{
 
 	public function SetTemplate($template){ // задать шаблон
 		$this->template = $template;	
+	}
+
+	public function SetArParam($arParam){ // задать параметры компонента // set array property component
+		$this->arParam = $arParam;
 	}
 
 	public function run(){

@@ -7,7 +7,7 @@ class component{
 	public $url;
 	public $lang; 
 
-	public function __construct( $name, $template, $arr, $url ){
+	public function __construct( $name, $template, $model, $arParam, $url ){
 		global $app;
 		$this->lang = new lang($url.'/class/', 'component', $app->options['lang']);
 
@@ -45,7 +45,9 @@ class component{
 			$this->ShowErr($errText);
 		} else { // иначе запускаем компонент
 			
-			$this->controller->SetTemplate($template); // задать шаблон
+			$this->controller->SetTemplate($template); // задать шаблон	
+			$this->controller->SetArParam($arParam); // передать параметры компонента // set array property component 
+			
 			$this->run();
 		}
 

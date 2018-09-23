@@ -24,18 +24,8 @@ class controller{
 		$this->arParam = $arParam;
 	}
 
-	public function run(){
-		$arRes = false;
-
-		// TODO надо сделать лучше
-		if (empty($model)){
-			include $this->controller;
-		}else{
-			$model = $this->model;
-			include $this->controller;
-		}
-	
-		return $arRes;
+	public function run(){		
+		include $this->controller;
 	}
 
 }

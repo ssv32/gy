@@ -10,7 +10,29 @@ include __DIR__ . '/class/model.php';
 include __DIR__ . '/class/template.php';
 include __DIR__ . '/class/controller.php';
 include __DIR__ . '/class/lang.php';
+include __DIR__ . '/class/class.db.php';
 ////
+
+// подключить класс работы с базой данный // include class work database
+if (isset($db_config) 
+    && isset($db_config['db_type']) 
+    && isset($db_config['db_host']) 
+    && isset($db_config['db_user']) 
+    && isset($db_config['db_pass']) 
+    && isset($db_config['db_name']) 
+){
+    if (file_exists(__DIR__ . '/class/class.'.$db_config['db_type'].'.php' )) {
+        include __DIR__ . '/class/class.'.$db_config['db_type'].'.php';
+        $db = new $db_config['db_type'];
+        
+        //echo '!!--!'.$db->test;
+        
+//        $db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+//        $asd = $db->query($db->db, 'CREATE TABLE test (id int, name varchar(50) )');
+//        var_dump($asd);
+//        $db->close($db->db);
+    }
+}
 
 $app = new app(__DIR__ );
 

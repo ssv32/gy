@@ -23,12 +23,12 @@ if (isset($db_config)
 ){
     if (file_exists(__DIR__ . '/class/class.'.$db_config['db_type'].'.php' )) {
         include __DIR__ . '/class/class.'.$db_config['db_type'].'.php';
-        $db = new $db_config['db_type'];
+        $db = new $db_config['db_type']; // mysql - for test work db mysql
         
         //echo '!!--!'.$db->test;
         
-//        $db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
-//        $asd = $db->query($db->db, 'CREATE TABLE test (id int, name varchar(50) )');
+        //$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+        //$asd = $db->query($db->db, 'CREATE TABLE test (id int, name varchar(50) )');
 //        var_dump($asd);
 //        $db->close($db->db);
     }

@@ -5,13 +5,22 @@ include_once("./gy/config/gy_const.php"); // подключение конста
 
 // подключение необходимых классов // include all class core
 include __DIR__ . '/app.php';
-include __DIR__ . '/class/component.php';
-include __DIR__ . '/class/model.php';
-include __DIR__ . '/class/template.php';
-include __DIR__ . '/class/controller.php';
-include __DIR__ . '/class/lang.php';
+//include __DIR__ . '/class/component.php';
+//include __DIR__ . '/class/model.php';
+//include __DIR__ . '/class/template.php';
+//include __DIR__ . '/class/controller.php';
+//include __DIR__ . '/class/lang.php';
 include __DIR__ . '/class/class.db.php';
 ////
+
+// авто подключение классов
+function __autoload($calssname){ 
+    if (file_exists(__DIR__ . '/class/'.$calssname.'.php' )){
+	require_once( "class/$calssname.php" );          
+    } else{
+        die('class '.$calssname.' not find' );
+    }
+}
 
 // подключить класс работы с базой данный // include class work database
 if (isset($db_config) 

@@ -9,19 +9,20 @@ if (isset($this->model) ){
 // были доступны параметры
 //echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';
 
+// если задан параметр idComponent значит сверить с пришедшим
+$isChackIdComponent = ( empty($this->arParam['idComponent']) || (!empty($this->arParam['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) );
+
 
 // $model - теоретически должно быть тут доступно
-if (!empty($_REQUEST['auth'])){
-	
+if ($isChackIdComponent && !empty($_REQUEST['auth']) ){
 	$arRes["auth_ok"] = 'ok';
 	$arRes["auth_user"] = $_REQUEST['auth'].' '.model_setAuth($_REQUEST['auth']);
 } else {
-
 	$arRes["auth"] = "auth";
-
-
 }
 
+
+
 // показать шаблон
-$this->template->show($arRes);
+$this->template->show($arRes, $this->arParam);
 ?>

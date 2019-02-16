@@ -8,7 +8,7 @@ class model{
 	}
 
 	public function includeModel(){		
-		include $this->url;
+		require_once $this->url; // !!!
 	}
 }
 

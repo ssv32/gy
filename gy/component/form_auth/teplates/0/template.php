@@ -4,6 +4,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
 		<? 
 		foreach ($arRes as $key => $value) {
 		?>
+		<input type="hidden" name="idComponent" value="<?=$arParam['idComponent']?>" />
 			<input type="text" name="<?=$key;?>"  />
 		<?}?>
 

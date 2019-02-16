@@ -26,7 +26,7 @@ class template{
 	 * 
 	 * @return void - ничего не вернёт, подключится файл шаблона // include template
 	 */
-	public function show($arRes){
+	public function show($arRes, $arParam){
 		include $this->template_url;
 	}
 }

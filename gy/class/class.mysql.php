@@ -21,7 +21,7 @@ class mysql extends db{
      * in:  $db - resurs (create self::connect()), $query - string query
      * out: true - ok OR false - not ok
      */
-    public function query($db, $query){
+    public function query($db, $query){	// TODO брать прямоиз класса $db
         return mysqli_query($db, $query);
     }
     
@@ -29,7 +29,7 @@ class mysql extends db{
      * in: $db - resurs (create self::connect()) 
      * out: true - ok OR false - not ok
      */
-    public function close($db){
+    public function close($db){ // TODO авто закрывать коннект при деструкте
         return mysqli_close($db);
     }
 }

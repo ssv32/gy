@@ -1,7 +1,7 @@
 <?php
 define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
 
-include_once("./gy/config/gy_const.php"); // подключение констант // include const
+include_once("config/gy_const.php"); // подключение констант // include const
 
 // подключение необходимых классов // include all class core
 include __DIR__ . '/app.php';
@@ -32,13 +32,14 @@ if (isset($db_config)
 ){
     if (file_exists(__DIR__ . '/class/class.'.$db_config['db_type'].'.php' )) {
         include __DIR__ . '/class/class.'.$db_config['db_type'].'.php';
+		global $db;
         $db = new $db_config['db_type']; // mysql - for test work db mysql
         
         //echo '!!--!'.$db->test;
         
         //$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
         //$asd = $db->query($db->db, 'CREATE TABLE test (id int, name varchar(50) )');
-//        var_dump($asd);
+//        var_$dbdump($asd);
 //        $db->close($db->db);
     }
 }

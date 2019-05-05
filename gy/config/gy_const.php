@@ -14,4 +14,6 @@ $db_config = array(
     ////
 );
 
+$global_config['sole'] = 'pass1021asz#_@)A';
+
 ?>

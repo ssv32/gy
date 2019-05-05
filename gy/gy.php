@@ -44,6 +44,13 @@ if (isset($db_config)
     }
 }
 
+$crypto = new crypto();
+if (!empty($global_config['sole'])){
+	$crypto->setSole($global_config['sole']);
+}
+
+
+
 $app = new app(__DIR__ );
 
 ?>

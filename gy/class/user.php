@@ -39,12 +39,18 @@ class user{ // TODO создавать обьект класса сразу пр
 			
 		if ($arRes = mysqli_fetch_assoc($res)){
 		
+			//print_r($arRes);
+			
 			// TODO установить куку что бы авторизация держалась
 			
-			/*setcookie('hash_auth', '12345'); //устанавливаем куку // сделать рендомным потом
+			/*
 			
 			mysql_query('update users set hash_auth="12345" where id="'.$arRes[0].'"');
 			*/
+					
+			global $crypto;
+			$this->setUserCookie($arRes['id'] , $crypto->getRandString());
+			
 			$result = true;		
 		}
 		
@@ -52,6 +58,13 @@ class user{ // TODO создавать обьект класса сразу пр
 
 		return $result;
 		
+	}
+	
+	protected function setUserCookie($userId, $StringCookie){
+		setcookie('gy_user_auth', $StringCookie);
+		global $db;
+		$db->query($db->db, 'update users set hash_auth="'.$StringCookie.'" where id="'.$userId.'"');
+		return true;
 	}
 		
 }

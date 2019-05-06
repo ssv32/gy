@@ -2,9 +2,13 @@
 class user{ // TODO создавать обьект класса сразу при начале сессии
 	
 	protected $authorized = false;
-	protected $id;
-	protected $login;
+	protected $dataUser;
 	protected $nameCookie = 'gy_user_auth';
+	protected $admin = false; 
+	
+	public function isAdmin(){
+		return $this->admin;
+	}
 	
 	/**
 	 * getAuthorized - узнать авторизован ли пользователь
@@ -19,7 +23,7 @@ class user{ // TODO создавать обьект класса сразу пр
 	 * @return int
 	 */
 	public function getId(){
-		return $this->id;
+		return $this->dataUser['id'];
 	}
 
 	
@@ -59,11 +63,14 @@ class user{ // TODO создавать обьект класса сразу пр
 		
 		if(!empty($_COOKIE[$this->nameCookie]) ){
 						
-			$id = $this->findUserByCookie($_COOKIE[$this->nameCookie]);
+			$dataUser = $this->findUserByCookie($_COOKIE[$this->nameCookie]);
 						
-			if ($id !== false){
-				$this->id = $id;
+			if ($dataUser !== false){
+				$this->dataUser = $dataUser;
 				$this->authorized = true;
+				if ($dataUser['groups'] == 1){
+					$this->admin = true;
+				}
 				$result = true;
 			}
 		}
@@ -78,7 +85,7 @@ class user{ // TODO создавать обьект класса сразу пр
 		$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
 			
 		if ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result = $arRes['id'];		
+			$result = $arRes;		
 		}
 				
 		return $result;

@@ -7,17 +7,17 @@ echo 'install table - user ...';
 
 global $db;
         
-$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
-$res = $db->query($db->db, 'CREATE TABLE users (id int, login varchar(50), name varchar(50), pass varchar(50), hash_auth varchar(50) )');
-$db->close($db->db);
+//$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+$res = $db->query($db->db, 'CREATE TABLE users (id int, login varchar(50), name varchar(50), pass varchar(50), hash_auth varchar(50), groups int );');
+//$db->close($db->db);
 
 if ($res === true){
 	echo '<br/>install table - user - OK';
 	
 	echo '<br/>add admin ...';
-	$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
-	$res = $db->query($db->db, "INSERT INTO users (id, login, name, pass ) VALUES(1, 'admin', 'admin', '".md5('admin')."' )");
-	$db->close($db->db);
+	//$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+	$res = $db->query($db->db, "INSERT INTO users (id, login, name, pass, groups ) VALUES(1, 'admin', 'admin', '".md5('admin')."', 1 )");
+	//$db->close($db->db);
 	
 	var_dump($res);
 	print_r($res);

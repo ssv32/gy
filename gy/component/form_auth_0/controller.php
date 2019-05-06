@@ -12,17 +12,17 @@ if (isset($this->model) ){
 // если задан параметр idComponent значит сверить с пришедшим
 $isChackIdComponent = ( empty($this->arParam['idComponent']) || (!empty($this->arParam['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) );
 
-$isAuthorized = false;
+$isAdmin = false;
 
 $thisLogin = $_REQUEST['auth'];
 
 global $user;
 
-$isAuthorized = $user->getAuthorized();
+$isAdmin = $user->isAdmin();
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
 
-if ($isAuthorized === true){
+if ($isAdmin === true){
 		
 	$thisLogin = $user->getId();	
 	$arRes["auth_ok"] = 'ok';
@@ -30,13 +30,13 @@ if ($isAuthorized === true){
 		
 } elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass'])) {
 	$user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
-	$isAuthorized = $user->getAuthorized();
+	$isAdmin = $user->isAdmin();
 	
-	if ($isAuthorized === false){
+	if ($isAdmin === false){
 		$arRes["err"] = 'err1'; 
 	}
 	
-	if ($isChackIdComponent && $isAuthorized){
+	if ($isChackIdComponent && $isAdmin){
 		$arRes["auth_ok"] = 'ok';
 		$arRes["auth_user"] = $thisLogin;
 		

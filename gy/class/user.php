@@ -32,10 +32,7 @@ class user{ // TODO создавать обьект класса сразу пр
 	protected function chackUser($log, $pass) { 
 		$result = false;
 		
-		global $db;
-		global $db_config;
-		
-		$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+		global $db;		
 		$res = $db->query($db->db, 'select * from users where login="'.$log.'" and pass="'.md5($pass).'"');
 			
 		if ($arRes = $db->GetResult_fetch_assoc($res)){				
@@ -44,8 +41,6 @@ class user{ // TODO создавать обьект класса сразу пр
 			$result = true;		
 		}
 		
-		$db->close($db->db);
-
 		return $result;
 		
 	}
@@ -79,17 +74,13 @@ class user{ // TODO создавать обьект класса сразу пр
 		$result = false;
 		
 		global $db;
-		global $db_config;
 		
-		$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
 		$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
 			
 		if ($arRes = $db->GetResult_fetch_assoc($res)){
 			$result = $arRes['id'];		
 		}
-		
-		$db->close($db->db);
-		
+				
 		return $result;
 	}
 	

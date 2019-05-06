@@ -36,5 +36,20 @@ class mysql extends db{
 	public function GetResult_fetch_assoc($res){
 		return mysqli_fetch_assoc($res);
 	}
+	
+	public function __construct() {
+		if ( empty($this->db)){
+			global $db_config;
+			if (!empty($db_config)){
+				$this->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+			}
+		}
+	}
+	
+	public function __destruct() {
+		if ( !empty($this->db)){
+			$this->close($this->db);
+		}
+	}
 }
 ?>

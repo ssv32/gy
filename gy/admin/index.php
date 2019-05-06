@@ -5,12 +5,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 ?>
 
-<html>
-	<head>
-		<title>gy -admin</title>
-		<link href="../../gy/style/main.css" rel="stylesheet">
-	</head>	
-	
+<?include "../../gy/admin/header-admin.php";?>
 	
 	<?
 	// пример вызова компонента // example run component
@@ -23,5 +18,5 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 	?>
 	
-	
-</html>	
+<?include "../../gy/admin/footer-admin.php";?>
+

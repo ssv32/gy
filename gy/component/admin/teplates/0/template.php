@@ -12,5 +12,18 @@
 		),
 		$app->url
 	);
+	
+	// menu
+	$app->component(
+		'menu',
+		'0',
+		array(			
+			'buttons' => array(
+				'Пользователи' => '/gy/admin/users.php'
+			)
+		),
+		$app->url
+	);
+	
 	?>
 </body>

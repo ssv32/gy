@@ -29,7 +29,7 @@ class mysql extends db{
      * in: $db - resurs (create self::connect()) 
      * out: true - ok OR false - not ok
      */
-    public function close($db){ // TODO авто закрывать коннект при деструкте
+    public function close($db){
         return mysqli_close($db);
     }
 	

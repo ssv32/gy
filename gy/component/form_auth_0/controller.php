@@ -19,7 +19,9 @@ $thisLogin = $_REQUEST['auth'];
 global $user;
 
 $isAuthorized = $user->getAuthorized();
-	
+
+$redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
+
 if ($isAuthorized === true){
 		
 	$thisLogin = $user->getId();	
@@ -38,12 +40,17 @@ if ($isAuthorized === true){
 		$arRes["auth_ok"] = 'ok';
 		$arRes["auth_user"] = $thisLogin;
 		
-		// TODO добавить редирект
+		header( 'Location: '.$redirectUrl );
 	} else {
 		$arRes['form_input']["auth"] = "auth";
 		$arRes['form_input']["pass"] = "pass";
+		header( 'Location: '.$redirectUrl.'?err=err1' );
+		
 	}
 } else {
+	if (!empty($_REQUEST['err'])){
+		$arRes["err"] = $_REQUEST['err']; 
+	}
 	$arRes['form_input']["auth"] = "auth";
 	$arRes['form_input']["pass"] = "pass";
 }

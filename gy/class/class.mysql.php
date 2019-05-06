@@ -32,5 +32,9 @@ class mysql extends db{
     public function close($db){ // TODO авто закрывать коннект при деструкте
         return mysqli_close($db);
     }
+	
+	public function GetResult_fetch_assoc($res){
+		return mysqli_fetch_assoc($res);
+	}
 }
 ?>

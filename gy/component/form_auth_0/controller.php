@@ -37,6 +37,8 @@ if ($isAuthorized === true){
 	if ($isChackIdComponent && $isAuthorized){
 		$arRes["auth_ok"] = 'ok';
 		$arRes["auth_user"] = $thisLogin;
+		
+		// TODO добавить редирект
 	} else {
 		$arRes['form_input']["auth"] = "auth";
 		$arRes['form_input']["pass"] = "pass";

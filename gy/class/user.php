@@ -29,7 +29,6 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
-	// TODO работа с БД не очкень универсальна, с другими БД может не работать, нужно добавить методы взятия результата в mysql class и т.д.
 	protected function chackUser($log, $pass) { 
 		$result = false;
 		
@@ -39,20 +38,9 @@ class user{ // TODO создавать обьект класса сразу пр
 		$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
 		$res = $db->query($db->db, 'select * from users where login="'.$log.'" and pass="'.md5($pass).'"');
 			
-		if ($arRes = mysqli_fetch_assoc($res)){
-		
-			//print_r($arRes);
-			
-			// TODO установить куку что бы авторизация держалась
-			
-			/*
-			
-			mysql_query('update users set hash_auth="12345" where id="'.$arRes[0].'"');
-			*/
-					
+		if ($arRes = $db->GetResult_fetch_assoc($res)){				
 			global $crypto;
 			$this->setUserCookie($arRes['id'] , $crypto->getRandString());
-			
 			$result = true;		
 		}
 		
@@ -96,7 +84,7 @@ class user{ // TODO создавать обьект класса сразу пр
 		$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
 		$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
 			
-		if ($arRes = mysqli_fetch_assoc($res)){
+		if ($arRes = $db->GetResult_fetch_assoc($res)){
 			$result = $arRes['id'];		
 		}
 		

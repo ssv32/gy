@@ -49,7 +49,9 @@ if (!empty($global_config['sole'])){
 	$crypto->setSole($global_config['sole']);
 }
 
-
+$user = new user;
+$user->checkUserCookie();
+	
 
 $app = new app(__DIR__ );
 

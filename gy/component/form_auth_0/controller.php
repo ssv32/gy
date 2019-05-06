@@ -14,27 +14,37 @@ $isChackIdComponent = ( empty($this->arParam['idComponent']) || (!empty($this->a
 
 $isAuthorized = false;
 
-if (!empty($_REQUEST['auth']) && !empty($_REQUEST['pass'])){
-	$user = new user();
+$thisLogin = $_REQUEST['auth'];
+
+global $user;
+
+$isAuthorized = $user->getAuthorized();
+	
+if ($isAuthorized === true){
+		
+	$thisLogin = $user->getId();	
+	$arRes["auth_ok"] = 'ok';
+	$arRes["auth_user"] = $thisLogin;
+		
+} elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass'])) {
 	$user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
 	$isAuthorized = $user->getAuthorized();
 	
 	if ($isAuthorized === false){
 		$arRes["err"] = 'err1'; 
 	}
-}
-
-// $model - теоретически должно быть тут доступно
-if ($isChackIdComponent && $isAuthorized ){
-	$arRes["auth_ok"] = 'ok';
-	$arRes["auth_user"] = $_REQUEST['auth'];
+	
+	if ($isChackIdComponent && $isAuthorized){
+		$arRes["auth_ok"] = 'ok';
+		$arRes["auth_user"] = $thisLogin;
+	} else {
+		$arRes['form_input']["auth"] = "auth";
+		$arRes['form_input']["pass"] = "pass";
+	}
 } else {
 	$arRes['form_input']["auth"] = "auth";
 	$arRes['form_input']["pass"] = "pass";
-	
 }
-
-
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

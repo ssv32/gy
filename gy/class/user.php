@@ -40,12 +40,14 @@ class user{ // TODO создавать обьект класса сразу пр
 	protected function chackUser($log, $pass) { 
 		$result = false;
 		
-		global $db;		
-		$res = $db->query($db->db, 'select * from users where login="'.$log.'" and pass="'.md5($pass).'"');
+		global $db;
+		global $crypto;		
+		$res = $db->query($db->db, 'select * from users where login="'.$log.'" and pass="'.md5($pass.$crypto->getSole()).'"');
 			
 		if ($arRes = $db->GetResult_fetch_assoc($res)){				
-			global $crypto;
-			$this->setUserCookie($arRes['id'] , $crypto->getRandString());
+			
+			//$this->setUserCookie($arRes['id'] , $crypto->getRandString());
+			$this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
 			$result = true;		
 		}
 		
@@ -64,7 +66,7 @@ class user{ // TODO создавать обьект класса сразу пр
 		global $_COOKIE;
 		unset($_COOKIE[$this->nameCookie]);
 		global $db;
-		$db->query($db->db, 'update users set hash_auth="" where id="'.$userId.'"');
+		$db->query($db->db, 'update users set hash_auth="NULL" where id="'.$userId.'"');
 		return true;
 	}
 	

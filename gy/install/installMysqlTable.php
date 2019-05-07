@@ -15,8 +15,11 @@ if ($res === true){
 	echo '<br/>install table - user - OK';
 	
 	echo '<br/>add admin ...';
+
+	global $crypto;
 	//$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
-	$res = $db->query($db->db, "INSERT INTO users (id, login, name, pass, groups ) VALUES(1, 'admin', 'admin', '".md5('admin')."', 1 )");
+	$res = $db->query($db->db, "INSERT INTO users (id, login, name, pass, groups ) VALUES(1, 'admin', 'admin', '".md5('admin'.$crypto->getSole())."', 1 )");
+	$res = $db->query($db->db, "INSERT INTO users (id, login, name, pass, groups ) VALUES(2, 'asd', 'asd', '".md5('asdasd'.$crypto->getSole())."', 2 )");
 	//$db->close($db->db);
 	
 	var_dump($res);

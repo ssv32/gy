@@ -8,23 +8,20 @@ global $user;
 if ($user->isAdmin()){
 	
 	include "../../gy/admin/header-admin.php";
-	?>
-	<body>
-		<?
-		// menu
-		$app->component(
-			'menu',
-			'0',
-			array(			
-				'buttons' => array(
-					'Пользователи' => '/gy/admin/users.php'
-				)
-			),
-			$app->url
-		);
-		?>
-	</body>	
-	<?	
+	
+	// menu
+	$app->component(
+		'menu',
+		'0',
+		array(			
+			'buttons' => array(
+				'Главная админки' => '/gy/admin/index.php',
+				'Пользователи' => '/gy/admin/users.php'
+			)
+		),
+		$app->url
+	);
+
 	include "../../gy/admin/footer-admin.php";
 
 } else {

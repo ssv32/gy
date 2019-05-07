@@ -4,7 +4,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
 		<input type="hidden" name="idComponent" value="<?=$arParam['idComponent']?>" />
 
 		<?foreach ($arRes['form_input'] as $key => $value) { ?>
-			<input type="text" name="<?=$key;?>"  /><br/>
+			<input type="<?=(($key == 'pass')? 'password': 'text');?>" name="<?=$key;?>"  /><br/>
 		<?}?>
 
 		<?if ( !empty($arRes['err']) ){?>
@@ -15,5 +15,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
 	</form>	
 <?else:?>
 	<h1>Привет, <?=$arRes["auth_user"];?></h1>
-
+	<form>
+		<input type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
+	</form>
 <?endif;?>

@@ -55,6 +55,12 @@ if ($isAdmin === true){
 	$arRes['form_input']["pass"] = "pass";
 }
 
+if ( ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
+	if ($user->userExit() ){
+		header( 'Location: '.$redirectUrl );
+	}
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);
 ?>

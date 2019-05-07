@@ -56,6 +56,14 @@ class user{ // TODO создавать обьект класса сразу пр
 		return true;
 	}
 	
+	protected function deleteUserCookie($userId){
+		global $_COOKIE;
+		unset($_COOKIE[$this->nameCookie]);
+		global $db;
+		$db->query($db->db, 'update users set hash_auth="" where id="'.$userId.'"');
+		return true;
+	}
+	
 	public function checkUserCookie(){
 		$result = false;
 		
@@ -89,6 +97,10 @@ class user{ // TODO создавать обьект класса сразу пр
 		}
 				
 		return $result;
+	}
+	
+	public function userExit(){
+		return $this->deleteUserCookie($this->dataUser['id']);
 	}
 	
 }

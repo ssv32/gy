@@ -24,7 +24,7 @@ $redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
 
 if ($isAdmin === true){
 		
-	$thisLogin = $user->getId();	
+	$thisLogin = $user->getDataThisUser()['login'];	
 	$arRes["auth_ok"] = 'ok';
 	$arRes["auth_user"] = $thisLogin;
 		

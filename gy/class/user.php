@@ -6,6 +6,10 @@ class user{ // TODO создавать обьект класса сразу пр
 	protected $nameCookie = 'gy_user_auth';
 	protected $admin = false; 
 	
+	public function getDataThisUser(){
+		return $this->dataUser;
+	}
+	
 	public function isAdmin(){
 		return $this->admin;
 	}
@@ -101,6 +105,16 @@ class user{ // TODO создавать обьект класса сразу пр
 	
 	public function userExit(){
 		return $this->deleteUserCookie($this->dataUser['id']);
+	}
+	
+	public function getAllDataUsers(){
+		$result = array();
+		global $db;		
+		$res = $db->query($db->db, 'select * from users');
+		while ($arRes = $db->GetResult_fetch_assoc($res)){
+			$result[] = $arRes;
+		}
+		return $result;
 	}
 	
 }

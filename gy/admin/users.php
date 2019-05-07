@@ -21,7 +21,18 @@ if ($user->isAdmin()){
 		),
 		$app->url
 	);
-
+	?>
+	<br/>
+	<?
+	// таблица с пользователями
+	$app->component(
+		'users_all_tables',
+		'0',
+		array(),
+		$app->url
+	);
+	
+	
 	include "../../gy/admin/footer-admin.php";
 
 } else {

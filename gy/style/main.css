@@ -4,3 +4,7 @@
 .active-menu{
     background-color: chartreuse;
 }
+.gy-table-all-users{
+    border-collapse: collapse;
+    background-color: aqua;
+}

@@ -150,5 +150,20 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
+	public function deleteUserById($idUser){
+		$result = false;
+		
+		if (is_numeric($idUser) && ($idUser != 1)){
+			global $db;
+			
+			$res = $db->query($db->db, 'DELETE FROM users WHERE id = '.$idUser.';');
+
+			if ($res){
+				$result = 'true';		
+			}
+		}		
+		return $result;
+	}
+	
 }
 ?>

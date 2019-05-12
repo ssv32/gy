@@ -31,8 +31,11 @@ if ($user->isAdmin()){
 		array(),
 		$app->url
 	);
+	?>
 	
+	<a href="add-user.php">add user</a>
 	
+	<?
 	include "../../gy/admin/footer-admin.php";
 
 } else {

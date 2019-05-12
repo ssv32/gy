@@ -119,5 +119,36 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
+	public function addUsers($data){
+		$result = false;
+
+		// id, login, name, pass, groups
+		global $db;
+		global $crypto;
+		
+		$nameProperty = '';
+		$valueProperty = '';
+		foreach ($data as $key=> $val){
+			$nameProperty .= (($nameProperty != '')? ', ': '').$key;
+			
+			if ($key == 'pass'){
+				$val = md5($val.$crypto->getSole());
+			}
+			
+			if (!is_numeric($val)){
+				$val = "'".$val."'";
+			}
+			
+			$valueProperty .= (($valueProperty != '')? ', ': '').$val;
+		}
+		
+		$res = $db->query($db->db, "INSERT INTO users (".$nameProperty." ) VALUES(".$valueProperty.")");
+		if ($res){
+			$result = true;
+		}
+			
+		return $result;
+	}
+	
 }
 ?>

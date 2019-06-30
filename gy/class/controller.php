@@ -3,7 +3,7 @@ class controller{
 	public $model;
 	public $controller; // ссылка для запуска выбранного контроллера компонента
 	public $lang;
-	public $template; // обьект шаблона 
+	public $template; // объект шаблона 
 	public $arParam;
 
 	public function __construct($url){
@@ -12,18 +12,33 @@ class controller{
 		$this->lang = new lang($url, 'controller', $app->options['lang']);
 	}
 	
+    /**
+     * SetModel
+     * @param type $model
+     */
 	public function SetModel($model){ // установить ссылку на модель если есть
 		$this->model = $model;
 	}
 
-	public function SetTemplate($template){ // задать шаблон
+    /**
+     * SetTemplate - задать шаблон
+     * @param object class template $template
+     */
+	public function SetTemplate($template){  
 		$this->template = $template;	
 	}
 
-	public function SetArParam($arParam){ // задать параметры компонента // set array property component
+    /**
+     * SetArParam - задать параметры компонента // set array property component
+     * @param type $arParam
+     */
+	public function SetArParam($arParam){ 
 		$this->arParam = $arParam;
 	}
 
+    /**
+     * run 
+     */
 	public function run(){		
 		include $this->controller;
 	}

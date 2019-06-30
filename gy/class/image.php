@@ -4,11 +4,13 @@
  */
 class image{
     
-    /* imageResized function compression image (jpeg)
+    /** 
+     * imageResized function compression image (jpeg)
      * imageResized - сжимает изображения (поддерживает пока jpeg)
-     * in:  $urlImgIn - ссылка на изображение которое нужно сжать // url input image
-     *      $urlImageOut - ссылка куда сохранить изображение // url save image
-     *      $compression - сжатие (0-100) 100 - это наилучнее качество // compression (0-100) 100 max quality
+     * @param string $urlImgIn - ссылка на изображение которое нужно сжать // url input image
+     * @param string $urlImageOut - ссылка куда сохранить изображение // url save image
+     * @param int $compression - сжатие (0-100) 100 - это наилучшее качество // compression (0-100) 100 max quality
+     * @return bool true or false
      */
     static function imageResized($urlImgIn, $urlImageOut, $compression){
         $result = false;

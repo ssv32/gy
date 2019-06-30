@@ -1,42 +1,63 @@
 <?
-class user{ // TODO создавать обьект класса сразу при начале сессии
+class user{ // TODO создавать объект класса сразу при начале сессии
 	
 	protected $authorized = false;
 	protected $dataUser;
 	protected $nameCookie = 'gy_user_auth';
 	protected $admin = false; 
 	
+    /**
+     * getDataThisUser - получить данные по текущему, авторизованному пользователю
+     * @return array
+     */
 	public function getDataThisUser(){
 		return $this->dataUser;
 	}
 	
+    /**
+     * isAdmin - проверить является ли текущий, авторизованный пользователем администратором
+     * @return booleand
+     */
 	public function isAdmin(){
 		return $this->admin;
 	}
 	
 	/**
 	 * getAuthorized - узнать авторизован ли пользователь
-	 * @return bool
+	 * @return booleand
 	 */
 	public function getAuthorized(){
 		return $this->authorized;
 	}
 	
 	/**
-	 * getId - получить id текузего пользователя
+	 * getId - получить id текущего пользователя
 	 * @return int
 	 */
 	public function getId(){
 		return $this->dataUser['id'];
 	}
 
-	
+	/**
+     * authorized - авторизовать пользователя
+     * @param type $log - логин
+     * @param type $pass - пароль
+     * @return booleand 
+     */
 	public function authorized($log, $pass ){
 		$result = $this->chackUser($log, $pass);
 		$this->authorized = $result;
 		return $result;
 	}
 	
+    /**
+     * chackUser - проверить существует ли пользователь
+     * @global type $db
+     * @global type $crypto
+     * @param type $log - логин
+     * @param type $pass - пароль
+     * @return booleand
+     */
 	protected function chackUser($log, $pass) { 
 		$result = false;
 		
@@ -55,6 +76,13 @@ class user{ // TODO создавать обьект класса сразу пр
 		
 	}
 	
+    /**
+     * setUserCookie - установить пользовательскую куку
+     * @global type $db
+     * @param int $userId - id пользователя
+     * @param string $StringCookie - строка, значение куки
+     * @return boolean
+     */
 	protected function setUserCookie($userId, $StringCookie){
 		setcookie($this->nameCookie, $StringCookie, 0, '/');
 		global $db;
@@ -62,6 +90,13 @@ class user{ // TODO создавать обьект класса сразу пр
 		return true;
 	}
 	
+    /**
+     * deleteUserCookie - удалить пользовательскую куку
+     * @global type $_COOKIE
+     * @global type $db
+     * @param int $userId - id пользователя
+     * @return boolean
+     */
 	protected function deleteUserCookie($userId){
 		global $_COOKIE;
 		unset($_COOKIE[$this->nameCookie]);
@@ -70,6 +105,11 @@ class user{ // TODO создавать обьект класса сразу пр
 		return true;
 	}
 	
+    /**
+     * checkUserCookie - проверить пользовательскую куку
+     * @global type $_COOKIE
+     * @return boolean
+     */
 	public function checkUserCookie(){
 		$result = false;
 		
@@ -91,6 +131,12 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
+    /**
+     * findUserByCookie - найти пользователя по значению куки
+     * @global type $db
+     * @param string $cookie
+     * @return array - данные пользователя
+     */
 	protected function findUserByCookie($cookie){
 		$result = false;
 		
@@ -105,10 +151,19 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
+    /**
+     * userExit - сделать выход для пользователя 
+     * @return boolean
+     */
 	public function userExit(){
 		return $this->deleteUserCookie($this->dataUser['id']);
 	}
 	
+    /**
+     * getAllDataUsers - получить данные по пользователю 
+     * @global type $db
+     * @return array
+     */
 	public function getAllDataUsers(){
 		$result = array();
 		global $db;		
@@ -119,6 +174,13 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
+    /**
+     * addUsers - добавить пользователя
+     * @global type $db
+     * @global type $crypto
+     * @param type $data
+     * @return boolean
+     */
 	public function addUsers($data){
 		$result = false;
 
@@ -150,6 +212,12 @@ class user{ // TODO создавать обьект класса сразу пр
 		return $result;
 	}
 	
+    /**
+     * deleteUserById - удалить пользователя
+     * @global type $db
+     * @param int $idUser - id пользователя
+     * @return string
+     */
 	public function deleteUserById($idUser){
 		$result = false;
 		

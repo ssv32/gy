@@ -14,19 +14,23 @@ class lang{
 		return $result;
 	}
 
-	/* авто подгрузка языковогофайла для файла где вызывается эта функция
-	* 	нужно передать в какой файле вызывается (название компонента например, шаблона)
-	*   namePHPFile	- файл в котором будет вызываться данный класс // там где нужен языковой файл
-	*/
+	/** 
+     * autoLoadLang
+     * авто загрузка языкового файла для файла где вызывается эта функция
+	 * 	нужно передать в какой файле вызывается (название компонента например, шаблона)
+	 * @param namePHPFile	- файл в котором будет вызываться данный класс // там где нужен языковой файл
+     * @return
+     */
 
 	function autoLoadLang($namePHPFile, $lang ){
 
 	}
 
-	/* GetMessage вернуть текст для заданной переменной текущего языка
-	*   передать переменную 
-	* 	вернёт текст или false
-	*/
+	/**
+     *  GetMessage вернуть текст для заданной переменной текущего языка
+	 * @param string $nameVar - передать переменную 
+	 * @return вернёт текст или false
+	 */
 	function GetMessage($nameVar ){
 		$result = false;
 		if ( !empty($this->textLang[$nameVar]) ){
@@ -37,7 +41,7 @@ class lang{
 
 	
 	/**
-	 * GetArrLangFromFilre pагрузить массив с текстом нужного языка // load array text language
+	 * GetArrLangFromFilre загрузить массив с текстом нужного языка // load array text language
 	 * @param $urlFile ссылка на загружаемый файл // url load file
 	 * @param $lang - нужный язык // language // rus, eng ...
 	 * 

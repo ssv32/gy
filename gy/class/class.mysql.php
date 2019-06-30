@@ -9,8 +9,11 @@ class mysql extends db{
     public $db;
     
     /* connect() - create connect in database
-    * in: $host, $user, $pass, $name_db
-    * out: resurs, false
+    * @param $host
+    * @param $user
+    * @param $pass 
+    * @param $name_db
+    * @return resurs, false
     */
     public function connect($host, $user, $pass, $name_db){
         $this->db = mysqli_connect($host, $user, $pass, $name_db);
@@ -18,21 +21,26 @@ class mysql extends db{
     }
     
     /* query()  - out query in database
-     * in:  $db - resurs (create self::connect()), $query - string query
-     * out: true - ok OR false - not ok
+     * @param $db - resurs (create self::connect()), $query - string query
+     * @return true - ok OR false - not ok
      */
-    public function query($db, $query){	// TODO брать прямоиз класса $db
+    public function query($db, $query){	// TODO брать прямо из класса $db
         return mysqli_query($db, $query);
     }
     
     /*  close() - close connect database
-     * in: $db - resurs (create self::connect()) 
-     * out: true - ok OR false - not ok
+     * @param $db - resurs (create self::connect()) 
+     * @return true - ok OR false - not ok
      */
     public function close($db){
         return mysqli_close($db);
     }
 	
+    /**
+     * GetResult_fetch_assoc 
+     * @param type $res
+     * @return type
+     */
 	public function GetResult_fetch_assoc($res){
 		return mysqli_fetch_assoc($res);
 	}

@@ -7,6 +7,9 @@ class model{
 		$this->url = $url;
 	}
 
+    /**
+     * includeModel - подключить файл с моделью компонента
+     */
 	public function includeModel(){		
 		require_once $this->url; // !!!
 	}

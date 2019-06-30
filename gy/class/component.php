@@ -52,11 +52,18 @@ class component{
 		$this->url = $url;
 	}
 
+    /**
+     * run() 
+     */
 	public function run(){
 		$this->controller->run();
 		//$this->template->show($arRes);
 	}
 
+    /**
+     * ShowErr 
+     * @param type $err
+     */
 	public function ShowErr($err){ // TODO вынести в отдельный класс про ошибки
 		echo '<div class=gy_err>'.$err.'</div>';
 	}

@@ -8,4 +8,4 @@
 		<script src="../../gy/js/main.js"></script>
 	</head>	
 	<body class="gy-body-admin">
-		<h2>Админка gy framework</h2>
+		<h2 class="gy-admin-logo">Админка gy framework</h2>

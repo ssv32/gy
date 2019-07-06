@@ -12,12 +12,12 @@ if ( empty($arRes["auth_ok"]) ) :?>
 		<?if ( !empty($arRes['err']) ){?>
 			<h4><?=$this->lang->GetMessage($arRes['err']);?></h4>
 		<?}?>	
-		<input type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
+		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
 
 	</form>	
 <?else:?>
 	<h1>Привет, <?=$arRes["auth_user"];?></h1>
 	<form>
-		<input type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
+		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
 	</form>
 <?endif;?>

@@ -1,10 +1,107 @@
 .gy-body-admin{
     background-color: #adade4;
 }
-.active-menu{
-    background-color: #dcffbf;
+
+/*--форма авторизации--*/
+.gy-admin-button{
+    margin: 15px;
+    border: 0;
+    height: auto;
+    padding: 15px 15px 14px;
+    background-color: #639;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+} 
+.gy-admin-button:hover { 
+    background: #8b5db9; 
 }
+.gy-admin-button:active { 
+    background: #412260; 
+}
+
+.gy-body-admin input[type="text"]{
+    width: 250px;
+    font-size: 13px;
+    padding: 6px 0 4px 10px;
+    border: 0px solid #ddeff6;
+    background: #ddeff6;
+    margin: 15px;
+    color: #040b57;
+}
+
+.gy-body-admin input[type="password"]{
+    width: 250px;
+    font-size: 13px;
+    padding: 6px 0 4px 10px;
+    border: 0px solid #ddeff6;
+    background: #ddeff6;
+    margin: 15px;
+    color: #040b57;
+}
+/*-----*/
+
+/*--меню--*/
+.gy-admin-menu{
+    background-color: #3257a2;
+    padding: 0 0 0 30px;
+    margin-bottom: 20px;
+    box-shadow: 2px 0 7px #b3b3b3, -2px 0 7px #b3b3b3;
+}
+
+.gy-admin-menu a{
+    display: inline-block;
+    /*width: 115px;*/
+    text-align: center;
+    text-decoration: none;
+    padding: 7px 10px 7px 10px;
+    color: #ffffff;
+    border-right: 1px solid #fff;
+    font-size: 18px;
+}
+.gy-admin-menu a:hover{
+    color: #fff;
+    background-color: #5b81ce;
+    text-decoration: underline;
+}
+.active-menu{
+    color: #fff;
+    background-color: #5b81ce;
+}
+/*-----*/
+
+.gy-admin-logo{
+    text-shadow: 1px 1px 2px #05ff07, 0 0 1em #0205ff;
+
+}
+
+.gy-admin-error-message{
+    margin: 15px;
+    background-color: #fea8ab;
+    padding: 10px;
+}
+
+.gy-admin-good-message{
+    margin: 15px;
+    background-color: #beffb7;
+    padding: 10px;
+}
+
+/*--таблицы--*/
 .gy-table-all-users{
     border-collapse: collapse;
     background-color: #8cc7f2;
 }
+
+.gy-table-all-users td{
+    padding: 10px;
+}
+
+.gy-table-all-users th{
+    padding: 10px;
+    background-color: #21a2ff;
+}
+
+/*-----*/

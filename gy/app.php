@@ -20,17 +20,18 @@ class app{
         $this->lang = new lang($url, 'app', $this->options['lang']);
     }
 
-    /* component отобразить компонент // show component
-    * 	$name - имя компонента и контроллера сразу 
-    * 	$template - имя шаблона 
-    * 	$arr - параметры компонента (параметры кеша и прочие нюансы) // array component config
-    * 
-    * 	вернёт объект компонент
-    * 
-    * 	TODO возможно понадобится сделать подключение модели // если делать универсальные модели для компонентов
-    * 		или возможность подключать много моделей разных
-    * 		maybe includ many model in component
-    */
+    /** 
+     *  component отобразить компонент // show component
+     * 	@param string $name - имя компонента и контроллера сразу 
+     * 	@param string $template - имя шаблона 
+     * 	@param array $arParam - параметры компонента (параметры кеша и прочие нюансы) // array component config
+     *  @param strung $url - url где лежит проект
+     * 	вернёт объект компонент
+     * 
+     * 	TODO возможно понадобится сделать подключение модели // если делать универсальные модели для компонентов
+     * 		или возможность подключать много моделей разных
+     * 		maybe includ many model in component
+     */
     public function component($name, $template, $arParam, $url ){
         $component = new component($name, $template, $arParam, $url);
         return $component;

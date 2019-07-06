@@ -1,4 +1,6 @@
 <? 
+if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
+
 /**
  * это модель класса, тут должны быть функции к которым будет обращаться компонент
  * также подключаться более общие классы (users, БД ... ) 

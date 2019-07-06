@@ -1,4 +1,6 @@
 <?php 
+if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
+
 class component{
 
 	public $template; // тут будут объект класса template

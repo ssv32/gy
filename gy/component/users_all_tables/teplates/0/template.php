@@ -1,4 +1,7 @@
-<?if ($arRes['allUsers']){?>
+<?
+if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
+
+if ($arRes['allUsers']){?>
 	<table border="1" class="gy-table-all-users">
 		<tr><td>id</td><td>login</td><td>name</td><td>group</td><td></td></tr>
 		<?foreach ($arRes['allUsers'] as $key => $val){?>

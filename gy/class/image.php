@@ -1,4 +1,6 @@
 <?
+if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
+
 /* image class work with image // wrapper class php GD
  * image класс для работы с изображениями // обёртка класса php GD
  */

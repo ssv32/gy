@@ -1,14 +1,16 @@
 <?php 
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
-class app{
+final class app{
 
     public $url;
     public $options; // настройки проекта
     public $lang; // табличка с языковыми сообщениями
     public $db; // db
 
-    public function  __construct($url){
+    private static $app;
+    
+    private function  __construct($url){
         // подключить настройки
 
         if (file_exists($url.'/config/gy_config.php' )) {	
@@ -22,6 +24,18 @@ class app{
         $this->lang = new lang($url, 'app', $this->options['lang']);
     }
 
+    /**
+     * createApp - создать объект класса app, запишет его в статичное свойство и вернёт
+     * @param string $url - расположение проекта
+     * @return object class app
+     */
+    public static function createApp($url){       
+        if (  static::$app === null ){
+            static::$app = new static($url);
+        }
+        return static::$app;
+    }
+    
     /** 
      *  component отобразить компонент // show component
      * 	@param string $name - имя компонента и контроллера сразу 

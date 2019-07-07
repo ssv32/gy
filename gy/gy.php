@@ -52,7 +52,7 @@ if (!empty($global_config['sole'])){
 $user = new user;
 $user->checkUserCookie();
 	
+$app = app::createApp(__DIR__);
 
-$app = new app(__DIR__ );
 
 ?>

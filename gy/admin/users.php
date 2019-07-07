@@ -17,8 +17,7 @@ if ($user->isAdmin()){
 				'Главная админки' => '/gy/admin/index.php',
 				'Пользователи' => '/gy/admin/users.php'
 			)
-		),
-		$app->url
+		)
 	);
 	?>
 	<br/>
@@ -27,8 +26,7 @@ if ($user->isAdmin()){
 	$app->component(
 		'users_all_tables',
 		'0',
-		array(),
-		$app->url
+		array()
 	);
 	?>
 	

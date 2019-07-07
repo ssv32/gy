@@ -19,8 +19,7 @@
 		array( 
 			'test' => 'asd',
 			'idComponent' => 1,
-		),
-		$app->url
+		)
 	);
         
         echo "ok2";
@@ -30,8 +29,7 @@
 		array( 
 			'test' => 'asd2',
 			'idComponent' => 2,
-		),
-		$app->url
+		)
 	);
 ?>
 

@@ -15,8 +15,7 @@ if ($user->isAdmin()){
 		'0',
 		array(
 			'back-url' => '/gy/admin/users.php'
-		),
-		$app->url
+		)
 	);
 	
 	include "../../gy/admin/footer-admin.php";

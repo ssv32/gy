@@ -8,10 +8,9 @@ class controller{
 	public $template; // объект шаблона 
 	public $arParam;
 
-	public function __construct($url){
-		global $app;
+	public function __construct($url, $lang){
 		$this->controller = $url.'/controller.php';
-		$this->lang = new lang($url, 'controller', $app->options['lang']);
+		$this->lang = new lang($url, 'controller', $lang);
 	}
 	
     /**

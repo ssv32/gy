@@ -10,8 +10,7 @@ include "../../gy/gy.php"; // подключить ядро // include core
 	$app->component(
 		'admin',
 		'0',
-		array(),
-		$app->url
+		array()
 	);
 
 	?>

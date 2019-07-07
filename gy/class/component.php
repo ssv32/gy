@@ -9,9 +9,8 @@ class component{
 	public $url;
 	public $lang; 
 
-	public function __construct( $name, $template, $arParam, $url ){
-		global $app;
-		$this->lang = new lang($url.'/class/', 'component', $app->options['lang']);
+	public function __construct( $name, $template, $arParam, $url, $lang ){
+		$this->lang = new lang($url.'/class/', 'component', $lang);
 
 		// TODO $template - сюда можно и пустую строку записать
 		// могут быть разные шаблоны
@@ -20,14 +19,14 @@ class component{
 		$errText = '';
 
 		if (($err == 0) && file_exists($url.'/component/'.$name.'/teplates/'.$template.'/template.php' ) ){ 
-			$template = new template($url.'/component/'.$name.'/teplates/'.$template );
+			$template = new template($url.'/component/'.$name.'/teplates/'.$template, $lang );
 		} else {
 			$err = 1;
 			$errText = $this->lang->GetMessage('err_not_controller');
 		}
 
 		if (($err == 0) && file_exists($url.'/component/'.$name.'/controller.php' ) ){ 
-			$this->controller = new controller($url.'/component/'.$name); // всегда один
+			$this->controller = new controller($url.'/component/'.$name, $lang); // всегда один
 		} else {
 			$err = 2;
 			$errText = $this->lang->GetMessage('err_not_controller') ;

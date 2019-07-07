@@ -6,10 +6,9 @@ class template{
 	// public $name; // имя шаблона
 	public $lang;
 
-	public function __construct($url){
-		global $app;
+	public function __construct($url, $lang){
 		$this->template_url = $url.'/template.php';
-		$this->lang = new lang($url, 'template', $app->options['lang']);
+		$this->lang = new lang($url, 'template', $lang);
 	}
 
 	/* show - нарисовать/показать шаблон 

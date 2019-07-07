@@ -48,8 +48,8 @@ final class app{
      * 		или возможность подключать много моделей разных
      * 		maybe includ many model in component
      */
-    public function component($name, $template, $arParam, $url ){
-        $component = new component($name, $template, $arParam, $url);
+    public function component($name, $template, $arParam  ){
+        $component = new component($name, $template, $arParam, $this->url, $this->options['lang']);
         return $component;
     }
 

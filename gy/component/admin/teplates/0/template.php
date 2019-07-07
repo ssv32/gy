@@ -17,8 +17,7 @@ if ($user->isAdmin()){
 				'Главная админки' => '/gy/admin/index.php',
 				'Пользователи' => '/gy/admin/users.php'
 			)
-		),
-		$app->url
+		)
 	);
 }
 ?>
@@ -30,8 +29,7 @@ $app->component(
 	array( 
 		'test' => 'asd',
 		'idComponent' => 1,
-	),
-	$app->url
+	)
 );
 
 ?>

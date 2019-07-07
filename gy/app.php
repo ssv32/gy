@@ -6,19 +6,14 @@ final class app{
     public $url;
     public $options; // настройки проекта
     public $lang; // табличка с языковыми сообщениями
-    public $db; // db
+    //public $db; // db
 
     private static $app;
     
-    private function  __construct($url){
+    private function  __construct($url, $options){
         // подключить настройки
-
-        if (file_exists($url.'/config/gy_config.php' )) {	
-                include $url.'/config/gy_config.php';
-                $this->options = $g_config; 
-                unset($g_config);
-        }
-        ////
+        $this->options = $options; 
+       
         $this->url = $url;
         // если есть языковой файл то надо подключить его
         $this->lang = new lang($url, 'app', $this->options['lang']);
@@ -29,9 +24,9 @@ final class app{
      * @param string $url - расположение проекта
      * @return object class app
      */
-    public static function createApp($url){       
+    public static function createApp($url, $options){       
         if (  static::$app === null ){
-            static::$app = new static($url);
+            static::$app = new static($url, $options);
         }
         return static::$app;
     }

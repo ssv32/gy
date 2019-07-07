@@ -1,7 +1,9 @@
 <?php
 define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
 
-include_once("config/gy_const.php"); // подключение констант // include const
+//include_once("config/gy_const.php"); // подключение констант // include const
+
+include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
 // подключение необходимых классов // include all class core
 include __DIR__ . '/app.php';
@@ -22,37 +24,33 @@ function __autoload($calssname){
     }
 }
 
+$app = app::createApp(__DIR__, $gy_config);
+unset($gy_config);
+
 // подключить класс работы с базой данный // include class work database
-if (isset($db_config) 
-    && isset($db_config['db_type']) 
-    && isset($db_config['db_host']) 
-    && isset($db_config['db_user']) 
-    && isset($db_config['db_pass']) 
-    && isset($db_config['db_name']) 
+if (isset($app->options['db_config']) 
+    && isset($app->options['db_config']['db_type']) 
+    && isset($app->options['db_config']['db_host']) 
+    && isset($app->options['db_config']['db_user']) 
+    && isset($app->options['db_config']['db_pass']) 
+    && isset($app->options['db_config']['db_name']) 
 ){
-    if (file_exists(__DIR__ . '/class/class.'.$db_config['db_type'].'.php' )) {
-        include __DIR__ . '/class/class.'.$db_config['db_type'].'.php';
+    if (file_exists(__DIR__ . '/class/class.'.$app->options['db_config']['db_type'].'.php' )) {
+        include __DIR__ . '/class/class.'.$app->options['db_config']['db_type'].'.php';
 		global $db;
-        $db = new $db_config['db_type']; // mysql - for test work db mysql
-        
-        //echo '!!--!'.$db->test;
-        
-        //$db->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
-        //$asd = $db->query($db->db, 'CREATE TABLE test (id int, name varchar(50) )');
-//        var_$dbdump($asd);
-//        $db->close($db->db);
+        $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
     }
 }
 
 $crypto = new crypto();
-if (!empty($global_config['sole'])){
-	$crypto->setSole($global_config['sole']);
+if (!empty($app->options['sole'])){
+	$crypto->setSole($app->options['sole']);
 }
 
 $user = new user;
 $user->checkUserCookie();
 	
-$app = app::createApp(__DIR__);
+
 
 
 ?>

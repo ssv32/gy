@@ -2,7 +2,6 @@
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
 $arRes['user_property'] = array(
-	'id',  //TODO сделать без этого, mysql что бы сам подставлял
 	'login', 
 	'name', 
 	'pass', 

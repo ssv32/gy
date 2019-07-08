@@ -1,10 +1,9 @@
 # gy php framework
 
-### Установка  gy php framework
-Установить пока можно php скриптом ниже
-https://github.com/ssv32/install-gy-php-framework
-После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом gy/install/consoleInstallOptions.php
-Затем надо установить и создать базу данных (пока mysql) скриптом gy/install/installMysqlTable.php (! он ещё не доделан)
+### Установка  gy php framework:
+- Установить пока можно php скриптом https://github.com/ssv32/install-gy-php-framework ;
+- После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом gy/install/consoleInstallOptions.php ;
+- Затем надо установить и создать базу данных (пока mysql) скриптом gy/install/installMysqlTable.php (! он ещё не доделан).
 
 
 ### Пример подключения gy php framework

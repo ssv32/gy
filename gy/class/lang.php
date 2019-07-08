@@ -7,7 +7,7 @@ class lang{
 
 	function __construct($url, $fileName, $lang){
 		$result = false; 
-		
+		        
 		if ( !empty($url) && !empty($fileName) && !empty($lang) ) {
 			//load array text language
 			$this->textLang = $this->GetArrLangFromFilre( $url.'/lang_'.$fileName.'.php', $lang );
@@ -51,13 +51,14 @@ class lang{
 	 */
 	function GetArrLangFromFilre( $urlFile, $lang ){
 		$mess = array();
-	
+	       
 		// если есть файл с языковыми параметрами
-		if ( file_exists($urlFile) ){	
+		if ( file_exists($urlFile) === true ){	
 			include $urlFile;
+            $mess = $mess[$lang];
 		}
 
-		return $mess[$lang];
+		return $mess;
 	}
 	
 }

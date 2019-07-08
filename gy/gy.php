@@ -51,6 +51,3 @@ $user = new user;
 $user->checkUserCookie();
 	
 
-
-
-?>

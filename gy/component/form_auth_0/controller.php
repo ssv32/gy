@@ -65,4 +65,3 @@ if ( ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);
-?>

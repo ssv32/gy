@@ -61,4 +61,3 @@ class mysql extends db{
 		}
 	}
 }
-?>

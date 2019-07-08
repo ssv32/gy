@@ -27,4 +27,3 @@ if ($isChackIdComponent && !empty($_REQUEST['auth']) ){
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);
-?>

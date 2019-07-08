@@ -5,4 +5,3 @@ $mess['rus'] = array(
 	'hi' => 'Админка gy framework',
 );
 
-?>

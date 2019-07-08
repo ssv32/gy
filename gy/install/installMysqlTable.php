@@ -35,6 +35,3 @@ if ($res === true){
 	echo '<br/>install table - user - NOT!';
 }
 
-
-
-?>

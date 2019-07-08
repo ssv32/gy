@@ -7,4 +7,3 @@ $mess['rus'] = array(
 	'exit' => 'Выйти'
 );
 
-?>

@@ -35,4 +35,3 @@ abstract class db{
 	 */
 	abstract public function GetResult_fetch_assoc($res);
 }
-?>

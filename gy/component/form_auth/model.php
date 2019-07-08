@@ -15,4 +15,3 @@ function model_setAuth($auth){ // test model
 	return 'test = ok';
 }
 
-?>

@@ -8,4 +8,3 @@ $arRes = array();
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);
-?>

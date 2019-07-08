@@ -10,7 +10,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
 		<?}?>
 
 		<?if ( !empty($arRes['err']) ){?>
-			<h4><?=$this->lang->GetMessage($arRes['err']);?></h4>
+			<div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['err']);?></div>
 		<?}?>	
 		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
 

@@ -54,8 +54,16 @@ class mysql extends db{
 			}
 		}
 	}
-        
-    private function parseWhereForQuery($where, $i, $key2){
+    
+    /**
+     * parseWhereForQuery - парсенг параметров where запроса
+     *   массив будет в виде дерева, т.е. конечне массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
+     * @param type $where
+     * @param type $i
+     * @param type $key2
+     * @return type
+     */    
+    private function parseWhereForQuery($where, $i, $key2){ // TODO рефакторинг
         $str = '';
         $str2 = '';
         if (is_array($where)){
@@ -63,10 +71,7 @@ class mysql extends db{
             foreach($where as $key => $val){
                 $str = '';
                 $str = $this->parseWhereForQuery($val, $i, $key);
-                
-                if (!empty($str)) {
-                    $str2 .=  ((!empty($str2))? ' '.$key2.' ' : '').$str;
-                }
+                $str2 .=  ((!empty($str2))? ' '.$key2.' ' : '').$str;
             }
         }else{
             $str2 = $where;
@@ -74,31 +79,33 @@ class mysql extends db{
         return $str2;
     }
     
+     /**
+     * selectDb - запрос типа select. на получение данных
+     * @param $db - расурс, коннект к базе данных
+     * @param string $tableName - имя таблици 
+     * @param array $propertys - параметры (какие поля вернуть или * - все)
+     * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     */
     public function selectDb($db, $tableName, $propertys, $where = array()){
         $query = 'SELECT ';
         $strPropertys = implode(",", $propertys);
-        /*foreach ($propertys as $val){
-            $strPropertys .= (($strPropertys != '')? ', ': '')."'".$val."'";
-        }*/
-        
+
         if(!empty($where)){            
             $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
         }else{
             $where = '';
         }
-               
+                
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
-         
-        //echo $query;
-        
+                 
         return mysqli_query($db, $query);
     }
     
-    public function insertDb($db, $tableName, $propertys, $where = array()){
+    public function insertDb($db, $tableName, $propertys, $where = array()){ //TODO
        
     }
     
-    public function updateDb($db, $tableName, $propertys, $where = array()){
+    public function updateDb($db, $tableName, $propertys, $where = array()){//TODO
         
     }
     

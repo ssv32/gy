@@ -35,7 +35,16 @@ abstract class db{
 	 */
 	abstract public function GetResult_fetch_assoc($res);
     
-    abstract public function selectDb($db, $tableName, $propertys, $where = array());
+    // TODO в функции ниже добавить параметры сортировки 
+    
+    /**
+     * selectDb - запрос типа select. на получение данных
+     * @param $db - resurs (create self::connect())
+     * @param string $tableName - имя таблици 
+     * @param array $propertys - параметры (какие поля вернуть или * - все)
+     * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     */
+    abstract public function selectDb($db, $tableName, $propertys, $where = array()); 
     
     abstract public function insertDb($db, $tableName, $propertys, $where = array());
     

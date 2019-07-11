@@ -65,17 +65,18 @@ class user{ // TODO создавать объект класса сразу пр
 		
 		global $db;
 		global $crypto;		
-		$res = $db->query($db->db, 'select * from users where login="'.$log.'" and pass="'.md5($pass.$crypto->getSole()).'"');
 			
-//        $res = $db->selectDb(
-//            $db->db, 
-//            'users', 
-//            array('*'), 
-//            array( 'AND' => array( 
-//                '=' => array('hash_auth', "'".$cookie."'"),
-//                
-//            )    
-//        );
+        $res = $db->selectDb(
+            $db->db, 
+            'users', 
+            array('*'), 
+            array(
+                'AND' => array( 
+                    '=' => array('login', "'".$log."'" ),
+                    'AND' => array( '=' => array('pass',"'".md5($pass.$crypto->getSole())."'") )
+                ),   
+            )    
+        );
         
 		if ($arRes = $db->GetResult_fetch_assoc($res)){				
 			

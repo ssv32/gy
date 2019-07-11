@@ -49,5 +49,39 @@ if (!empty($app->options['sole'])){
 
 $user = new user;
 $user->checkUserCookie();
-	
 
+/*
+global $db;
+$res = $db->selectDb(
+    $db->db, 
+    'users', 
+    array('*'), 
+    array( 'AND' => array(
+        '=' => array('logIn', "'admin'"), 
+        //'>' => array('id', 0),
+        'AND' =>  array('=' => array('logIn', "'admin2'") //,
+            //'AND' =>  array('=' => array('logIn', "'admin2'") )
+            ),
+        
+        //'<' => array('asd', 2),
+        ) 
+    )
+);*/
+
+/*
+$res = $db->selectDb(
+    $db->db, 
+    'users', 
+    array('*'), 
+    array( 
+        '=' => array('id', 1,), 
+        
+    )
+);*/
+
+//print_r($res);
+//
+//while ($arRes = $db->GetResult_fetch_assoc($res)){
+//    print_r($arRes);
+//
+//}

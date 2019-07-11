@@ -54,7 +54,54 @@ class mysql extends db{
 			}
 		}
 	}
-	
+        
+    private function parseWhereForQuery($where, $i, $key2){
+        $str = '';
+        $str2 = '';
+        if (is_array($where)){
+            $i++;
+            foreach($where as $key => $val){
+                $str = '';
+                $str = $this->parseWhereForQuery($val, $i, $key);
+                
+                if (!empty($str)) {
+                    $str2 .=  ((!empty($str2))? ' '.$key2.' ' : '').$str;
+                }
+            }
+        }else{
+            $str2 = $where;
+        }   
+        return $str2;
+    }
+    
+    public function selectDb($db, $tableName, $propertys, $where = array()){
+        $query = 'SELECT ';
+        $strPropertys = implode(",", $propertys);
+        /*foreach ($propertys as $val){
+            $strPropertys .= (($strPropertys != '')? ', ': '')."'".$val."'";
+        }*/
+        
+        if(!empty($where)){            
+            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
+        }else{
+            $where = '';
+        }
+               
+        $query .= $strPropertys.' FROM '.$tableName.$where.';';
+         
+        //echo $query;
+        
+        return mysqli_query($db, $query);
+    }
+    
+    public function insertDb($db, $tableName, $propertys, $where = array()){
+       
+    }
+    
+    public function updateDb($db, $tableName, $propertys, $where = array()){
+        
+    }
+    
 	public function __destruct() {
 		if ( !empty($this->db)){
 			$this->close($this->db);

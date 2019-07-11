@@ -67,6 +67,16 @@ class user{ // TODO создавать объект класса сразу пр
 		global $crypto;		
 		$res = $db->query($db->db, 'select * from users where login="'.$log.'" and pass="'.md5($pass.$crypto->getSole()).'"');
 			
+//        $res = $db->selectDb(
+//            $db->db, 
+//            'users', 
+//            array('*'), 
+//            array( 'AND' => array( 
+//                '=' => array('hash_auth', "'".$cookie."'"),
+//                
+//            )    
+//        );
+        
 		if ($arRes = $db->GetResult_fetch_assoc($res)){				
 			
 			//$this->setUserCookie($arRes['id'] , $crypto->getRandString());
@@ -144,8 +154,15 @@ class user{ // TODO создавать объект класса сразу пр
 		
 		global $db;
 		
-		$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
+		//$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
 			
+        $res = $db->selectDb(
+            $db->db, 
+            'users', 
+            array('*'), 
+            array( '=' => array('hash_auth', "'".$cookie."'") ) 
+        );
+        
 		if ($arRes = $db->GetResult_fetch_assoc($res)){
 			$result = $arRes;		
 		}
@@ -169,7 +186,14 @@ class user{ // TODO создавать объект класса сразу пр
 	public function getAllDataUsers(){
 		$result = array();
 		global $db;		
-		$res = $db->query($db->db, 'select * from users');
+		//$res = $db->query($db->db, 'select * from users');
+        
+        $res = $db->selectDb(
+            $db->db, 
+            'users', 
+            array('*')
+        );
+        
 		while ($arRes = $db->GetResult_fetch_assoc($res)){
 			$result[] = $arRes;
 		}

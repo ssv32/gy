@@ -34,4 +34,10 @@ abstract class db{
      * @param $res
 	 */
 	abstract public function GetResult_fetch_assoc($res);
+    
+    abstract public function selectDb($db, $tableName, $propertys, $where = array());
+    
+    abstract public function insertDb($db, $tableName, $propertys, $where = array());
+    
+    abstract public function updateDb($db, $tableName, $propertys, $where = array());
 }

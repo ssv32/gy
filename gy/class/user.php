@@ -67,7 +67,6 @@ class user{ // TODO создавать объект класса сразу пр
 		global $crypto;		
 			
         $res = $db->selectDb(
-            $db->db, 
             'users', 
             array('*'), 
             array(
@@ -99,7 +98,7 @@ class user{ // TODO создавать объект класса сразу пр
 	protected function setUserCookie($userId, $StringCookie){
 		setcookie($this->nameCookie, $StringCookie, 0, '/');
 		global $db;
-		$db->query($db->db, 'update users set hash_auth="'.$StringCookie.'" where id="'.$userId.'"');
+		$db->query('update users set hash_auth="'.$StringCookie.'" where id="'.$userId.'"');
 		return true;
 	}
 	
@@ -114,7 +113,7 @@ class user{ // TODO создавать объект класса сразу пр
 		global $_COOKIE;
 		unset($_COOKIE[$this->nameCookie]);
 		global $db;
-		$db->query($db->db, 'update users set hash_auth="NULL" where id="'.$userId.'"');
+		$db->query('update users set hash_auth="NULL" where id="'.$userId.'"');
 		return true;
 	}
 	
@@ -158,7 +157,6 @@ class user{ // TODO создавать объект класса сразу пр
 		//$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
 			
         $res = $db->selectDb(
-            $db->db, 
             'users', 
             array('*'), 
             array( '=' => array('hash_auth', "'".$cookie."'") ) 
@@ -189,8 +187,7 @@ class user{ // TODO создавать объект класса сразу пр
 		global $db;		
 		//$res = $db->query($db->db, 'select * from users');
         
-        $res = $db->selectDb(
-            $db->db, 
+        $res = $db->selectDb( 
             'users', 
             array('*')
         );
@@ -231,7 +228,7 @@ class user{ // TODO создавать объект класса сразу пр
 			$valueProperty .= (($valueProperty != '')? ', ': '').$val;
 		}
 		
-		$res = $db->query($db->db, "INSERT INTO users (".$nameProperty." ) VALUES(".$valueProperty.")");
+		$res = $db->query("INSERT INTO users (".$nameProperty." ) VALUES(".$valueProperty.")");
 		if ($res){
 			$result = true;
 		}
@@ -251,7 +248,7 @@ class user{ // TODO создавать объект класса сразу пр
 		if (is_numeric($idUser) && ($idUser != 1)){
 			global $db;
 			
-			$res = $db->query($db->db, 'DELETE FROM users WHERE id = '.$idUser.';');
+			$res = $db->query('DELETE FROM users WHERE id = '.$idUser.';');
 
 			if ($res){
 				$result = 'true';		

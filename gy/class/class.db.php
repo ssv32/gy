@@ -19,13 +19,13 @@ abstract class db{
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
-    abstract public function query($db, $query); // запрос к db
+    abstract public function query($query); // запрос к db
     
     /**  close() - close connect database
      * @param $db - resurs (create self::connect()) 
      * @return true - ok OR false - not ok
      */
-    abstract public function close($db); // закрыть подключение к db
+    abstract public function close(); // закрыть подключение к db
     
     //abstract public function select();
 	
@@ -44,9 +44,9 @@ abstract class db{
      * @param array $propertys - параметры (какие поля вернуть или * - все)
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      */
-    abstract public function selectDb($db, $tableName, $propertys, $where = array()); 
+    abstract public function selectDb($tableName, $propertys, $where = array()); 
     
-    abstract public function insertDb($db, $tableName, $propertys, $where = array());
+    abstract public function insertDb($tableName, $propertys, $where = array());
     
-    abstract public function updateDb($db, $tableName, $propertys, $where = array());
+    abstract public function updateDb($tableName, $propertys, $where = array());
 }

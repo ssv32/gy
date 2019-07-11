@@ -26,16 +26,16 @@ class mysql extends db{
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
-    public function query($db, $query){	// TODO брать прямо из класса $db
-        return mysqli_query($db, $query);
+    public function query($query){	// TODO брать прямо из класса $db
+        return mysqli_query($this->db, $query);
     }
     
     /*  close() - close connect database
      * @param $db - resurs (create self::connect()) 
      * @return true - ok OR false - not ok
      */
-    public function close($db){
-        return mysqli_close($db);
+    public function close(){
+        return mysqli_close($this->db);
     }
 	
     /**
@@ -86,7 +86,7 @@ class mysql extends db{
      * @param array $propertys - параметры (какие поля вернуть или * - все)
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      */
-    public function selectDb($db, $tableName, $propertys, $where = array()){
+    public function selectDb($tableName, $propertys, $where = array()){
         $query = 'SELECT ';
         $strPropertys = implode(",", $propertys);
 
@@ -98,14 +98,14 @@ class mysql extends db{
                 
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
                  
-        return mysqli_query($db, $query);
+        return mysqli_query($this->db, $query);
     }
     
-    public function insertDb($db, $tableName, $propertys, $where = array()){ //TODO
+    public function insertDb($tableName, $propertys, $where = array()){ //TODO
        
     }
     
-    public function updateDb($db, $tableName, $propertys, $where = array()){//TODO
+    public function updateDb($tableName, $propertys, $where = array()){//TODO
         
     }
     

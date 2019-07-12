@@ -105,7 +105,7 @@ class mysql extends db{
     /**
      * insertDb - вставка, добавление новых строк в базу данных
      * @param string $tableName - имя таблици 
-     * @param param array $propertys - параметры (поле = значение)
+     * @param array $propertys - параметры (поле = значение)
      * @return - false or object result query
      */
     public function insertDb($tableName, $propertys){
@@ -135,6 +135,13 @@ class mysql extends db{
         return  $this->query($query);
     }
     
+    /**
+     * updateDb - обновить поле таблици
+     * @param string $tableName - имя таблици 
+     * @param array $propertys - параметры (поле = значение)
+     * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     * @return - false or object result query
+     */
     public function updateDb($tableName, $propertys, $where = array()){//TODO
         $query = 'UPDATE ';
         $textPropertys = '';

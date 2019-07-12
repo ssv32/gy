@@ -5,7 +5,17 @@ echo 'install table - user ...';
 
 global $db;
         
-$res = $db->query('CREATE TABLE users (id int PRIMARY KEY AUTO_INCREMENT, login varchar(50), name varchar(50), pass varchar(50), hash_auth varchar(50), groups int );');
+$res = $db->createTable(
+    'users',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'login varchar(50)', 
+        'name varchar(50)', 
+        'pass varchar(50)', 
+        'hash_auth varchar(50)', 
+        'groups int'
+    )
+);        
 
 if ($res === true){
 	echo '<br/>install table - user - OK';

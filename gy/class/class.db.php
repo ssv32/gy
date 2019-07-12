@@ -63,4 +63,12 @@ abstract class db{
      * @return - false or object result query
      */
     abstract public function updateDb($tableName, $propertys, $where = array());
+    
+    /**
+     * createTable - создать таблицу в базе данных
+     * @param string $tableName - имя таблици
+     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
+     * @return - false or object result query
+     */
+    abstract public function createTable($tableName, $propertys);
 }

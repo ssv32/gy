@@ -163,6 +163,24 @@ class mysql extends db{
         return  $this->query($query);
     }
     
+    /**
+     * createTable - создать таблицу в базе данных
+     * @param string $tableName - имя таблици
+     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
+     * @return - false or object result query
+     */
+    public function createTable($tableName, $propertys){
+        $query = '';
+        $textPropertys = '';
+        foreach($propertys as $val){
+            $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$val;
+        }
+        
+        $query = 'CREATE TABLE '.$tableName.' ('.$textPropertys.');';
+
+        return  $this->query($query);
+    }
+    
 	public function __destruct() {
 		if ( !empty($this->db)){
 			$this->close($this->db);

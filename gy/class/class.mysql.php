@@ -136,7 +136,24 @@ class mysql extends db{
     }
     
     public function updateDb($tableName, $propertys, $where = array()){//TODO
-        
+        $query = 'UPDATE ';
+        $textPropertys = '';
+        foreach ($propertys as $key => $val){
+            if (!is_numeric($val)){
+				$val = "'".$val."'";
+			}
+            $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$key.'='.$val;
+        }
+
+        if(!empty($where)){            
+            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
+        }else{
+            $where = '';
+        }
+                
+        $query .= $tableName.' SET '.$textPropertys.$where.';';
+                    
+        return  $this->query($query);
     }
     
 	public function __destruct() {

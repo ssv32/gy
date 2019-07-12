@@ -98,7 +98,13 @@ class user{ // TODO создавать объект класса сразу пр
 	protected function setUserCookie($userId, $StringCookie){
 		setcookie($this->nameCookie, $StringCookie, 0, '/');
 		global $db;
-		$db->query('update users set hash_auth="'.$StringCookie.'" where id="'.$userId.'"');
+        
+        $res = $db->updateDb(
+            'users', 
+            array('hash_auth' => $StringCookie), 
+            array( '=' => array('id' , $userId ) )    
+        );
+        
 		return true;
 	}
 	
@@ -113,7 +119,13 @@ class user{ // TODO создавать объект класса сразу пр
 		global $_COOKIE;
 		unset($_COOKIE[$this->nameCookie]);
 		global $db;
-		$db->query('update users set hash_auth="NULL" where id="'.$userId.'"');
+        
+        $res = $db->updateDb(
+            'users', 
+            array('hash_auth' => 'NULL'), 
+            array( '=' => array('id' , $userId ) )    
+        );
+        
 		return true;
 	}
 	

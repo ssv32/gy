@@ -17,7 +17,7 @@ abstract class db{
     
     /** query()  - out query in database
      * @param $db - resurs (create self::connect()), $query - string query
-     * @return true - ok OR false - not ok
+     * @return false or object result query
      */
     abstract public function query($query); // запрос к db
     
@@ -43,10 +43,17 @@ abstract class db{
      * @param string $tableName - имя таблици 
      * @param array $propertys - параметры (какие поля вернуть или * - все)
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     * @return - false or object result query
      */
     abstract public function selectDb($tableName, $propertys, $where = array()); 
     
-    abstract public function insertDb($tableName, $propertys, $where = array());
+    /**
+     * insertDb - вставка, добавление новых строк в базу данных
+     * @param string $tableName - имя таблици 
+     * @param param array $propertys - параметры (поле = значение)
+     * @return - false or object result query
+     */
+    abstract public function insertDb($tableName, $propertys);
     
     abstract public function updateDb($tableName, $propertys, $where = array());
 }

@@ -209,27 +209,10 @@ class user{ // TODO создавать объект класса сразу пр
 		$result = false;
 
 		// id, login, name, pass, groups
-		global $db;
-		global $crypto;
-		
-		$nameProperty = '';
-		$valueProperty = '';
-		foreach ($data as $key=> $val){
-			$nameProperty .= (($nameProperty != '')? ', ': '').$key;
-			
-			if ($key == 'pass'){
-				$val = md5($val.$crypto->getSole());
-			}
-			
-			if (!is_numeric($val)){
-				$val = "'".$val."'";
-			}
-			
-			$valueProperty .= (($valueProperty != '')? ', ': '').$val;
-		}
-		
-		$res = $db->query("INSERT INTO users (".$nameProperty." ) VALUES(".$valueProperty.")");
-		if ($res){
+		global $db;		
+        $res = $db->insertDb('users', $data);
+        
+        if ($res){
 			$result = true;
 		}
 			

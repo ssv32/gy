@@ -85,6 +85,7 @@ class mysql extends db{
      * @param string $tableName - имя таблици 
      * @param array $propertys - параметры (какие поля вернуть или * - все)
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     * @return - false or object result query
      */
     public function selectDb($tableName, $propertys, $where = array()){
         $query = 'SELECT ';
@@ -98,11 +99,40 @@ class mysql extends db{
                 
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
                  
-        return mysqli_query($this->db, $query);
+        return  $this->query($query);
     }
     
-    public function insertDb($tableName, $propertys, $where = array()){ //TODO
-       
+    /**
+     * insertDb - вставка, добавление новых строк в базу данных
+     * @param string $tableName - имя таблици 
+     * @param param array $propertys - параметры (поле = значение)
+     * @return - false or object result query
+     */
+    public function insertDb($tableName, $propertys){
+        $query = '';
+        
+        // разбить параметры на два списка через запятую // TODO вынести кудато
+        global $crypto;
+        $nameProperty = '';
+		$valueProperty = '';
+		foreach ($propertys as $key=> $val){
+			$nameProperty .= (($nameProperty != '')? ', ': '').$key;
+			
+			if ($key == 'pass'){
+				$val = md5($val.$crypto->getSole());
+			}
+			
+			if (!is_numeric($val)){
+				$val = "'".$val."'";
+			}
+			
+			$valueProperty .= (($valueProperty != '')? ', ': '').$val;
+		}
+        ////
+
+        $query = "INSERT INTO ".$tableName." (".$nameProperty." ) VALUES(".$valueProperty.")";
+               
+        return  $this->query($query);
     }
     
     public function updateDb($tableName, $propertys, $where = array()){//TODO

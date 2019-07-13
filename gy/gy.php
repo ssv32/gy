@@ -1,24 +1,12 @@
 <?php
 define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
 
-//include_once("config/gy_const.php"); // подключение констант // include const
-
 include_once("config/gy_config.php"); // подключение настроек ядра // include options
-
-// подключение необходимых классов // include all class core
-include __DIR__ . '/app.php';
-//include __DIR__ . '/class/component.php';
-//include __DIR__ . '/class/model.php';
-//include __DIR__ . '/class/template.php';
-//include __DIR__ . '/class/controller.php';
-//include __DIR__ . '/class/lang.php';
-include __DIR__ . '/class/class.db.php';
-////
 
 // авто подключение классов
 function __autoload($calssname){ 
     if (file_exists(__DIR__ . '/class/'.$calssname.'.php' )){
-	require_once( "class/$calssname.php" );          
+        require_once( "class/$calssname.php" );          
     } else{
         die('class '.$calssname.' not find' );
     }
@@ -35,13 +23,11 @@ if (isset($app->options['db_config'])
     && isset($app->options['db_config']['db_pass']) 
     && isset($app->options['db_config']['db_name']) 
 ){
-    if (file_exists(__DIR__ . '/class/class.'.$app->options['db_config']['db_type'].'.php' )) {
-        include __DIR__ . '/class/class.'.$app->options['db_config']['db_type'].'.php';
-		global $db;
-        $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
-    }
+    global $db;
+    $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
 }
 
+global $crypto;	
 $crypto = new crypto();
 if (!empty($app->options['sole'])){
 	$crypto->setSole($app->options['sole']);

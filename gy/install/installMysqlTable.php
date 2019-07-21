@@ -55,3 +55,71 @@ if ($res === true){
 	echo '<br/>install table - user - NOT!';
 }
 
+//---infoBox---
+echo 'install table - infoBox ...';
+        
+$res = $db->createTable( // infoBox-ы
+    'info_box',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'name varchar(50)', 
+        'code varchar(50)', 
+    )
+);        
+
+$res = $db->createTable( // список свойств infoBox
+    'list_propertys_info_box',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'id_type_property int', 
+        'id_info_box int', 
+        'code varchar(50)', 
+        'name varchar(50)', 
+    )
+); 
+
+$res = $db->createTable( // типы свойств infoBox
+    'types_property_info_box',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'id_type_property int', 
+        'info varchar(50)', 
+        'code varchar(50)', 
+        'name varchar(50)', 
+    )
+); 
+
+$res = $db->createTable( // элементы infoBox-а
+    'element_info_box',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'section_id int', 
+        'code varchar(50)', 
+        'name varchar(50)', 
+        'id_info_box int',
+    )
+); 
+
+$res = $db->createTable( // значения свойств infoBox-а типа строка
+    'value_propertys_type_html',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'id_info_box int', 
+        'id_element_info_box int',
+        'id_property_info_box int',
+        'value varchar(255)'
+    )
+); 
+
+$res = $db->createTable( // значения свойств infoBox-а типа число
+    'value_propertys_type_number',
+    array( 
+        'id int PRIMARY KEY AUTO_INCREMENT', 
+        'id_info_box int', 
+        'id_element_info_box int',
+        'id_property_info_box int',
+        'value int'
+    )
+);
+
+//-infoBox-------------

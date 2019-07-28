@@ -32,5 +32,12 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
             </tr>
         <?}?>
 	</table>
-    <a href="/gy/admin/info-box-add.php" class="gy-admin-button"><?=$this->lang->GetMessage('add');?></a>
+    
+<?}else{?>
+    <?=$this->lang->GetMessage('not-element');?>
+    <br/>
+    <br/>
+    <br/>
 <?}?>
+
+<a href="/gy/admin/info-box-add.php" class="gy-admin-button"><?=$this->lang->GetMessage('add');?></a>

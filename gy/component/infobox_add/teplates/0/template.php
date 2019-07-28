@@ -21,11 +21,11 @@ if ($arRes['status'] == 'add'){ ?>
 <?if ($arRes['status'] == 'add-ok'){?>
     <div class="gy-admin-good-message"><?=$this->lang->GetMessage('add-ok');?></div>
     <br/>
-    <a href="" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <a href="/gy/admin/info-box.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
 <? } ?>
     
 <?if ($arRes['status'] == 'add-err'){?>
     <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
     <br/>
-    <a href="" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <a href="/gy/admin/info-box.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
 <? } ?>

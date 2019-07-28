@@ -44,7 +44,11 @@ class mysql extends db{
      * @return type
      */
 	public function GetResult_fetch_assoc($res){
-		return mysqli_fetch_assoc($res);
+        $result = array();
+        if ($res !== false){
+            $result = mysqli_fetch_assoc($res);
+        }
+		return $result;
 	}
 	
 	public function __construct($db_config) {
@@ -178,6 +182,25 @@ class mysql extends db{
         
         $query = 'CREATE TABLE '.$tableName.' ('.$textPropertys.');';
 
+        return  $this->query($query);
+    }
+    
+    /**
+     * deleteDb - удаление строк из таблици
+     * @param string $tableName - имя таблици
+     * @param array $where - условия запроса, что удалять
+     * @return boolean
+     */
+    public function deleteDb($tableName, $where){
+        $query = '';
+        if(!empty($where)){            
+            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
+        }else{
+            $where = '';
+        }
+        
+        $query = 'DELETE FROM '.$tableName.$where;
+                    
         return  $this->query($query);
     }
     

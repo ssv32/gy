@@ -71,4 +71,12 @@ abstract class db{
      * @return - false or object result query
      */
     abstract public function createTable($tableName, $propertys);
+    
+    /**
+     * deleteDb - удаление строк из таблици
+     * @param string $tableName - имя таблици
+     * @param array $where - условия запроса, что удалять
+     * @return boolean
+     */
+    abstract public function deleteDb($tableName, $where);
 }

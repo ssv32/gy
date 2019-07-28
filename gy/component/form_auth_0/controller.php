@@ -16,7 +16,9 @@ $isChackIdComponent = ( empty($this->arParam['idComponent']) || (!empty($this->a
 
 $isAdmin = false;
 
-$thisLogin = $_REQUEST['auth'];
+if(!empty($_REQUEST['auth'])){
+    $thisLogin = $_REQUEST['auth'];
+}
 
 global $user;
 
@@ -57,7 +59,7 @@ if ($isAdmin === true){
 	$arRes['form_input']["pass"] = "pass";
 }
 
-if ( ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
+if ( !empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
 	if ($user->userExit() ){
 		header( 'Location: '.$redirectUrl );
 	}

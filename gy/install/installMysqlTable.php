@@ -82,12 +82,31 @@ $res = $db->createTable( // типы свойств infoBox
     'types_property_info_box',
     array( 
         'id int PRIMARY KEY AUTO_INCREMENT', 
-        'id_type_property int', 
         'info varchar(50)', 
         'code varchar(50)', 
         'name varchar(50)', 
     )
 ); 
+
+$res = $db->insertDb(
+    'types_property_info_box', 
+    array(
+        'name' => 'html', 
+        'code' =>   'html', 
+        'info' => 'property save date - html'
+        //'id_type_property' => 1
+    )
+);
+
+$res = $db->insertDb(
+    'types_property_info_box', 
+    array(
+        'name' => 'number', 
+        'code' =>   'number', 
+        'info' => 'property save date - number'
+        //'id_type_property' => 1
+    )
+);
 
 $res = $db->createTable( // элементы infoBox-а
     'element_info_box',

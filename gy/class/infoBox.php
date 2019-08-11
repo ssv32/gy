@@ -9,6 +9,13 @@ class infoBox{
     public static $table_value_propertys_type_html = 'value_propertys_type_html';
     public static $table_value_propertys_type_number = 'value_propertys_type_number';
     
+    public static $propertyTapleProperty = array(
+        'id_type_property',
+        'id_info_box',
+        'code',
+        'name'
+    );
+    
     /**
      * getInfoBox - получить по фильтру InfoBox
      * @param type $arFilter
@@ -91,14 +98,37 @@ class infoBox{
      * getAllTypePropertysInfoBox - получить все типы свойств InfoBox 
      */
     public static function getAllTypePropertysInfoBox(){
-        echo 'getAllTypePropertysInfoBox - ok';
+       
+        $result = array();
+        global $db;
+        $res = $db->selectDb(
+            self::$table_types_property_info_box,
+            array('*'),
+            array()
+        );
+              
+        while ($arRes = $db->GetResult_fetch_assoc($res)){
+			$result[$arRes['id']] = $arRes;
+		}
+        return $result;
     }
        
     /**
      * getAllPropertysInfoBox - получить свойства InfoBox (! не значения)
      */
-    public static function getAllPropertysInfoBox($idInfoBox){
-        
+    public static function getPropertysInfoBox($where){
+        $result = array();
+        global $db;
+        $res = $db->selectDb(
+            self::$table_list_propertys_info_box,
+            array('*'),
+            $where
+        );
+              
+        while ($arRes = $db->GetResult_fetch_assoc($res)){
+			$result[] = $arRes;
+		}
+        return $result;
     }
     
     /**
@@ -106,7 +136,18 @@ class infoBox{
      * @param type $arParams
      */
     public static function addPropertyInfoBox($arParams){
+        $result = false;
+
+		// id, login, name, pass, groups
+		global $db;		
+        $res = $db->insertDb(self::$table_list_propertys_info_box, $arParams);
         
+        if ($res){
+			$result = true;
+		}
+			
+		return $result;
+    
     }
     
     /**

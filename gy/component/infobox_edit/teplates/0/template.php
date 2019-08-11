@@ -19,6 +19,10 @@ if (!empty($arRes['data-this-nfo-box'][0])){
     </form>    
    
     <a href="" class="gy-admin-button"><?=$this->lang->GetMessage('back');?></a>
+    <br/>
+    <br/>
+    <br/>
+    <a href="/gy/admin/info-box-property-edit.php?info-box-id=<?=$arRes['data-this-nfo-box'][0]['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-property');?></a>
 <?}?>    
    
 <?if(!empty($arRes['status'])){?>    

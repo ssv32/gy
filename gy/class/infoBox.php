@@ -173,7 +173,21 @@ class infoBox{
      * @param type $idInfoBox
      */
     public static function getAllElementInfoBox($idInfoBox){
-        
+                      
+        $result = array();
+        global $db;
+        $res = $db->selectDb(
+            self::$table_element_info_box,
+            array('*'),
+            array(
+                '=' => array('id_info_box', $idInfoBox )
+            )
+        );
+              
+        while ($arRes = $db->GetResult_fetch_assoc($res)){
+			$result[] = $arRes;
+		}
+        return $result;
     }
     
     /**
@@ -181,7 +195,34 @@ class infoBox{
      * @param type $arParams
      */
     public static function addElementInfoBox($arParams){
+        $result = false;
+
+		// id, login, name, pass, groups
+		global $db;		
+        $res = $db->insertDb(self::$table_element_info_box, $arParams);
         
+        if ($res){
+			$result = true;
+		}
+			
+		return $result;
+    }
+    
+    /**
+     * deleteElementInfoBox - удалить элемент InfoBox
+     * @param type $arParams
+     */
+    public static function deleteElementInfoBox($id){
+        $result = false;
+
+		global $db;		
+        $res = $db->deleteDb(self::$table_element_info_box, array('=' => array('id', $id)));
+        
+        if ($res){
+			$result = true;
+		}
+			
+		return $result;
     }
     
 }

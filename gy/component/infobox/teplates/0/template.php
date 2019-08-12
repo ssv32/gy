@@ -28,7 +28,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                     </form>
                 </td>
                 <td><a href="/gy/admin/info-box-edit.php?ID=<?=$val['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit');?></a></td>
-                <td><button class="gy-admin-button"><?=$this->lang->GetMessage('show-element');?></button></td>
+                <td><a href="/gy/admin/info-box-element-list.php?info-box-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('show-element');?></a></td>
             </tr>
         <?}?>
 	</table>

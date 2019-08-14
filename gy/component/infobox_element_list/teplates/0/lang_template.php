@@ -4,7 +4,8 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 $mess['rus'] = array(
 	'ITEMS-NULL' => '!Элементов ещё нет',
     'title-add-element' => 'Добавить новый элемент',
-    'save' => 'Добавить',
+    'add' => 'Добавить',
+    'save' => 'Изменить',
     'back' => 'Отмена',
     'title' => 'Элементы info-box',
     'add-ok' => 'Элемент добавлен',
@@ -12,6 +13,7 @@ $mess['rus'] = array(
     'el-edit' => 'Изменить элемент',
     'el-del' => 'Удалить элемент',
     'el-view-property' => 'Просмотреть свойства элемента',
-    'del-ok' => '! Элемент удалён'
+    'del-ok' => '! Элемент удалён',
+    'edit-ok' => 'Элемент изменён'
 );
 

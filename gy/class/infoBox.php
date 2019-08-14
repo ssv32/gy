@@ -225,4 +225,22 @@ class infoBox{
 		return $result;
     }
     
+    /**
+     * updateElementInfoBox - зменить элемент InfoBox
+     * @param type $arParams
+     */
+    public static function updateElementInfoBox($arParams, $where){
+        $result = false;
+
+		// id, login, name, pass, groups
+		global $db;		
+        $res = $db->updateDb(self::$table_element_info_box, $arParams, $where);
+        
+        if ($res){
+			$result = true;
+		}
+			
+		return $result;
+    }
+    
 }

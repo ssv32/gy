@@ -25,7 +25,7 @@ if(!empty($arRes['ITEMS'])){ ?>
                 <td><?=$val['code']?></td>
                 <td><?=$val['section_id']?></td>
                 <td><a href="?info-box-id=<?=$arParam['info-box-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-edit');?></a></td>
-                <td><a href="" class="gy-admin-button"><?=$this->lang->GetMessage('el-view-property');?></a></td>
+                <td><a href="/gy/admin/info-box-element-property.php?info-box-id=<?=$arParam['info-box-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-view-property');?></a></td>
                 <td>
                     <form method="post">
                         <input type="hidden" name="id" value="<?=$val['id']?>" />

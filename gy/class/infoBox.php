@@ -126,7 +126,7 @@ class infoBox{
         );
               
         while ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result[] = $arRes;
+			$result[$arRes['id']] = $arRes;
 		}
         return $result;
     }
@@ -154,19 +154,87 @@ class infoBox{
      * getValuePropertysInfoBox - получить значения свойств указанного элемента infoBox
      * @param type $idInfoBox
      * @param type $idElementInfoBox
+     * @param type $idProperty
      * @param type $tableName
      */
-    public static function getValuePropertysInfoBox($idInfoBox, $idElementInfoBox, $tableName){
-        
+    public static function getValuePropertysInfoBox($idInfoBox, $idElementInfoBox, $idProperty,  $tableName){
+        $result = array();
+        global $db;
+        $res = $db->selectDb(
+            $tableName,
+            array('*'),
+            array(
+                'AND' => array(
+                    '=' => array(
+                        'id_info_box', 
+                        $idInfoBox 
+                    ),
+                    'AND' => array( 
+                        'AND' => array(
+                            '=' => array( 
+                                'id_element_info_box',
+                                $idElementInfoBox
+                            ), 
+                            'AND' => array(
+                                '=' => array(
+                                    'id_property_info_box', 
+                                    $idProperty
+                                ) 
+                            )    
+                        )
+                    )
+                )    
+            )
+        );
+                      
+        if ($arRes = $db->GetResult_fetch_assoc($res)){
+			$result = $arRes;
+		}
+        return $result;
     }
     
     /**
      * addValuePropertyInfoBox - добавить значения свойства для элемента InfoBox
      * @param type $arParams
      */
-    public static function addValuePropertyInfoBox($arParams){
-        
+    public static function addValuePropertyInfoBox($idInfoBox, $idElementInfoBox, $idProperty,  $tableName, $value){
+        $result = false;
+        global $db;		
+        $res = $db->insertDb(
+            $tableName, 
+            array(
+                'id_info_box' => $idInfoBox,
+                'id_element_info_box' => $idElementInfoBox,
+                'id_property_info_box' => $idProperty,
+                'value' => $value
+            )
+        );
+        if($res){
+            $result = true;
+        }
+        return $result;
     }
+    
+    
+    public static function UpdateValuePropertyInfoBox($tableName, $id, $value){
+        $result = false;
+        global $db;
+        
+        $res = $db->updateDb(
+            $tableName, 
+            array('value' => $value), 
+            array(
+                '=' => array('id', $id)
+            )
+        );
+        
+        if($res){
+            $result = true;
+        }
+        return $result;
+    }
+    
+    
     
     /**
      * getAllElementInfoBox - получить все элементы InfoBox

@@ -76,7 +76,7 @@ $res = $db->createTable( // список свойств infoBox
         'code varchar(50)', 
         'name varchar(50)', 
     )
-); 
+);
 
 $res = $db->createTable( // типы свойств infoBox
     'types_property_info_box',
@@ -85,6 +85,7 @@ $res = $db->createTable( // типы свойств infoBox
         'info varchar(50)', 
         'code varchar(50)', 
         'name varchar(50)', 
+        'name_table varchar(50)'
     )
 ); 
 
@@ -92,9 +93,9 @@ $res = $db->insertDb(
     'types_property_info_box', 
     array(
         'name' => 'html', 
-        'code' =>   'html', 
-        'info' => 'property save date - html'
-        //'id_type_property' => 1
+        'code' => 'html', 
+        'info' => 'property save date - html',
+        'name_table' => 'value_propertys_type_html'
     )
 );
 
@@ -103,8 +104,8 @@ $res = $db->insertDb(
     array(
         'name' => 'number', 
         'code' =>   'number', 
-        'info' => 'property save date - number'
-        //'id_type_property' => 1
+        'info' => 'property save date - number',
+        'name_table' => 'value_propertys_type_number'
     )
 );
 

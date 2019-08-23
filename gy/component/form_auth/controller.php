@@ -12,7 +12,9 @@ if (isset($this->model) ){
 //echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';
 
 // если задан параметр idComponent значит сверить с пришедшим
-$isChackIdComponent = ( empty($this->arParam['idComponent']) || (!empty($this->arParam['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) );
+$isChackIdComponent = ( empty($this->arParam['idComponent']) 
+    || (!empty($this->arParam['idComponent']) && !empty($_REQUEST['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) 
+);
 
 
 // $model - теоретически должно быть тут доступно

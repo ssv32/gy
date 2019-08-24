@@ -16,7 +16,7 @@ if (!empty($data['id_info_box']) && !empty($data['name']) && !empty($data['code'
                 'id_info_box' => $data['id_info_box']
             )
         );
-        if($res){ // TODO добавить редирект
+        if($res){ 
             $arRes['stat'] = 'ok';
         }else{
             $arRes['stat'] = 'err';
@@ -37,22 +37,20 @@ if (!empty($data['id_info_box']) && !empty($data['name']) && !empty($data['code'
             )
         );
         
-        if($res){ // TODO добавить редирект
+        if($res){ 
             $arRes['stat-edit'] = 'ok';
         }else{
             $arRes['stat-edit'] = 'err';
         }
     }else{
         $arRes['stat'] = 'err';
-    }
-        
-    
+    }  
     
 }
 
 if( !empty($data['del-el']) && !empty($data['id']) ){
     $res = infoBox::deleteElementInfoBox( $data['id']);
-    if($res){ // TODO добавить редирект
+    if($res){ 
         $arRes['stat-del'] = 'ok';
     }else{
         $arRes['stat-del'] = 'err';
@@ -62,7 +60,7 @@ if( !empty($data['del-el']) && !empty($data['id']) ){
 if (!empty($this->arParam['info-box-id']) && is_numeric($this->arParam['info-box-id'])){
     $arRes['ITEMS'] = infoBox::getAllElementInfoBox($this->arParam['info-box-id']);
       
-    if(!empty($data['el-id']) && is_numeric($data['el-id']) ){
+    if(!empty($data['el-id']) && is_numeric($data['el-id']) && empty($arRes['stat-edit']) ){
         
         foreach ($arRes['ITEMS'] as $val){
             if($val['id'] == $data['el-id']){

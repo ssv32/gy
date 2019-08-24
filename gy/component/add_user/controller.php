@@ -1,6 +1,8 @@
 <?php 
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
+$data  = $_REQUEST;
+
 $arRes['user_property'] = array(
 	'login', 
 	'name', 
@@ -20,13 +22,13 @@ function checkProperty($arr, $arRes){
 	return $result;
 }
 
-if ( $_REQUEST['Добавить'] == 'Добавить') {
-	if(checkProperty($_REQUEST, $arRes)){
+if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
+	if(checkProperty($data, $arRes)){
 		// добавление пользователя
 		global $user;
 		$arDaraUser = array();
 		foreach ($arRes['user_property'] as $val){
-			$arDaraUser[$val] = $_REQUEST[$val];
+			$arDaraUser[$val] = $data[$val];
 		}
 		
 		if( $user->addUsers($arDaraUser)){
@@ -41,16 +43,16 @@ if ( $_REQUEST['Добавить'] == 'Добавить') {
 	}
 	
 	
-} elseif($arRes["stat"] != 'err') {
+} elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
 	
 	$arRes["stat"] = 'add';
 
 }
 
-if (empty($_REQUEST['stat'])){
+if (empty($data['stat'])){
 	header( 'Location: '.$redirectUrl.'?stat='.$arRes["stat"] );
 }else{
-	$arRes["stat"] = $_REQUEST['stat'];
+	$arRes["stat"] = $data['stat'];
 }
 
 // показать шаблон

@@ -16,16 +16,56 @@ $isChackIdComponent = ( empty($this->arParam['idComponent'])
     || (!empty($this->arParam['idComponent']) && !empty($_REQUEST['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) 
 );
 
+$isAdmin = false;
 
-// $model - теоретически должно быть тут доступно
-if ($isChackIdComponent && !empty($_REQUEST['auth']) ){
-	$arRes["auth_ok"] = 'ok';
-	$arRes["auth_user"] = $_REQUEST['auth'].' '.model_setAuth($_REQUEST['auth']);
-} else {
-	$arRes["auth"] = "auth";
+if(!empty($_REQUEST['auth'])){
+    $thisLogin = $_REQUEST['auth'];
 }
 
+global $user;
 
+$isAdmin = $user->isAdmin();
+
+$redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
+
+if ($isAdmin === true){
+		
+	$thisLogin = $user->getDataThisUser()['login'];	
+	$arRes["auth_ok"] = 'ok';
+	$arRes["auth_user"] = $thisLogin;
+		
+} elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass'])) {
+	$user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
+	$isAdmin = $user->isAdmin();
+	
+	if ($isAdmin === false){
+		$arRes["err"] = 'err1'; 
+	}
+	
+	if ($isChackIdComponent && $isAdmin){
+		$arRes["auth_ok"] = 'ok';
+		$arRes["auth_user"] = $thisLogin;
+		
+		header( 'Location: '.$redirectUrl );
+	} else {
+		$arRes['form_input']["auth"] = "auth";
+		$arRes['form_input']["pass"] = "pass";
+		header( 'Location: '.$redirectUrl.'?err=err1' );
+		
+	}
+} else {
+	if (!empty($_REQUEST['err'])){
+		$arRes["err"] = $_REQUEST['err']; 
+	}
+	$arRes['form_input']["auth"] = "auth";
+	$arRes['form_input']["pass"] = "pass";
+}
+
+if ( !empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
+	if ($user->userExit() ){
+		header( 'Location: '.$redirectUrl );
+	}
+}
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

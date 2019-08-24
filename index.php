@@ -14,7 +14,7 @@
 	
 	// пример вызова компонента // example run component
 	$app->component(
-		'form_auth',
+		'form_auth_test',
 		'0',
 		array( 
 			'test' => 'asd',
@@ -24,7 +24,7 @@
         
         echo "ok2";
 	$app->component(
-		'form_auth',
+		'form_auth_test',
 		'0',
 		array( 
 			'test' => 'asd2',

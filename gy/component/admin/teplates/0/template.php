@@ -7,7 +7,7 @@ global $app;
 <br/>
 <?
 $app->component(
-	'form_auth_0',
+	'form_auth',
 	'0',
 	array( 
 		'test' => 'asd',

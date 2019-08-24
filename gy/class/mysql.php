@@ -39,11 +39,11 @@ class mysql extends db{
     }
 	
     /**
-     * GetResult_fetch_assoc 
-     * @param type $res
-     * @return type
+     * fetch - получить порцию (строку) данных, после выполнения запроса в БД
+     * @param $res - результат отработки запроса в БД
+     * @return array
      */
-	public function GetResult_fetch_assoc($res){
+	public function fetch($res){
         $result = array();
         if ($res !== false){
             $result = mysqli_fetch_assoc($res);
@@ -51,6 +51,23 @@ class mysql extends db{
 		return $result;
 	}
 	
+    /**
+	 * fetchAll - тоже что и fetch только в получит всё в виде массива (с ключём id элемента)
+     * @param $res - результат отработки запроса в БД
+     * @return array
+	 */
+	public function fetchAll($res, $key = 'id'){
+        $result = array();
+        while ($arRes = self::fetch($res)){
+            if($key !== false){
+                $result[$arRes[$key]] = $arRes;
+            }else{
+                $result[] = $arRes;
+            }
+		}
+        return $result;
+    }
+    
 	public function __construct($db_config) {
 		if ( empty($this->db)){
 			if (!empty($db_config)){

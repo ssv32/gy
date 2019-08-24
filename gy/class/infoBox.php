@@ -30,10 +30,9 @@ class infoBox{
             $arProperty,
             $arFilter
         );
-              
-        while ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result[] = $arRes;
-		}
+                      
+        $result = $db->fetchAll($res, false);
+        
         return $result;
     }
     
@@ -110,9 +109,8 @@ class infoBox{
             array()
         );
               
-        while ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result[$arRes['id']] = $arRes;
-		}
+        $result = $db->fetchAll($res);
+        
         return $result;
     }
        
@@ -128,10 +126,9 @@ class infoBox{
             array('*'),
             $where
         );
-              
-        while ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result[$arRes['id']] = $arRes;
-		}
+        
+        $result = $db->fetchAll($res);
+        
         return $result;
     }
     
@@ -193,7 +190,7 @@ class infoBox{
             )
         );
                       
-        if ($arRes = $db->GetResult_fetch_assoc($res)){
+        if ($arRes = $db->fetch($res)){
 			$result = $arRes;
 		}
         return $result;
@@ -270,10 +267,9 @@ class infoBox{
                 '=' => array('id_info_box', $idInfoBox )
             )
         );
-              
-        while ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result[] = $arRes;
-		}
+                     
+        $result = $db->fetchAll($res, false);
+        
         return $result;
     }
     

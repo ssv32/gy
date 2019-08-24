@@ -77,7 +77,7 @@ class user{ // TODO создавать объект класса сразу пр
             )    
         );
         
-		if ($arRes = $db->GetResult_fetch_assoc($res)){				
+		if ($arRes = $db->fetch($res)){				
 			
 			//$this->setUserCookie($arRes['id'] , $crypto->getRandString());
 			$this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
@@ -174,7 +174,7 @@ class user{ // TODO создавать объект класса сразу пр
             array( '=' => array('hash_auth', "'".$cookie."'") ) 
         );
         
-		if ($arRes = $db->GetResult_fetch_assoc($res)){
+		if ($arRes = $db->fetch($res)){
 			$result = $arRes;		
 		}
 				
@@ -196,17 +196,12 @@ class user{ // TODO создавать объект класса сразу пр
      */
 	public function getAllDataUsers(){
 		$result = array();
-		global $db;		
-		//$res = $db->query($db->db, 'select * from users');
-        
+		global $db;		        
         $res = $db->selectDb( 
             'users', 
             array('*')
         );
-        
-		while ($arRes = $db->GetResult_fetch_assoc($res)){
-			$result[] = $arRes;
-		}
+        $result = $db->fetchAll($res, false);
 		return $result;
 	}
 	

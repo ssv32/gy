@@ -67,7 +67,7 @@ $res = $db->selectDb(
 
 //print_r($res);
 //
-//while ($arRes = $db->GetResult_fetch_assoc($res)){
+//while ($arRes = $db->fetch($res)){
 //    print_r($arRes);
 //
 //}

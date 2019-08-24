@@ -34,19 +34,24 @@ if(!empty($this->arParam['info-box-id']) && !empty($this->arParam['el-id'])  ){
     
     // получить значения
     foreach($arRes['PROPERTY'] as $key => $val){
-        $arRes['PROPERTY_VALUE'][$val['id']] = infoBox::getValuePropertysInfoBox(
+        $propertyValue = infoBox::getValuePropertysInfoBox(
             $this->arParam['info-box-id'], 
             $this->arParam['el-id'],
             $val['id'],
             $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
         );
+        
+        if(!empty($propertyValue)){
+            $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
+        }
     }
     
     $arKeyValue = array();
     foreach ($arRes['PROPERTY_VALUE'] as $key => $value) {
+
         $arKeyValue[$value['id']] = $key;
     }
-    
+        
     // обновление
     // сохранение свойств
     if(!empty($data['propertyUpdate']) ){
@@ -69,12 +74,16 @@ if(!empty($this->arParam['info-box-id']) && !empty($this->arParam['el-id'])  ){
     
     // получить значения
     foreach($arRes['PROPERTY'] as $key => $val){
-        $arRes['PROPERTY_VALUE'][$val['id']] = infoBox::getValuePropertysInfoBox(
+         $propertyValue = infoBox::getValuePropertysInfoBox(
             $this->arParam['info-box-id'], 
             $this->arParam['el-id'],
             $val['id'],
             $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
         );
+        
+        if(!empty($propertyValue)){
+            $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
+        }
     }
     
 }

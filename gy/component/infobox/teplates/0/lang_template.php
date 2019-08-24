@@ -8,6 +8,7 @@ $mess['rus'] = array(
     'show-element' => 'Работа с элементами info-box',
     'del-err' => 'Ошибка! попробуйте ещё раз',
     'del-ok' => 'info-box удалён!',
-    'not-element' => 'info-box пока нет'
+    'not-element' => 'info-box пока нет',
+    'ok' => 'ОК'
 );
 

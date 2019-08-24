@@ -20,6 +20,7 @@ class infoBox{
      * getInfoBox - получить по фильтру InfoBox
      * @param type $arFilter
      * @param type $arProperty
+     * @return array
      */
     public static function getInfoBox($arFilter, $arProperty){
         $result = array();
@@ -38,6 +39,7 @@ class infoBox{
     
     /**
      * addInfoBox - добавить InfoBox
+     * @return boolean
      */
     public static function addInfoBox($arParams){
         $result = false;
@@ -96,6 +98,7 @@ class infoBox{
     
     /**
      * getAllTypePropertysInfoBox - получить все типы свойств InfoBox 
+     * @return array
      */
     public static function getAllTypePropertysInfoBox(){
        
@@ -115,6 +118,7 @@ class infoBox{
        
     /**
      * getAllPropertysInfoBox - получить свойства InfoBox (! не значения)
+     * @return array
      */
     public static function getPropertysInfoBox($where){
         $result = array();
@@ -134,6 +138,7 @@ class infoBox{
     /**
      * addPropertyInfoBox - добавить свойство для InfoBox
      * @param type $arParams
+     * @return boolean
      */
     public static function addPropertyInfoBox($arParams){
         $result = false;
@@ -156,6 +161,7 @@ class infoBox{
      * @param type $idElementInfoBox
      * @param type $idProperty
      * @param type $tableName
+     * @return array
      */
     public static function getValuePropertysInfoBox($idInfoBox, $idElementInfoBox, $idProperty,  $tableName){
         $result = array();
@@ -195,7 +201,12 @@ class infoBox{
     
     /**
      * addValuePropertyInfoBox - добавить значения свойства для элемента InfoBox
-     * @param type $arParams
+     * @param int $idInfoBox
+     * @param int $idElementInfoBox
+     * @param int $idProperty
+     * @param int $tableName
+     * @param mixed $value
+     * @return boolean
      */
     public static function addValuePropertyInfoBox($idInfoBox, $idElementInfoBox, $idProperty,  $tableName, $value){
         $result = false;
@@ -215,7 +226,14 @@ class infoBox{
         return $result;
     }
     
-    
+    /**
+     * UpdateValuePropertyInfoBox - обновить значение свойства элемента info-box
+     * @global type $db
+     * @param type $tableName
+     * @param type $id
+     * @param type $value
+     * @return boolean
+     */
     public static function UpdateValuePropertyInfoBox($tableName, $id, $value){
         $result = false;
         global $db;
@@ -238,7 +256,8 @@ class infoBox{
     
     /**
      * getAllElementInfoBox - получить все элементы InfoBox
-     * @param type $idInfoBox
+     * @param int $idInfoBox
+     * @return array
      */
     public static function getAllElementInfoBox($idInfoBox){
                       
@@ -261,6 +280,7 @@ class infoBox{
     /**
      * addElementInfoBox - добавить элемент InfoBox
      * @param type $arParams
+     * @return boolean
      */
     public static function addElementInfoBox($arParams){
         $result = false;
@@ -279,6 +299,7 @@ class infoBox{
     /**
      * deleteElementInfoBox - удалить элемент InfoBox
      * @param type $arParams
+     * @return boolean
      */
     public static function deleteElementInfoBox($id){
         $result = false;
@@ -296,6 +317,7 @@ class infoBox{
     /**
      * updateElementInfoBox - зменить элемент InfoBox
      * @param type $arParams
+     * @return boolean
      */
     public static function updateElementInfoBox($arParams, $where){
         $result = false;

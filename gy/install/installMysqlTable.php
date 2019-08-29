@@ -4,7 +4,7 @@ include "../../gy/gy.php"; // подключить ядро // include core
 echo 'install table - user ...';
 
 global $db;
-        
+
 $res = $db->createTable(
     'users',
     array( 
@@ -141,5 +141,77 @@ $res = $db->createTable( // значения свойств infoBox-а типа 
         'value int'
     )
 );
-
+echo '<br/>install table - infoBox OK';
 //-infoBox-------------
+
+
+//--тестовый контент--
+echo '<br/>install info-box Content - test content...';
+
+// добавить инфоблок контент
+infoBox::addInfoBox(array('code'=> 'Content','name'=> 'Контент2'));
+
+$dataContentInfoBox = infoBox::getInfoBox(array('=' => array('code', "'Content'")), array('*'));
+
+//добавить свойство
+infoBox::addPropertyInfoBox(
+    array(
+        'id_type_property' => 1,
+        'id_info_box' => $dataContentInfoBox[0]['id'],
+        'code' => 'html-code',
+        'name' => 'html вставка'
+    )
+);
+
+// добавить элемент инфоблока
+infoBox::addElementInfoBox(
+    array(
+        'section_id' => 0,
+        'code' => 'html-index-page',
+        'name' => 'Приветствие на главной',
+        'id_info_box' => $dataContentInfoBox[0]['id']
+    )
+);
+
+// взять типы свойств что бы знать названия таблиц где их искать
+//$dataTypeProperty = infoBox::getAllTypePropertysInfoBox();
+// найти элемент
+$dataElement = infoBox::getElementInfoBox(
+    array(
+        'AND' => array(
+            '=' => array(
+                'id_info_box', 
+                $dataContentInfoBox[0]['id']
+            ),
+            'AND' => array(
+                '=' => array(
+                    'code',
+                    "'html-index-page'"
+                )
+            )
+        )
+    )
+);
+
+// найти его свойства
+$propertyInfoBox = infoBox::getPropertysInfoBox(
+    array(
+        '='=>array(
+            'id_info_box', 
+            $dataContentInfoBox[0]['id']
+        ) 
+    ) 
+);
+$prop = array_shift($propertyInfoBox);
+
+// добавить значение свойства для элемента созданного выше
+infoBox::addValuePropertyInfoBox(
+    $dataContentInfoBox[0]['id'], 
+    $dataElement['id'], 
+    $prop['id'],  
+    'value_propertys_type_html', 
+    'Привет пользователь, тебя приветствует gy php framework<br/> и текст показан из его контентной части!!!'
+);
+
+echo '<br/>install info-box Content - test content OK';
+////

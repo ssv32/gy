@@ -32,5 +32,16 @@
 		)
 	);
 
-
+    $app->component(
+		'infobox_element_show',
+		'0',
+		array( 
+			'info-box-code' => 'Content',
+			'element-code' => 'html-index-page',
+		)
+	);
+    
+    
+    
+    
 

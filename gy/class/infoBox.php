@@ -247,9 +247,7 @@ class infoBox{
             $result = true;
         }
         return $result;
-    }
-    
-    
+    }  
     
     /**
      * getAllElementInfoBox - получить все элементы InfoBox
@@ -272,6 +270,27 @@ class infoBox{
         
         return $result;
     }
+    
+    /**
+     * getElementInfoBox - получить элемент InfoBox
+     * @param int $idInfoBox
+     * @return array
+     */
+    public static function getElementInfoBox($where){
+                      
+        $result = array();
+        global $db;
+        $res = $db->selectDb(
+            self::$table_element_info_box,
+            array('*'),
+            $where
+        );
+                     
+        $result = $db->fetch($res, false);
+        
+        return $result;
+    }
+    
     
     /**
      * addElementInfoBox - добавить элемент InfoBox

@@ -22,15 +22,26 @@ if(empty($arRes['stat-save'] )){
                         <td><?=$val['code']?></td>
                         <td><?=$arRes['PROPERTY_TYPE'][$val['id_type_property']]['name']?></td>
                         <td>
-                            <input 
-                                type="text" 
-                                <?if(!empty($arRes['PROPERTY_VALUE'][$val['id']])){?>
-                                    name="propertyUpdate[<?=$arRes['PROPERTY_VALUE'][$val['id']]['id']?>]" 
-                                <?}else{?>
-                                    name="propertyAdd[<?=$val['id']?>]" 
-                                <?}?>    
-                                value="<?=((!empty($arRes['PROPERTY_VALUE'][$val['id']]))? $arRes['PROPERTY_VALUE'][$val['id']]['value'] : '')?>" 
-                            />
+                            <?if($arRes['PROPERTY_TYPE'][$val['id_type_property']]['name'] != 'html'){?>
+                                <input 
+                                    type="text" 
+                                    <?if(!empty($arRes['PROPERTY_VALUE'][$val['id']])){?>
+                                        name="propertyUpdate[<?=$arRes['PROPERTY_VALUE'][$val['id']]['id']?>]" 
+                                    <?}else{?>
+                                        name="propertyAdd[<?=$val['id']?>]" 
+                                    <?}?>    
+                                    value="<?=((!empty($arRes['PROPERTY_VALUE'][$val['id']]))? $arRes['PROPERTY_VALUE'][$val['id']]['value'] : '')?>" 
+                                />
+                            <?}else{?>
+                                <textarea 
+                                    rows="5" cols="70"
+                                    <?if(!empty($arRes['PROPERTY_VALUE'][$val['id']])){?>
+                                        name="propertyUpdate[<?=$arRes['PROPERTY_VALUE'][$val['id']]['id']?>]" 
+                                    <?}else{?>
+                                        name="propertyAdd[<?=$val['id']?>]" 
+                                    <?}?>    
+                                /><?=((!empty($arRes['PROPERTY_VALUE'][$val['id']]))? $arRes['PROPERTY_VALUE'][$val['id']]['value'] : '')?></textarea>
+                            <?}?>
                         </td>
                     </tr>
                 <?}?>

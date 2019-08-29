@@ -152,6 +152,7 @@ class infoBox{
     
     }
     
+    
     /**
      * getValuePropertysInfoBox - получить значения свойств указанного элемента infoBox
      * @param type $idInfoBox
@@ -347,5 +348,42 @@ class infoBox{
 			
 		return $result;
     }
+    
+    /** //TODO протестить закомментировать
+     * deletePropertyInfoBox - удалить свойства инфоблока
+     * @param int $idProperty - id свойства info-box
+     * @param int $infoBox
+     * @return boolean
+     */
+    public static function deletePropertyInfoBox($idProperty, $infoBox){
+        //---надо взять все имеющиеся для этого свойства значения у элементов и удалить тоже
+        global $db;	
+        
+        // взять все типы инфоблоков что бы знать в каких таблицах искать значения
+        $dataTypeProperty = infoBox::getAllTypePropertysInfoBox();
+        
+        // найти все свойства info-box      
+        $propertyInfoBox = infoBox::getPropertysInfoBox(
+            array(
+                '='=>array(
+                    'id_info_box', 
+                    $infoBox
+                ) 
+            ) 
+        );
+        
+        $tableName = $dataTypeProperty[$propertyInfoBox[$idProperty]['id_type_property']]['name_table'];
+        
+        // удалить для всех элементов значения свойства           
+        $db->deleteDb($tableName, array('=' => array('id_property_info_box', $idProperty) )  );
+        
+        // удалить само свойство info-box
+        $db->deleteDb(static::$table_list_propertys_info_box, array('=' => array('id', $idProperty) )  );
+
+        ////---
+        return true; // TODO доделать что бы был ещё false
+    }
+    
+    
     
 }

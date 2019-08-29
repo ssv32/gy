@@ -14,8 +14,8 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
 
             <?foreach ($arRes['ITEMS'] as $val){?>
                 <tr>
-                    <td><?=$val['name']?></td>
                     <td><?=$val['code']?></td>
+                    <td><?=$val['name']?></td>
                     <td><?=$val['section_id']?></td>
                     <td><a href="?info-box-id=<?=$arParam['info-box-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-edit');?></a></td>
                     <td><a href="/gy/admin/info-box-element-property.php?info-box-id=<?=$arParam['info-box-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-view-property');?></a></td>

@@ -4,7 +4,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 $data = $_POST;
 
 if( !empty($data['ID']) && is_numeric($data['ID']) ){
-    $res = infoBox::deleteInfoBox(array('=' => array('id', $data['ID'])));
+    $res = infoBox::deleteInfoBox($data['ID']);
     
     if($res){
         $arRes['status'] = 'del-ok';

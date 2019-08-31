@@ -60,14 +60,37 @@ class infoBox{
      * @param type $arParams
      * @return boolean
      */
-    public static function deleteInfoBox($arParams){
+    public static function deleteInfoBox($id){
         $result = false;
 
 		// id, login, name, pass, groups
 		global $db;		
-        $res = $db->deleteDb(self::$table_info_box, $arParams);
+        $res = $db->deleteDb(self::$table_info_box, array('=' => array('id', $id)));
         
         if ($res){
+            
+            //нужно удалить все элементы связанные с ним свойства и значения свойств
+            
+            $db->deleteDb( // удалить значения свойств свойств html
+                self::$table_value_propertys_type_html, 
+                array('=' => array('id_info_box', $id) )  
+            );
+            $db->deleteDb( // удалить значения свойств свойств number
+                self::$table_value_propertys_type_number, 
+                array('=' => array('id_info_box', $id) )  
+            );
+            
+            
+            $db->deleteDb( // удалить элементы info-box
+                self::$table_element_info_box, 
+                array('=' => array('id_info_box', $id) )  
+            );       
+              
+            $db->deleteDb( // удалить свойства info-box
+                self::$table_list_propertys_info_box, 
+                array('=' => array('id_info_box', $id) )  
+            );
+            
 			$result = true;
 		}
 			
@@ -324,6 +347,17 @@ class infoBox{
         $res = $db->deleteDb(self::$table_element_info_box, array('=' => array('id', $id)));
         
         if ($res){
+            // надо удалить все свойства этого элемента
+            $db->deleteDb( // удалить всё для свойств html
+                self::$table_value_propertys_type_html, 
+                array('=' => array('id_element_info_box', $id) )  
+            );
+            $db->deleteDb( // удалить всё для свойств number
+                self::$table_value_propertys_type_number, 
+                array('=' => array('id_element_info_box', $id) )  
+            );
+        
+                    
 			$result = true;
 		}
 			
@@ -383,7 +417,6 @@ class infoBox{
         ////---
         return true; // TODO доделать что бы был ещё false
     }
-    
-    
+       
     
 }

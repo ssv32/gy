@@ -49,7 +49,8 @@ if(empty($arRes['stat-save'] )){
 
             <input type="submit" class="gy-admin-button" value="<?=$this->lang->GetMessage('save');?>" />
         </form>    
-
+        
+        <br/>
         <a href="" class="gy-admin-button"><?=$this->lang->GetMessage('back');?></a>
         <br/>
         <br/>

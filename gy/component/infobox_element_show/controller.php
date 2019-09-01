@@ -3,7 +3,6 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 $arRes = array();
 
-// TODO добавить кеш
 // TODO попробовать уменьшить количество запросов
 
 /**
@@ -12,57 +11,76 @@ $arRes = array();
 */
 if(!empty($this->arParam['info-box-code']) && !empty($this->arParam['element-code'])){
     
-    // найти info-box
-    $dataInfoBox = infoBox::getInfoBox(
-        array(
-            '=' => array( 'code', "'".$this->arParam['info-box-code']."'") 
-        ), 
-        array('*')
-    );
+    $isCache = (!empty($this->arParam['cacheTime']) && is_numeric($this->arParam['cacheTime']));
     
-    $dataInfoBox = $dataInfoBox[0]; 
+    if($isCache){
+        global $app;
+        $cache = new cache($app->url);
+        $initCache = $cache->cacheInit('component_infobox_element_show', $this->arParam['cacheTime']);
+    }
+    
+    if($isCache && $initCache){
+        $arRes = $cache->getCacheData();
+    }
+    
+    if( !$isCache || ($isCache && !$initCache) ){
+                
+        // найти info-box
+        $dataInfoBox = infoBox::getInfoBox(
+            array(
+                '=' => array( 'code', "'".$this->arParam['info-box-code']."'") 
+            ), 
+            array('*')
+        );
 
-    // взять типы свойств что бы знать названия таблиц где их искать
-    $dataTypeProperty = infoBox::getAllTypePropertysInfoBox();
+        $dataInfoBox = $dataInfoBox[0]; 
 
-    // найти его свойства
-    $propertyInfoBox = infoBox::getPropertysInfoBox(
-        array(
-            '='=>array(
-                'id_info_box', 
-                $dataInfoBox['id']
-            ) 
-        ) 
-    );
+        // взять типы свойств что бы знать названия таблиц где их искать
+        $dataTypeProperty = infoBox::getAllTypePropertysInfoBox();
 
-    // найти элемент
-    $dataElement = infoBox::getElementInfoBox(
-        array(
-            'AND' => array(
-                '=' => array(
+        // найти его свойства
+        $propertyInfoBox = infoBox::getPropertysInfoBox(
+            array(
+                '='=>array(
                     'id_info_box', 
                     $dataInfoBox['id']
-                ),
+                ) 
+            ) 
+        );
+
+        // найти элемент
+        $dataElement = infoBox::getElementInfoBox(
+            array(
                 'AND' => array(
                     '=' => array(
-                        'code',
-                        "'".$this->arParam['element-code']."'"
+                        'id_info_box', 
+                        $dataInfoBox['id']
+                    ),
+                    'AND' => array(
+                        '=' => array(
+                            'code',
+                            "'".$this->arParam['element-code']."'"
+                        )
                     )
                 )
             )
-        )
-    );
-        
-    // найти значения свойств элемента
-    $arRes['ITEMS'] = array();
-    
-    foreach ($propertyInfoBox as $val) {
-        $arRes['ITEMS'][$val['id']] = infoBox::getValuePropertysInfoBox(
-            $dataInfoBox['id'], 
-            $dataElement['id'], 
-            $val['id'],  
-            $dataTypeProperty[$val['id_type_property']]['name_table']
         );
+
+        // найти значения свойств элемента
+        $arRes['ITEMS'] = array();
+
+        foreach ($propertyInfoBox as $val) {
+            $arRes['ITEMS'][$val['id']] = infoBox::getValuePropertysInfoBox(
+                $dataInfoBox['id'], 
+                $dataElement['id'], 
+                $val['id'],  
+                $dataTypeProperty[$val['id_type_property']]['name_table']
+            );
+        }
+        
+        if($isCache){
+            $cache->setCacheData($arRes);
+        }
     }
     
 }

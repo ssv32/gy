@@ -38,6 +38,7 @@
 		array( 
 			'info-box-code' => 'Content',
 			'element-code' => 'html-index-page',
+            'cacheTime' => 86400 // закешить на 24 ч.
 		)
 	);
     

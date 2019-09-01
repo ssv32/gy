@@ -21,7 +21,8 @@
                     'buttons' => array(
                         'Главная админки' => '/gy/admin/index.php',
                         'Пользователи' => '/gy/admin/users.php',
-                        'info-box' => '/gy/admin/info-box.php'
+                        'info-box' => '/gy/admin/info-box.php',
+                        'Настройки' => '/gy/admin/options.php'
                     )
                 )
             );

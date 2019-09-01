@@ -1,7 +1,8 @@
-<?
-if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
+<?if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );?>
 
-if ($arRes['allUsers']){?>
+<h1><?=$this->lang->GetMessage('title');?></h1>
+
+<?if ($arRes['allUsers']){?>
 	<table border="1" class="gy-table-all-users">
 		<tr><th>id</th><th>login</th><th>name</th><th>group</th><th></th></tr>
 		<?foreach ($arRes['allUsers'] as $key => $val){?>

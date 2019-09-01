@@ -7,11 +7,7 @@ global $user;
 if ($user->isAdmin()){
 	
 	include "../../gy/admin/header-admin.php";
-	
-	
-	?>
-	<br/>
-	<?
+
 	// таблица с пользователями
 	$app->component(
 		'users_all_tables',
@@ -33,5 +29,5 @@ if ($user->isAdmin()){
 	header( 'Location: /gy/admin/' );
 }
 
-?>
+
 

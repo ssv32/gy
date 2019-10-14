@@ -9,11 +9,21 @@ if ( empty($arRes["auth_ok"]) ) :?>
 			<input type="<?=(($key == 'pass')? 'password': 'text');?>" name="<?=$key;?>"  /><br/>
 		<?}?>
 
+        <? // показать капчу
+        global $app;
+        $app->component(
+            'capcha',
+            '0',
+            array( 
+            )
+        );?>
+            
 		<?if ( !empty($arRes['err']) ){?>
 			<div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['err']);?></div>
 		<?}?>	
-		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
-
+		
+        <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
+        
 	</form>	
 <?else:?>
 	<h1>Привет, <?=$arRes["auth_user"];?></h1>

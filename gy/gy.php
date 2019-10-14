@@ -12,6 +12,7 @@ function __autoload($calssname){
     }
 }
 
+global $app;
 $app = app::createApp(__DIR__, $gy_config);
 unset($gy_config);
 
@@ -35,6 +36,9 @@ if (!empty($app->options['sole'])){
 
 $user = new user;
 $user->checkUserCookie();
+
+session_start();
+
 
 /*
 global $db;

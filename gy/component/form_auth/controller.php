@@ -34,25 +34,33 @@ if ($isAdmin === true){
 	$arRes["auth_ok"] = 'ok';
 	$arRes["auth_user"] = $thisLogin;
 		
-} elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass'])) {
-	$user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
-	$isAdmin = $user->isAdmin();
+} elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
 	
-	if ($isAdmin === false){
-		$arRes["err"] = 'err1'; 
-	}
-	
-	if ($isChackIdComponent && $isAdmin){
-		$arRes["auth_ok"] = 'ok';
-		$arRes["auth_user"] = $thisLogin;
-		
-		header( 'Location: '.$redirectUrl );
-	} else {
-		$arRes['form_input']["auth"] = "auth";
-		$arRes['form_input']["pass"] = "pass";
-		header( 'Location: '.$redirectUrl.'?err=err1' );
-		
-	}
+    if( capcha::chackCapcha($_REQUEST['capcha']) ){
+
+        $user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
+        $isAdmin = $user->isAdmin();
+
+        if ($isAdmin === false){
+            $arRes["err"] = 'err1'; 
+        }
+
+        if ($isChackIdComponent && $isAdmin){
+            $arRes["auth_ok"] = 'ok';
+            $arRes["auth_user"] = $thisLogin;
+
+            header( 'Location: '.$redirectUrl );
+        } else {
+            $arRes['form_input']["auth"] = "auth";
+            $arRes['form_input']["pass"] = "pass";
+            header( 'Location: '.$redirectUrl.'?err=err1' );
+
+        }
+    }else{
+        $arRes['form_input']["auth"] = "auth";
+        $arRes['form_input']["pass"] = "pass";
+        header( 'Location: '.$redirectUrl.'?err=err_capcha' );
+    }
 } else {
 	if (!empty($_REQUEST['err'])){
 		$arRes["err"] = $_REQUEST['err']; 

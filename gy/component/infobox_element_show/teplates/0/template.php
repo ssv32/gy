@@ -2,6 +2,6 @@
 
 <?if(!empty($arRes['ITEMS'])){?>
     <? foreach ($arRes['ITEMS'] as $value) { ?>
-        <?=$value['value'];?>
+        <?=((!empty($value['value']))? $value['value'] : '');?>
     <?}?> 
 <?}?>    

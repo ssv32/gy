@@ -33,7 +33,7 @@ if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
     <br/>
     <a href="/gy/admin/users.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
 <?}elseif($arRes["stat"] == 'err'){?>
-    <div class="gy-admin-error-message">error, попробуйте заново</div>
+    <div class="gy-admin-error-message"><?=$this->lang->GetMessage('edit-err');?></div>
 	<?if (!empty($arRes["stat-text"])){?>
 		<br/> <?=$arRes["stat-text"];?>
 	<?}?>

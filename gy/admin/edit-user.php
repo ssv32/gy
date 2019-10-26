@@ -2,16 +2,18 @@
 include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;
+$data = $_REQUEST;
 
-if ($user->isAdmin()){
+if ($user->isAdmin() && !empty($data['edit-id']) && is_numeric($data['edit-id']) && ($data['edit-id'] != 1) ){
 	
 	include "../../gy/admin/header-admin.php";
 	
 	$app->component(
-		'add_user',
+		'edit_user',
 		'0',
 		array(
-			'back-url' => '/gy/admin/users.php'
+			'back-url' => '/gy/admin/users.php',
+            'id-user' => $data['edit-id']
 		)
 	);
 	
@@ -21,3 +23,5 @@ if ($user->isAdmin()){
 	header( 'Location: /gy/admin/' );
 }
 	
+
+?>

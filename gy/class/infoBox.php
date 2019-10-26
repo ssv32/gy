@@ -106,7 +106,6 @@ class infoBox{
     public static function updateInfoBox($arParams, $where){
         $result = false;
 
-		// id, login, name, pass, groups
 		global $db;		
         $res = $db->updateDb(self::$table_info_box, $arParams, $where);
         

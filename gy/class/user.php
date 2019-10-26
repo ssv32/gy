@@ -7,7 +7,9 @@ class user{ // TODO создавать объект класса сразу пр
 	protected $dataUser;
 	protected $nameCookie = 'gy_user_auth';
 	protected $admin = false; 
-	
+	protected $tableName = 'users';
+
+
     /**
      * getDataThisUser - получить данные по текущему, авторизованному пользователю
      * @return array
@@ -67,7 +69,7 @@ class user{ // TODO создавать объект класса сразу пр
 		global $crypto;		
 			
         $res = $db->selectDb(
-            'users', 
+            $this->tableName, 
             array('*'), 
             array(
                 'AND' => array( 
@@ -100,7 +102,7 @@ class user{ // TODO создавать объект класса сразу пр
 		global $db;
         
         $res = $db->updateDb(
-            'users', 
+            $this->tableName, 
             array('hash_auth' => $StringCookie), 
             array( '=' => array('id' , $userId ) )    
         );
@@ -121,7 +123,7 @@ class user{ // TODO создавать объект класса сразу пр
 		global $db;
         
         $res = $db->updateDb(
-            'users', 
+            $this->tableName, 
             array('hash_auth' => 'NULL'), 
             array( '=' => array('id' , $userId ) )    
         );
@@ -169,7 +171,7 @@ class user{ // TODO создавать объект класса сразу пр
 		//$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
 			
         $res = $db->selectDb(
-            'users', 
+            $this->tableName, 
             array('*'), 
             array( '=' => array('hash_auth', "'".$cookie."'") ) 
         );
@@ -198,13 +200,33 @@ class user{ // TODO создавать объект класса сразу пр
 		$result = array();
 		global $db;		        
         $res = $db->selectDb( 
-            'users', 
+            $this->tableName, 
             array('*')
         );
         $result = $db->fetchAll($res, false);
 		return $result;
 	}
 	
+    /**
+     * getUserById - получить данные по пользователю по id
+     * @global type $db
+     * @param type $id
+     * @return array
+     */
+    public function getUserById($id){
+		$result = array();
+		global $db;		        
+        $res = $db->selectDb( 
+            $this->tableName, 
+            array('*'),
+            array(
+                '=' => array('id', $id)
+            )
+        );
+        $result = $db->fetch($res, false);
+		return $result;
+	}
+    
     /**
      * addUsers - добавить пользователя
      * @global type $db
@@ -217,7 +239,7 @@ class user{ // TODO создавать объект класса сразу пр
 
 		// id, login, name, pass, groups
 		global $db;		
-        $res = $db->insertDb('users', $data);
+        $res = $db->insertDb($this->tableName, $data);
         
         if ($res){
 			$result = true;
@@ -226,6 +248,28 @@ class user{ // TODO создавать объект класса сразу пр
 		return $result;
 	}
 	
+    /**
+     * updateUserById - обновление данных пользователя
+     * @global type $db
+     * @param int $userId - id пльзователя
+     * @param array $arParams - даные пользователя
+     * @return boolean
+     */
+    public function updateUserById($userId, $arParams){
+        $result = false;
+
+        unset($arParams['id']);
+        
+		global $db;		
+        $res = $db->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
+        
+        if ($res){
+			$result = true;
+		}
+			
+		return $result; 
+    }
+    
     /**
      * deleteUserById - удалить пользователя
      * @global type $db
@@ -238,7 +282,7 @@ class user{ // TODO создавать объект класса сразу пр
 		if (is_numeric($idUser) && ($idUser != 1)){
 			global $db;
 			
-			$res = $db->query('DELETE FROM users WHERE id = '.$idUser.';');
+			$res = $db->query('DELETE FROM '.$this->tableName.' WHERE id = '.$idUser.';');
 
 			if ($res){
 				$result = 'true';		

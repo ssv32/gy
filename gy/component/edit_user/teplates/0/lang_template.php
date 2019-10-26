@@ -3,16 +3,15 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 
 $mess['rus'] = array(
-	'button' => 'Добавить',
+	'button' => 'Сохранить',
 	'id' => 'id', 
 	'login' => 'Логин', 
 	'name' => 'Имя', 
 	'pass' => 'Пароль', 
 	'groups' => 'Группа прав',
-    'title-add' => 'Добавление нового пользователя',
+    'title' => 'Изменение пользователя',
     'back' => '<< Назад',
     'ok' => 'ok',
-    'add-ok' => 'Пользователь добавлен',
-    'add-err' => 'error, попробуйте заново'
+    'stat-ok' => 'Данные сохранены'
 );
 

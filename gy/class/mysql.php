@@ -166,7 +166,13 @@ class mysql extends db{
     public function updateDb($tableName, $propertys, $where = array()){//TODO
         $query = 'UPDATE ';
         $textPropertys = '';
+        global $crypto;
         foreach ($propertys as $key => $val){
+            
+            if ($key == 'pass'){
+				$val = md5($val.$crypto->getSole());
+			}
+            
             if (!is_numeric($val)){
 				$val = "'".$val."'";
 			}

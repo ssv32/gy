@@ -14,15 +14,7 @@ if ($user->isAdmin()){
 		'0',
 		array()
 	);
-	?>
 	
-    <br/>
-    <br/>
-	<a class="gy-admin-button" href="add-user.php">add user</a>
-	<br/>
-	<br/>
-    
-	<?
 	include "../../gy/admin/footer-admin.php";
 
 } else {

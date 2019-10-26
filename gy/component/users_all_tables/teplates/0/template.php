@@ -13,10 +13,18 @@
 				<td><?=$val['groups'];?></td>
 				<td>
 					<?if ($val['id'] != 1){?>
-					<button  class="del-user gy-admin-button" data-id-user="<?=$val['id'];?>"><?=$this->lang->GetMessage('del-user');?></button>
-					<?} ?>
+                        <button  class="del-user gy-admin-button" data-id-user="<?=$val['id'];?>"><?=$this->lang->GetMessage('del-user');?></button>
+                        <a href="edit-user.php?edit-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-user');?></a>
+                    <?} ?>
 				</td>
 			</tr>
 		<?}?>
 	</table>
+
+    	
+    <br/>
+    <br/>
+	<a class="gy-admin-button" href="add-user.php"><?=$this->lang->GetMessage('add-user');?></a>
+	<br/>
+	<br/>
 <?}?>

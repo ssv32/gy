@@ -2,12 +2,25 @@
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
 class template{
-	public $template_url; // ссылка на шаблон
+	public $templateUrl; // ссылка на шаблон
 	// public $name; // имя шаблона
 	public $lang;
-
+    private $urlFileStyle; // url н афайл со стилями, для этого шаблона
+    private $urlFileJs; // url для файла с js, для этого шаблона
+    
 	public function __construct($url, $lang){
-		$this->template_url = $url.'/template.php';
+		$this->templateUrl = $url.'/template.php';
+        
+        // проверить существует ли файл стилей для компонента
+        if(file_exists($url.'/style.css')){
+            $this->urlFileStyle = $url.'/style.css';
+        }
+        
+        // если есть файл js 
+        if(file_exists($url.'/script.js')){
+            $this->urlFileJs = $url.'/script.js';
+        }
+        
 		$this->lang = new lang($url, 'template', $lang);
 	}
 
@@ -27,7 +40,23 @@ class template{
 	 * @return void - ничего не вернёт, подключится файл шаблона // include template
 	 */
 	public function show($arRes, $arParam){
-		include $this->template_url;
+        
+        // если есть стили то добавить стили
+        if(!empty($this->urlFileStyle)){
+            echo '<style>';
+            include $this->urlFileStyle;
+            echo '</style>';
+        }
+        
+        // файл шаблона
+		include $this->templateUrl;
+        
+        // если есть js то добавить его
+        if(!empty($this->urlFileJs)){
+            echo '<script>';
+            include $this->urlFileJs;
+            echo '</script>';
+        }
 	}
 }
 

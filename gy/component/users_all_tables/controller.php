@@ -4,5 +4,8 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 global $user;
 $arRes['allUsers'] = $user->getAllDataUsers();
 
+// взять все группы пользователей
+$arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

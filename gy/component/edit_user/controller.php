@@ -10,31 +10,63 @@ $arRes['user_property'] = array(
 	'groups'
 );
 
+global $user; 
+
+// взять все группы пользователей
+$arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();
+
 function checkProperty($arr, $arRes){
 	$result = true;
-	foreach ($arRes['user_property'] as $val){		
-		if (empty($arr[$val])){
-			$result = false;
-		}
+	foreach ($arRes['user_property'] as $val){	
+        if (empty($arr[$val])){
+            $result = false;
+        } 
 	}
+    
+    if($result){
+        foreach ($arr['groups'] as $value) {  // TODO протестировать
+            
+            if( empty($arRes['allUsersGroups'][$value]) ){
+                $result = false;
+            }
+            
+            if(!empty($arr['groups']['admins']) && !$user->isAdmin()){ // TODO протестировать
+                $result = false;
+            }
+        }
+    }
+    
 	return $result;
 }
 
 // получить данные пользователя
-if(!empty($this->arParam['id-user'])){
-    global $user; 
+if(!empty($this->arParam['id-user'])){  
     $arRes['userData'] = $user->getUserById($this->arParam['id-user']);  
     unset($arRes['userData']['pass']);
 }
 
-if (!empty($data['Сохранить']) && ($data['Сохранить'] == 'Сохранить') && !empty($data['edit-id']) && is_numeric($data['edit-id']) ) {
+if (!empty($data['Сохранить']) 
+    && ($data['Сохранить'] == 'Сохранить') 
+    && !empty($data['edit-id']) 
+    && is_numeric($data['edit-id']) 
+    && ($data['edit-id'] != 1)  
+) {
+    
 	if(checkProperty($data, $arRes)){
+                
         // подготовить массив данных для обновления пользователей
         $dataUpdateUser = array();
         foreach ($arRes['user_property'] as $value) {
             $dataUpdateUser[$value] = $data[$value];
         }
 
+        // сохранить группы для пользователя
+        unset($dataUpdateUser['groups']);
+        accessUserGroup::deleteUserInAllGroups($data['edit-id']);
+        foreach ($data['groups'] as $value) {
+            accessUserGroup::addUserInGroup($data['edit-id'], $value);
+        }
+        
         // обновить данные пользователя
 		global $user;
         $res = $user->updateUserById($data['edit-id'], $dataUpdateUser);

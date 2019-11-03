@@ -12,15 +12,33 @@ $arRes['user_property'] = array(
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
 
+// взять все группы пользователей
+$arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();
+
 function checkProperty($arr, $arRes){
 	$result = true;
-	foreach ($arRes['user_property'] as $val){		
-		if (empty($arr[$val])){
-			$result = false;
-		}
+	foreach ($arRes['user_property'] as $val){	
+        if (empty($arr[$val])){
+            $result = false;
+        }    
 	}
+    
+    if($result){
+        foreach ($arr['groups'] as $value) {  // TODO протестировать
+            
+            if( empty($arRes['allUsersGroups'][$value]) ){
+                $result = false;
+            }
+            
+            if(!empty($arr['groups']['admins']) && !$user->isAdmin()){ // TODO протестировать
+                $result = false;
+            }
+        }
+    }
+    
 	return $result;
 }
+
 
 if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
 	if(checkProperty($data, $arRes)){
@@ -31,7 +49,31 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
 			$arDaraUser[$val] = $data[$val];
 		}
 		
+        // убрать группы из добавления
+        unset($arDaraUser['groups']);
+       
 		if( $user->addUsers($arDaraUser)){
+            // найти id добавленного пользователя
+            global $db;		   
+            global $crypto;
+            $res = $db->selectDb( 
+                $user->tableName, 
+                array('*'),
+                array(
+                    'AND' => array(
+                        '=' => array('login', "'".$arDaraUser['login']."'"),
+                        'AND' => array('=' => array('pass', "'".md5($arDaraUser['pass'].$crypto->getSole())."'") )
+                    )
+                )
+            );
+            $dataAddNewUser = $db->fetch($res);
+            
+            // добавить пользователя к указанным группам
+            accessUserGroup::deleteUserInAllGroups($dataAddNewUser['id']);
+            foreach ($data['groups'] as $value) {
+                accessUserGroup::addUserInGroup($dataAddNewUser['id'], $value);
+            }
+            
 			$arRes["stat"] = 'ok';
 		} else{
 			$arRes["stat"] = 'err';

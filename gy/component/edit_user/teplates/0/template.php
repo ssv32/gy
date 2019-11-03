@@ -4,7 +4,6 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 ?>
 <h3><?=$this->lang->GetMessage('title');?></h3>
 <?
-
 if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
     <br/>
     <br/>
@@ -17,11 +16,21 @@ if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
         <input type="hidden" name="edit-id" value="<?=$arParam['id-user'];?>" />
 		<? foreach ($arRes["user_property"] as $key => $val ){?>
 			<?=$this->lang->GetMessage($val);?>:<br/>
-            <input 
-                type="<?=(($val == 'pass')? 'password': 'text');?>" 
-                name="<?=$val;?>" 
-                value="<?=((!empty($arRes['userData'][$val]))? $arRes['userData'][$val] : '');?>"
-            />
+            <?if ($val != 'groups'){?>
+                <input 
+                    type="<?=(($val == 'pass')? 'password': 'text');?>" 
+                    name="<?=$val;?>" 
+                    value="<?=((!empty($arRes['userData'][$val]))? $arRes['userData'][$val] : '');?>"
+                />
+            <?}else{?>
+                <select multiple name="groups[]">
+                    <? foreach ($arRes['allUsersGroups'] as $value) { ?>
+                        <option <?=(( !empty($arRes['userData'][$val][$value['code']]) )? 'selected' : '');?> value="<?=$value['code'];?>">
+                            <?=$value['name']?> (<?=$value['code'];?>)
+                        </option>
+                    <?}?>
+                </select>
+            <?}?>    
 			<br/>
 		<?}?>
 		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />

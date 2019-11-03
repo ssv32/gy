@@ -16,8 +16,18 @@ if (!empty($arParam['back-url'])){?>
 	<form>
 		<? foreach ($arRes["user_property"] as $key => $val ){?>
 			<?=$this->lang->GetMessage($val);?>:<br/>
-			<input type="<?=(($val == 'pass')? 'password': 'text');?>" name="<?=$val;?>" />
-			<br/>
+			<?if($val != 'groups'){?>
+                <input type="<?=(($val == 'pass')? 'password': 'text');?>" name="<?=$val;?>" />
+            <?}else{?>
+                <select multiple name="groups[]">
+                    <? foreach ($arRes['allUsersGroups'] as $value) { ?>
+                        <option value="<?=$value['code'];?>">
+                            <?=$value['name']?> (<?=$value['code'];?>)
+                        </option>
+                    <?}?>
+                </select>
+            <?}?>
+            <br/>
 		<?}?>
 		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
 

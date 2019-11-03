@@ -7,9 +7,20 @@ class user{ // TODO создавать объект класса сразу пр
 	protected $dataUser;
 	protected $nameCookie = 'gy_user_auth';
 	protected $admin = false; 
-	protected $tableName = 'users';
+	public $tableName = 'users';
 
-
+    /**
+     * getThisUserGroups - получить группы текущего пользователя
+     * @return array
+     */
+    public function getThisUserGroups(){
+        $arResult = array();
+        if(!empty($this->dataUser['groups'])){
+            $arResult = $this->dataUser['groups'];
+        }
+        return $arResult;
+    }    
+    
     /**
      * getDataThisUser - получить данные по текущему, авторизованному пользователю
      * @return array
@@ -147,8 +158,12 @@ class user{ // TODO создавать объект класса сразу пр
 						
 			if ($dataUser !== false){
 				$this->dataUser = $dataUser;
+                
+                // получить группы к каким относится пользователь
+                $this->dataUser['groups'] = accessUserGroup::getListGroupsByUser($dataUser['id']);
+                
 				$this->authorized = true;
-				if ($dataUser['groups'] == 1){
+				if ( !empty($this->dataUser['groups']['admins']) ){
 					$this->admin = true;
 				}
 				$result = true;
@@ -204,6 +219,12 @@ class user{ // TODO создавать объект класса сразу пр
             array('*')
         );
         $result = $db->fetchAll($res, false);
+        
+        // получить группы пользователей
+        foreach ($result as $key => $value) {
+            $result[$key]['groups'] = accessUserGroup::getListGroupsByUser($value['id']);
+        }
+        
 		return $result;
 	}
 	
@@ -224,6 +245,10 @@ class user{ // TODO создавать объект класса сразу пр
             )
         );
         $result = $db->fetch($res, false);
+        
+        // получить группы текущего пользователя
+        $result['groups'] = accessUserGroup::getListGroupsByUser($id);
+        
 		return $result;
 	}
     
@@ -240,7 +265,7 @@ class user{ // TODO создавать объект класса сразу пр
 		// id, login, name, pass, groups
 		global $db;		
         $res = $db->insertDb($this->tableName, $data);
-        
+                
         if ($res){
 			$result = true;
 		}
@@ -285,7 +310,7 @@ class user{ // TODO создавать объект класса сразу пр
 			$res = $db->query('DELETE FROM '.$this->tableName.' WHERE id = '.$idUser.';');
 
 			if ($res){
-				$result = 'true';		
+				$result = true;		
 			}
 		}		
 		return $result;

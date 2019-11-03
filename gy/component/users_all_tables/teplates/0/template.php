@@ -10,7 +10,17 @@
 				<td><?=$val['id'];?></td>
 				<td><?=$val['login'];?></td>
 				<td><?=$val['name'];?></td>
-				<td><?=$val['groups'];?></td>
+				<td>
+                    <? foreach ($val['groups'] as $groupIs) {?>
+                        -
+                        <?=$arRes['allUsersGroups'][$groupIs]['name'];?>
+                        (
+                        <?=$arRes['allUsersGroups'][$groupIs]['code'];?>
+                        );
+                        <br/>
+                    <?}?>
+                 
+                </td>
 				<td>
 					<?if ($val['id'] != 1){?>
                         <button  class="del-user gy-admin-button" data-id-user="<?=$val['id'];?>"><?=$this->lang->GetMessage('del-user');?></button>

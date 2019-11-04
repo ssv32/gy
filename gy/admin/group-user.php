@@ -9,11 +9,11 @@ if ($user->isAdmin()){
 	include "../../gy/admin/header-admin.php";
 
 	// таблица с пользователями
-//	$app->component(
-//		'users_all_tables',
-//		'0',
-//		array()
-//	);
+	$app->component(
+		'users_group_manager',
+		'0',
+		array()
+	);
 	
 	include "../../gy/admin/footer-admin.php";
 

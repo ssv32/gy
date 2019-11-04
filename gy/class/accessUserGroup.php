@@ -41,7 +41,9 @@ class accessUserGroup{
         global $db;
         $res = $db->selectDb(self::$tableNameAccessGroup, array('*'));
         while($arRes = $db->fetch($res)){
-            $arResult[$arRes['code']]['code_action_user'][$arRes['code_action_user']] = $arRes['code_action_user'];
+            if(!empty($arRes['code_action_user'])){
+                $arResult[$arRes['code']]['code_action_user'][$arRes['code_action_user']] = $arRes['code_action_user'];
+            }
             $arResult[$arRes['code']]['name'] = $arRes['name'];
             $arResult[$arRes['code']]['code'] = $arRes['code'];
             $arResult[$arRes['code']]['text'] = $arRes['text'];
@@ -125,4 +127,89 @@ class accessUserGroup{
         return $arResult;
     }
     
+    /**
+     * deleteAllActionsForGroup() 
+     * - удалить все заданные, разрешённые действия пользователей для указанной группы
+     * 
+     * @global type $db
+     * @param string $codeUserGroup
+     * @return boolean
+     */
+    public static function deleteAllActionsForGroup($codeUserGroup){ 
+        $arResult = false;
+        global $db;
+        $dataAllGroup = self::getAccessGroup();
+                
+        if( !empty($dataAllGroup[$codeUserGroup])){
+            // тут будут данные по нужной группе
+            $dataThisGroup = $dataAllGroup[$codeUserGroup];
+            $dataThisGroup['code_action_user'] = '';
+            
+            // удаляем все данные по этой группе из БД
+            $res = $db->deleteDb(self::$tableNameAccessGroup, array('=' => array('code', "'".$codeUserGroup."'")) );
+                        
+            if($res){
+                // добавляем пустую группу
+                $res2 = $db->insertDb(
+                    self::$tableNameAccessGroup, 
+                    $dataThisGroup
+                );
+                if($res2){
+                    $arResult = true;
+                }
+            }
+        }
+           
+    }
+    
+    /**
+     * addOptionsGroup() 
+     * - добавить для указанной группы пользователй разрешённо действие
+     *  
+     * @global type $db
+     * @param string $codeUserGroup - код группы
+     * @param string $codeAction - код пользовательского действия
+     * @return boolean
+     */
+    public static function addOptionsGroup($codeUserGroup, $codeAction){
+        $arResult = false;
+        global $db;
+        $dataAllGroup = self::getAccessGroup();
+                
+        if( !empty($dataAllGroup[$codeUserGroup])){
+            $dataThisGroup = $dataAllGroup[$codeUserGroup];
+          
+            // если действий для пользователя нет обновить группу (добавить действия)
+            if(empty($dataThisGroup['code_action_user'])){
+                $dataThisGroup['code_action_user'] = $codeAction;
+                // если мы попали сюда то всего одна запись в БД соответствует этой группе её и обновляем
+                $res = $db->updateDb(
+                    self::$tableNameAccessGroup, 
+                    $dataThisGroup, 
+                    array(
+                        '=' => array(
+                            'code', 
+                            "'".$codeUserGroup."'"
+                        ) 
+                    )
+                );
+                if($res){
+                    $arResult = true;
+                }               
+            } else{ // добавить копию группы с новым действием                
+                $dataThisGroup['code_action_user'] = $codeAction;
+                $res = $db->insertDb(
+                    self::$tableNameAccessGroup, 
+                    $dataThisGroup
+                );
+                if($res){
+                    $arResult = true;
+                }
+            }
+            
+        }
+        return $arResult;
+    }
+    
+       
 }

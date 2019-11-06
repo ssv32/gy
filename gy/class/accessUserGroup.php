@@ -11,6 +11,33 @@ class accessUserGroup{
     private static $tableNameUserActions = 'action_user';
     private static $tableNameUsersInGroupss = 'users_in_groups';
     
+    /**
+     * checkAccessUserGroupsByUserAction - определить можно ли пользователю с заданным набором его групп 
+     *   и данными по всем группам выполнить указанное действие 
+     * 
+     * @param array $groupsThisUser - группы к каким относится пользователь
+     * @param array $dataAllGroups - данные по всем группам
+     * @param string $thisAction - проверяемое действие пользователя
+     * @return boolean
+     */
+    private static function checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $thisAction){
+        $arResult = false;
+
+        // определить все действия разхрешённые для данного пользователя
+        $AllAccessActionsThisUser = array();
+        foreach ($groupsThisUser as $nameGroup) {
+            if($dataAllGroups[$nameGroup]){
+                $AllAccessActionsThisUser = array_merge($AllAccessActionsThisUser, $dataAllGroups[$nameGroup]['code_action_user']);
+            }
+        }
+        
+        // найти заданное действие среди разрешённых для данного пользователя
+        // либо проверить на админа (т.е. разрешены любые действия)
+        if(in_array($thisAction , $AllAccessActionsThisUser) || in_array('action_all' , $AllAccessActionsThisUser) ){
+            $arResult = true;
+        }
+        return $arResult;
+    }
     
     /**
      * accessUser() - проверит разрешёно ли указанное действие заданному пользователю
@@ -20,15 +47,40 @@ class accessUserGroup{
      * @return boolean
      */
     public static function accessUser($userId, $actionUser){
-        /*
-        1. получить все группы и права для них
-        2. получить группы в каких состоит заданный пользователь
-        3. выдать разрешён ли доступ или нет 
 
-        */
+        // получить данные по пользователю 
+        $userFind = new user();
+        $dataUserFind = $userFind->getUserById($userId);
         
-        return true;
+        // получить данные по всем группам
+        $dataAllGroups = self::getAccessGroup();
+        
+        // определить пользователю с таким набором групп доступно ли указанное действие
+        return self::checkAccessUserGroupsByUserAction($dataUserFind['groups'], $dataAllGroups, $actionUser);
     }
+    
+    /**
+     * accessThisUserByAction - проверить разрешено ли текущему пользователю 
+     *   указанное действие
+     * 
+     * @global type $user
+     * @param string $action - код действия 
+     * @return boolean
+     */
+    public static function accessThisUserByAction($action){
+        global $user;
+        $groupsThisUser = $user->getThisUserGroups();
+        
+        // получить данные по всем группам
+        $dataAllGroups = self::getAccessGroup();
+        
+        // определить пользователю с таким набором групп доступно ли указанное действие
+        $arResult = self::checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $action);
+
+        return $arResult;
+    }
+    
+
     
     /**
      * getAccessGroup() - получить все группы пользователей какие есть

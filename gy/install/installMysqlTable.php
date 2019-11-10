@@ -239,6 +239,14 @@ if($isRunConsole){
         $db->insertDb(
             'action_user', 
             array(
+                'code' => 'show_admin_panel', 
+                'text' => 'Просматривать админку', 
+            )
+        );
+        
+        $db->insertDb(
+            'action_user', 
+            array(
                 'code' => 'action_all', 
                 'text' => 'Редактировать всё (Админ)', 
             )
@@ -287,6 +295,15 @@ if($isRunConsole){
                 'code_action_user' => 'action_all'
             )
         );
+        $db->insertDb(
+            'access_group', 
+            array(
+                'code' => 'admins', 
+                'name' => 'Админы',
+                'text' => 'Админы, есть права на всё',
+                'code_action_user' => 'show_admin_panel'
+            )
+        );
         
         $db->insertDb(
             'access_group', 
@@ -297,6 +314,15 @@ if($isRunConsole){
                 'code_action_user' => 'edit_info_box'
             )
         );
+        $db->insertDb(
+            'access_group', 
+            array(
+                'code' => 'content', 
+                'name' => 'Контент',
+                'text' => 'Те кто изменяют контент сайта',
+                'code_action_user' => 'show_admin_panel'
+            )
+        );
         
         $db->insertDb(
             'access_group', 
@@ -305,6 +331,15 @@ if($isRunConsole){
                 'name' => 'Админи по пользователям',
                 'text' => 'Могут изменять только пользователей', 
                 'code_action_user' => 'edit_users'
+            )
+        );
+        $db->insertDb(
+            'access_group', 
+            array(
+                'code' => 'user_admin', 
+                'name' => 'Админи по пользователям',
+                'text' => 'Могут изменять только пользователей', 
+                'code_action_user' => 'show_admin_panel'
             )
         );
         

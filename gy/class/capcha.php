@@ -35,7 +35,7 @@ class capcha{
     public static function chackCapcha( $code){
         $arResult = false; 
         // проверит код с капчи
-        if ($_SESSION['capcha'] == $code){
+        if ($_SESSION['capcha'] == mb_strtoupper($code) ){
             $arResult = true; 
         }
         self::clearCapcha();
@@ -51,7 +51,7 @@ class capcha{
         $this->code = $value;
         
         // записать в сессию значение
-        $_SESSION['capcha'] = $this->code;
+        $_SESSION['capcha'] = mb_strtoupper($this->code);
         
     }
     

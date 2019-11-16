@@ -16,7 +16,7 @@ $isChackIdComponent = ( empty($this->arParam['idComponent'])
     || (!empty($this->arParam['idComponent']) && !empty($_REQUEST['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) 
 );
 
-$isAdmin = false;
+$isShowAdminPanel = false;
 
 if(!empty($_REQUEST['auth'])){
     $thisLogin = $_REQUEST['auth'];
@@ -24,11 +24,11 @@ if(!empty($_REQUEST['auth'])){
 
 global $user;
 
-$isAdmin = $user->isAdmin();
+$isShowAdminPanel = accessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
 
-if ($isAdmin === true){
+if ($isShowAdminPanel === true){
 		
 	$thisLogin = $user->getDataThisUser()['login'];	
 	$arRes["auth_ok"] = 'ok';
@@ -39,13 +39,13 @@ if ($isAdmin === true){
     if( capcha::chackCapcha($_REQUEST['capcha']) ){
 
         $user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
-        $isAdmin = $user->isAdmin();
+        $isShowAdminPanel = accessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
-        if ($isAdmin === false){
+        if ($isShowAdminPanel === false){
             $arRes["err"] = 'err1'; 
         }
 
-        if ($isChackIdComponent && $isAdmin){
+        if ($isChackIdComponent && $isShowAdminPanel){
             $arRes["auth_ok"] = 'ok';
             $arRes["auth_user"] = $thisLogin;
 

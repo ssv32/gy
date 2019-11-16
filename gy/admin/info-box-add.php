@@ -3,16 +3,17 @@ include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;
 
-if ($user->isAdmin()){
+if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
 	include "../../gy/admin/header-admin.php";
 
-    $app->component(
-        'infobox_add',
-        '0',
-        array()
-    );
-
+    if (accessUserGroup::accessThisUserByAction( 'edit_info_box')){
+        $app->component(
+            'infobox_add',
+            '0',
+            array()
+        );
+    }
 
 	include "../../gy/admin/footer-admin.php";
 

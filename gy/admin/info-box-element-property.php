@@ -4,26 +4,29 @@ include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;
 
-if ($user->isAdmin()){
+if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
 	include "../../gy/admin/header-admin.php";?>
     
     <?
-    $data = $_GET;
+    if(accessUserGroup::accessThisUserByAction( 'edit_info_box')){
     
-    if ( (!empty($data['info-box-id']) && is_numeric($data['info-box-id'])) && (!empty($data['el-id']) && is_numeric($data['el-id'])   ) ){
+        $data = $_GET;
 
-        $app->component(
-            'infobox_element_property',
-            '0',
-            array(
-                'info-box-id' => $data['info-box-id'],
-                'el-id' => $data['el-id']
-            )
-        );
+        if ( (!empty($data['info-box-id']) && is_numeric($data['info-box-id'])) && (!empty($data['el-id']) && is_numeric($data['el-id'])   ) ){
 
-    }else{
-        echo 'error not id info-box';
+            $app->component(
+                'infobox_element_property',
+                '0',
+                array(
+                    'info-box-id' => $data['info-box-id'],
+                    'el-id' => $data['el-id']
+                )
+            );
+
+        }else{
+            echo 'error not id info-box';
+        }
     }
 	?>
     

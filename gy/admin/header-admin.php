@@ -12,18 +12,31 @@
         <?
         global $user;
 
-        if ($user->isAdmin()){
+        if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
+            
+            // меню доступное для текущего пользователя
+            $menu['Главная админки'] = '/gy/admin/index.php';
+           
+            if(accessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()){ 
+                $menu['Пользователи'] = '/gy/admin/users.php';
+            }
+            
+            // TODO гдето отдельно подключать в зависимости от установленного модуля (чего пока не реализовано)
+            if(accessUserGroup::accessThisUserByAction( 'edit_info_box') || $user->isAdmin()){
+                $menu['info-box'] = '/gy/admin/info-box.php';
+            }
+            
+
+            if($user->isAdmin()){
+                $menu['Настройки'] = '/gy/admin/options.php';
+            }
+            
             // menu
             $app->component(
                 'menu',
                 '0',
                 array(			
-                    'buttons' => array(
-                        'Главная админки' => '/gy/admin/index.php',
-                        'Пользователи' => '/gy/admin/users.php',
-                        'info-box' => '/gy/admin/info-box.php',
-                        'Настройки' => '/gy/admin/options.php'
-                    )
+                    'buttons' => $menu
                 )
             );
         }

@@ -4,16 +4,18 @@ include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;
 
-if ($user->isAdmin()){
+if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
 	include "../../gy/admin/header-admin.php";?>
         
     <?
-	$app->component(
-		'gy_options',
-		'0',
-		array()
-	);
+    if(accessUserGroup::accessThisUserByAction('action_all')){
+        $app->component(
+            'gy_options',
+            '0',
+            array()
+        );
+    }
 	?>
     
 	<?include "../../gy/admin/footer-admin.php";

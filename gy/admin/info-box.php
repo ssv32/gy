@@ -4,19 +4,23 @@ include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;
 
-if ($user->isAdmin()){
+if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
 	include "../../gy/admin/header-admin.php";?>
     
-    <h1>infoBox</h1>
+    <?if(accessUserGroup::accessThisUserByAction( 'edit_info_box')){?>
+
+        <h1>infoBox</h1>
+
+        <?
+        $app->component(
+            'infobox',
+            '0',
+            array()
+        );
+        ?>
     
-    <?
-	$app->component(
-		'infobox',
-		'0',
-		array()
-	);
-	?>
+    <?}?>
     
 	<?include "../../gy/admin/footer-admin.php";
 

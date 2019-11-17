@@ -1,15 +1,14 @@
 <?
 include "../../gy/gy.php"; // подключить ядро // include core
 
-
 global $user;
 
-if ($user->isAdmin()){
+if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
 	include "../../gy/admin/header-admin.php";?>
     
     <?
-    if (is_numeric($_GET['ID'])){
+    if (accessUserGroup::accessThisUserByAction( 'edit_info_box') && is_numeric($_GET['ID'])){
         $id = $_GET['ID'];
 
         $app->component(

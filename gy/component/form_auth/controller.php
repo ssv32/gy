@@ -30,7 +30,7 @@ $redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
 
 if ($isShowAdminPanel === true){
 		
-	$thisLogin = $user->getDataThisUser()['login'];	
+	$thisLogin = $user->getDataThisUser()['name'];	
 	$arRes["auth_ok"] = 'ok';
 	$arRes["auth_user"] = $thisLogin;
 		

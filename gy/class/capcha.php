@@ -8,7 +8,8 @@ class capcha{
     
     // символы которые будут в капче
     //private static $letters = 'abcdefghijklmnopqrstuvwxyzABCDRFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    private static $letters = 'aAbBcCd0DeEfFgG1hHiI2jJkK3lLm4MnN5oOp6PqQr7RsSt8TuUv9VwWxXyYzZ';
+    //  убрал ноль и буквы о, что бы не было путаниц
+    private static $letters = 'aAbBcCdDeEfFgG1hHiI2jJkK3lLm4MnN5p6PqQr7RsSt8TuUv9VwWxXyYzZ'; 
     
     private $count = 5; // количество символов
     private $code = 5; // код капчи
@@ -35,7 +36,7 @@ class capcha{
     public static function chackCapcha( $code){
         $arResult = false; 
         // проверит код с капчи
-        if ($_SESSION['capcha'] == mb_strtoupper($code) ){
+        if ($_SESSION['capcha'] == mb_strtoupper($code) ){ // всё приводится к верхнему регистру что бы пользователю проще было угадать капчу
             $arResult = true; 
         }
         self::clearCapcha();

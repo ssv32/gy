@@ -22,6 +22,11 @@ if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
                     name="<?=$val;?>" 
                     value="<?=((!empty($arRes['userData'][$val]))? $arRes['userData'][$val] : '');?>"
                 />
+                <?
+                // эта галочка что бы можно было менять настройки пользователя, без смены пароля
+                if($val == 'pass'){?>
+                    <input type="checkbox" name="no-update-pass" /><?=$this->lang->GetMessage('no-update-pass-text');?> 
+                <?}?>
             <?}else{?>
                 <select multiple name="groups[]">
                     <? foreach ($arRes['allUsersGroups'] as $value) { ?>

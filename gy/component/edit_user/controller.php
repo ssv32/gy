@@ -3,12 +3,20 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 $data  = $_REQUEST;
 
+// стоит ли галочка не обновлять пароль, при изменении пользователя
+$notUpdatePass = (!empty($data['no-update-pass']) && ($data['no-update-pass'] == 'on') );
+
 $arRes['user_property'] = array(
-	'login', 
-	'name', 
-	'pass', 
-	'groups'
+	'login' => 'login', 
+	'name' => 'name', 
+	'pass' => 'pass', 
+	'groups' => 'groups'
 );
+
+// если идёт обновление пользователя без пароля то убрать пароль из списка свойств пользователя
+if($notUpdatePass){
+    unset($arRes['user_property']['pass']);
+}
 
 global $user; 
 
@@ -22,7 +30,7 @@ function checkProperty($arr, $arRes){
             $result = false;
         } 
 	}
-    
+        
     if($result){
         foreach ($arr['groups'] as $value) {  // TODO протестировать
             
@@ -51,9 +59,9 @@ if (!empty($data['Сохранить'])
     && is_numeric($data['edit-id']) 
     && ($data['edit-id'] != 1)  
 ) {
-    
+        
 	if(checkProperty($data, $arRes)){
-                
+
         // подготовить массив данных для обновления пользователей
         $dataUpdateUser = array();
         foreach ($arRes['user_property'] as $value) {

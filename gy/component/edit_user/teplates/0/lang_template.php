@@ -13,6 +13,7 @@ $mess['rus'] = array(
     'back' => '<< Назад',
     'ok' => 'ok',
     'stat-ok' => 'Данные сохранены',
-    'edit-err' => 'error, попробуйте заново'
+    'edit-err' => 'error, попробуйте заново',
+    'no-update-pass-text' => 'Не изменять пароль'
 );
 

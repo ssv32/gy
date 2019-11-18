@@ -7,7 +7,10 @@ include_once("config/gy_config.php"); // подключение настроек
 function __autoload($calssname){ 
     if (file_exists(__DIR__ . '/class/'.$calssname.'.php' )){
         require_once( "class/$calssname.php" );          
-    } else{
+    } elseif(file_exists(__DIR__ . '/class/abstract/'.$calssname.'.php' )){
+        // подключение abstract классов (что бы они хранились в отдельном разделе)
+        require_once( "class/abstract/$calssname.php" );   
+    }else{
         die('class '.$calssname.' not find' );
     }
 }

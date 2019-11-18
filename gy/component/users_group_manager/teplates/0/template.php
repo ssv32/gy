@@ -8,10 +8,17 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
         <h1><?=$this->lang->GetMessage('title');?></h1>
         <form method="post">
             <table border="1" class="gy-table-all-users">
-                <tr><th><?=$this->lang->GetMessage('groups');?></th><th><?=$this->lang->GetMessage('actions');?></th></tr>
+                <tr>
+                    <th><?=$this->lang->GetMessage('groups');?></th>
+                    <th><?=$this->lang->GetMessage('text');?></th>
+                    <th><?=$this->lang->GetMessage('actions');?></th>
+                    <th></th>
+                </tr>
                 <? foreach ($arRes['allUsersGroups'] as $val){?>
                     <tr>
+                        
                         <td><?=$val['name']?>(<?=$val['code']?>)</td>
+                        <td><?=$val['text']?></td>
                         <td>
                             <select multiple="" name="groupsActions[<?=$val['code']?>][]">
                                 <? foreach ($arRes['allActionUser'] as $userActions) {?>
@@ -24,8 +31,35 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
                                 <?}?>
                             </select>
                         </td>
+                        <td> 
+                            <?if(!empty($val['flag_del']) && ($val['flag_del'] == 'Y')){?> 
+                                <input type="checkbox" name="delete[<?=$val['code']?>]" /><?=$this->lang->GetMessage('delete');?> 
+                            <?}?>
+                        </td>
                     </tr>
                 <?}?>
+                <tr>
+                    <td colspan="4"><b><?=$this->lang->GetMessage('title-add-group');?></b></td>
+                </tr>
+                <tr>
+                    <td>
+                        Название:<input type="text" name="add-group-name" />
+                        <br/>
+                        (код:<input type="text" name="add-group-code" />)
+                    </td>
+                    <td>описание:<input type="text" name="add-group-text" /></td>
+                    <td>
+                        <select multiple="" name="groupsActions[add-group-action-user][]">
+                            <? foreach ($arRes['allActionUser'] as $userActions) {?>
+                                <option value="<?=$userActions['code']?>" >
+                                    <?=$userActions['text']?>(<?=$userActions['code']?>)
+                                </option>
+                            <?}?>
+                        </select>
+                    </td>
+                    <td></td>
+                    
+                </tr>
             </table> 
 
             <input type="submit" name="button-form" class="gy-admin-button" value="<?=$this->lang->GetMessage('save');?>" />

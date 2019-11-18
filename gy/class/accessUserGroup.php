@@ -216,7 +216,7 @@ class accessUserGroup{
     
     /**
      * addOptionsGroup() 
-     * - добавить для указанной группы пользователй разрешённо действие
+     * - добавить для указанной группы пользователей разрешённое действие
      *  
      * @global type $db
      * @param string $codeUserGroup - код группы
@@ -263,5 +263,70 @@ class accessUserGroup{
         return $arResult;
     }
     
+    /**
+     * addUserGroup
+     *  - добавить новую пользовательскую группу 
+     * 
+     * @global type $db
+     * @param array $arDataNewGroup - массив с данными по группе (name, code, text)
+     * @param array $arActionUserThisGroup - массив с разрешёнными для этой группы действиями
+     * @return boolean
+     */
+    public static function addUserGroup($arDataNewGroup, $arActionUserThisGroup){
+        global $db;
+        $arResult = true; 
+        foreach ($arActionUserThisGroup as $value) {
+            $res = $db->insertDb(
+                self::$tableNameAccessGroup, 
+                array(
+                    'code' => $arDataNewGroup['code'], 
+                    'name' => $arDataNewGroup['name'],
+                    'text' => $arDataNewGroup['text'],
+                    'code_action_user' => $value
+                )
+            );
+            if($res){
+                //$arResult = true;
+            }else{
+                $arResult = false;
+            }
+        }
+        return $arResult;
+    }
+    
+    /**
+     * deleteUserGroupByCode
+     *  - удалить пользовательскую группу по коду группы
+     * 
+     * @global type $db
+     * @param string $codeGroup - код удаляемой группы
+     * @return boolean
+     */
+    public static function deleteUserGroupByCode($codeGroup){
+        global $db;
+        $arResult = false;
+        // удалить все связи пользователей с этой группой
+        
+        $res = $db->deleteDb(
+            self::$tableNameUsersInGroupss,
+            array('=' => array('codeGroup' , "'".$codeGroup."'" ) )
+        );
+        if($res){
+            $arResult = true;
+        }
+                
+        // удалить группу по коду уруппы
+        if($arResult){
+            $arResult = false;
+            $res = $db->deleteDb(
+                self::$tableNameAccessGroup,
+                array('=' => array('code' , "'".$codeGroup."'" ) )
+            );
+            if($res){
+                $arResult = true;
+            }
+        }
+        return $arResult;   
+    }
        
 }

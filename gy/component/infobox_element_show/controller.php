@@ -14,8 +14,9 @@ if(!empty($this->arParam['info-box-code']) && !empty($this->arParam['element-cod
     $isCache = (!empty($this->arParam['cacheTime']) && is_numeric($this->arParam['cacheTime']));
     
     if($isCache){
-        global $app;
-        $cache = new cacheFiles($app->url);
+        global $app; 
+        global $cacheClassName;
+        $cache = new $cacheClassName($app->url);
         $initCache = $cache->cacheInit('component_infobox_element_show', $this->arParam['cacheTime']);
     }
     

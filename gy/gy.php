@@ -40,6 +40,14 @@ if (!empty($app->options['sole'])){
 $user = new user;
 $user->checkUserCookie();
 
+// обьявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
+if (!isset($app->options['type_cache'])) {  
+    $app->options['type_cache'] = 'cacheFiles';
+} 
+global $cacheClassName;
+$cacheClassName = $app->options['type_cache'];
+
+
 session_start();
 
 

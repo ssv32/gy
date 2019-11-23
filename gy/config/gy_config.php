@@ -11,4 +11,5 @@ $gy_config = array(
         'db_pass' => '********', // заменить на настоящий пароль // replace by true password
         'db_name' => 'gy_db',
     ),
+    'type_cache' => 'cacheFiles'
 );

@@ -11,6 +11,8 @@ class accessUserGroup{
     private static $tableNameUserActions = 'action_user';
     private static $tableNameUsersInGroupss = 'users_in_groups';
     
+    private static $cacheTimeGetData = 604800;
+    
     /**
      * checkAccessUserGroupsByUserAction - определить можно ли пользователю с заданным набором его групп 
      *   и данными по всем группам выполнить указанное действие 
@@ -87,37 +89,76 @@ class accessUserGroup{
      *  + вернутся заданные в группах разрешения на пользовательские действия
      * @return array
      */
-    public static function getAccessGroup(){ // TODO закешировать
+    public static function getAccessGroup(){
         $arResult = array();
         
-        global $db;
-        $res = $db->selectDb(self::$tableNameAccessGroup, array('*'));
-        while($arRes = $db->fetch($res)){
-            if(!empty($arRes['code_action_user'])){
-                $arResult[$arRes['code']]['code_action_user'][$arRes['code_action_user']] = $arRes['code_action_user'];
+        global $app;
+        global $cacheClassName;
+        $cache = new $cacheClassName($app->url);
+        $initCache = $cache->cacheInit('getAccessGroup', self::$cacheTimeGetData);
+        
+        if ($initCache){
+            $arResult = $cache->getCacheData();
+        }else{
+            
+            global $db;
+            $res = $db->selectDb(self::$tableNameAccessGroup, array('*'));
+            while($arRes = $db->fetch($res)){
+                if(!empty($arRes['code_action_user'])){
+                    $arResult[$arRes['code']]['code_action_user'][$arRes['code_action_user']] = $arRes['code_action_user'];
+                }
+                $arResult[$arRes['code']]['name'] = $arRes['name'];
+                $arResult[$arRes['code']]['code'] = $arRes['code'];
+                $arResult[$arRes['code']]['text'] = $arRes['text'];
             }
-            $arResult[$arRes['code']]['name'] = $arRes['name'];
-            $arResult[$arRes['code']]['code'] = $arRes['code'];
-            $arResult[$arRes['code']]['text'] = $arRes['text'];
+            
+            $cache->setCacheData($arResult);
         }
         
         return $arResult;
+    }
+        
+    /**
+     * clearCacheForFunctionGetAccessGroup -
+     *  сбросить кеш на получение разрешений для групп и всех данных по группам
+     * 
+     * @global type $app
+     * @global type $cacheClassName
+     */
+    public static function clearCacheForFunctionGetAccessGroup(){
+        global $app;
+        global $cacheClassName;
+        $cache = new $cacheClassName($app->url);
+        $cache->cacheInit('getAccessGroup', self::$cacheTimeGetData);
+        $cache->clearThisCache();
     }
     
     /**
      * getUserAction() - получить все какие есть пользовательские действия
      * @return array
      */
-    public static function getUserAction(){ // TODO закешировать
+    public static function getUserAction(){ 
         $arResult = array();
         
-        global $db;
-        $res = $db->selectDb(self::$tableNameUserActions, array('*'));
-        while($arRes = $db->fetch($res)){
-            $arResult[$arRes['code']]['code'] = $arRes['code'];
-            $arResult[$arRes['code']]['text'] = $arRes['text'];
-        }
+        global $app;
+        global $cacheClassName;
+        $cache = new $cacheClassName($app->url);
+        $initCache = $cache->cacheInit('getUserAction', self::$cacheTimeGetData);
         
+        if ($initCache){
+            $arResult = $cache->getCacheData();
+        }else{
+            
+            global $db;
+            $res = $db->selectDb(self::$tableNameUserActions, array('*'));
+            while($arRes = $db->fetch($res)){
+                $arResult[$arRes['code']]['code'] = $arRes['code'];
+                $arResult[$arRes['code']]['text'] = $arRes['text'];
+            }
+        
+            $cache->setCacheData($arResult);
+        }
+            
         return $arResult;
     }
     
@@ -260,6 +301,10 @@ class accessUserGroup{
             }
             
         }
+                
+        // сбросить кеш на получение разрешений для групп и всех данных по группам
+        self::clearCacheForFunctionGetAccessGroup();
+        
         return $arResult;
     }
     
@@ -291,6 +336,10 @@ class accessUserGroup{
                 $arResult = false;
             }
         }
+        
+        // сбросить кеш на получение разрешений для групп и всех данных по группам
+        self::clearCacheForFunctionGetAccessGroup();
+        
         return $arResult;
     }
     
@@ -326,6 +375,10 @@ class accessUserGroup{
                 $arResult = true;
             }
         }
+        
+        // сбросить кеш на получение разрешений для групп и всех данных по группам
+        self::clearCacheForFunctionGetAccessGroup();
+        
         return $arResult;   
     }
        

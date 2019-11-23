@@ -71,5 +71,13 @@ class cacheFiles extends cache {
         return true;
     }
     
+    /**
+     * clearThisCache - удалит текущий кеш (кеш связанный с текущим обьектом)
+     */
+    public function clearThisCache(){
+        if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)){
+            unlink($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl);
+        }
+    }
     
 }

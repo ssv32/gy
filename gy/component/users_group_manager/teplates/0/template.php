@@ -20,7 +20,7 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
                         <td><?=$val['name']?>(<?=$val['code']?>)</td>
                         <td><?=$val['text']?></td>
                         <td>
-                            <select multiple="" name="groupsActions[<?=$val['code']?>][]">
+                            <select <?=(($val['code'] == 'admins')? 'disabled': '');?> multiple="" name="groupsActions[<?=$val['code']?>][]">
                                 <? foreach ($arRes['allActionUser'] as $userActions) {?>
                                     <option 
                                         value="<?=$userActions['code']?>" 

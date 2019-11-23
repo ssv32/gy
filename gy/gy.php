@@ -5,11 +5,11 @@ include_once("config/gy_config.php"); // подключение настроек
 
 // авто подключение классов
 function __autoload($calssname){ 
-    if (file_exists(__DIR__ . '/class/'.$calssname.'.php' )){
-        require_once( "class/$calssname.php" );          
-    } elseif(file_exists(__DIR__ . '/class/abstract/'.$calssname.'.php' )){
+    if (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
+        require_once( "classes/$calssname.php" );          
+    } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
         // подключение abstract классов (что бы они хранились в отдельном разделе)
-        require_once( "class/abstract/$calssname.php" );   
+        require_once( "classes/abstract/$calssname.php" );   
     }else{
         die('class '.$calssname.' not find' );
     }

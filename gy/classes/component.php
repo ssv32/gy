@@ -10,7 +10,7 @@ class component{
 	public $lang; 
 
 	public function __construct( $name, $template, $arParam, $url, $lang ){
-		$this->lang = new lang($url.'/class/', 'component', $lang);
+		$this->lang = new lang($url.'/classes/', 'component', $lang);
 
 		// TODO $template - сюда можно и пустую строку записать
 		// могут быть разные шаблоны

@@ -33,10 +33,10 @@
 	);
 
     $app->component(
-		'infobox_element_show',
+		'containerdata_element_show',
 		'0',
 		array( 
-			'info-box-code' => 'Content',
+			'container-data-code' => 'Content',
 			'element-code' => 'html-index-page',
             'cacheTime' => 86400 // закешить на 24 ч.
 		)

@@ -22,8 +22,8 @@
             }
             
             // TODO гдето отдельно подключать в зависимости от установленного модуля (чего пока не реализовано)
-            if(accessUserGroup::accessThisUserByAction( 'edit_info_box') || $user->isAdmin()){
-                $menu['info-box'] = '/gy/admin/info-box.php';
+            if(accessUserGroup::accessThisUserByAction( 'edit_container_data') || $user->isAdmin()){
+                $menu['Контейнеры данных'] = '/gy/admin/container-data.php';
             }
             
 

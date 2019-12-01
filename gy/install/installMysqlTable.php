@@ -58,11 +58,11 @@ if($isRunConsole){
         echo $br.'install table - user - NOT!';
     }
 
-    //---infoBox---
-    echo 'install table - infoBox ...';
+    //---containerData---
+    echo 'install table - containerData ...';
 
-    $res = $db->createTable( // infoBox-ы
-        'info_box',
+    $res = $db->createTable( // containerData-ы
+        'container_data',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
             'name varchar(50)', 
@@ -70,19 +70,19 @@ if($isRunConsole){
         )
     );        
 
-    $res = $db->createTable( // список свойств infoBox
-        'list_propertys_info_box',
+    $res = $db->createTable( // список свойств containerData
+        'list_propertys_container_data',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
             'id_type_property int', 
-            'id_info_box int', 
+            'id_container_data int', 
             'code varchar(50)', 
             'name varchar(50)', 
         )
     );
 
-    $res = $db->createTable( // типы свойств infoBox
-        'types_property_info_box',
+    $res = $db->createTable( // типы свойств containerData
+        'types_property_container_data',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
             'info varchar(50)', 
@@ -93,7 +93,7 @@ if($isRunConsole){
     ); 
 
     $res = $db->insertDb(
-        'types_property_info_box', 
+        'types_property_container_data', 
         array(
             'name' => 'html', 
             'code' => 'html', 
@@ -103,7 +103,7 @@ if($isRunConsole){
     );
 
     $res = $db->insertDb(
-        'types_property_info_box', 
+        'types_property_container_data', 
         array(
             'name' => 'number', 
             'code' =>   'number', 
@@ -112,79 +112,79 @@ if($isRunConsole){
         )
     );
 
-    $res = $db->createTable( // элементы infoBox-а
-        'element_info_box',
+    $res = $db->createTable( // элементы containerData-а
+        'element_container_data',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
             'section_id int', 
             'code varchar(50)', 
             'name varchar(50)', 
-            'id_info_box int',
+            'id_container_data int',
         )
     ); 
 
-    $res = $db->createTable( // значения свойств infoBox-а типа строка
+    $res = $db->createTable( // значения свойств containerData-а типа строка
         'value_propertys_type_html',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
-            'id_info_box int', 
-            'id_element_info_box int',
-            'id_property_info_box int',
+            'id_container_data int', 
+            'id_element_container_data int',
+            'id_property_container_data int',
             'value varchar(255)'
         )
     ); 
 
-    $res = $db->createTable( // значения свойств infoBox-а типа число
+    $res = $db->createTable( // значения свойств containerData-а типа число
         'value_propertys_type_number',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
-            'id_info_box int', 
-            'id_element_info_box int',
-            'id_property_info_box int',
+            'id_container_data int', 
+            'id_element_container_data int',
+            'id_property_container_data int',
             'value int'
         )
     );
-    echo $br.'install table - infoBox OK';
-    //-infoBox-------------
+    echo $br.'install table - containerData OK';
+    //-containerData-------------
 
 
     //--тестовый контент--
-    echo $br.'install info-box Content - test content...';
+    echo $br.'install container-data Content - test content...';
 
     // добавить инфоблок контент
-    infoBox::addInfoBox(array('code'=> 'Content','name'=> 'Контент2'));
+    containerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2'));
 
-    $dataContentInfoBox = infoBox::getInfoBox(array('=' => array('code', "'Content'")), array('*'));
+    $dataContentContainerData = containerData::getContainerData(array('=' => array('code', "'Content'")), array('*'));
 
     //добавить свойство
-    infoBox::addPropertyInfoBox(
+    containerData::addPropertyContainerData(
         array(
             'id_type_property' => 1,
-            'id_info_box' => $dataContentInfoBox[0]['id'],
+            'id_container_data' => $dataContentContainerData[0]['id'],
             'code' => 'html-code',
             'name' => 'html вставка'
         )
     );
 
     // добавить элемент инфоблока
-    infoBox::addElementInfoBox(
+    containerData::addElementContainerData(
         array(
             'section_id' => 0,
             'code' => 'html-index-page',
             'name' => 'Приветствие на главной',
-            'id_info_box' => $dataContentInfoBox[0]['id']
+            'id_container_data' => $dataContentContainerData[0]['id']
         )
     );
 
     // взять типы свойств что бы знать названия таблиц где их искать
-    //$dataTypeProperty = infoBox::getAllTypePropertysInfoBox();
+    //$dataTypeProperty = containerData::getAllTypePropertysContainerData();
     // найти элемент
-    $dataElement = infoBox::getElementInfoBox(
+    $dataElement = containerData::getElementContainerData(
         array(
             'AND' => array(
                 '=' => array(
-                    'id_info_box', 
-                    $dataContentInfoBox[0]['id']
+                    'id_container_data', 
+                    $dataContentContainerData[0]['id']
                 ),
                 'AND' => array(
                     '=' => array(
@@ -197,26 +197,26 @@ if($isRunConsole){
     );
 
     // найти его свойства
-    $propertyInfoBox = infoBox::getPropertysInfoBox(
+    $propertyContainerData = containerData::getPropertysContainerData(
         array(
             '='=>array(
-                'id_info_box', 
-                $dataContentInfoBox[0]['id']
+                'id_container_data', 
+                $dataContentContainerData[0]['id']
             ) 
         ) 
     );
-    $prop = array_shift($propertyInfoBox);
+    $prop = array_shift($propertyContainerData);
 
     // добавить значение свойства для элемента созданного выше
-    infoBox::addValuePropertyInfoBox(
-        $dataContentInfoBox[0]['id'], 
+    containerData::addValuePropertyContainerData(
+        $dataContentContainerData[0]['id'], 
         $dataElement['id'], 
         $prop['id'],  
         'value_propertys_type_html', 
         'Привет пользователь, тебя приветствует gy php framework'.$br.' и текст показан из его контентной части!!!'
     );
 
-    echo $br.'install info-box Content - test content OK';
+    echo $br.'install container-data Content - test content OK';
     ////
     
     
@@ -255,8 +255,8 @@ if($isRunConsole){
         $db->insertDb(
             'action_user', 
             array(
-                'code' => 'edit_info_box', 
-                'text' => 'Изменение всех info_box', 
+                'code' => 'edit_container_data', 
+                'text' => 'Изменение всех container-data', 
             )
         );
         
@@ -311,7 +311,7 @@ if($isRunConsole){
                 'code' => 'content', 
                 'name' => 'Контент',
                 'text' => 'Те кто изменяют контент сайта',
-                'code_action_user' => 'edit_info_box'
+                'code_action_user' => 'edit_container_data'
             )
         );
         $db->insertDb(

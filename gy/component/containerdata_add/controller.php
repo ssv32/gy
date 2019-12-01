@@ -2,7 +2,7 @@
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
 //global $user;
-//$arRes['ITEMS'] = ContainerData::getContainerData(array(), array('*') );
+//$arRes['ITEMS'] = containerData::getContainerData(array(), array('*') );
 
 // найти текущие значения
 

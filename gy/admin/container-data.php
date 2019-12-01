@@ -10,8 +10,6 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
     
     <?if(accessUserGroup::accessThisUserByAction( 'edit_container_data')){?>
 
-        <h1>containerData</h1>
-
         <?
         $app->component(
             'containerdata',

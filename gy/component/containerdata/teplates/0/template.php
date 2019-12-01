@@ -1,6 +1,8 @@
 <?
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );?>
 
+<h1><?=$this->lang->GetMessage('title-container-data');?></h1>
+
 <?if (!empty($arRes['status']) ){?>
     <?if ( $arRes['status'] == 'del-ok'){ ?>
         <div class="gy-admin-good-message"><?=$this->lang->GetMessage('del-ok');?></div>

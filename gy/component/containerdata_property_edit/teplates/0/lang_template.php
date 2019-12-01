@@ -12,6 +12,6 @@ $mess['rus'] = array(
     'add-err-not-type' => 'Ошибка! не выбран тип свойства',
     'ok' => 'ОК',
     'del-btn' => 'Удалить',
-    'del-property-ok' => '! свойство этого container-data удалено'
+    'del-property-ok' => '! свойство этого контейнера данных удалено'
 );
 

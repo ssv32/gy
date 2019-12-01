@@ -4,10 +4,10 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 $mess['rus'] = array(
 	'save' => 'Сохранить',
     'back' => 'Отменить',
-    'title' => 'Редактирование container-data',
+    'title' => 'Редактирование контейнера данных',
     'add-err' => 'Ошибка! попробуйте ещё раз', 
-    'add-ok' => 'container-data успешно изменён!',
+    'add-ok' => 'Контейнер данных успешно изменён!',
     'ok' => 'ОК',
-    'edit-property' => 'Редактировать свойства этого container-data'
+    'edit-property' => 'Редактировать свойства этого контейнера данных'
 );
 

@@ -5,10 +5,11 @@ $mess['rus'] = array(
 	'del' => 'Удалить',
     'add' => 'Добавить',
     'edit' => 'Редактировать',
-    'show-element' => 'Работа с элементами container-data',
+    'show-element' => 'Работа с элементами контейнера данных',
     'del-err' => 'Ошибка! попробуйте ещё раз',
-    'del-ok' => 'container-data удалён!',
-    'not-element' => 'container-data пока нет',
-    'ok' => 'ОК'
+    'del-ok' => 'Контейнер данных удалён!',
+    'not-element' => 'Контейнеров данных пока нет',
+    'ok' => 'ОК',
+    'title-container-data' => 'Контейнеры данных'
 );
 

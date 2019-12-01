@@ -4,9 +4,9 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 $mess['rus'] = array(
 	'save' => 'Создать',
     'back' => 'Отменить',
-    'title' => 'Создание container-data',
+    'title' => 'Создание контейнера данных',
     'add-err' => 'Ошибка! попробуйте ещё раз', 
-    'add-ok' => 'container-data успешно создан!',
+    'add-ok' => 'Контейнер данных успешно создан!',
     'ok' => 'ОК'
 );
 

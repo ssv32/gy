@@ -339,7 +339,7 @@ class containerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function deleteElementcContainerData($id){
+    public static function deleteElementContainerData($id){
         $result = false;
 
 		global $db;		

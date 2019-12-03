@@ -17,24 +17,32 @@ class component{
 
 		$err = 0;
 		$errText = '';
-
-		if (($err == 0) && file_exists($url.'/component/'.$name.'/teplates/'.$template.'/template.php' ) ){ 
-			$template = new template($url.'/component/'.$name.'/teplates/'.$template, $lang );
+        
+        if (($err == 0) && file_exists($url.'/customDir/component/'.$name.'/teplates/'.$template.'/template.php' ) ){
+            // если есть такой компонент и указанный шаблон в папке /customDir/ то подключить от туда
+            $template = new template($url.'/customDir/component/'.$name.'/teplates/'.$template, $lang ); 
+        }elseif(($err == 0) && file_exists($url.'/gy/component/'.$name.'/teplates/'.$template.'/template.php' ) ){ 
+            // если нет то поискать шаблон в стандартной папке с компонентами
+			$template = new template($url.'/gy/component/'.$name.'/teplates/'.$template, $lang );
 		} else {
 			$err = 1;
 			$errText = $this->lang->GetMessage('err_not_controller');
 		}
 
-		if (($err == 0) && file_exists($url.'/component/'.$name.'/controller.php' ) ){ 
-			$this->controller = new controller($url.'/component/'.$name, $lang); // всегда один
+        if (($err == 0) && file_exists($url.'/customDir/component/'.$name.'/controller.php' ) ){ 
+            $this->controller = new controller($url.'/customDir/component/'.$name, $lang); // всегда один
+        }elseif(($err == 0) && file_exists($url.'/gy/component/'.$name.'/controller.php' ) ){ 
+			$this->controller = new controller($url.'/gy/component/'.$name, $lang); // всегда один
 		} else {
 			$err = 2;
 			$errText = $this->lang->GetMessage('err_not_controller') ;
 		}
 
-
-		if ( ($err == 0) && file_exists($url.'/component/'.$name.'/model.php' ) ){ 
-			$model = new model($url.'/component/'.$name.'/model.php'); // может и не быть
+		if ( ($err == 0) && file_exists($url.'/customDir/component/'.$name.'/model.php' ) ){ 
+            $model = new model($url.'/customDir/component/'.$name.'/model.php'); // может и не быть
+			$this->controller->SetModel($model);
+        }elseif( ($err == 0) && file_exists($url.'/gy/component/'.$name.'/model.php' ) ){ 
+			$model = new model($url.'/gy/component/'.$name.'/model.php'); // может и не быть
 			$this->controller->SetModel($model);
 		} 
 
@@ -50,7 +58,7 @@ class component{
 			$this->run();
 		}
 
-		$this->url = $url;
+		$this->url = $url.'/gy';
 	}
 
     /**

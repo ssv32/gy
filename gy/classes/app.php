@@ -7,7 +7,8 @@ final class app{
     public $options; // настройки проекта
     public $lang; // табличка с языковыми сообщениями
     //public $db; // db
-
+    public $urlProject; // урл как $this-url только без /gy в конце
+    
     private static $app;
     
     private function  __construct($url, $options){
@@ -15,6 +16,10 @@ final class app{
         $this->options = $options; 
        
         $this->url = $url;
+        
+        // записать ещё путь до проекта без последней директории т.е. без /gy
+        $this->urlProject = substr($this->url, 0, (strlen($this->url) - 3) );
+        
         // если есть языковой файл то надо подключить его
         $this->lang = new lang($url, 'app', $this->options['lang']);
     }
@@ -44,7 +49,7 @@ final class app{
      * 		maybe includ many model in component
      */
     public function component($name, $template, $arParam  ){
-        $component = new component($name, $template, $arParam, $this->url, $this->options['lang']);
+        $component = new component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
         return $component;
     }
 

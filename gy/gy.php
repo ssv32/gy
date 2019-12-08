@@ -3,15 +3,33 @@ define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядр
 
 include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
+// подключаем класс модуля 
+// (нужен для подключения модулей до определения автоподключения классов)
+include_once(__DIR__ . '/classes/module.php');
+
+// подключить модули
+global $module;
+$module = module::getInstance();
+$module->setUrlGyCore(__DIR__);
+$module->includeModule('containerdata');
+
 // авто подключение классов
 function __autoload($calssname){ 
-    if (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
-        require_once( "classes/$calssname.php" );          
-    } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
-        // подключение abstract классов (что бы они хранились в отдельном разделе)
-        require_once( "classes/abstract/$calssname.php" );   
+    
+    // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
+    global $module;
+    $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
+    if($meyByClassModule !== false){
+        require_once( $meyByClassModule );
     }else{
-        die('class '.$calssname.' not find' );
+        if (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
+            require_once( "classes/$calssname.php" );          
+        } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
+            // подключение abstract классов (что бы они хранились в отдельном разделе)
+            require_once( "classes/abstract/$calssname.php" );   
+        }else{
+            die('class '.$calssname.' not find' );
+        }
     }
 }
 
@@ -48,6 +66,18 @@ global $cacheClassName;
 $cacheClassName = $app->options['type_cache'];
 
 
+//echo "nameModuleByComponentName <pre>";
+//print_r($module->nameModuleByComponentName);
+//echo "</pre>>";
+//
+//echo "nameClassModuleByNameModule <pre>";
+//print_r($module->nameClassModuleByNameModule);
+//echo "</pre>>";
+//
+//echo "arrayIncludeModules <pre>";
+//print_r($module->arrayIncludeModules);
+//echo "</pre>>";
+        
 session_start();
 
 

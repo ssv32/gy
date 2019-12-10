@@ -11,7 +11,8 @@ include_once(__DIR__ . '/classes/module.php');
 global $module;
 $module = module::getInstance();
 $module->setUrlGyCore(__DIR__);
-$module->includeModule('containerdata');
+//$module->includeModule('containerdata');
+$module->includeAllModules();
 
 // авто подключение классов
 function __autoload($calssname){ 

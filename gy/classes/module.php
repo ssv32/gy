@@ -48,7 +48,7 @@ class module{
     
     /**
      * IncludeModule 
-     *  - подключить указанный можуль
+     *  - подключить указанный модуль
      *  (т.е. ядро узнает о классах, компонентах модуля и прочем)
      * 
      * @param string $nameModule - имя модуля
@@ -64,12 +64,16 @@ class module{
         return $result;
     }
     
-    
+    /**
+     * includeModuleByUrl
+     *  - подключить можуль по указанному урлу 
+     * 
+     * @param string $urlModule
+     * @return boolean
+     */
     public function includeModuleByUrl($urlModule){ // TODO можно добавить проверки на ошибки 
         $result = false;
-        
-        echo 'ok='.$urlModule;
-        
+                
         if(file_exists($urlModule.'init.php' )){
             include $urlModule.'init.php';
             
@@ -103,7 +107,14 @@ class module{
         return $result;
     }
     
-    // получить по имени компонента данные о компоненте из подключённых модулей
+
+    /**
+     * getModulesComponent
+     *  - получить по имени компонента данные о компоненте из подключённых модулей
+     * 
+     * @param string $nameComponent
+     * @return string
+     */
     public function getModulesComponent($nameComponent){
         $result = false;
         
@@ -114,7 +125,13 @@ class module{
         return $result;
     } 
     
-    // по имени класса, если он есть в одном из подключённых модулей выдать урл на класс
+    /**
+     * getUrlModuleClassByNameClass
+     *  - по имени класса, если он есть в одном из подключённых модулей выдать урл на класс
+     * 
+     * @param string $nameClass
+     * @return string
+     */
     public function getUrlModuleClassByNameClass($nameClass){
         $result = false;
         if(!empty($this->nameClassModuleByNameModule[$nameClass])){
@@ -122,5 +139,45 @@ class module{
         }
         return $result;
     }
+       
+    /**
+     * searchAllModules()
+     *  - найти все разделы из раздела /gy/modules , т.е. все имеющиея модули
+     * 
+     * @return array
+     */
+    public function searchAllModules(){
+        $result = array();
+        if ($handleDirs = opendir( $this->urlGyCore.'/modules/' ) ) {      
+            while (false !== ($dirName = readdir($handleDirs))) { 
+                if( ($dirName != '.') && ($dirName != '..') ){
+                    $result[$dirName] = $dirName;
+                }
+            }
+            closedir($handleDirs);
+        }
+        return $result;
+    }
+    
+    /**
+     * includeAllModules()
+     *  - подключить все имеющиеся модули
+     * 
+     */
+    public function includeAllModules(){
+        $allModules = $this->searchAllModules();
+        if(!empty($allModules)){
+            foreach ($allModules as $value) {
+                $this->includeModule($value);
+            }
+        }
+    }
+    
+    // нужен метод запуска установки БД указанного модуля
+    
+    
+    // нужен метод подключения всех имеющихся модулей
+    
+    
     
 }

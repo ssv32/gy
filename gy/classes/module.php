@@ -172,12 +172,37 @@ class module{
             }
         }
     }
+       
+    /**
+     * installDbModuleByNameModule 
+     *  - установить часть БД связанную с этим можулем
+     * 
+     * @param string $nameModule - имя модуля
+     * @return boolean
+     */
+    public function installDbModuleByNameModule($nameModule){ // TODO пока только установка для mysql
+        $result = false;
+        
+        if(file_exists($this->urlGyCore.'/modules/'.$nameModule.'/install/installMysqlTable.php' )){
+            include_once( $this->urlGyCore.'/modules/'.$nameModule.'/install/installMysqlTable.php' );
+            $result = true;
+        }
+        
+        return $result;
+    }
     
-    // нужен метод запуска установки БД указанного модуля
-    
-    
-    // нужен метод подключения всех имеющихся модулей
-    
+    /**
+     * installBdAllModules 
+     *  - установить части БД для всех можулей
+     */
+    public function installBdAllModules(){
+        $allModules = $this->searchAllModules();
+        if(!empty($allModules)){
+            foreach ($allModules as $value) {
+                $this->installDbModuleByNameModule($value);
+            }
+        }
+    }
     
     
 }

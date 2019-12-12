@@ -17,8 +17,8 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
                     <td><?=$val['code']?></td>
                     <td><?=$val['name']?></td>
                     <td><?=$val['section_id']?></td>
-                    <td><a href="?container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-edit');?></a></td>
-                    <td><a href="/gy/admin/container-data-element-property.php?container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-view-property');?></a></td>
+                    <td><a href="?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-edit');?></a></td>
+                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-element-property&container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-view-property');?></a></td>
                     <td>
                         <form method="post">
                             <input type="hidden" name="id" value="<?=$val['id']?>" />

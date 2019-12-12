@@ -30,8 +30,8 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                             <input type="submit" class="gy-admin-button" name="<?=$this->lang->GetMessage('del');?>" value="<?=$this->lang->GetMessage('del');?>" />
                         </form>
                     </td>
-                    <td><a href="/gy/admin/container-data-edit.php?ID=<?=$val['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit');?></a></td>
-                    <td><a href="/gy/admin/container-data-element-list.php?container-data-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('show-element');?></a></td>
+                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-edit&ID=<?=$val['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit');?></a></td>
+                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-element-list&container-data-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('show-element');?></a></td>
                 </tr>
             <?}?>
         </table>
@@ -44,5 +44,5 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
     <?}?>
     <br/>
     <br/>
-    <a href="/gy/admin/container-data-add.php" class="gy-admin-button"><?=$this->lang->GetMessage('add');?></a>
+    <a href="/gy/admin/get-admin-page.php?page=container-data-add" class="gy-admin-button"><?=$this->lang->GetMessage('add');?></a>
 <?}?>

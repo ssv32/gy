@@ -22,19 +22,19 @@ if (!empty($arRes['data-this-nfo-box'][0])){
     <br/>
     <br/>
     <br/>
-    <a href="/gy/admin/container-data-property-edit.php?container-data-id=<?=$arRes['data-this-nfo-box'][0]['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-property');?></a>
+    <a href="/gy/admin/get-admin-page.php?page=container-data-property-edit&container-data-id=<?=$arRes['data-this-nfo-box'][0]['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-property');?></a>
 <?}?>    
    
 <?if(!empty($arRes['status'])){?>    
     <?if ($arRes['status'] == 'add-ok'){?>
         <div class="gy-admin-good-message"><?=$this->lang->GetMessage('add-ok');?></div>
         <br/>
-        <a href="/gy/admin/container-data.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+        <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
     <? } ?>
 
     <?if ($arRes['status'] == 'add-err'){?>
         <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
         <br/>
-        <a href="/gy/admin/container-data.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+        <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
     <? } ?>
 <?}?>

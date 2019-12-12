@@ -15,6 +15,9 @@ class module{
     // соответствие имени класса (находящегося в модуле) и имени модуля 
     public $nameClassModuleByNameModule = array();
     
+    // связь имени страници и модуля
+    public $nameModuleByNameAdminPage = array();
+    
     // url до папки gy в проекте
     private $urlGyCore = false;
     
@@ -101,6 +104,16 @@ class module{
                 }
                 unset($classesThisModule);
             }
+            
+            // тут список страниц админки
+            if (!empty($adminPageThisModule)){
+
+                foreach ($adminPageThisModule as $value) {      
+                    $this->nameModuleByNameAdminPage[$value] = $nameThisModule;    
+                }
+                unset($adminPageThisModule);
+            }
+            
             
             
         }

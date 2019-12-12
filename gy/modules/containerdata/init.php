@@ -25,6 +25,13 @@ $classesThisModule = array(
 );
 
 // страници админки
-// TODO
+$adminPageThisModule = array(
+    'container-data-add',
+    'container-data-edit',
+    'container-data-element-list',
+    'container-data-element-property',
+    'container-data-property-edit',
+    'container-data',    
+);
 
 $nameThisModule = 'containerdata';

@@ -1,7 +1,8 @@
 <?
-include "../../gy/gy.php"; // подключить ядро // include core
+if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
+//include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+//global $user;
 
 if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	

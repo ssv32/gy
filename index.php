@@ -1,19 +1,11 @@
-<?php
-	include "./gy/gy.php"; // подключить ядро // include core
-
-	// if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
-
-
-	//echo GetMessageCore("err_include_core");
-	//var_dump( GY_GLOBAL_FLAG_CORE_INCLUDE );
-	//var_dump( GY_LENGUAGE );
-
-	echo "ok";
-	// $asd = `ls -l`;
-	// echo $asd;
+<? include "./gy/gy.php"; // подключить ядро // include core ?>
 	
-	// пример вызова компонента // example run component
-	$app->component(
+    <h1>Пример использования gy CMS/framework</h1>
+
+    <? // пример вызова одинаковых компонентов // example run two component ?>
+    <h4>Вызов компонента "form_auth_test" (1 раз)</h4>
+    <?
+    $app->component(
 		'form_auth_test',
 		'0',
 		array( 
@@ -21,8 +13,10 @@
 			'idComponent' => 1,
 		)
 	);
-        
-        echo "ok2";
+    ?>    
+    
+    <h4>Вызов компонента "form_auth_test" (2 раз)</h4>
+    <?
 	$app->component(
 		'form_auth_test',
 		'0',
@@ -32,6 +26,12 @@
 		)
 	);
 
+    /**
+    пример вызова компонента с выводом контента,
+      + пример использования кастомного (пользовательского) шаблока компонента
+      (пользователя - разработчика использующего gy)
+    */
+    
     $app->component(
 		'containerdata_element_show',
 		'0',

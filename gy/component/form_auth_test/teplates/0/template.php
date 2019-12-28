@@ -3,6 +3,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 if ( empty($arRes["auth_ok"]) ) :?>
 	<form>
+        <p><?=$this->lang->GetMessage('get-text');?></p>
 		<? 
 		foreach ($arRes as $key => $value) {
 		?>

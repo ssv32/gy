@@ -56,8 +56,9 @@ if (!empty($app->options['sole'])){
 	$crypto->setSole($app->options['sole']);
 }
 
-$user = new user;
-$user->checkUserCookie();
+global $user;
+$user = new user();
+
 
 // объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
 if (!isset($app->options['type_cache'])) {  

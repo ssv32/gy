@@ -1,7 +1,7 @@
 <?
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
-class user{ // TODO создавать объект класса сразу при начале сессии
+class user{ 
 	
 	protected $authorized = false;
 	protected $dataUser;
@@ -9,6 +9,10 @@ class user{ // TODO создавать объект класса сразу пр
 	protected $admin = false; 
 	public $tableName = 'users';
 
+    public function __construct() {
+        $this->checkUserCookie();
+    }
+    
     /**
      * getThisUserGroups - получить группы текущего пользователя
      * @return array

@@ -51,8 +51,8 @@ class accessUserGroup{
     public static function accessUser($userId, $actionUser){
 
         // получить данные по пользователю 
-        $userFind = new user();
-        $dataUserFind = $userFind->getUserById($userId);
+        global $user;
+        $dataUserFind = $user->getUserById($userId);
         
         // получить данные по всем группам
         $dataAllGroups = self::getAccessGroup();

@@ -34,4 +34,10 @@ $adminPageThisModule = array(
     'container-data',    
 );
 
+$pagesFromAdminMenu = array(
+    'Контейнеры данных' => '/gy/admin/get-admin-page.php?page=container-data'
+);
+
+$isShowButtonsMenuAdminPanetThisModule = 'edit_container_data';
+
 $nameThisModule = 'containerdata';

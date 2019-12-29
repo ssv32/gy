@@ -21,12 +21,22 @@
                 $menu['Пользователи'] = '/gy/admin/users.php';
             }
             
-            // TODO где то отдельно подключать в зависимости от установленного модуля (чего пока не реализовано)
-            if(accessUserGroup::accessThisUserByAction( 'edit_container_data') || $user->isAdmin()){
-                $menu['Контейнеры данных'] = '/gy/admin/get-admin-page.php?page=container-data';
+            // надо добавить пункты меню заданные в подключенных модулях
+            $module = module::getInstance();
+            foreach ($module->getButtonsMenuAllModules() as $nameModule => $arButton) {
+                // условия показа пункта меню (задаётся модулем) или если админ
+                if(
+                    (
+                        !empty($module->getFlagShowButtonsAdminPanelByModule[$nameModule])
+                        && accessUserGroup::accessThisUserByAction( $module->getFlagShowButtonsAdminPanelByModule[$nameModule]) 
+                    )
+                    || $user->isAdmin() ){
+                    foreach ($arButton as $buttonName => $buttonUrl) {
+                        $menu[$buttonName] = $buttonUrl;
+                    }
+                }
             }
             
-
             if($user->isAdmin()){
                 $menu['Настройки'] = '/gy/admin/options.php';
             }

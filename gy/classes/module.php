@@ -18,6 +18,12 @@ class module{
     // связь имени страницы и модуля
     public $nameModuleByNameAdminPage = array();
     
+    // пункты меню для админ панели (связанные с модулями)
+    public $buttonMenuAdminPanel = array();
+    
+    // условия показа пунктов меню админки для подключённых модулей
+    public $isShowButtonsMenuAdminPanelModules = array();
+    
     // url до папки gy в проекте
     private $urlGyCore = false;
     
@@ -114,7 +120,18 @@ class module{
                 unset($adminPageThisModule);
             }
             
-            
+            // пункты меню в админке
+            if (!empty($pagesFromAdminMenu)){
+                $this->buttonMenuAdminPanel[$nameThisModule] = $pagesFromAdminMenu;
+                unset($pagesFromAdminMenu);
+            }
+             
+            // условия показа пунктов меню админки для подключённых модулей
+            if (!empty($isShowButtonsMenuAdminPanetThisModule)){
+                $this->isShowButtonsMenuAdminPanelModules[$nameThisModule] = $isShowButtonsMenuAdminPanetThisModule;
+                unset($isShowButtonsMenuAdminPanetThisModule);
+            }
+                
             
         }
         return $result;
@@ -217,5 +234,40 @@ class module{
         }
     }
     
+    /**
+     * getButtonsMenuByModule
+     *  - вернуть кнопки меню панели администратора определённые в указанном модуле
+     * 
+     * @param string $nameModule - код модуля
+     * @return array - массив с кнопками где ключ это название пункта меню а значение url
+     */
+    public function getButtonsMenuByModule($nameModule){
+        return $this->buttonMenuAdminPanel[$nameModule];
+    }
+    
+    /**
+     * getButtonsMenuAllModules
+     *  - вернуть все пункты меню админки всех подключённых модулей 
+     * 
+     * @return array - массив с кнопками где ключ это код модуля, 
+     *   а значения как результат getButtonsMenuByModule
+     */
+    public function getButtonsMenuAllModules(){
+        return $this->buttonMenuAdminPanel;
+    }
+    
+    /**
+     * getFlagShowButtonsAdminPanelByModule
+     *  - вернуть условие показа кнопок в админке,
+     *  это код для метода accessUserGroup::accessThisUserByAction
+     *  т.е. действие и если оно разрешено пользователю то покажется пункты меню в админке
+     *  
+     * 
+     * @param string $nameModule - код модуля
+     * @return string - код действия 
+     */
+    public function getFlagShowButtonsAdminPanelByModule($nameModule){
+        return $this->isShowButtonsMenuAdminPanelModules[$nameModule];
+    }
     
 }

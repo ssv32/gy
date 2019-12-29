@@ -16,7 +16,6 @@ $isChackIdComponent = ( empty($this->arParam['idComponent'])
     || (!empty($this->arParam['idComponent']) && !empty($_REQUEST['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) 
 );
 
-
 // $model - теоретически должно быть тут доступно
 if ($isChackIdComponent && !empty($_REQUEST['auth']) ){
 	$arRes["auth_ok"] = 'ok';
@@ -24,8 +23,6 @@ if ($isChackIdComponent && !empty($_REQUEST['auth']) ){
 } else {
 	$arRes["auth"] = "auth";
 }
-
-
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

@@ -6,3 +6,7 @@ $mess['rus'] = array(
     'get-text' => 'Введите любой текст'
 );
 
+$mess['eng'] = array(
+	'button' => 'Send',
+    'get-text' => 'pleas input any text'
+);

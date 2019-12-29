@@ -36,7 +36,7 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
     
     <form method="post">
         <input name="id_container_data" type="hidden" value="<?=$arParam['container-data-id']?>" />
-        <input name="section_id" type="hidden" value="0" /> <?// TODO пока так (всегда один аздел н оможно доработать)?>
+        <input name="section_id" type="hidden" value="0" /> <?// TODO пока так (всегда один раздел н можно доработать)?>
 
         <?if($isEdit ){?>
             <input name="el_edit_id" type="hidden" value="<?=$arRes['edit-id']?>" />

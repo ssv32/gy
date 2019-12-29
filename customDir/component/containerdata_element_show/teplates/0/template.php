@@ -9,6 +9,5 @@
     <?}?>    
     
     <br/>(<?=$this->lang->GetMessage('add-custom-text');?>)
-    
-    
+      
 </div>

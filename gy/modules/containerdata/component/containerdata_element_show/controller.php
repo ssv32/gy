@@ -82,8 +82,7 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
         if($isCache){
             $cache->setCacheData($arRes);
         }
-    }
-    
+    }  
 }
 
 // показать шаблон

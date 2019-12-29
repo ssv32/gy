@@ -15,7 +15,6 @@ if(!empty($data['cacheClear'])){
     $arRes['status'] = 'cacheClear-ok'; 
 }
 
-
 $arRes['button'] = array(
     'cacheClear'
 );

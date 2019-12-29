@@ -1,7 +1,6 @@
 <?
 include "../../gy/gy.php"; // подключить ядро // include core
 
-
 global $user;
 
 if ($user->isAdmin()){

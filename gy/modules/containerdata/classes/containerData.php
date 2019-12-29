@@ -116,7 +116,6 @@ class containerData{
 		return $result; 
     }
     
-    
     /**
      * getAllTypePropertysContainerData - получить все типы свойств ContainerData 
      * @return array

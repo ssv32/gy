@@ -16,7 +16,5 @@ if( !empty($data['ID']) && is_numeric($data['ID']) ){
 global $user;
 $arRes['ITEMS'] = containerData::getContainerData(array(), array('*') );
 
-
-
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

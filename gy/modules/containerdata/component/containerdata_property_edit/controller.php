@@ -11,7 +11,6 @@ if(!empty($data['del-property-id']) && !empty($data['del-proprty-container-data'
     $arRes['status'] = 'del-property-ok';
 }else{
 
-
     $arRes['TYPE_PROPERTYS'] = containerData::getAllTypePropertysContainerData();
 
     if(!empty($data)){

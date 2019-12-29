@@ -1,7 +1,6 @@
 <?
 include "../../gy/gy.php"; // подключить ядро // include core
 
-
 global $user;
 
 if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
@@ -16,10 +15,10 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
             array()
         );
         ?>
-    <br>
-    <br>
-    <a href="group-user.php" class="gy-admin-button">Настройка групп прав доступа</a>
-    <?
+        <br>
+        <br>
+        <a href="group-user.php" class="gy-admin-button">Настройка групп прав доступа</a>
+        <?
     }
 	include "../../gy/admin/footer-admin.php";
 

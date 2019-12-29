@@ -39,7 +39,6 @@ function checkProperty($arr, $arRes){
 	return $result;
 }
 
-
 if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
 	if(checkProperty($data, $arRes)){
 		// добавление пользователя
@@ -84,11 +83,8 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
 		$arRes["stat"] = 'err';
 	}
 	
-	
 } elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
-	
 	$arRes["stat"] = 'add';
-
 }
 
 if (empty($data['stat'])){

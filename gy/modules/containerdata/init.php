@@ -34,10 +34,13 @@ $adminPageThisModule = array(
     'container-data',    
 );
 
+// кнопки для меню админки
 $pagesFromAdminMenu = array(
     'Контейнеры данных' => '/gy/admin/get-admin-page.php?page=container-data'
 );
 
+// пользовательское действие, и если оно разрешено текущему пользователю то он увидит 
+// в меню админки кнопки $pagesFromAdminMenu
 $isShowButtonsMenuAdminPanetThisModule = 'edit_container_data';
 
 $nameThisModule = 'containerdata';

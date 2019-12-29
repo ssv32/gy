@@ -93,9 +93,7 @@ if (!empty($data['Сохранить'])
 	
 	
 } elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
-	
 	$arRes["stat"] = 'edit';
-
 }
 
 if (empty($data['stat'])){

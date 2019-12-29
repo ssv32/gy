@@ -1,4 +1,4 @@
-<? // TODO поправить комментарии и код протестить
+<? // TODO поправить комментарии и код протестировать
 
 
 global $argv;
@@ -105,7 +105,7 @@ if($isRunConsole){
     //--тестовый контент--
     echo $br.'install sest content - containerData = start';
 
-    // добавить инфоблок контент
+    // добавить контейнер данных - контент
     containerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2'));
 
     $dataContentContainerData = containerData::getContainerData(array('=' => array('code', "'Content'")), array('*'));
@@ -120,7 +120,7 @@ if($isRunConsole){
         )
     );
 
-    // добавить элемент инфоблока
+    // добавить элемент контейнера данных
     containerData::addElementContainerData(
         array(
             'section_id' => 0,

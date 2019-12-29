@@ -77,8 +77,8 @@ class mysql extends db{
 	}
     
     /**
-     * parseWhereForQuery - парсенг параметров where запроса
-     *   массив будет в виде дерева, т.е. конечне массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
+     * parseWhereForQuery - парсинг параметров where запроса
+     *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
      * @param type $where
      * @param type $i
      * @param type $key2
@@ -103,7 +103,7 @@ class mysql extends db{
      /**
      * selectDb - запрос типа select. на получение данных
      * @param $db - расурс, коннект к базе данных
-     * @param string $tableName - имя таблици 
+     * @param string $tableName - имя таблицы 
      * @param array $propertys - параметры (какие поля вернуть или * - все)
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
@@ -125,14 +125,14 @@ class mysql extends db{
     
     /**
      * insertDb - вставка, добавление новых строк в базу данных
-     * @param string $tableName - имя таблици 
+     * @param string $tableName - имя таблицы 
      * @param array $propertys - параметры (поле = значение)
      * @return - false or object result query
      */
     public function insertDb($tableName, $propertys){
         $query = '';
         
-        // разбить параметры на два списка через запятую // TODO вынести кудато
+        // разбить параметры на два списка через запятую // TODO вынести куда то
         global $crypto;
         $nameProperty = '';
 		$valueProperty = '';
@@ -157,8 +157,8 @@ class mysql extends db{
     }
     
     /**
-     * updateDb - обновить поле таблици
-     * @param string $tableName - имя таблици 
+     * updateDb - обновить поле таблицы
+     * @param string $tableName - имя таблицы
      * @param array $propertys - параметры (поле = значение)
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
@@ -192,7 +192,7 @@ class mysql extends db{
     
     /**
      * createTable - создать таблицу в базе данных
-     * @param string $tableName - имя таблици
+     * @param string $tableName - имя таблицы
      * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
      * @return - false or object result query
      */
@@ -209,8 +209,8 @@ class mysql extends db{
     }
     
     /**
-     * deleteDb - удаление строк из таблици
-     * @param string $tableName - имя таблици
+     * deleteDb - удаление строк из таблицы
+     * @param string $tableName - имя таблицы
      * @param array $where - условия запроса, что удалять
      * @return boolean
      */

@@ -25,7 +25,7 @@ class accessUserGroup{
     private static function checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $thisAction){
         $arResult = false;
 
-        // определить все действия разхрешённые для данного пользователя
+        // определить все действия разрешённые для данного пользователя
         $AllAccessActionsThisUser = array();
         foreach ($groupsThisUser as $nameGroup) {
             if($dataAllGroups[$nameGroup]){
@@ -45,7 +45,7 @@ class accessUserGroup{
      * accessUser() - проверит разрешёно ли указанное действие заданному пользователю
      * 
      * @param int $userId - id пользователя
-     * @param string $actionUser - код пользовательского дефствия
+     * @param string $actionUser - код пользовательского действия
      * @return boolean
      */
     public static function accessUser($userId, $actionUser){

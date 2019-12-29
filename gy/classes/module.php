@@ -15,13 +15,13 @@ class module{
     // соответствие имени класса (находящегося в модуле) и имени модуля 
     public $nameClassModuleByNameModule = array();
     
-    // связь имени страници и модуля
+    // связь имени страницы и модуля
     public $nameModuleByNameAdminPage = array();
     
     // url до папки gy в проекте
     private $urlGyCore = false;
     
-    // обьект класса (всегда будет один)
+    // объект класса (всегда будет один)
     private static $module; 
     
     private function  __construct(){
@@ -33,7 +33,7 @@ class module{
     
     /**
      * getInstance 
-     *  - получение обьекта класса (всегда один обьект)
+     *  - получение объекта класса (всегда один обьект)
      * реализация singleton
      * 
      * @return jbject this class
@@ -69,7 +69,7 @@ class module{
     
     /**
      * includeModuleByUrl
-     *  - подключить можуль по указанному урлу 
+     *  - подключить модуль по указанному урлу 
      * 
      * @param string $urlModule
      * @return boolean
@@ -155,7 +155,7 @@ class module{
        
     /**
      * searchAllModules()
-     *  - найти все разделы из раздела /gy/modules , т.е. все имеющиея модули
+     *  - найти все разделы из раздела /gy/modules , т.е. все имеющиеся модули
      * 
      * @return array
      */
@@ -188,7 +188,7 @@ class module{
        
     /**
      * installDbModuleByNameModule 
-     *  - установить часть БД связанную с этим можулем
+     *  - установить часть БД связанную с этим модулем
      * 
      * @param string $nameModule - имя модуля
      * @return boolean
@@ -206,7 +206,7 @@ class module{
     
     /**
      * installBdAllModules 
-     *  - установить части БД для всех можулей
+     *  - установить части БД для всех модулей
      */
     public function installBdAllModules(){
         $allModules = $this->searchAllModules();

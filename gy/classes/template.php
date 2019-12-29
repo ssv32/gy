@@ -5,7 +5,7 @@ class template{
 	public $templateUrl; // ссылка на шаблон
 	// public $name; // имя шаблона
 	public $lang;
-    private $urlFileStyle; // url н афайл со стилями, для этого шаблона
+    private $urlFileStyle; // url на файл со стилями, для этого шаблона
     private $urlFileJs; // url для файла с js, для этого шаблона
     
 	public function __construct($url, $lang){

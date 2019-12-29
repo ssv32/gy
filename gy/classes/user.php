@@ -276,8 +276,8 @@ class user{ // TODO создавать объект класса сразу пр
     /**
      * updateUserById - обновление данных пользователя
      * @global type $db
-     * @param int $userId - id пльзователя
-     * @param array $arParams - даные пользователя
+     * @param int $userId - id пользователя
+     * @param array $arParams - данные пользователя
      * @return boolean
      */
     public function updateUserById($userId, $arParams){

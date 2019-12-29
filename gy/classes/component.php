@@ -18,7 +18,7 @@ class component{
 		$err = 0;
 		$errText = '';
         
-        // нужно попробовать найти подключаемый компонент среди подключённых можулей
+        // нужно попробовать найти подключаемый компонент среди подключённых модулей
         global $module;
         $urlComponentInModule = $module->getModulesComponent($name);
                 

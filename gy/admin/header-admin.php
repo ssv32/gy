@@ -21,7 +21,7 @@
                 $menu['Пользователи'] = '/gy/admin/users.php';
             }
             
-            // TODO гдето отдельно подключать в зависимости от установленного модуля (чего пока не реализовано)
+            // TODO где то отдельно подключать в зависимости от установленного модуля (чего пока не реализовано)
             if(accessUserGroup::accessThisUserByAction( 'edit_container_data') || $user->isAdmin()){
                 $menu['Контейнеры данных'] = '/gy/admin/get-admin-page.php?page=container-data';
             }

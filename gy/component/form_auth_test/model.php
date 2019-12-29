@@ -7,7 +7,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
  * 
  * this is model component, here function for component and include class
  * 
- * TODO может можель сделать универсальной и не писать свою для каждого класса
+ * TODO может модель сделать универсальной и не писать свою для каждого класса
  * 		надо подумать
  */
 

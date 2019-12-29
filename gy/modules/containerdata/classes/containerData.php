@@ -364,7 +364,7 @@ class containerData{
     }
     
     /**
-     * updateElementContainerData - зменить элемент ContainerData
+     * updateElementContainerData - изменить элемент ContainerData
      * @param type $arParams
      * @return boolean
      */
@@ -382,8 +382,8 @@ class containerData{
 		return $result;
     }
     
-    /** //TODO протестить закомментировать
-     * deletePropertyContainerData - удалить свойства инфоблока
+    /** //TODO протестировать за комментировать
+     * deletePropertyContainerData - удалить свойства контент блока
      * @param int $idProperty - id свойства container-data
      * @param int $containerData
      * @return boolean
@@ -392,7 +392,7 @@ class containerData{
         //---надо взять все имеющиеся для этого свойства значения у элементов и удалить тоже
         global $db;	
         
-        // взять все типы инфоблоков что бы знать в каких таблицах искать значения
+        // взять все типы контент блоков что бы знать в каких таблицах искать значения
         $dataTypeProperty = containerData::getAllTypePropertysContainerData();
         
         // найти все свойства container-data      

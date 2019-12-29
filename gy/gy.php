@@ -4,7 +4,7 @@ define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядр
 include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
 // подключаем класс модуля 
-// (нужен для подключения модулей до определения автоподключения классов)
+// (нужен для подключения модулей до определения авто подключения классов)
 include_once(__DIR__ . '/classes/module.php');
 
 // подключить модули
@@ -59,26 +59,13 @@ if (!empty($app->options['sole'])){
 $user = new user;
 $user->checkUserCookie();
 
-// обьявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
+// объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
 if (!isset($app->options['type_cache'])) {  
     $app->options['type_cache'] = 'cacheFiles';
 } 
 global $cacheClassName;
 $cacheClassName = $app->options['type_cache'];
 
-
-//echo "nameModuleByComponentName <pre>";
-//print_r($module->nameModuleByComponentName);
-//echo "</pre>>";
-//
-//echo "nameClassModuleByNameModule <pre>";
-//print_r($module->nameClassModuleByNameModule);
-//echo "</pre>>";
-//
-//echo "arrayIncludeModules <pre>";
-//print_r($module->arrayIncludeModules);
-//echo "</pre>>";
-        
 session_start();
 
 

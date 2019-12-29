@@ -22,4 +22,3 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel') && !empty($data
 
 echo json_encode($result);
 
-?>

@@ -11,5 +11,3 @@ function GetMessageCore($code_text) {
 	}
 	return $msg;
 } 
-
-?>

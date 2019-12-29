@@ -4,4 +4,4 @@
     <? foreach ($arRes['ITEMS'] as $value) { ?>
         <?=((!empty($value['value']))? $value['value'] : '');?>
     <?}?> 
-<?}?>    
+<?}

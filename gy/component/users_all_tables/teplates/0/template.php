@@ -37,4 +37,4 @@
 	<a class="gy-admin-button" href="add-user.php"><?=$this->lang->GetMessage('add-user');?></a>
 	<br/>
 	<br/>
-<?}?>
+<?}

@@ -74,6 +74,6 @@ if(empty($arRes['status'])){?>
         <br/>
     <? } ?>
     <a href="<?=$_SERVER['REQUEST_URI']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<?}?>    
+<?}
   
     

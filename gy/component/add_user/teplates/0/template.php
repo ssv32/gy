@@ -44,4 +44,4 @@ if (!empty($arParam['back-url'])){?>
 	<?}?>
     <br/>
     <a href="<?=$arParam['back-url'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<? } ?>
+<? } 

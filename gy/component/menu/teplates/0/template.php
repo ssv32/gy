@@ -7,4 +7,4 @@ if ($arParam['buttons']){?>
 			<a href="<?=$val;?>" class="<?=(($val == $arRes['thisUrl'])? 'active-menu': '');?>"><?=$key;?></a>
 		<?}?>
 	</div>
-<?}?>
+<?}

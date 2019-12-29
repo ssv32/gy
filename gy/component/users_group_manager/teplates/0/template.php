@@ -85,4 +85,4 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
         <? } ?>
     <?}?>
 
-<?}?>
+<?}

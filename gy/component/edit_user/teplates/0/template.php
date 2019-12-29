@@ -53,4 +53,4 @@ if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
 	<?}?>
     <br/>
     <a href="edit-user.php?edit-id=<?=$arParam['id-user'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<? } ?>
+<? } 

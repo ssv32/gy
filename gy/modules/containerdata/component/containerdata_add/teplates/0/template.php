@@ -28,4 +28,4 @@ if ($arRes['status'] == 'add'){ ?>
     <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
     <br/>
     <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<? } ?>
+<? } 

@@ -15,4 +15,4 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
     <? } ?>
     <br/>
     <a href="/gy/admin/options.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<?}?>
+<?}

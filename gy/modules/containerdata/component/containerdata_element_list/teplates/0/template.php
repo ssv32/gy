@@ -84,4 +84,4 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
     <?}?>
     
     <a href="<?=$_SERVER['SCRIPT_NAME']?>?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<?}?>        
+<?}  

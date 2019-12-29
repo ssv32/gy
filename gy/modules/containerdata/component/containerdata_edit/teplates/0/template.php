@@ -37,4 +37,4 @@ if (!empty($arRes['data-this-nfo-box'][0])){
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
     <? } ?>
-<?}?>
+<?}

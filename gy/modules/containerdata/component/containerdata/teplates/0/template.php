@@ -45,4 +45,4 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
     <br/>
     <br/>
     <a href="/gy/admin/get-admin-page.php?page=container-data-add" class="gy-admin-button"><?=$this->lang->GetMessage('add');?></a>
-<?}?>
+<?}

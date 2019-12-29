@@ -1,11 +1,10 @@
 <?
 include "../../gy/gy.php"; // подключить ядро // include core
 
-?>
 
-<?include "../../gy/admin/header-admin.php";?>
+include "../../gy/admin/header-admin.php";
 	
-	<?
+	
 	// пример вызова компонента // example run component
 	$app->component(
 		'admin',
@@ -13,7 +12,7 @@ include "../../gy/gy.php"; // подключить ядро // include core
 		array()
 	);
 
-	?>
 	
-<?include "../../gy/admin/footer-admin.php";?>
+	
+include "../../gy/admin/footer-admin.php";
 

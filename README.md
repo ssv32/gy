@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="gy/images/gy-icons.jpg" width="128" height="128"/>
+</p>
+
 # gy php framework
 
 ### Установка  gy php framework:

@@ -19,7 +19,7 @@ class component{
 		$errText = '';
         
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
-        global $module;
+        $module = module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
                 
         if (($err == 0) && file_exists($url.'/customDir/component/'.$name.'/teplates/'.$template.'/template.php' ) ){

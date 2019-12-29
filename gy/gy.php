@@ -8,7 +8,7 @@ include_once("config/gy_config.php"); // подключение настроек
 include_once(__DIR__ . '/classes/module.php');
 
 // подключить модули
-global $module;
+//global $module;
 $module = module::getInstance();
 $module->setUrlGyCore(__DIR__);
 //$module->includeModule('containerdata');
@@ -70,6 +70,9 @@ session_start();
 
 
 /*
+Примеры как можно прокидывать where условия в запросы 
+ (возможно не рабочие но можно увидеть логику работы)
+
 global $db;
 $res = $db->selectDb(
     $db->db, 
@@ -97,10 +100,3 @@ $res = $db->selectDb(
         
     )
 );*/
-
-//print_r($res);
-//
-//while ($arRes = $db->fetch($res)){
-//    print_r($arRes);
-//
-//}

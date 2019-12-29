@@ -205,7 +205,7 @@ if($isRunConsole){
     echo $br.'install all modules db = start';
     
     // теперь установка частей БД относящихся к модулям
-    global $module;
+    $module = module::getInstance();
     $module->installBdAllModules();
     
     echo $br.'install all modules db = OK!';

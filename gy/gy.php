@@ -1,4 +1,5 @@
 <?php
+ob_start();
 define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
 
 include_once("config/gy_config.php"); // подключение настроек ядра // include options

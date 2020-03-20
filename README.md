@@ -18,6 +18,7 @@
 `<?if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );?>`
 
 ### Пример вызова компонента:
+
 `<?`<br/>
 `include "./gy/gy.php"; // подключить ядро `<br/>
 <br/>
@@ -31,11 +32,10 @@
 `⋅⋅⋅⋅),`<br/>
 `);`<br/>
 <br/>
-<br/>
-<br/>
 
-Имеются файлы wiki по работе с framework, описанием реализованного (с точки зрения админки и пояснения для разработчиков)
-https://github.com/ssv32/gy/wiki
+
+<p>Имеются файлы wiki по работе с framework, описанием реализованного (с точки зрения админки и пояснения для разработчиков)
+https://github.com/ssv32/gy/wiki</p>
 <br/><br/>
 Также gy php framework имеет элементы CMS, это админка и прочее для управления контентом на страницах.
 <br/><br/>
@@ -44,6 +44,7 @@ gy php framework протестирован и будет работать на 
 7.0<br/>
 7.1<br/>
 <br/>
+
 -----
 (en):
 ### Install gy php framework:
@@ -73,9 +74,6 @@ gy php framework протестирован и будет работать на 
 `⋅⋅⋅⋅),`<br/>
 `);`<br/>
 <br/>
-<br/>
-<br/>
-
 There are wiki pages that show how to work with gy framework. (in terms of admin panel and explanation for developers)
 https://github.com/ssv32/gy/wiki
 <br/><br/>

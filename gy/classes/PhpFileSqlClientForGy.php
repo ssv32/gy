@@ -31,8 +31,8 @@ class PhpFileSqlClientForGy extends db{
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
-    public function query($query){	// TODO брать прямо из класса $db
-        //return mysqli_query($this->db, $query);
+    public function query($query){	
+        // 
     }
     
     /*  close() - close connect database
@@ -86,7 +86,7 @@ class PhpFileSqlClientForGy extends db{
         }
     }
 
-    /** //TODO
+    /** 
      * parseWhereForQuery - парсинг параметров where запроса
      *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
      * @param type $where
@@ -139,7 +139,14 @@ class PhpFileSqlClientForGy extends db{
      * @param array $propertys - параметры (поле = значение)
      * @return - false or object result query
      */
-    public function insertDb($tableName, $propertys){     
+    public function insertDb($tableName, $propertys){   
+        global $crypto;
+        
+        // если встречается пароль то засолить и зашифровать его
+        if(!empty($propertys['pass'])){
+            $propertys['pass'] = md5($propertys['pass'].$crypto->getSole());
+        }
+
         return  $this->db->insertInto($tableName, $propertys);
     }
     
@@ -150,7 +157,7 @@ class PhpFileSqlClientForGy extends db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function updateDb($tableName, $propertys, $where = array()){//TODO
+    public function updateDb($tableName, $propertys, $where = array()){
         $query = 'UPDATE ';
         $textPropertys = '';
         global $crypto;

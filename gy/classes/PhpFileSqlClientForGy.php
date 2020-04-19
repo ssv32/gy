@@ -150,7 +150,7 @@ class PhpFileSqlClientForGy extends db{
         return  $this->db->insertInto($tableName, $propertys);
     }
     
-    /** //TODO
+    /** 
      * updateDb - обновить поле таблицы
      * @param string $tableName - имя таблицы
      * @param array $propertys - параметры (поле = значение)
@@ -158,30 +158,17 @@ class PhpFileSqlClientForGy extends db{
      * @return - false or object result query
      */
     public function updateDb($tableName, $propertys, $where = array()){
-        $query = 'UPDATE ';
-        $textPropertys = '';
+        
+        // подготовить массив с условиями для класса PhpFileSql
+        $where = $this->createTrueArrayWhereFromPhpFileSql($where);
+               
+        // если встречается пароль то засолить и зашифровать его
         global $crypto;
-        foreach ($propertys as $key => $val){
-            
-            if ($key == 'pass'){
-                $val = md5($val.$crypto->getSole());
-            }
-            
-            if (!is_numeric($val)){
-                $val = "'".$val."'";
-            }
-            $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$key.'='.$val;
+        if(!empty($propertys['pass'])){
+            $propertys['pass'] = md5($propertys['pass'].$crypto->getSole());
         }
 
-        if(!empty($where)){            
-            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
-        }else{
-            $where = '';
-        }
-                
-        $query .= $tableName.' SET '.$textPropertys.$where.';';
-                    
-        return  $this->query($query);
+        return $this->db->update($tableName, $propertys, $where);
     }
     
     /** // TODO сделать PRIMARY KEY AUTO_INCREMENT
@@ -212,6 +199,19 @@ class PhpFileSqlClientForGy extends db{
     public function deleteDb($tableName, $where){
 
         // подготовить массив с условиями для класса PhpFileSql
+        $where = $this->createTrueArrayWhereFromPhpFileSql($where);
+        
+        return $this->db->delete($tableName, $where);
+    }
+    
+    /**
+     * createTrueArrayWhereFromPhpFileSql 
+     *  - сделать массив where к виду подходящему для класса PhpFileSql
+     * 
+     * @param array $where
+     * @return array
+     */
+    public function createTrueArrayWhereFromPhpFileSql($where){
         foreach ($where as $key1 => $value1) {
             if(is_array($value1)){
                 foreach($value1 as $key2 => $value2){
@@ -221,8 +221,7 @@ class PhpFileSqlClientForGy extends db{
                 $where[$key1] = str_replace("'", '', $value);
             }
         }
-        
-        return $this->db->delete($tableName, $where);
+        return $where;
     }
     
     public function __destruct() {

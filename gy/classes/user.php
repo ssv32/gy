@@ -3,11 +3,11 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 class user{ 
 	
-	protected $authorized = false;
-	protected $dataUser;
-	protected $nameCookie = 'gy_user_auth';
-	protected $admin = false; 
-	public $tableName = 'users';
+    protected $authorized = false;
+    protected $dataUser;
+    protected $nameCookie = 'gy_user_auth';
+    protected $admin = false; 
+    public $tableName = 'users';
 
     public function __construct() {
         $this->checkUserCookie();
@@ -29,33 +29,33 @@ class user{
      * getDataThisUser - получить данные по текущему, авторизованному пользователю
      * @return array
      */
-	public function getDataThisUser(){
-		return $this->dataUser;
-	}
+    public function getDataThisUser(){
+        return $this->dataUser;
+    }
 	
     /**
      * isAdmin - проверить является ли текущий, авторизованный пользователем администратором
      * @return booleand
      */
-	public function isAdmin(){
-		return $this->admin;
-	}
+    public function isAdmin(){
+        return $this->admin;
+    }
 	
-	/**
-	 * getAuthorized - узнать авторизован ли пользователь
-	 * @return booleand
-	 */
-	public function getAuthorized(){
-		return $this->authorized;
-	}
-	
-	/**
-	 * getId - получить id текущего пользователя
-	 * @return int
-	 */
-	public function getId(){
-		return $this->dataUser['id'];
-	}
+    /**
+     * getAuthorized - узнать авторизован ли пользователь
+     * @return booleand
+     */
+    public function getAuthorized(){
+        return $this->authorized;
+    }
+
+    /**
+     * getId - получить id текущего пользователя
+     * @return int
+     */
+    public function getId(){
+        return $this->dataUser['id'];
+    }
 
 	/**
      * authorized - авторизовать пользователя
@@ -63,11 +63,11 @@ class user{
      * @param type $pass - пароль
      * @return booleand 
      */
-	public function authorized($log, $pass ){
-		$result = $this->chackUser($log, $pass);
-		$this->authorized = $result;
-		return $result;
-	}
+    public function authorized($log, $pass ){
+        $result = $this->chackUser($log, $pass);
+        $this->authorized = $result;
+        return $result;
+    }
 	
     /**
      * chackUser - проверить существует ли пользователь
@@ -77,11 +77,11 @@ class user{
      * @param type $pass - пароль
      * @return booleand
      */
-	protected function chackUser($log, $pass) { 
-		$result = false;
-		
-		global $db;
-		global $crypto;		
+    protected function chackUser($log, $pass) { 
+        $result = false;
+
+        global $db;
+        global $crypto;		
 			
         $res = $db->selectDb(
             $this->tableName, 
@@ -94,16 +94,16 @@ class user{
             )    
         );
         
-		if ($arRes = $db->fetch($res)){				
-			
-			//$this->setUserCookie($arRes['id'] , $crypto->getRandString());
-			$this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
-			$result = true;		
-		}
+        if ($arRes = $db->fetch($res)){				
+
+            //$this->setUserCookie($arRes['id'] , $crypto->getRandString());
+            $this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
+            $result = true;		
+        }
+
+        return $result;
 		
-		return $result;
-		
-	}
+    }
 	
     /**
      * setUserCookie - установить пользовательскую куку
@@ -112,9 +112,9 @@ class user{
      * @param string $StringCookie - строка, значение куки
      * @return boolean
      */
-	protected function setUserCookie($userId, $StringCookie){
-		setcookie($this->nameCookie, $StringCookie, 0, '/');
-		global $db;
+    protected function setUserCookie($userId, $StringCookie){
+        setcookie($this->nameCookie, $StringCookie, 0, '/');
+        global $db;
         
         $res = $db->updateDb(
             $this->tableName, 
@@ -122,8 +122,8 @@ class user{
             array( '=' => array('id' , $userId ) )    
         );
         
-		return true;
-	}
+        return true;
+    }
 	
     /**
      * deleteUserCookie - удалить пользовательскую куку
@@ -132,10 +132,10 @@ class user{
      * @param int $userId - id пользователя
      * @return boolean
      */
-	protected function deleteUserCookie($userId){
-		global $_COOKIE;
-		unset($_COOKIE[$this->nameCookie]);
-		global $db;
+    protected function deleteUserCookie($userId){
+        global $_COOKIE;
+        unset($_COOKIE[$this->nameCookie]);
+        global $db;
         
         $res = $db->updateDb(
             $this->tableName, 
@@ -143,38 +143,38 @@ class user{
             array( '=' => array('id' , $userId ) )    
         );
         
-		return true;
-	}
+        return true;
+    }
 	
     /**
      * checkUserCookie - проверить пользовательскую куку
      * @global type $_COOKIE
      * @return boolean
      */
-	public function checkUserCookie(){
-		$result = false;
-		
-		global $_COOKIE;
-		
-		if(!empty($_COOKIE[$this->nameCookie]) ){
-						
-			$dataUser = $this->findUserByCookie($_COOKIE[$this->nameCookie]);
-						
-			if ($dataUser !== false){
-				$this->dataUser = $dataUser;
-                
+    public function checkUserCookie(){
+        $result = false;
+
+        global $_COOKIE;
+
+        if(!empty($_COOKIE[$this->nameCookie]) ){
+
+            $dataUser = $this->findUserByCookie($_COOKIE[$this->nameCookie]);
+
+            if ($dataUser !== false){
+                $this->dataUser = $dataUser;
+
                 // получить группы к каким относится пользователь
                 $this->dataUser['groups'] = accessUserGroup::getListGroupsByUser($dataUser['id']);
-                
-				$this->authorized = true;
-				if ( !empty($this->dataUser['groups']['admins']) ){
-					$this->admin = true;
-				}
-				$result = true;
-			}
-		}
-		return $result;
-	}
+
+                $this->authorized = true;
+                if ( !empty($this->dataUser['groups']['admins']) ){
+                    $this->admin = true;
+                }
+                $result = true;
+            }
+        }
+        return $result;
+    }
 	
     /**
      * findUserByCookie - найти пользователя по значению куки
@@ -182,42 +182,41 @@ class user{
      * @param string $cookie
      * @return array - данные пользователя
      */
-	protected function findUserByCookie($cookie){
-		$result = false;
-		
-		global $db;
-		
-		//$res = $db->query($db->db, 'select * from users where hash_auth="'.$cookie.'";');
-			
+    protected function findUserByCookie($cookie){
+        $result = false;
+
+        global $db;
+
         $res = $db->selectDb(
             $this->tableName, 
             array('*'), 
             array( '=' => array('hash_auth', "'".$cookie."'") ) 
         );
-        
-		if ($arRes = $db->fetch($res)){
-			$result = $arRes;		
-		}
-				
-		return $result;
-	}
+
+        if ($arRes = $db->fetch($res)){
+            $result = $arRes;		
+        }
+
+        return $result;
+    }
 	
     /**
      * userExit - сделать выход для пользователя 
      * @return boolean
      */
-	public function userExit(){
-		return $this->deleteUserCookie($this->dataUser['id']);
-	}
+    public function userExit(){
+        return $this->deleteUserCookie($this->dataUser['id']);
+    }
 	
     /**
      * getAllDataUsers - получить данные по пользователю 
      * @global type $db
      * @return array
      */
-	public function getAllDataUsers(){
-		$result = array();
-		global $db;		        
+    public function getAllDataUsers(){
+        $result = array();
+        
+        global $db;		        
         $res = $db->selectDb( 
             $this->tableName, 
             array('*')
@@ -229,8 +228,8 @@ class user{
             $result[$key]['groups'] = accessUserGroup::getListGroupsByUser($value['id']);
         }
         
-		return $result;
-	}
+        return $result;
+    }
 	
     /**
      * getUserById - получить данные по пользователю по id
@@ -239,8 +238,8 @@ class user{
      * @return array
      */
     public function getUserById($id){
-		$result = array();
-		global $db;		        
+        $result = array();
+        global $db;		        
         $res = $db->selectDb( 
             $this->tableName, 
             array('*'),
@@ -253,8 +252,8 @@ class user{
         // получить группы текущего пользователя
         $result['groups'] = accessUserGroup::getListGroupsByUser($id);
         
-		return $result;
-	}
+        return $result;
+    }
     
     /**
      * addUsers - добавить пользователя
@@ -263,19 +262,19 @@ class user{
      * @param type $data
      * @return boolean
      */
-	public function addUsers($data){
-		$result = false;
+    public function addUsers($data){
+        $result = false;
 
-		// id, login, name, pass, groups
-		global $db;		
+        // id, login, name, pass, groups
+        global $db;		
         $res = $db->insertDb($this->tableName, $data);
                 
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result;
-	}
+        return $result;
+    }
 	
     /**
      * updateUserById - обновление данных пользователя
@@ -289,14 +288,14 @@ class user{
 
         unset($arParams['id']);
         
-		global $db;		
+        global $db;		
         $res = $db->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
         
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result; 
+        return $result; 
     }
     
     /**
@@ -305,19 +304,19 @@ class user{
      * @param int $idUser - id пользователя
      * @return string
      */
-	public function deleteUserById($idUser){
-		$result = false;
-		
-		if (is_numeric($idUser) && ($idUser != 1)){
-			global $db;
-			
-			$res = $db->query('DELETE FROM '.$this->tableName.' WHERE id = '.$idUser.';');
+    public function deleteUserById($idUser){
+        $result = false;
 
-			if ($res){
-				$result = true;		
-			}
-		}		
-		return $result;
-	}
+        if (is_numeric($idUser) && ($idUser != 1)){
+            global $db;
+
+            $res = $db->deleteDb($this->tableName, array('='=>array('id', $idUser)));
+
+            if ($res){
+                $result = true;		
+            }
+        }		
+        return $result;
+    }
 	
 }

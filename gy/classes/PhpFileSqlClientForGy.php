@@ -10,7 +10,21 @@ class PhpFileSqlClientForGy extends db{
     
     public $test = 'PhpFileSqlClient ok';
     public $db; //TODO private
-        
+    
+    // даныне после запроса селект для метода fetch() 
+    private $dataSelectForFetch = array();  
+    
+    /**
+     * clearResultMethodSelect()
+     *  - сбросит результаты запроса метода select
+     * 
+     * @return boolean
+     */
+    private function clearResultMethodSelect(){
+        $this->dataSelectForFetch = array();
+        return true;
+    }
+    
     /* connect() - create connect in database
     * @param $host
     * @param $user
@@ -48,33 +62,47 @@ class PhpFileSqlClientForGy extends db{
         }
     }
 	
-    /** //TODO
+    /** 
      * fetch - получить порцию (строку) данных, после выполнения запроса в БД
      * @param $res - результат отработки запроса в БД
      * @return array
      */
     public function fetch($res){
-        $result = array();
-        if ($res !== false){
-            //$result = mysqli_fetch_assoc($res);
+        $res = $this->dataSelectForFetch;
+        
+        $result = false;
+        if(($res !== false) && is_array($res)) {
+                        
+            // беру первое значение из него
+            $result = array_shift($res);
+            
+            // записываем без первого значения
+            $this->dataSelectForFetch = $res;
+            
         }
         return $result;
     }
 	
-    /** //TODO
+    /**
      * fetchAll - тоже что и fetch только в получит всё в виде массива (с ключём id элемента)
      * @param $res - результат отработки запроса в БД
      * @return array
      */
     public function fetchAll($res, $key = 'id'){
-        $result = array();
-        while ($arRes = self::fetch($res)){
-            if($key !== false){
-                $result[$arRes[$key]] = $arRes;
+        $result = false;
+        
+        if(($res !== false) && is_array($res)) {
+            if(empty($key) ){
+                foreach ($res as $value) {
+                    if(!empty($value[$key])){
+                        $result[$value[$key]] = $value;
+                    }
+                }
             }else{
-                $result[] = $arRes;
-            }
-		}
+                $result = $res;
+            }   
+        }
+        
         return $result;
     }
     
@@ -86,7 +114,7 @@ class PhpFileSqlClientForGy extends db{
         }
     }
 
-    /** 
+    /** // TODO проверить нужен или нет вообще
      * parseWhereForQuery - парсинг параметров where запроса
      *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
      * @param type $where
@@ -118,19 +146,22 @@ class PhpFileSqlClientForGy extends db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function selectDb($tableName, $propertys, $where = array()){
-        $query = 'SELECT ';
-        $strPropertys = implode(",", $propertys);
-
-        if(!empty($where)){            
-            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
-        }else{
-            $where = '';
+    public function selectDb($tableName, $propertys = '*', $where = false){
+        
+        // чуть подправить для совместимости
+        if($propertys[0] == '*'){
+            $propertys = '*';
         }
-                
-        $query .= $strPropertys.' FROM '.$tableName.$where.';';
-                 
-        return  $this->query($query);
+        
+        // подготовить массив с условиями для класса PhpFileSql
+        $where = $this->createTrueArrayWhereFromPhpFileSql($where);
+        
+        $dataResult = $this->db->select($tableName, $propertys, $where);
+        
+        // записываю для метода fetch()
+        $this->dataSelectForFetch = $dataResult;
+        
+        return $dataResult;
     }
     
     /**
@@ -139,7 +170,10 @@ class PhpFileSqlClientForGy extends db{
      * @param array $propertys - параметры (поле = значение)
      * @return - false or object result query
      */
-    public function insertDb($tableName, $propertys){   
+    public function insertDb($tableName, $propertys){  
+        // сбросить данные предыдущего вызова метода select
+        $this->clearResultMethodSelect();
+        
         global $crypto;
         
         // если встречается пароль то засолить и зашифровать его
@@ -158,6 +192,8 @@ class PhpFileSqlClientForGy extends db{
      * @return - false or object result query
      */
     public function updateDb($tableName, $propertys, $where = array()){
+        // сбросить данные предыдущего вызова метода select
+        $this->clearResultMethodSelect();
         
         // подготовить массив с условиями для класса PhpFileSql
         $where = $this->createTrueArrayWhereFromPhpFileSql($where);
@@ -178,6 +214,9 @@ class PhpFileSqlClientForGy extends db{
      * @return - false or object result query
      */
     public function createTable($tableName, $propertys){
+        // сбросить данные предыдущего вызова метода select
+        $this->clearResultMethodSelect();
+        
         // массив мараметров подходящий для PhpFileSql метода createTable
         $arrayColumns = array();
         
@@ -197,7 +236,9 @@ class PhpFileSqlClientForGy extends db{
      * @return boolean
      */
     public function deleteDb($tableName, $where){
-
+        // сбросить данные предыдущего вызова метода select
+        $this->clearResultMethodSelect();
+        
         // подготовить массив с условиями для класса PhpFileSql
         $where = $this->createTrueArrayWhereFromPhpFileSql($where);
         
@@ -212,13 +253,15 @@ class PhpFileSqlClientForGy extends db{
      * @return array
      */
     public function createTrueArrayWhereFromPhpFileSql($where){
-        foreach ($where as $key1 => $value1) {
-            if(is_array($value1)){
-                foreach($value1 as $key2 => $value2){
-                    $where[$key1][$key2] = str_replace("'", '', $value2);
+        if(is_array($where)){
+            foreach ($where as $key1 => $value1) {
+                if(is_array($value1)){
+                    foreach($value1 as $key2 => $value2){
+                        $where[$key1][$key2] = str_replace("'", '', $value2);
+                    }
+                }else{
+                    $where[$key1] = str_replace("'", '', $value);
                 }
-            }else{
-                $where[$key1] = str_replace("'", '', $value);
             }
         }
         return $where;

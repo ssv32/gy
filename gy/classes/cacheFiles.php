@@ -66,8 +66,10 @@ class cacheFiles extends cache {
             'data' => $data,
             'createTime' => time(),
             'cacheTime' => $this->cacheTime
-        );       
-        file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<? $cacheData = '."'". json_encode($cacheData)."';" );  
+        );  
+        if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl) ){
+            file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<? $cacheData = '."'". json_encode($cacheData)."';" );  
+        }
         return true;
     }
     

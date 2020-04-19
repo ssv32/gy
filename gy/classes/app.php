@@ -14,11 +14,12 @@ final class app{
     private function  __construct($url, $options){
         // подключить настройки
         $this->options = $options; 
-       
-        $this->url = $url;
         
-        // записать ещё путь до проекта без последней директории т.е. без /gy
-        $this->urlProject = substr($this->url, 0, (strlen($this->url) - 3) );
+        // записать ещё путь c /gy
+        $this->url = $url.'/gy';
+        
+        // путь до проекта
+        $this->urlProject = $url;
         
         // если есть языковой файл то надо подключить его
         $this->lang = new lang($url, 'app', $this->options['lang']);

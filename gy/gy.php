@@ -15,16 +15,24 @@ $module->setUrlGyCore(__DIR__);
 //$module->includeModule('containerdata');
 $module->includeAllModules();
 
+// путь к проекту
+global $urlProject;
+$urlProject = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
+
 // авто подключение классов
 function __autoload($calssname){ 
-    
+    global $urlProject;
+        
     // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
     global $module;
     $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
     if($meyByClassModule !== false){
         require_once( $meyByClassModule );
     }else{
-        if (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
+                
+        if(file_exists($urlProject."/customDir/classes/".$calssname.".php" ) ){ // сюда будут подключаться пользовательские классы
+            require_once( $urlProject."/customDir/classes/".$calssname.".php" );   
+        }elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
             require_once( "classes/$calssname.php" );          
         } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
             // подключение abstract классов (что бы они хранились в отдельном разделе)
@@ -36,7 +44,7 @@ function __autoload($calssname){
 }
 
 global $app;
-$app = app::createApp(__DIR__, $gy_config);
+$app = app::createApp($urlProject, $gy_config);
 unset($gy_config);
 
 // подключить класс работы с базой данный // include class work database

@@ -88,8 +88,8 @@ class user{
             array('*'), 
             array(
                 'AND' => array( 
-                    '=' => array('login', "'".$log."'" ),
-                    'AND' => array( '=' => array('pass',"'".md5($pass.$crypto->getSole())."'") )
+                    array('=' => array('login', "'".$log."'" ) ),
+                    array( '=' => array('pass',"'".md5($pass.$crypto->getSole())."'") )
                 ),   
             )    
         );

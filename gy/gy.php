@@ -83,19 +83,6 @@ session_start();
 Примеры как можно прокидывать where условия в запросы 
  (возможно не рабочие но можно увидеть логику работы)
 
-global $db;
-$res = $db->selectDb(
-    $db->db, 
-    'users', 
-    array('*'), 
-    array( 
-        'AND' => array(
-            '=' => array('logIn', "'admin'"), 
-            'AND' =>  array('=' => array('logIn', "'admin2'") 
-        ),
-    )
-);
-
 issues/24 - теперь будет так
 global $db;
 $res = $db->selectDb(

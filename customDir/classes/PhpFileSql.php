@@ -548,9 +548,21 @@ class PhpFileSql {
                 $this->datasDataBase['tables'][$tableName]['columns'] = array();
                 
                 foreach ($arrayColumns as $value) {
-                    $this->datasDataBase['tables'][$tableName]['columns'][] = array(
-                        'name' => $value
-                    );
+                    if(!is_array($value)){
+                        $this->datasDataBase['tables'][$tableName]['columns'][] = array(
+                            'name' => $value
+                        );
+                    }else{
+                        
+                        $this->datasDataBase['tables'][$tableName]['columns'][] = array(
+                            'name' => $value[0]
+                        );
+                        
+                        if($value[1] == 'PRIMARY_KEY_AUTO_INCREMENT'){ // add PRIMARY_KEY_AUTO_INCREMENT
+                            $this->datasDataBase['tables'][$tableName]['additional_property_pkai'][$value[0]] = 0;
+                        }
+                        
+                    }
                 }
                 
                 $this->datasDataBase['tables'][$tableName]['row'] = array();
@@ -729,17 +741,23 @@ class PhpFileSql {
      * 
      *  $where = array(
      *      'OR' => array(
-     *          '=' => array(
-     *              'login',
-     *              'asd2'
+     *          array(
+     *              '=' => array(
+     *                  'login',
+     *                  'asd2'
+     *              ),
      *          ),
-     *          '!=' => array(
-     *              'login',
-     *              'asd'
+     *          array(
+     *              '!=' => array(
+     *                  'login',
+     *                  'asd'
+     *              ),
      *          ),
-     *          '!=' => array(
-     *              'login',
-     *              'asd'
+     *          array(
+     *              '!=' => array(
+     *                  'login',
+     *                  'asd'
+     *              ),
      *          ),
      *      )    
      *  ) 
@@ -753,8 +771,8 @@ class PhpFileSql {
         $result = true;
         foreach ($where as $key => $value) {
             if(in_array($key, array('OR', 'AND'))){
-                foreach ($value as $key2 => $value2) {
-                    if ( in_array($key2, array('=', '!=' )) && (count($value2) != 2) ){
+                foreach ($value as $value2) {
+                    if(!$this->isOneVersionWhere($value2)){
                         $result = false;
                     }
                 }
@@ -800,12 +818,12 @@ class PhpFileSql {
     private function getStrTwoTypeWhere($where){
         $result = '';
         if( !empty($where['AND']) ){
-            foreach($where['AND'] as $key => $val){
-                $result .= ((!empty($result))? ' && ': '').$this->getStrOneTypeWhere(array( $key => $val) );
+            foreach($where['AND'] as $val){
+                $result .= ((!empty($result))? ' && ': '').$this->getStrOneTypeWhere( $val );
             }
         }elseif( !empty($where['OR'])){
-            foreach($where['OR'] as $key => $val){
-                $result .= ((!empty($result))? ' || ': '').$this->getStrOneTypeWhere(array( $key => $val));
+            foreach($where['OR'] as $val){
+                $result .= ((!empty($result))? ' || ': '').$this->getStrOneTypeWhere($val);
             }
         }
         return $result;
@@ -837,20 +855,8 @@ class PhpFileSql {
                 
                 $result = array();
                 
-                // (ru) - выбрать нужные поля
-                // (en) - select the required fields
-                if( ($arrayNameColumns !== '*') && is_array($arrayNameColumns)){
-                    foreach ($this->datasDataBase['tables'][$nameTable]['row'] as $key => $value) {
-
-                        foreach ($arrayNameColumns as $keyRow){
-                            if(isset($value[$keyRow])){
-                                $result[$key][$keyRow] = $value[$keyRow];
-                            }
-                        }
-                    }
-                }elseif($arrayNameColumns == '*'){
-                    $result = $this->datasDataBase['tables'][$nameTable]['row'];
-                }
+                // взят все данные
+                $result = $this->datasDataBase['tables'][$nameTable]['row'];
                 
                 // (ru) - взять нужное по условию
                 // (en) - take the necessary conditionally
@@ -884,6 +890,22 @@ class PhpFileSql {
                         }
                     } 
                 }
+                
+                // (ru) - выбрать нужные поля
+                // (en) - select the required fields
+                if( ($arrayNameColumns !== '*') && is_array($arrayNameColumns)){
+                    foreach ($result as $key => $value) {
+
+                        foreach ($arrayNameColumns as $keyRow){
+                            if(!isset($value[$keyRow])){
+                                unset($result[$key][$keyRow]);
+                            }
+                        }
+                    }
+                }elseif($arrayNameColumns == '*'){
+                    //$result = $this->datasDataBase['tables'][$nameTable]['row'];
+                }
+                
             }else{
                 $this->textErrors = $this->GetMessage('err_not_table');
                 $result = false;
@@ -929,6 +951,15 @@ class PhpFileSql {
                         $arrayTrueProperty[$value['name']] = '';
                     }
                 }
+                
+                if(!empty($this->datasDataBase['tables'][$nameTable]['additional_property_pkai'])){
+                    foreach ($this->datasDataBase['tables'][$nameTable]['additional_property_pkai'] as $key => $value) {
+                        $value++;
+                        $arrayTrueProperty[$key] = $value;
+                        $this->datasDataBase['tables'][$nameTable]['additional_property_pkai'][$key] = $value;
+                    }
+                }
+                
                 $this->datasDataBase['tables'][$nameTable]['row'][] = $arrayTrueProperty;
                 $result = true;
             }else{

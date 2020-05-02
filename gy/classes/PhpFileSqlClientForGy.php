@@ -92,7 +92,7 @@ class PhpFileSqlClientForGy extends db{
         $result = false;
         
         if(($res !== false) && is_array($res)) {
-            if(empty($key) ){
+            if($key !== false ){
                 foreach ($res as $value) {
                     if(!empty($value[$key])){
                         $result[$value[$key]] = $value;
@@ -113,30 +113,6 @@ class PhpFileSqlClientForGy extends db{
             }
         }
     }
-
-    /** // TODO проверить нужен или нет вообще
-     * parseWhereForQuery - парсинг параметров where запроса
-     *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
-     * @param type $where
-     * @param type $i
-     * @param type $key2
-     * @return type
-     */    
-    private function parseWhereForQuery($where, $i, $key2){ 
-        $str = '';
-        $str2 = '';
-        if (is_array($where)){
-            $i++;
-            foreach($where as $key => $val){
-                $str = '';
-                $str = $this->parseWhereForQuery($val, $i, $key);
-                $str2 .=  ((!empty($str2))? ' '.$key2.' ' : '').$str;
-            }
-        }else{
-            $str2 = $where;
-        }   
-        return $str2;
-    }
     
      /** //TODO
      * selectDb - запрос типа select. на получение данных
@@ -152,7 +128,7 @@ class PhpFileSqlClientForGy extends db{
         if($propertys[0] == '*'){
             $propertys = '*';
         }
-        
+                
         // подготовить массив с условиями для класса PhpFileSql
         $where = $this->createTrueArrayWhereFromPhpFileSql($where);
         
@@ -160,7 +136,7 @@ class PhpFileSqlClientForGy extends db{
         
         // записываю для метода fetch()
         $this->dataSelectForFetch = $dataResult;
-        
+
         return $dataResult;
     }
     
@@ -223,7 +199,17 @@ class PhpFileSqlClientForGy extends db{
         // нужно подогнать свойства под метод класса PhpFileSql
         foreach($propertys as $val){
             $attr = explode(' ', $val);
-            $arrayColumns[] = $attr[0];
+            if( (count($attr)>2) 
+                && ($attr[1] == 'int' )
+                && ($attr[2] == 'PRIMARY')
+                && ($attr[3] == 'KEY')
+                && ($attr[4] == 'AUTO_INCREMENT')
+            ){ 
+                // PRIMARY KEY AUTO_INCREMENT
+                $arrayColumns[] = array($attr[0], 'PRIMARY_KEY_AUTO_INCREMENT' );
+            }else{
+                $arrayColumns[] = $attr[0];
+            }
         }      
 
         return $this->db->createTable($tableName, $arrayColumns);
@@ -253,17 +239,21 @@ class PhpFileSqlClientForGy extends db{
      * @return array
      */
     public function createTrueArrayWhereFromPhpFileSql($where){
+        
         if(is_array($where)){
-            foreach ($where as $key1 => $value1) {
-                if(is_array($value1)){
-                    foreach($value1 as $key2 => $value2){
-                        $where[$key1][$key2] = str_replace("'", '', $value2);
+            foreach ($where as $key0 => $value0) {
+                if(in_array($key0, array('=', '!='))){
+                    $where[$key0][1] = str_replace("'", '', $where[$key0][1]);
+                }elseif(in_array($key0, array('AND', 'OR'))){
+                    foreach ($value0 as $key1 => $value1) {
+                        foreach ($value1 as $key2 => $value2) {
+                            $where[$key0][$key1][$key2][1] = str_replace("'", '', $where[$key0][$key1][$key2][1]);
+                        } 
                     }
-                }else{
-                    $where[$key1] = str_replace("'", '', $value);
                 }
-            }
-        }
+            } 
+        }  
+
         return $where;
     }
     

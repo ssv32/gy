@@ -26,7 +26,7 @@ class mysql extends db{
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
-    public function query($query){	// TODO брать прямо из класса $db
+    public function query($query){
         return mysqli_query($this->db, $query);
     }
     
@@ -68,38 +68,173 @@ class mysql extends db{
         return $result;
     }
     
-	public function __construct($db_config) {
-		if ( empty($this->db)){
-			if (!empty($db_config)){
-				$this->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
-			}
-		}
-	}
+    public function __construct($db_config) {
+        if ( empty($this->db)){
+            if (!empty($db_config)){
+                $this->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+            }
+        }
+    }
+        
+    /**
+     * isOneVersionWhere 
+     *  (ru) - проверит соответствует ли условие, условию как ниже (первый вариант)
+     *         (пока поддерживается только сравнение и не рано '=', '!=' )
+     *  
+     *  (en) - will check whether it matches the condition, the condition as below (first option)
+     *         (so far only comparison is supported and not early '=', '! =')
+     * 
+     *  $where = array(
+     *    '=' => array(
+     *       'login',
+     *       'asd2'
+     *    )
+     *  ) 
+     * 
+     * @param array $where - 
+     *        (ru) - условие (пример выше, что то типа дерева)
+     *        (en) - condition (example above, something like a tree)
+     * @return boolean
+     */        
+    private function isOneVersionWhere($where){
+        $result = false;
+        if (count($where) == 1){
+            foreach ($where as $key => $value) {
+                if( in_array($key, array('=', '!=' )) && (count($value) == 2) ){
+                    $result = true;
+                }
+            }
+            $value = array_shift($where);
+            
+        }
+        return $result;
+    }
+    
+    /**
+     * isTwoVersionWhere 
+     *  (ru) - проверит соответствует ли условие, условию как ниже (второй вариант)
+     *         (пока поддерживается только сравнение и не рано '=', '!=' и связки 'AND', 'OR' )
+     *  
+     *  (ru) - will check whether the condition matches the condition as below (second option)
+     *         (so far only comparison is supported and not early '=', '! =' and the 'AND', 'OR' connectives)
+     * 
+     *  $where = array(
+     *      'OR' => array(
+     *          array(
+     *              '=' => array(
+     *                  'login',
+     *                  'asd2'
+     *              ),
+     *          ),
+     *          array(
+     *              '!=' => array(
+     *                  'login',
+     *                  'asd'
+     *              ),
+     *          ),
+     *          array(
+     *              '!=' => array(
+     *                  'login',
+     *                  'asd'
+     *              ),
+     *          ),
+     *      )    
+     *  ) 
+     * 
+     * @param array $where - 
+     *        (ru) - условие (пример выше, что то типа дерева)
+     *        (en) - condition (example above, something like a tree)
+     * @return boolean
+     */ 
+    private function isTwoVersionWhere($where){
+        $result = true;
+        foreach ($where as $key => $value) {
+            if(in_array($key, array('OR', 'AND'))){
+                foreach ($value as $value2) {
+                    if(!$this->isOneVersionWhere($value2)){
+                        $result = false;
+                    }
+                }
+            }else{
+                $result = false;
+            }
+        }
+        return $result;
+    }
+        
+    /**
+     * getStrOneTypeWhere
+     *  (ru) - соберёт строчку с условием определённого вида,
+     *         для условий из массива $where (метода например select) 1 варианта
+     * 
+     *  (en) - will collect a line with a condition of a certain kind,
+     *         for conditions from the array $where (for example, select parameters) 1 option
+     * 
+     * @param array $where
+     * @return string
+     */
+    private function getStrOneTypeWhere($where){
+        $result = false;
+        if(!empty($where['='])){
+            $result = $where['='][0]." = ".$where['='][1];
+        }elseif( !empty($where['!=']) ){
+            $result = $where['!='][0]." != ".$where['!='][1];
+        }
+        return $result;
+    }
+    
+    /**
+     * getStrOneTypeWhere
+     *  (ru) - соберёт строчку с условием определённого вида,
+     *         для условий из массива $where (метода например select) 2 варианта
+     * 
+     *  (en) - will collect a line with a condition of a certain kind,
+     *         for conditions from the array $where (for example, select parameters) 2 option
+     * 
+     * @param array $where
+     * @return string
+     */
+    private function getStrTwoTypeWhere($where){
+        $result = '';
+        if( !empty($where['AND']) ){
+            foreach($where['AND'] as $val){
+                $result .= ((!empty($result))? ' AND ': '').$this->getStrOneTypeWhere( $val );
+            }
+        }elseif( !empty($where['OR'])){
+            foreach($where['OR'] as $val){
+                $result .= ((!empty($result))? ' OR ': '').$this->getStrOneTypeWhere($val);
+            }
+        }
+        return $result;
+    }
     
     /**
      * parseWhereForQuery - парсинг параметров where запроса
-     *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов // TODO добавить примеры в wiki
+     *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов 
      * @param type $where
      * @param type $i
      * @param type $key2
      * @return type
      */    
-    private function parseWhereForQuery($where, $i, $key2){ // TODO рефакторинг
-        $str = '';
-        $str2 = '';
-        if (is_array($where)){
-            $i++;
-            foreach($where as $key => $val){
-                $str = '';
-                $str = $this->parseWhereForQuery($val, $i, $key);
-                $str2 .=  ((!empty($str2))? ' '.$key2.' ' : '').$str;
-            }
-        }else{
-            $str2 = $where;
-        }   
-        return $str2;
+    private function parseWhereForQuery($where){ 
+        
+        $strWhere = '';
+        if($this->isOneVersionWhere($where) ){
+            // (ru) - если условия 1 варианта
+            // (en) - if conditions 1 options
+            $strWhere = $this->getStrOneTypeWhere($where);
+
+        }elseif($this->isTwoVersionWhere($where) ){
+            // (ru) - если условие 2 варианта
+            // (en) - if condition 2 options
+            $strWhere = $this->getStrTwoTypeWhere($where);
+        } 
+        // (ru) - остальное пока не поддерживается
+        // (en) - the rest is not yet supported
+        
+        return $strWhere;
     }
-    
+        
      /**
      * selectDb - запрос типа select. на получение данных
      * @param $db - расурс, коннект к базе данных
@@ -113,13 +248,13 @@ class mysql extends db{
         $strPropertys = implode(",", $propertys);
 
         if(!empty($where)){            
-            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
+            $where = ' WHERE '.$this->parseWhereForQuery($where);
         }else{
             $where = '';
         }
-                
+              
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
-                 
+           
         return  $this->query($query);
     }
     
@@ -163,24 +298,24 @@ class mysql extends db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function updateDb($tableName, $propertys, $where = array()){//TODO
+    public function updateDb($tableName, $propertys, $where = array()){
         $query = 'UPDATE ';
         $textPropertys = '';
         global $crypto;
         foreach ($propertys as $key => $val){
             
             if ($key == 'pass'){
-				$val = md5($val.$crypto->getSole());
-			}
+                $val = md5($val.$crypto->getSole());
+            }
             
             if (!is_numeric($val)){
-				$val = "'".$val."'";
-			}
+                $val = "'".$val."'";
+            }
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$key.'='.$val;
         }
 
         if(!empty($where)){            
-            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
+            $where = ' WHERE '.$this->parseWhereForQuery($where); 
         }else{
             $where = '';
         }
@@ -217,7 +352,7 @@ class mysql extends db{
     public function deleteDb($tableName, $where){
         $query = '';
         if(!empty($where)){            
-            $where = ' WHERE '.$this->parseWhereForQuery($where, 0, '');
+            $where = ' WHERE '.$this->parseWhereForQuery($where);
         }else{
             $where = '';
         }

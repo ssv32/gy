@@ -60,8 +60,8 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
                 array('*'),
                 array(
                     'AND' => array(
-                        '=' => array('login', "'".$arDaraUser['login']."'"),
-                        'AND' => array('=' => array('pass', "'".md5($arDaraUser['pass'].$crypto->getSole())."'") )
+                        array('=' => array('login', "'".$arDaraUser['login']."'")),
+                        array('=' => array('pass', "'".md5($arDaraUser['pass'].$crypto->getSole())."'") )
                     )
                 )
             );

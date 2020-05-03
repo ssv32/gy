@@ -190,24 +190,9 @@ class containerData{
             array('*'),
             array(
                 'AND' => array(
-                    '=' => array(
-                        'id_container_data', 
-                        $idContainerData
-                    ),
-                    'AND' => array( 
-                        'AND' => array(
-                            '=' => array( 
-                                'id_element_container_data',
-                                $idElementContainerData
-                            ), 
-                            'AND' => array(
-                                '=' => array(
-                                    'id_property_container_data', 
-                                    $idProperty
-                                ) 
-                            )    
-                        )
-                    )
+                    array('=' => array('id_container_data', $idContainerData) ),
+                    array('=' => array('id_element_container_data', $idElementContainerData) ), 
+                    array('=' => array('id_property_container_data', $idProperty) ) 
                 )    
             )
         );

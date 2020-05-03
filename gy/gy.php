@@ -66,8 +66,7 @@ if (!empty($app->options['sole'])){
 }
 
 global $user;
-$user = new user();
-
+$user = new user(); 
 
 // объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
 if (!isset($app->options['type_cache'])) {  
@@ -83,22 +82,21 @@ session_start();
 Примеры как можно прокидывать where условия в запросы 
  (возможно не рабочие но можно увидеть логику работы)
 
+issues/24 - теперь будет так
 global $db;
 $res = $db->selectDb(
     $db->db, 
     'users', 
     array('*'), 
-    array( 'AND' => array(
-        '=' => array('logIn', "'admin'"), 
-        //'>' => array('id', 0),
-        'AND' =>  array('=' => array('logIn', "'admin2'") //,
-            //'AND' =>  array('=' => array('logIn', "'admin2'") )
-            ),
-        
-        //'<' => array('asd', 2),
-        ) 
+    array( 
+        'AND' => array(
+            array('=' => array('logIn', "'admin'") ), 
+            array('=' => array('logIn', "'admin2'") ) 
+        ),  
     )
-);*/
+);
+
+*/
 
 /*
 $res = $db->selectDb(
@@ -106,7 +104,6 @@ $res = $db->selectDb(
     'users', 
     array('*'), 
     array( 
-        '=' => array('id', 1,), 
-        
+        '=' => array('id', 1 ), 
     )
 );*/

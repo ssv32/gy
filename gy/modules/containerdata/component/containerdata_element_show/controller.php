@@ -53,16 +53,8 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
         $dataElement = containerData::getElementContainerData(
             array(
                 'AND' => array(
-                    '=' => array(
-                        'id_container_data', 
-                        $dataContainerData['id']
-                    ),
-                    'AND' => array(
-                        '=' => array(
-                            'code',
-                            "'".$this->arParam['element-code']."'"
-                        )
-                    )
+                    array( '=' => array( 'id_container_data', $dataContainerData['id'])),
+                    array( '=' => array( 'code', "'".$this->arParam['element-code']."'"))
                 )
             )
         );

@@ -1,16 +1,18 @@
 <?
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
-if (!empty($arRes['data-this-nfo-box'][0])){
+
+$value = array_shift($arRes['data-this-nfo-box']);
+if (!empty($value)){
     ?>
     <h1><?=$this->lang->GetMessage('title');?></h1>
     <form method="post">
-        <input name="ID" type="hidden" value="<?=$arRes['data-this-nfo-box'][0]['id']?>" />
+        <input name="ID" type="hidden" value="<?=$value['id']?>" />
         <table border="1" class="gy-table-all-users">
             <? foreach ($arRes['property'] as $val){?>
                 <tr>
                     <td><?=$val?></td>
-                    <td><input type="text" name="<?=$val?>" value="<?=$arRes['data-this-nfo-box'][0][$val]?>" /></td>
+                    <td><input type="text" name="<?=$val?>" value="<?=$value[$val]?>" /></td>
                 </tr>
             <?}?>
         </table> 
@@ -22,7 +24,7 @@ if (!empty($arRes['data-this-nfo-box'][0])){
     <br/>
     <br/>
     <br/>
-    <a href="/gy/admin/get-admin-page.php?page=container-data-property-edit&container-data-id=<?=$arRes['data-this-nfo-box'][0]['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-property');?></a>
+    <a href="/gy/admin/get-admin-page.php?page=container-data-property-edit&container-data-id=<?=$value['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-property');?></a>
 <?}?>    
    
 <?if(!empty($arRes['status'])){?>    

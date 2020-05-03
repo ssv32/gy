@@ -14,7 +14,7 @@ $gy_config = array(
         'db_name' => 'gy_db',
         //---
         
-        //--- example connect mysql---
+        //--- example connect PhpFileSql---
         //'db_host' => 'localhost',
         //'db_url' => 'C:/OSPanel/domains/demo-gy.lc/customDir/db/',
         //'db_type' => 'PhpFileSqlClientForGy', 

@@ -10,7 +10,7 @@ $arRes['user_property'] = array(
 	'groups'
 );
 
-$redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
+$redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 // взять все группы пользователей
 $arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();

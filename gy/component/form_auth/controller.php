@@ -26,7 +26,7 @@ global $user;
 
 $isShowAdminPanel = accessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
-$redirectUrl = str_replace('index.php', '', $_SERVER['DOCUMENT_URI']);
+$redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 if ($isShowAdminPanel === true){
 		

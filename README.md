@@ -8,7 +8,7 @@
 - Установить пока можно php скриптом https://github.com/ssv32/install-gy-php-framework ;
 - После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом gy/install/consoleInstallOptions.php 
   (или в файле /gy/config/gy_config.php);
-- Затем надо установить таблицы в базу данных (пока mysql) скриптом gy/install/installMysqlTable.php (предварительно нужно создать БД и задать доступы и её имя на шаге выше).
+- Затем надо установить таблицы в базу данных скриптом gy/install/installDataBaseTable.php (предварительно нужно создать БД и задать доступы и её имя на шаге выше).
 
 ### Пример подключения gy php framework
 `<?`<br/>
@@ -39,10 +39,16 @@ https://github.com/ssv32/gy/wiki</p>
 <br/><br/>
 Также gy php framework имеет элементы CMS, это админка и прочее для управления контентом на страницах.
 <br/><br/>
-gy php framework протестирован и будет работать на php версиях (необходимо скомпилировать PHP с графической библиотекой GD):<br/>
-5.6<br/>
-7.0<br/>
-7.1<br/>
+gy php framework протестирован и будет работать на php версиях (необходимо скомпилировать PHP с графической библиотекой GD): <br/>
+
+- 5.6;<br/>
+- 7.0;<br/>
+- 7.1.<br/>
+<br/>
+
+Поддерживаются базы данных (протестированы): <br/>
+- mySQL/MariaDB (MariaDB-10.3); <br/>
+- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql). <br/>
 <br/>
 
 -----
@@ -51,7 +57,7 @@ gy php framework протестирован и будет работать на 
 - Can be installed with php script https://github.com/ssv32/install-gy-php-framework ;
 - After installation, you need to set the kernel settings gy framework, this can be done with a script  gy/install/consoleInstallOptions.php 
   (or in file /gy/config/gy_config.php);
-- Then you need to create tables in the database, this is done by a script (now only mysql) gy/install/installMysqlTable.php (first you need to create a database and set access and its name in the step above).
+- Then you need to create tables in the database, this is done by a script gy/install/installDataBaseTable.php (first you need to create a database and set access and its name in the step above).
 
 ### Example сonnection gy php framework
 `<?`<br/>
@@ -80,7 +86,13 @@ https://github.com/ssv32/gy/wiki
 Also, the gy php framework has CMS elements, this is the admin panel and more for managing content on pages.
 <br/><br/>
 gy php framework tested and will work on php versions (you need to compile PHP with the GD graphics library):<br/>
-5.6<br/>
-7.0<br/>
-7.1<br/>
+
+- 5.6;<br/>
+- 7.0;<br/>
+- 7.1.<br/>
+<br/>
+
+Databases supported (tested): <br/>
+- mySQL/MariaDB (MariaDB-10.3); <br/>
+- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql). <br/>
 <br/>

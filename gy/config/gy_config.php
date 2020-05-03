@@ -11,16 +11,19 @@ $gy_config = array(
         'db_host' => 'localhost',
         'db_user' => 'root', // заменить на настоящего пользователя // replace by true user 
         'db_pass' => '', 
+        'db_name' => 'gy_db',
         //---
         
         //--- example connect mysql---
+        //'db_host' => 'localhost',
         //'db_url' => 'C:/OSPanel/domains/demo-gy.lc/customDir/db/',
         //'db_type' => 'PhpFileSqlClientForGy', 
         //'db_user' => 'root', // заменить на настоящего пользователя // replace by true user 
         //'db_pass' => '12345678', // заменить на настоящий пароль // replace by true password
+        //'db_name' => 'gy_db',
         //---
         
-        'db_name' => 'gy_db',
+
     ),
     'type_cache' => 'cacheFiles'
 );

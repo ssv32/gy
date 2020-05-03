@@ -213,8 +213,8 @@ class module{
     public function installDbModuleByNameModule($nameModule){ // TODO пока только установка для mysql
         $result = false;
         
-        if(file_exists($this->urlGyCore.'/modules/'.$nameModule.'/install/installMysqlTable.php' )){
-            include_once( $this->urlGyCore.'/modules/'.$nameModule.'/install/installMysqlTable.php' );
+        if(file_exists($this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' )){
+            include_once( $this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' );
             $result = true;
         }
         

@@ -136,16 +136,8 @@ if($isRunConsole){
     $dataElement = containerData::getElementContainerData(
         array(
             'AND' => array(
-                '=' => array(
-                    'id_container_data', 
-                    $dataContentContainerData[0]['id']
-                ),
-                'AND' => array(
-                    '=' => array(
-                        'code',
-                        "'html-index-page'"
-                    )
-                )
+                array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                array( '=' => array( 'code', "'html-index-page'"))
             )
         )
     );

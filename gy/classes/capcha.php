@@ -113,7 +113,7 @@ class capcha{
             $b = rand(50, 230);
             $text_color = imagecolorallocate($img, $r, $g, $b);
             
-            $font = rand(3, 5); // размер шрифта
+            $font = rand(5, 7); // размер шрифта
             
             $j = rand(0,1);
             if($j == 0){

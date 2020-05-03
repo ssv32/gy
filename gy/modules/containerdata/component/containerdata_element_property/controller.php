@@ -33,19 +33,21 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     $arRes['PROPERTY_VALUE'] = array();
     
     // получить значения
-    foreach($arRes['PROPERTY'] as $key => $val){
-        $propertyValue = containerData::getValuePropertysContainerData(
-            $this->arParam['container-data-id'], 
-            $this->arParam['el-id'],
-            $val['id'],
-            $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
-        );
-        
-        if(!empty($propertyValue)){
-            $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
+    if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
+        foreach($arRes['PROPERTY'] as $key => $val){
+            $propertyValue = containerData::getValuePropertysContainerData(
+                $this->arParam['container-data-id'], 
+                $this->arParam['el-id'],
+                $val['id'],
+                $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
+            );
+
+            if(!empty($propertyValue)){
+                $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
+            }
         }
     }
-    
+        
     $arKeyValue = array();
     foreach ($arRes['PROPERTY_VALUE'] as $key => $value) {
 
@@ -73,19 +75,20 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     $arRes['PROPERTY_VALUE'] = array();
     
     // получить значения
-    foreach($arRes['PROPERTY'] as $key => $val){
-         $propertyValue = containerData::getValuePropertysContainerData(
-            $this->arParam['container-data-id'], 
-            $this->arParam['el-id'],
-            $val['id'],
-            $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
-        );
-        
-        if(!empty($propertyValue)){
-            $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
+    if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
+        foreach($arRes['PROPERTY'] as $key => $val){
+             $propertyValue = containerData::getValuePropertysContainerData(
+                $this->arParam['container-data-id'], 
+                $this->arParam['el-id'],
+                $val['id'],
+                $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
+            );
+
+            if(!empty($propertyValue)){
+                $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
+            }
         }
     }
-    
 }
 
 // показать шаблон

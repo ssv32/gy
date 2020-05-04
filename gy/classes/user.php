@@ -57,7 +57,7 @@ class user{
         return $this->dataUser['id'];
     }
 
-	/**
+    /**
      * authorized - авторизовать пользователя
      * @param type $log - логин
      * @param type $pass - пароль

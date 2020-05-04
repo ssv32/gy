@@ -43,15 +43,15 @@ class containerData{
     public static function addContainerData($arParams){
         $result = false;
 
-		// id, login, name, pass, groups
-		global $db;		
+        // id, login, name, pass, groups
+        global $db;		
         $res = $db->insertDb(self::$table_container_data, $arParams);
         
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result;
+        return $result;
     }
     
     /**
@@ -63,8 +63,8 @@ class containerData{
     public static function deleteContainerData($id){
         $result = false;
 
-		// id, login, name, pass, groups
-		global $db;		
+        // id, login, name, pass, groups
+        global $db;		
         $res = $db->deleteDb(self::$table_container_data, array('=' => array('id', $id)));
         
         if ($res){
@@ -91,10 +91,10 @@ class containerData{
                 array('=' => array('id_container_data', $id) )  
             );
             
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result; 
+        return $result; 
     }
     
     /**
@@ -106,14 +106,14 @@ class containerData{
     public static function updateContainerData($arParams, $where){
         $result = false;
 
-		global $db;		
+        global $db;		
         $res = $db->updateDb(self::$table_container_data, $arParams, $where);
         
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result; 
+        return $result; 
     }
     
     /**
@@ -161,15 +161,15 @@ class containerData{
     public static function addPropertyContainerData($arParams){
         $result = false;
 
-		// id, login, name, pass, groups
-		global $db;		
+        // id, login, name, pass, groups
+        global $db;		
         $res = $db->insertDb(self::$table_list_propertys_container_data, $arParams);
         
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result;
+        return $result;
     
     }
     
@@ -198,8 +198,8 @@ class containerData{
         );
                       
         if ($arRes = $db->fetch($res)){
-			$result = $arRes;
-		}
+            $result = $arRes;
+        }
         return $result;
     }
     
@@ -307,15 +307,15 @@ class containerData{
     public static function addElementContainerData($arParams){
         $result = false;
 
-		// id, login, name, pass, groups
-		global $db;		
+        // id, login, name, pass, groups
+        global $db;		
         $res = $db->insertDb(self::$table_element_container_data, $arParams);
         
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result;
+        return $result;
     }
     
     /**
@@ -326,7 +326,7 @@ class containerData{
     public static function deleteElementContainerData($id){
         $result = false;
 
-		global $db;		
+        global $db;		
         $res = $db->deleteDb(self::$table_element_container_data, array('=' => array('id', $id)));
         
         if ($res){
@@ -341,10 +341,10 @@ class containerData{
             );
         
                     
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result;
+        return $result;
     }
     
     /**
@@ -355,15 +355,15 @@ class containerData{
     public static function updateElementContainerData($arParams, $where){
         $result = false;
 
-		// id, login, name, pass, groups
-		global $db;		
+        // id, login, name, pass, groups
+        global $db;		
         $res = $db->updateDb(self::$table_element_container_data, $arParams, $where);
         
         if ($res){
-			$result = true;
-		}
+            $result = true;
+        }
 			
-		return $result;
+        return $result;
     }
     
     /** //TODO протестировать за комментировать

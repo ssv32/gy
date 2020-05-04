@@ -2,12 +2,12 @@
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
 if ( empty($arRes["auth_ok"]) ) :?>
-	<form>
-		<input type="hidden" name="idComponent" value="<?=$arParam['idComponent']?>" />
+    <form>
+        <input type="hidden" name="idComponent" value="<?=$arParam['idComponent']?>" />
 
-		<?foreach ($arRes['form_input'] as $key => $value) { ?>
-			<input type="<?=(($key == 'pass')? 'password': 'text');?>" name="<?=$key;?>"  /><br/>
-		<?}?>
+        <?foreach ($arRes['form_input'] as $key => $value) { ?>
+            <input type="<?=(($key == 'pass')? 'password': 'text');?>" name="<?=$key;?>"  /><br/>
+        <?}?>
 
         <? // показать капчу
         global $app;
@@ -18,16 +18,16 @@ if ( empty($arRes["auth_ok"]) ) :?>
             )
         );?>
             
-		<?if ( !empty($arRes['err']) ){?>
-			<div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['err']);?></div>
-		<?}?>	
+        <?if ( !empty($arRes['err']) ){?>
+            <div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['err']);?></div>
+        <?}?>	
 		
         <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
         
-	</form>	
+    </form>	
 <?else:?>
-	<h1>Привет, <?=$arRes["auth_user"];?></h1>
-	<form>
-		<input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
-	</form>
+    <h1>Привет, <?=$arRes["auth_user"];?></h1>
+    <form>
+        <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
+    </form>
 <?endif;?>

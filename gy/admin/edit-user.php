@@ -10,7 +10,7 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')
     && ($data['edit-id'] != 1) 
 ){
 	
-	include "../../gy/admin/header-admin.php";
+    include "../../gy/admin/header-admin.php";
 	
     if (accessUserGroup::accessThisUserByAction( 'edit_users')){
         $app->component(
@@ -23,7 +23,7 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')
         );
     }
         
-	include "../../gy/admin/footer-admin.php";
+    include "../../gy/admin/footer-admin.php";
 
 } else {
 	header( 'Location: /gy/admin/' );

@@ -2,7 +2,7 @@
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
 $mess['rus'] = array(
-	'title' => 'Настройка групп прав доступа',
+    'title' => 'Настройка групп прав доступа',
     'back' => 'Отмена',
     'save' => 'Сохранить',
     'text-ok' => 'Настройки успешно сохранены',

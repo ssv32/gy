@@ -6,25 +6,25 @@
     <h4>Вызов компонента "form_auth_test" (1 раз)</h4>
     <?
     $app->component(
-		'form_auth_test',
-		'0',
-		array( 
-			'test' => 'asd',
-			'idComponent' => 1,
-		)
-	);
+        'form_auth_test',
+        '0',
+        array( 
+            'test' => 'asd',
+            'idComponent' => 1,
+        )
+    );
     ?>    
     
     <h4>Вызов компонента "form_auth_test" (2 раз)</h4>
     <?
-	$app->component(
-		'form_auth_test',
-		'0',
-		array( 
-			'test' => 'asd2',
-			'idComponent' => 2,
-		)
-	);
+    $app->component(
+        'form_auth_test',
+        '0',
+        array( 
+            'test' => 'asd2',
+            'idComponent' => 2,
+        )
+    );
 
     /**
     пример вызова компонента с выводом контента,
@@ -33,14 +33,14 @@
     */
     
     $app->component(
-		'containerdata_element_show',
-		'0',
-		array( 
-			'container-data-code' => 'Content',
-			'element-code' => 'html-index-page',
+        'containerdata_element_show',
+        '0',
+        array( 
+            'container-data-code' => 'Content',
+            'element-code' => 'html-index-page',
             'cacheTime' => 86400 // закешить на 24 ч.
-		)
-	);
+        )
+    );
     
     
     

@@ -12,6 +12,6 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
  */
 
 function model_setAuth($auth){ // test model
-	return '(test = ok)';
+    return '(test = ok)';
 }
 

@@ -43,20 +43,20 @@ class mysql extends db{
      * @param $res - результат отработки запроса в БД
      * @return array
      */
-	public function fetch($res){
-        $result = array();
-        if ($res !== false){
-            $result = mysqli_fetch_assoc($res);
-        }
-		return $result;
-	}
+    public function fetch($res){
+    $result = array();
+    if ($res !== false){
+        $result = mysqli_fetch_assoc($res);
+    }
+        return $result;
+    }
 	
     /**
-	 * fetchAll - тоже что и fetch только в получит всё в виде массива (с ключём id элемента)
+     * fetchAll - тоже что и fetch только в получит всё в виде массива (с ключём id элемента)
      * @param $res - результат отработки запроса в БД
      * @return array
-	 */
-	public function fetchAll($res, $key = 'id'){
+     */
+    public function fetchAll($res, $key = 'id'){
         $result = array();
         while ($arRes = self::fetch($res)){
             if($key !== false){
@@ -64,7 +64,7 @@ class mysql extends db{
             }else{
                 $result[] = $arRes;
             }
-		}
+        }
         return $result;
     }
     
@@ -270,20 +270,20 @@ class mysql extends db{
         // разбить параметры на два списка через запятую // TODO вынести куда то
         global $crypto;
         $nameProperty = '';
-		$valueProperty = '';
-		foreach ($propertys as $key=> $val){
-			$nameProperty .= (($nameProperty != '')? ', ': '').$key;
-			
-			if ($key == 'pass'){
-				$val = md5($val.$crypto->getSole());
-			}
-			
-			if (!is_numeric($val)){
-				$val = "'".$val."'";
-			}
-			
-			$valueProperty .= (($valueProperty != '')? ', ': '').$val;
-		}
+        $valueProperty = '';
+        foreach ($propertys as $key=> $val){
+            $nameProperty .= (($nameProperty != '')? ', ': '').$key;
+
+            if ($key == 'pass'){
+                $val = md5($val.$crypto->getSole());
+            }
+
+            if (!is_numeric($val)){
+                $val = "'".$val."'";
+            }
+
+            $valueProperty .= (($valueProperty != '')? ', ': '').$val;
+        }
         ////
 
         $query = "INSERT INTO ".$tableName." (".$nameProperty." ) VALUES(".$valueProperty.")";
@@ -362,9 +362,9 @@ class mysql extends db{
         return  $this->query($query);
     }
     
-	public function __destruct() {
-		if ( !empty($this->db)){
-			$this->close($this->db);
-		}
-	}
+    public function __destruct() {
+        if ( !empty($this->db)){
+            $this->close($this->db);
+        }
+    }
 }

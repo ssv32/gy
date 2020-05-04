@@ -18,5 +18,5 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel') && !empty($data
     }
     
 }else {
-	header( 'Location: /gy/admin/' );
+    header( 'Location: /gy/admin/' );
 }

@@ -130,9 +130,7 @@ class module{
             if (!empty($isShowButtonsMenuAdminPanetThisModule)){
                 $this->isShowButtonsMenuAdminPanelModules[$nameThisModule] = $isShowButtonsMenuAdminPanetThisModule;
                 unset($isShowButtonsMenuAdminPanetThisModule);
-            }
-                
-            
+            } 
         }
         return $result;
     }

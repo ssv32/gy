@@ -5,7 +5,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 // подключить модель // include model this component
 if (isset($this->model) ){
-	$this->model->includeModel(); 
+    $this->model->includeModel(); 
 }	
 
 // были доступны параметры
@@ -30,9 +30,9 @@ $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 if ($isShowAdminPanel === true){
 		
-	$thisLogin = $user->getDataThisUser()['name'];	
-	$arRes["auth_ok"] = 'ok';
-	$arRes["auth_user"] = $thisLogin;
+    $thisLogin = $user->getDataThisUser()['name'];	
+    $arRes["auth_ok"] = 'ok';
+    $arRes["auth_user"] = $thisLogin;
 		
 } elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
 	
@@ -62,17 +62,17 @@ if ($isShowAdminPanel === true){
         header( 'Location: '.$redirectUrl.'?err=err_capcha' );
     }
 } else {
-	if (!empty($_REQUEST['err'])){
-		$arRes["err"] = $_REQUEST['err']; 
-	}
-	$arRes['form_input']["auth"] = "auth";
-	$arRes['form_input']["pass"] = "pass";
+    if (!empty($_REQUEST['err'])){
+        $arRes["err"] = $_REQUEST['err']; 
+    }
+    $arRes['form_input']["auth"] = "auth";
+    $arRes['form_input']["pass"] = "pass";
 }
 
 if ( !empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
-	if ($user->userExit() ){
-		header( 'Location: '.$redirectUrl );
-	}
+    if ($user->userExit() ){
+        header( 'Location: '.$redirectUrl );
+    }
 }
 
 // показать шаблон

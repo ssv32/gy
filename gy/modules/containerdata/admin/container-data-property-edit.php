@@ -3,7 +3,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
-	include "../../gy/admin/header-admin.php";
+    include "../../gy/admin/header-admin.php";
     
     if (accessUserGroup::accessThisUserByAction( 'edit_container_data') && is_numeric($_GET['container-data-id'])){
         $id = $_GET['container-data-id'];
@@ -20,8 +20,8 @@ if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
         echo 'error not id container-data';
     }
 
-	include "../../gy/admin/footer-admin.php";
+    include "../../gy/admin/footer-admin.php";
 
 } else {
-	header( 'Location: /gy/admin/' );
+    header( 'Location: /gy/admin/' );
 }

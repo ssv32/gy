@@ -5,7 +5,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 // подключить модель // include model this component
 if (isset($this->model) ){
-	$this->model->includeModel(); 
+    $this->model->includeModel(); 
 }	
 
 // были доступны параметры
@@ -18,10 +18,10 @@ $isChackIdComponent = ( empty($this->arParam['idComponent'])
 
 // $model - теоретически должно быть тут доступно
 if ($isChackIdComponent && !empty($_REQUEST['auth']) ){
-	$arRes["auth_ok"] = 'ok';
-	$arRes["auth_user"] = $_REQUEST['auth'].' '.model_setAuth($_REQUEST['auth']);
+    $arRes["auth_ok"] = 'ok';
+    $arRes["auth_user"] = $_REQUEST['auth'].' '.model_setAuth($_REQUEST['auth']);
 } else {
-	$arRes["auth"] = "auth";
+    $arRes["auth"] = "auth";
 }
 
 // показать шаблон

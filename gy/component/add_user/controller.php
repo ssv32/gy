@@ -4,10 +4,10 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 $data  = $_REQUEST;
 
 $arRes['user_property'] = array(
-	'login', 
-	'name', 
-	'pass', 
-	'groups'
+    'login', 
+    'name', 
+    'pass', 
+    'groups'
 );
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
@@ -16,12 +16,12 @@ $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 $arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
-	$result = true;
-	foreach ($arRes['user_property'] as $val){	
+    $result = true;
+    foreach ($arRes['user_property'] as $val){	
         if (empty($arr[$val])){
             $result = false;
         }    
-	}
+    }
     
     if($result){
         foreach ($arr['groups'] as $value) {  // TODO протестировать
@@ -36,22 +36,22 @@ function checkProperty($arr, $arRes){
         }
     }
     
-	return $result;
+    return $result;
 }
 
 if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
-	if(checkProperty($data, $arRes)){
-		// добавление пользователя
-		global $user;
-		$arDaraUser = array();
-		foreach ($arRes['user_property'] as $val){
-			$arDaraUser[$val] = $data[$val];
-		}
+    if(checkProperty($data, $arRes)){
+        // добавление пользователя
+        global $user;
+        $arDaraUser = array();
+        foreach ($arRes['user_property'] as $val){
+            $arDaraUser[$val] = $data[$val];
+        }
 		
         // убрать группы из добавления
         unset($arDaraUser['groups']);
        
-		if( $user->addUsers($arDaraUser)){
+        if( $user->addUsers($arDaraUser)){
             // найти id добавленного пользователя
             global $db;		   
             global $crypto;
@@ -73,24 +73,24 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
                 accessUserGroup::addUserInGroup($dataAddNewUser['id'], $value);
             }
             
-			$arRes["stat"] = 'ok';
-		} else{
-			$arRes["stat"] = 'err';
-		}
+            $arRes["stat"] = 'ok';
+        } else{
+            $arRes["stat"] = 'err';
+        }
 				
-	}else{
-		$arRes["stat-text"] = '! Не все поля заполнены';
-		$arRes["stat"] = 'err';
-	}
+    }else{
+        $arRes["stat-text"] = '! Не все поля заполнены';
+        $arRes["stat"] = 'err';
+    }
 	
 } elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
-	$arRes["stat"] = 'add';
+    $arRes["stat"] = 'add';
 }
 
 if (empty($data['stat'])){
-	header( 'Location: '.$redirectUrl.'?stat='.$arRes["stat"] );
+    header( 'Location: '.$redirectUrl.'?stat='.$arRes["stat"] );
 }else{
-	$arRes["stat"] = $data['stat'];
+    $arRes["stat"] = $data['stat'];
 }
 
 // показать шаблон

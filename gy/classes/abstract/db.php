@@ -29,21 +29,21 @@ abstract class db{
     
     //abstract public function select();
 	
-	/**
-	 * fetch - получить порцию (строку) данных, после выполнения запроса в БД
+    /**
+     * fetch - получить порцию (строку) данных, после выполнения запроса в БД
      * @param $res - результат отработки запроса в БД
      * @return array
-	 */
-	abstract public function fetch($res);
+    */
+    abstract public function fetch($res);
 	
-	/**
-	 * fetchAll - тоже что и fetch только в получит всё в виде массива 
+    /**
+     * fetchAll - тоже что и fetch только в получит всё в виде массива 
      *   что будет ключём можно указать, либо false тогда вернёт массив с ключами по порядку
      * @param $res - результат отработки запроса в БД
      * @param string $key - строка либо false, это что будет ключём в массиве (по умолчанию id записи)
      * @return array
-	 */
-	abstract public function fetchAll($res, $key = 'id');
+    */
+    abstract public function fetchAll($res, $key = 'id');
     
     
     // TODO в функции ниже добавить параметры сортировки 

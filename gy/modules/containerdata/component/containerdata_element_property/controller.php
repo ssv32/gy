@@ -77,7 +77,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     // получить значения
     if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
         foreach($arRes['PROPERTY'] as $key => $val){
-             $propertyValue = containerData::getValuePropertysContainerData(
+            $propertyValue = containerData::getValuePropertysContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'],
                 $val['id'],

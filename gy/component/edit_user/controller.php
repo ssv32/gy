@@ -7,10 +7,10 @@ $data  = $_REQUEST;
 $notUpdatePass = (!empty($data['no-update-pass']) && ($data['no-update-pass'] == 'on') );
 
 $arRes['user_property'] = array(
-	'login' => 'login', 
-	'name' => 'name', 
-	'pass' => 'pass', 
-	'groups' => 'groups'
+    'login' => 'login', 
+    'name' => 'name', 
+    'pass' => 'pass', 
+    'groups' => 'groups'
 );
 
 // если идёт обновление пользователя без пароля то убрать пароль из списка свойств пользователя
@@ -24,12 +24,12 @@ global $user;
 $arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
-	$result = true;
-	foreach ($arRes['user_property'] as $val){	
+    $result = true;
+    foreach ($arRes['user_property'] as $val){	
         if (empty($arr[$val])){
             $result = false;
         } 
-	}
+    }
         
     if($result){
         foreach ($arr['groups'] as $value) {  // TODO протестировать
@@ -44,7 +44,7 @@ function checkProperty($arr, $arRes){
         }
     }
     
-	return $result;
+    return $result;
 }
 
 // получить данные пользователя
@@ -60,7 +60,7 @@ if (!empty($data['Сохранить'])
     && ($data['edit-id'] != 1)  
 ) {
         
-	if(checkProperty($data, $arRes)){
+    if(checkProperty($data, $arRes)){
 
         // подготовить массив данных для обновления пользователей
         $dataUpdateUser = array();
@@ -76,7 +76,7 @@ if (!empty($data['Сохранить'])
         }
         
         // обновить данные пользователя
-		global $user;
+        global $user;
         $res = $user->updateUserById($data['edit-id'], $dataUpdateUser);
         
         if($res){
@@ -86,20 +86,20 @@ if (!empty($data['Сохранить'])
             $arRes["stat"] = 'err';
         }
         			
-	}else{
-		$arRes["stat-text"] = '! Не все поля заполнены';
-		$arRes["stat"] = 'err';
-	}
+    }else{
+        $arRes["stat-text"] = '! Не все поля заполнены';
+        $arRes["stat"] = 'err';
+    }
 	
 	
 } elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
-	$arRes["stat"] = 'edit';
+    $arRes["stat"] = 'edit';
 }
 
 if (empty($data['stat'])){
-	header( 'Location: ?stat='.$arRes["stat"].'&edit-id='.$this->arParam['id-user'] );
+    header( 'Location: ?stat='.$arRes["stat"].'&edit-id='.$this->arParam['id-user'] );
 }else{
-	$arRes["stat"] = $data['stat'];
+    $arRes["stat"] = $data['stat'];
 }
      
 // показать шаблон

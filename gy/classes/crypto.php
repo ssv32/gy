@@ -3,33 +3,33 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 class crypto{
 	
-	private $sole; 
+    private $sole; 
 	
     /**
      * setSole - установить соль (некая строка)
      * @param string $sole
      * @return boolean true
      */
-	public function setSole($sole){
-		$this->sole = $sole;
-		return true;
-	}
+    public function setSole($sole){
+        $this->sole = $sole;
+        return true;
+    }
 	
     /**
      * getSole - получить значение соли
      * @return string
      */
-	public function getSole(){
-		return $this->sole;
-	}
+    public function getSole(){
+        return $this->sole;
+    }
 	
     /**
      * getRandString - даст произвольную строку
      * @return string
      */
-	public function getRandString(){
-		return md5(microtime().$this->sole);
-	}
+    public function getRandString(){
+        return md5(microtime().$this->sole);
+    }
 	
     /**
      * getStringForUserCookie - даст строку для пользовательской куки
@@ -39,9 +39,9 @@ class crypto{
      * @param int $id
      * @return string (md5)
      */
-	public function getStringForUserCookie($login, $name, $id){
-		return md5(microtime().$login.$this->sole.$name.$id);
-	}
+    public function getStringForUserCookie($login, $name, $id){
+        return md5(microtime().$login.$this->sole.$name.$id);
+    }
 
 }
 

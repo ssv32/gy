@@ -301,16 +301,16 @@ class user{
     /**
      * deleteUserById - удалить пользователя
      * @global type $db
-     * @param int $idUser - id пользователя
+     * @param int $id_user - id пользователя
      * @return string
      */
-    public function deleteUserById($idUser){
+    public function deleteUserById($id_user){
         $result = false;
 
-        if (is_numeric($idUser) && ($idUser != 1)){
+        if (is_numeric($id_user) && ($id_user != 1)){
             global $db;
 
-            $res = $db->deleteDb($this->tableName, array('='=>array('id', $idUser)));
+            $res = $db->deleteDb($this->tableName, array('='=>array('id', $id_user)));
 
             if ($res){
                 $result = true;		

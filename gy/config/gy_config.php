@@ -23,7 +23,14 @@ $gy_config = array(
         //'db_name' => 'gy_db',
         //---
         
-
+        //--- example connect PostgreSQL---
+        //'db_type' => 'pgsql', 
+        //'db_host' => 'localhost',
+        //'db_user' => 'postgres', // заменить на настоящего пользователя // replace by true user 
+        //'db_pass' => '', 
+        //'db_name' => 'gy_db',
+        //---
+        
     ),
     'type_cache' => 'cacheFiles'
 );

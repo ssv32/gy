@@ -1,4 +1,7 @@
-<? // TODO сделать нормально по шагам потом
+<? 
+// TODO сделать нормально по шагам потом (+графический интерфейс)
+// TODO проверку на ошибки переделать с учётом установки на пострис
+
 global $argv;
 $isRunConsole = isset($argv);
 $br = "\n";
@@ -49,11 +52,11 @@ if($isRunConsole){
             )
         );
 
-        if($res === true){
+//        if($res === true){
             echo $br.'add admin user = OK!';
-        }else{
-            echo $br.'add admin user = ERROR!';
-        }
+//        }else{
+//            echo $br.'add admin user = ERROR!';
+//        }
 //    }else{
 //        echo $br.'install user table = ERROR!';
 //    }

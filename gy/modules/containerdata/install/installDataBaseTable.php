@@ -178,8 +178,8 @@ if($isRunConsole){
     $db->insertDb(
         'users_in_groups', 
         array(
-            'codeGroup' => 'content', 
-            'idUser' => 2,
+            'code_group' => 'content', 
+            'id_user' => 2,
         )
     );
     

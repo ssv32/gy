@@ -165,17 +165,17 @@ class accessUserGroup{
     /**
      * getListGroupsByUser() - получить список групп к каким относится пользователь
      * 
-     * @param int $idUsers - id пользователя
+     * @param int $id_users - id пользователя
      * @return array
      */
-    public static function getListGroupsByUser($idUsers){
+    public static function getListGroupsByUser($id_users){
         $arResult = array();
 
         // определить id групп к каким относится пользователь
         global $db;
-        $res = $db->selectDb(self::$tableNameUsersInGroupss, array('codeGroup'), array('='=>array('idUser', $idUsers )));
+        $res = $db->selectDb(self::$tableNameUsersInGroupss, array('code_group'), array('='=>array('id_user', $id_users )));
         while($arRes = $db->fetch($res)){
-            $arResult[$arRes['codeGroup']] = $arRes['codeGroup'];
+            $arResult[$arRes['code_group']] = $arRes['code_group'];
         }
         
         return $arResult;   
@@ -184,18 +184,18 @@ class accessUserGroup{
     
     /**
      * addUserInGroup() - добавить пользователя в группуы
-     * @param int $idUsers - id пользователя
-     * @param string $codeGroup - код группы
+     * @param int $id_users - id пользователя
+     * @param string $code_group - код группы
      * @return boolean
      */
-    public static function addUserInGroup($idUser, $codeGroup){
+    public static function addUserInGroup($id_user, $code_group){
         $arResult = false;
         global $db;
         $res = $db->insertDb(
             self::$tableNameUsersInGroupss, 
             array(
-                'codeGroup' => $codeGroup, 
-                'idUser' => $idUser,
+                'code_group' => $code_group, 
+                'id_user' => $id_user,
             )
         );
         if($res){
@@ -207,13 +207,13 @@ class accessUserGroup{
     /**
      * deleteUserInAllGroups - удалить пользователя из всех групп 
      *  (где он состоит)
-     * @param int $idUsers - id пользователя
+     * @param int $id_users - id пользователя
      * @return boolean
      */
-    public static function deleteUserInAllGroups($idUser){
+    public static function deleteUserInAllGroups($id_user){
         $arResult = false;
         global $db;
-        $res = $db->deleteDb(self::$tableNameUsersInGroupss, array('=' => array('idUser', $idUser)) );
+        $res = $db->deleteDb(self::$tableNameUsersInGroupss, array('=' => array('id_user', $id_user)) );
         if($res){
             $arResult = true;
         }
@@ -348,17 +348,17 @@ class accessUserGroup{
      *  - удалить пользовательскую группу по коду группы
      * 
      * @global type $db
-     * @param string $codeGroup - код удаляемой группы
+     * @param string $code_group - код удаляемой группы
      * @return boolean
      */
-    public static function deleteUserGroupByCode($codeGroup){
+    public static function deleteUserGroupByCode($code_group){
         global $db;
         $arResult = false;
         // удалить все связи пользователей с этой группой
         
         $res = $db->deleteDb(
             self::$tableNameUsersInGroupss,
-            array('=' => array('codeGroup' , "'".$codeGroup."'" ) )
+            array('=' => array('code_group' , "'".$code_group."'" ) )
         );
         if($res){
             $arResult = true;
@@ -369,7 +369,7 @@ class accessUserGroup{
             $arResult = false;
             $res = $db->deleteDb(
                 self::$tableNameAccessGroup,
-                array('=' => array('code' , "'".$codeGroup."'" ) )
+                array('=' => array('code' , "'".$code_group."'" ) )
             );
             if($res){
                 $arResult = true;

@@ -1,4 +1,7 @@
-<? // TODO сделать нормально по шагам потом
+<? 
+// TODO сделать нормально по шагам потом (+графический интерфейс)
+// TODO проверку на ошибки переделать с учётом установки на пострис
+
 global $argv;
 $isRunConsole = isset($argv);
 $br = "\n";
@@ -23,8 +26,8 @@ if($isRunConsole){
             //'groups int'
         )
     );        
-
-    if ($res === true){
+    
+   // if ($res === true){
         echo $br.'install user table = OK!';
 
         echo $br.'add admin user (and test user) = start';
@@ -49,14 +52,14 @@ if($isRunConsole){
             )
         );
 
-        if($res === true){
+//        if($res === true){
             echo $br.'add admin user = OK!';
-        }else{
-            echo $br.'add admin user = ERROR!';
-        }
-    }else{
-        echo $br.'install user table = ERROR!';
-    }
+//        }else{
+//            echo $br.'add admin user = ERROR!';
+//        }
+//    }else{
+//        echo $br.'install user table = ERROR!';
+//    }
 
     // задать группы прав доступа и действия разрешаемые для пользователей групп
     echo $br.'install access users = start';
@@ -72,7 +75,7 @@ if($isRunConsole){
         )
     );        
 
-    if ($res === true){
+    //if ($res === true){
         
         $db->insertDb(
             'action_user', 
@@ -97,7 +100,7 @@ if($isRunConsole){
                 'text' => 'Изменение пользователей (кроме админов)', 
             )
         );  
-    }
+    //}
     
     echo $br.'install access users = OK!';
     
@@ -115,7 +118,7 @@ if($isRunConsole){
         )
     );        
 
-    if ($res === true){
+    //if ($res === true){
         
         $db->insertDb(
             'access_group', 
@@ -166,7 +169,7 @@ if($isRunConsole){
             )
         );
         
-    }
+    //}
     echo $br.'install user groups = OK!';
     
     echo $br.'add users in user groups = start';
@@ -175,29 +178,29 @@ if($isRunConsole){
         'users_in_groups',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
-            'codeGroup varchar(255)', 
-            'idUser int', 
+            'code_group varchar(255)', 
+            'id_user int', 
         )
     );
     
-    if ($res === true){
+    //if ($res === true){
         
         $db->insertDb(
             'users_in_groups', 
             array(
-                'codeGroup' => 'admins', 
-                'idUser' => 1,
+                'code_group' => 'admins', 
+                'id_user' => 1,
             )
         );
         
         $db->insertDb(
             'users_in_groups', 
             array(
-                'codeGroup' => 'user_admin', 
-                'idUser' => 2,
+                'code_group' => 'user_admin', 
+                'id_user' => 2,
             )
         );
-    }    
+    //}    
     
     echo $br.'add users in user groups = OK';
     

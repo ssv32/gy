@@ -47,8 +47,10 @@ gy php framework протестирован и будет работать на 
 <br/>
 
 Поддерживаются базы данных (протестированы): <br/>
-- mySQL/MariaDB (MariaDB-10.3); <br/>
-- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql). <br/>
+- mySQL 5.6 ; <br/>
+- MariaDB-10.3 ; <br/>
+- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql) ; <br/>
+- PostgreSQL 9.2 . <br/>
 <br/>
 
 -----
@@ -93,6 +95,8 @@ gy php framework tested and will work on php versions (you need to compile PHP w
 <br/>
 
 Databases supported (tested): <br/>
-- mySQL/MariaDB (MariaDB-10.3); <br/>
-- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql). <br/>
+- mySQL 5.6 ; <br/>
+- MariaDB-10.3 ; <br/>
+- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql) ; <br/>
+- PostgreSQL 9.2 . <br/>
 <br/>

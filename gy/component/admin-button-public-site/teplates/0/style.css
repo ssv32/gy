@@ -1,11 +1,12 @@
 .gy-admin-panel{
     width: 735px;
     height: 67px;
-    background-color: #adade4;
+    /*background-color: #adade4;*/
     margin-left: -10;
     margin-top: -10;
     padding-left: 8px;
     border-radius: 7px;
+    background: url(/gy/images/fon.png) #9292ef;
 }
 
 .gy-admin-panel > H2{

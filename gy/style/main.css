@@ -1,5 +1,6 @@
 .gy-body-admin{
-    background-color: #adade4;
+    /*background-color: #adade4;*/
+    background: url(/gy/images/fon.png) #9292ef;
 }
 
 /*--форма авторизации--*/

@@ -1,0 +1,46 @@
+.gy-admin-panel{
+    width: 735px;
+    height: 67px;
+    background-color: #adade4;
+    margin-left: -10;
+    margin-top: -10;
+    padding-left: 8px;
+    border-radius: 7px;
+}
+
+.gy-admin-panel > H2{
+    padding-top: 8px;
+    margin-bottom: 12px;
+}
+
+.gy-admin-panel-button{
+    margin: 0px;
+    border: 0;
+    height: auto;
+    padding: 2px 30px 4px;
+    background-color: #639;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+} 
+.gy-admin-panel-button:hover { 
+    background: #8b5db9; 
+}
+.gy-admin-panel-button:active { 
+    background: #412260; 
+}
+
+.gy-admin-panel > .gy-admin-logo{
+    text-shadow: 1px 1px 2px #05ff07, 0 0 1em #0205ff;
+
+}
+.div-button-admin-panel{
+    float: left;
+    width: 70%;
+}
+.div-login{
+    float: left;
+    width: 30%;
+}

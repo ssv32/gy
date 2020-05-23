@@ -43,6 +43,25 @@
 }
 /*-----*/
 
+.gy-admin-button-min{
+    margin: 0px;
+    border: 0;
+    height: auto;
+    padding: 2px 30px 4px;
+    background-color: #639;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+} 
+.gy-admin-button-min:hover { 
+    background: #8b5db9; 
+}
+.gy-admin-button-min:active { 
+    background: #412260; 
+}
+
 /*--меню--*/
 .gy-admin-menu{
     background-color: #3257a2;

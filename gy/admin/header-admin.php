@@ -8,6 +8,9 @@
     </head>	
     <body class="gy-body-admin">
         <h2 class="gy-admin-logo">Админка gy framework</h2>
+        <a href="/" class="gy-admin-button-min" >Перейти на сайт</a>
+        <br/>
+        <br/>
         <?
         global $user;
 

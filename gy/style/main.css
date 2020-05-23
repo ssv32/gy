@@ -5,6 +5,7 @@
 
 /*--форма авторизации--*/
 .gy-admin-button{
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
     margin: 15px;
     border: 0;
     height: auto;
@@ -45,6 +46,7 @@
 /*-----*/
 
 .gy-admin-button-min{
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
     margin: 0px;
     border: 0;
     height: auto;
@@ -113,6 +115,7 @@
 .gy-table-all-users{
     border-collapse: collapse;
     background-color: #8cc7f2;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
 }
 
 .gy-table-all-users td{

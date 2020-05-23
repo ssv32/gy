@@ -1,8 +1,9 @@
 <?
 if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );
 
-/* mysql - класс для работы с базой данных mysql
- * class work mysql 
+/** 
+ * pgsql - класс для работы с базой данных PostgreSQL
+ * class work PostgreSQL 
  */
 
 class pgsql extends db{

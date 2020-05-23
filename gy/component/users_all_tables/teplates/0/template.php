@@ -2,38 +2,61 @@
 
 <h1><?=$this->lang->GetMessage('title');?></h1>
 
-<?if ($arRes['allUsers']){?>
-    <table border="1" class="gy-table-all-users">
-        <tr><th>id</th><th>login</th><th>name</th><th>group</th><th></th></tr>
-        <?foreach ($arRes['allUsers'] as $key => $val){?>
-            <tr>
-                <td><?=$val['id'];?></td>
-                <td><?=$val['login'];?></td>
-                <td><?=$val['name'];?></td>
-                <td>
-                    <? foreach ($val['groups'] as $groupIs) {?>
-                        -
-                        <?=$arRes['allUsersGroups'][$groupIs]['name'];?>
-                        (
-                        <?=$arRes['allUsersGroups'][$groupIs]['code'];?>
-                        );
-                        <br/>
-                    <?}?>
+<?if (!empty($arRes['del-stat']) ){?>
+    <?if ( $arRes['del-stat'] == 'ok'){ ?>
+        <div class="gy-admin-good-message"><?=$this->lang->GetMessage('del-ok');?></div>
+        <br/>
+    <?}?>
 
-                </td>
-                <td>
-                    <?if ($val['id'] != 1){?>
-                        <button  class="del-user gy-admin-button" data-id-user="<?=$val['id'];?>"><?=$this->lang->GetMessage('del-user');?></button>
-                        <a href="edit-user.php?edit-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-user');?></a>
-                    <?} ?>
-                </td>
-            </tr>
-        <?}?>
-    </table>
-	
-    <br/>
-    <br/>
-    <a class="gy-admin-button" href="add-user.php"><?=$this->lang->GetMessage('add-user');?></a>
-    <br/>
-    <br/>
-<?}
+    <?if ($arRes['del-stat'] == 'err'){?>
+        <div class="gy-admin-error-message"><?=$this->lang->GetMessage('del-err');?></div>
+        <br/>
+    <?}?>
+    <a href="users.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+<?}else{?>
+
+    <?if ($arRes['allUsers']){?>
+        <table border="1" class="gy-table-all-users">
+            <tr><th>id</th><th>login</th><th>name</th><th>group</th><th></th></tr>
+
+                <?foreach ($arRes['allUsers'] as $key => $val){?>
+                    <tr>
+                        <td><?=$val['id'];?></td>
+                        <td><?=$val['login'];?></td>
+                        <td><?=$val['name'];?></td>
+                        <td>
+                            <? foreach ($val['groups'] as $groupIs) {?>
+                                -
+                                <?=$arRes['allUsersGroups'][$groupIs]['name'];?>
+                                (
+                                <?=$arRes['allUsersGroups'][$groupIs]['code'];?>
+                                );
+                                <br/>
+                            <?}?>
+
+                        </td>
+                        <td>
+                            <?if ($val['id'] != 1){?>
+                                <br/>
+                                <a href="users.php?del-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('del-user');?></a>
+                                <a href="edit-user.php?edit-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-user');?></a>
+                                <br/>
+                                <br/>
+                            <?} ?>
+                        </td>
+                    </tr>
+                <?}?>
+
+        </table>
+
+        <br/>
+        <br/>
+        <a class="gy-admin-button" href="add-user.php"><?=$this->lang->GetMessage('add-user');?></a>
+        <br/>
+        <br/>
+        <br>
+        <br>
+        <a href="group-user.php" class="gy-admin-button">Настройка групп прав доступа</a>
+    <?}?>
+<?}?>
+        

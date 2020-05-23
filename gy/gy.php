@@ -43,6 +43,9 @@ function __autoload($calssname){
     }
 }
 
+// обезопасить получаемый конфиг
+$gy_config = security::filterInputData($gy_config);
+
 global $app;
 $app = app::createApp($urlProject, $gy_config);
 unset($gy_config);
@@ -76,6 +79,17 @@ global $cacheClassName;
 $cacheClassName = $app->options['type_cache'];
 
 session_start();
+
+// нужно обезопасить все входные данные  
+// на этой странице не проверять, т.к. там могут сохраняться данные html (своства контейнера данных)
+// TODO - может как то это пофиксить
+if( ($app->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')  
+    && ($_REQUEST['page'] != 'container-data-element-property' ) 
+){
+    $_REQUEST = security::filterInputData($_REQUEST);
+    $_GET = security::filterInputData($_GET);
+    $_POST = security::filterInputData($_POST);
+}
 
 
 /*

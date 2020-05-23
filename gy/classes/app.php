@@ -50,8 +50,32 @@ final class app{
      * 		maybe includ many model in component
      */
     public function component($name, $template, $arParam  ){
+        // обезопасим входные параметры
+        $arParam = security::filterInputData($arParam);
+                
         $component = new component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
         return $component;
     }
 
+    /**
+     * getAllUrlTisPage()
+     *  - вернёт полный путь к текущей страницы (вместе с get параметрами)
+     * 
+     * @return string
+     */
+    public function getAllUrlTisPage(){
+        return $_SERVER['REQUEST_URI'];
+    }
+    
+    /**
+     * getUrlTisPageNotGetProperty()
+     *  - вернёт полный путь к текущей страницы (без get параметров)
+     * 
+     * @return string
+     */
+    public function getUrlTisPageNotGetProperty(){
+        return $_SERVER['SCRIPT_NAME'];
+    }
+    
+    
 }

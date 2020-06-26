@@ -4,6 +4,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 $mess['rus'] = array(
     'button-admin' => 'Gy - раздел администрирования сайта',
     'hi' => 'Привет, ',
-    'exit' => 'Выйти'
+    'exit' => 'Выйти',
+    'button-work-page' => 'Работа со страницами сайта'
 );
 

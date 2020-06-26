@@ -1,6 +1,6 @@
 .gy-admin-panel{
     width: 735px;
-    height: 75px;
+    height: 100px;
     /*background-color: #adade4;*/
     margin-left: -10;
     margin-top: -10;
@@ -13,6 +13,32 @@
 .gy-admin-panel > H2{
     padding-top: 8px;
     margin-bottom: 12px;
+}
+.gy-admin-panel > .edit-button{
+    padding-top: 10px;
+    margin-top: 30px;
+}
+
+
+
+.gy-admin-edit-button{
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+    margin: 0px;
+    border: 0;
+    height: auto;
+    padding: 2px 30px 4px;
+    background-color: #265ed0 ;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+} 
+.gy-admin-edit-button:hover { 
+    background: #5b81ce; 
+}
+.gy-admin-edit-button:active { 
+    background: #5b81ce; 
 }
 
 .gy-admin-panel-button{

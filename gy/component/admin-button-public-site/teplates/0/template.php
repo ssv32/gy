@@ -5,6 +5,7 @@
     <div>
         <div class="div-button-admin-panel">
             <a href="/gy/admin/" class="gy-admin-panel-button"><?=$this->lang->GetMessage('button-admin');?></a>
+            
         </div>
         <div class="div-login">
             <?=$this->lang->GetMessage('hi');?><?=$arRes["auth_user"]?>
@@ -17,5 +18,8 @@
             </a>
         </div>
         
+    </div>
+    <div class="edit-button"> <?// TODO надо что бы была возможность добавлять кнопки из модулей?>
+        <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-edit-button"><?=$this->lang->GetMessage('button-work-page');?></a>
     </div>
 </div>

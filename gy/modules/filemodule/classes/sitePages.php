@@ -50,7 +50,7 @@ class sitePages{
      * @return boolean
      */
     public function createSitePage($urlPage){
-        if($this->urlProject !== false){
+        if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
             // если нет директории создать её
             if(file_exists($this->urlProject.$urlPage.'/') === false){ // TODO вынести в класс files
                 mkdir($this->urlProject.$urlPage.'/', 0755, true);   
@@ -69,7 +69,7 @@ class sitePages{
      * @return boolean
      */
     public function deleteSitePage($urlPage){
-        if($this->urlProject !== false){
+        if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
             $res = files::deleteFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
             
             // если файлов не осталось удалить директорию // TODO вынести в класс files
@@ -93,7 +93,7 @@ class sitePages{
      * @return false/string
      */
     public function getContextPage($urlPage){
-        if($this->urlProject !== false){
+        if( ($this->urlProject !== false) &&  $this->checkUrl('/'.$urlPage.'/')   ){
             return files::getContentFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
         }else{
             return false;
@@ -109,11 +109,28 @@ class sitePages{
      * @return boolean
      */
     public function putContextPage($urlPage, $date){
-        if($this->urlProject !== false){
+        if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
             return files::saveFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite, $date);
         }else{
             return false;
         }
+    }
+    
+    /**
+     * checkUrl
+     *  - проверит можно ли работать с урлом
+     * 
+     * @param string $url
+     * @return boolean
+     */
+    private function checkUrl($url){
+        $result = true;
+        foreach ($this->notEditPages as $value) {
+            if(strripos($url, $value) !== false ){
+                $result = false;
+            }
+        }
+        return $result;
     }
     
 }

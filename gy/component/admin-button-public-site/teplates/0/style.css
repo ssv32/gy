@@ -1,6 +1,6 @@
 .gy-admin-panel{
     width: 735px;
-    height: 100px;
+    height: 140px;
     /*background-color: #adade4;*/
     margin-left: -10;
     margin-top: -10;
@@ -72,4 +72,14 @@
 .div-login{
     float: left;
     width: 30%;
+}
+
+.version-gy-core-admin-panel{
+    padding-left: 0px;
+    position: absolute;
+    top: 30px;
+    font-size: 9pt;
+    font-style: italic;
+    background-color: aquamarine;
+    left: 270px;
 }

@@ -9,6 +9,9 @@ class module{
     // массив подключённых модулей
     public $arrayIncludeModules = array(); 
     
+    // массив подключённых модулей и их версии
+    public $arrayIncludeModulesAndVersion = array(); 
+    
     // соответствие компонентов подключенным модулям
     public $nameModuleByComponentName = array();
     
@@ -32,6 +35,7 @@ class module{
     
     private function  __construct(){
         // заполнить пустотой
+        $this->arrayIncludeModulesAndVersion = array();
         $this->arrayIncludeModules = array();
         $this->nameModuleByComponentName = array();
         $this->nameClassModuleByNameModule = array();
@@ -90,6 +94,12 @@ class module{
             if (!empty($nameThisModule)){
                 $this->arrayIncludeModules[$nameThisModule] = $urlModule;
                 //unset($nameThisModule);
+                
+                if(!empty($versionThisModule)){
+                    $this->arrayIncludeModulesAndVersion[$nameThisModule] = $versionThisModule;
+                    unset($versionThisModule);
+                }
+                
             }
             
             // тут список компонентов модуля
@@ -266,6 +276,10 @@ class module{
      */
     public function getFlagShowButtonsAdminPanelByModule($nameModule){
         return $this->isShowButtonsMenuAdminPanelModules[$nameModule];
+    }
+    
+    public function getInfoAllIncludeModules(){
+        return $this->arrayIncludeModulesAndVersion;
     }
     
 }

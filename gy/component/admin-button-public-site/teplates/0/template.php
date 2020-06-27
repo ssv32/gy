@@ -2,10 +2,16 @@
 
 <div class="gy-admin-panel">
     <h2 class="gy-admin-logo">Админка gy framework</h2>
+    <?
+    global $app;
+    if(!empty($app->options['v-gy'])){?>
+        <span class="version-gy-core-admin-panel">v <?=$app->options['v-gy']?></span>
+        <br/>
+    <?}?>
     <div>
         <div class="div-button-admin-panel">
             <a href="/gy/admin/" class="gy-admin-panel-button"><?=$this->lang->GetMessage('button-admin');?></a>
-            
+           
         </div>
         <div class="div-login">
             <?=$this->lang->GetMessage('hi');?><?=$arRes["auth_user"]?>

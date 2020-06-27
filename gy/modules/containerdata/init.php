@@ -43,4 +43,8 @@ $pagesFromAdminMenu = array(
 // в меню админки кнопки $pagesFromAdminMenu
 $isShowButtonsMenuAdminPanetThisModule = 'edit_container_data';
 
+// имя текущего модуля
 $nameThisModule = 'containerdata';
+
+// версия текущего модуля
+$versionThisModule = '0.1';

@@ -47,6 +47,8 @@ function __autoload($calssname){
 $gy_config = security::filterInputData($gy_config);
 
 global $app;
+// добавлю версию ядра gy 
+$gy_config['v-gy'] = '0.1-alpha';
 $app = app::createApp($urlProject, $gy_config);
 unset($gy_config);
 

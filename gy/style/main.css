@@ -132,3 +132,13 @@
 form{
     margin-bottom: 0px;
 }
+
+.version-gy-core{
+    padding-left: 0px;
+    position: absolute;
+    top: 30px;
+    font-size: 9pt;
+    font-style: italic;
+    background-color: aquamarine;
+    left: 270px;
+}

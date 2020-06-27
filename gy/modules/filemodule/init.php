@@ -33,4 +33,8 @@ $pagesFromAdminMenu = array(
 // в меню админки кнопки $pagesFromAdminMenu
 $isShowButtonsMenuAdminPanetThisModule = 'work_file_module';
 
+// имя текущего модуля
 $nameThisModule = 'filemodule';
+
+//версия текущего модуля
+$versionThisModule = '0.1';

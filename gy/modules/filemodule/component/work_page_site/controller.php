@@ -3,8 +3,6 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 $data = $_POST;
 
-// TODO !!! перепроверить везде права пользователя на действие
-
 // создание страницы сайта
 if( !empty($data['action-1']) ){
     
@@ -65,7 +63,30 @@ if( !empty($data['action-2-1'])  && !empty($data['url-site-page'])  && !empty($d
     }
 }
 
+// открыть редактируемую страницу
+if( !empty($data['action-4']) ){
+    header("Location: /".$data['url-site-page'] );
+}
 
+if( !empty($data['action-5']) ){
+    // сохраним основной app обьект
+    global $app;
+    $appGlobal = $app;
+    
+    // переопределим app
+    $app = new appFromConstructorPageComponent();
+
+    $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
+    
+    include $url; // !! надо не подключать ядро
+
+    $arRes['dataIncludeAllComponentsInThisPageSite'] = $app->getAllDataIncludeComponents();
+    $arRes['url-site-page'] = $data['url-site-page'];
+    
+    // вернём как было
+    $app = $appGlobal;
+    $arRes['status'] = 'constructor';
+}
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

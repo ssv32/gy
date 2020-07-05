@@ -1,125 +1,130 @@
 <?php
-ob_start();
-define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
+// если ядро не подключено подключаем всё а если уже подключено то не надо
+if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) {
 
-include_once("config/gy_config.php"); // подключение настроек ядра // include options
+    ob_start();
+    define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
 
-// подключаем класс модуля 
-// (нужен для подключения модулей до определения авто подключения классов)
-include_once(__DIR__ . '/classes/module.php');
+    include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
-// подключить модули
-//global $module;
-$module = module::getInstance();
-$module->setUrlGyCore(__DIR__);
-//$module->includeModule('containerdata');
-$module->includeAllModules();
+    // подключаем класс модуля 
+    // (нужен для подключения модулей до определения авто подключения классов)
+    include_once(__DIR__ . '/classes/module.php');
 
-// путь к проекту
-global $urlProject;
-$urlProject = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
+    // подключить модули
+    //global $module;
+    $module = module::getInstance();
+    $module->setUrlGyCore(__DIR__);
+    //$module->includeModule('containerdata');
+    $module->includeAllModules();
 
-// авто подключение классов
-function __autoload($calssname){ 
+    // путь к проекту
     global $urlProject;
-        
-    // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
-    global $module;
-    $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
-    if($meyByClassModule !== false){
-        require_once( $meyByClassModule );
-    }else{
-                
-        if(file_exists($urlProject."/customDir/classes/".$calssname.".php" ) ){ // сюда будут подключаться пользовательские классы
-            require_once( $urlProject."/customDir/classes/".$calssname.".php" );   
-        }elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
-            require_once( "classes/$calssname.php" );          
-        } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
-            // подключение abstract классов (что бы они хранились в отдельном разделе)
-            require_once( "classes/abstract/$calssname.php" );   
+    $urlProject = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
+
+    // авто подключение классов
+    function __autoload($calssname){ 
+        global $urlProject;
+
+        // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
+        global $module;
+        $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
+        if($meyByClassModule !== false){
+            require_once( $meyByClassModule );
         }else{
-            die('class '.$calssname.' not find' );
+
+            if(file_exists($urlProject."/customDir/classes/".$calssname.".php" ) ){ // сюда будут подключаться пользовательские классы
+                require_once( $urlProject."/customDir/classes/".$calssname.".php" );   
+            }elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
+                require_once( "classes/$calssname.php" );          
+            } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
+                // подключение abstract классов (что бы они хранились в отдельном разделе)
+                require_once( "classes/abstract/$calssname.php" );   
+            }else{
+                die('class '.$calssname.' not find' );
+            }
         }
     }
-}
 
-// обезопасить получаемый конфиг
-$gy_config = security::filterInputData($gy_config);
+    // обезопасить получаемый конфиг
+    $gy_config = security::filterInputData($gy_config);
 
-global $app;
-// добавлю версию ядра gy 
-$gy_config['v-gy'] = '0.1-alpha';
-$app = app::createApp($urlProject, $gy_config);
-unset($gy_config);
+    global $app;
+    // добавлю версию ядра gy 
+    $gy_config['v-gy'] = '0.1-alpha';
+    $app = app::createApp($urlProject, $gy_config);
+    unset($gy_config);
 
-// подключить класс работы с базой данный // include class work database
-if (isset($app->options['db_config']) 
-    && isset($app->options['db_config']['db_type']) 
-    && isset($app->options['db_config']['db_host']) 
-    && isset($app->options['db_config']['db_user']) 
-    && isset($app->options['db_config']['db_pass']) 
-    && isset($app->options['db_config']['db_name']) 
-){
+    // подключить класс работы с базой данный // include class work database
+    if (isset($app->options['db_config']) 
+        && isset($app->options['db_config']['db_type']) 
+        && isset($app->options['db_config']['db_host']) 
+        && isset($app->options['db_config']['db_user']) 
+        && isset($app->options['db_config']['db_pass']) 
+        && isset($app->options['db_config']['db_name']) 
+    ){
+        global $db;
+        $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
+    }
+
+    global $crypto;	
+    $crypto = new crypto();
+    if (!empty($app->options['sole'])){
+            $crypto->setSole($app->options['sole']);
+    }
+
+    global $user;
+    $user = new user(); 
+
+    // объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
+    if (!isset($app->options['type_cache'])) {  
+        $app->options['type_cache'] = 'cacheFiles';
+    } 
+    global $cacheClassName;
+    $cacheClassName = $app->options['type_cache'];
+
+    session_start();
+
+    // нужно обезопасить все входные данные  
+    // на этой странице не проверять, т.к. там могут сохраняться данные html (своства контейнера данных)
+    // TODO - может как то это пофиксить
+    if( ($app->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')  
+        && ($_REQUEST['page'] != 'container-data-element-property' ) 
+    ){
+        $_REQUEST = security::filterInputData($_REQUEST);
+        $_GET = security::filterInputData($_GET);
+        $_POST = security::filterInputData($_POST);
+    }
+
+
+    /*
+    Примеры как можно прокидывать where условия в запросы 
+     (возможно не рабочие но можно увидеть логику работы)
+
+    issues/24 - теперь будет так
     global $db;
-    $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
+    $res = $db->selectDb(
+        $db->db, 
+        'users', 
+        array('*'), 
+        array( 
+            'AND' => array(
+                array('=' => array('logIn', "'admin'") ), 
+                array('=' => array('logIn', "'admin2'") ) 
+            ),  
+        )
+    );
+
+    */
+
+    /*
+    $res = $db->selectDb(
+        $db->db, 
+        'users', 
+        array('*'), 
+        array( 
+            '=' => array('id', 1 ), 
+        )
+    );*/
+
 }
-
-global $crypto;	
-$crypto = new crypto();
-if (!empty($app->options['sole'])){
-	$crypto->setSole($app->options['sole']);
-}
-
-global $user;
-$user = new user(); 
-
-// объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
-if (!isset($app->options['type_cache'])) {  
-    $app->options['type_cache'] = 'cacheFiles';
-} 
-global $cacheClassName;
-$cacheClassName = $app->options['type_cache'];
-
-session_start();
-
-// нужно обезопасить все входные данные  
-// на этой странице не проверять, т.к. там могут сохраняться данные html (своства контейнера данных)
-// TODO - может как то это пофиксить
-if( ($app->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')  
-    && ($_REQUEST['page'] != 'container-data-element-property' ) 
-){
-    $_REQUEST = security::filterInputData($_REQUEST);
-    $_GET = security::filterInputData($_GET);
-    $_POST = security::filterInputData($_POST);
-}
-
-
-/*
-Примеры как можно прокидывать where условия в запросы 
- (возможно не рабочие но можно увидеть логику работы)
-
-issues/24 - теперь будет так
-global $db;
-$res = $db->selectDb(
-    $db->db, 
-    'users', 
-    array('*'), 
-    array( 
-        'AND' => array(
-            array('=' => array('logIn', "'admin'") ), 
-            array('=' => array('logIn', "'admin2'") ) 
-        ),  
-    )
-);
-
-*/
-
-/*
-$res = $db->selectDb(
-    $db->db, 
-    'users', 
-    array('*'), 
-    array( 
-        '=' => array('id', 1 ), 
-    )
-);*/

@@ -1,18 +1,28 @@
-<? include "./gy/gy.php"; // подключить ядро // include core 
-
+<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
 $app->component(
     'admin-button-public-site',
     '0',
     array()
 );
-?>
 
-<h1>Пример использования gy CMS/framework</h1>
+$app->component(
+    'includeHtml',
+    '0',
+    array(
+        'html' => '<h1>Пример использования gy CMS/framework</h1>'
+    )
+);
 
-<? // пример вызова одинаковых компонентов // example run two component ?>
-<h4>Вызов компонента "form_auth_test" (1 раз)</h4>
-<?
+// пример вызова одинаковых компонентов // example run two component 
+$app->component(
+    'includeHtml',
+    '0',
+    array(
+        'html' => '<h4>Вызов компонента "form_auth_test" (1 раз)</h4>'
+    )
+);
+
 $app->component(
     'form_auth_test',
     '0',
@@ -21,10 +31,16 @@ $app->component(
         'idComponent' => 1,
     )
 );
-?>    
 
-<h4>Вызов компонента "form_auth_test" (2 раз)</h4>
-<?
+ // пример вызова одинаковых компонентов // example run two component 
+$app->component(
+    'includeHtml',
+    '0',
+    array(
+        'html' => '<h4>Вызов компонента "form_auth_test" (2 раз)</h4>'
+    )
+);
+
 $app->component(
     'form_auth_test',
     '0',
@@ -39,7 +55,6 @@ $app->component(
   + пример использования кастомного (пользовательского) шаблона компонента
   (пользователя - разработчика использующего gy)
 */
-
 $app->component(
     'containerdata_element_show',
     '0',

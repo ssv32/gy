@@ -50,9 +50,11 @@ final class app{
      * 		maybe includ many model in component
      */
     public function component($name, $template, $arParam  ){
-        // обезопасим входные параметры
-        $arParam = security::filterInputData($arParam);
-                
+        if($name != 'includeHtml'){
+            // обезопасим входные параметры
+            $arParam = security::filterInputData($arParam);
+        }
+        
         $component = new component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
         return $component;
     }

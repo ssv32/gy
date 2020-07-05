@@ -16,7 +16,8 @@ $componentsThisModule = array(
 // классы этого можуля
 $classesThisModule = array(
     'files',
-    'sitePages' 
+    'sitePages',
+    'appFromConstructorPageComponent'
 );
 
 // страници админки

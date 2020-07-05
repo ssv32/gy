@@ -74,11 +74,15 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                         </p>
                         <table border="1" class="gy-table-all-users">
                             <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
-                            <? foreach ($component['arParam'] as $keyParam => $valueParam) { ?>
+                            <? 
+                            // TODO компонент includeHtml в параметре html с кавычками и всё лакается
+                            //    пока заменил input на textarea надо протестить
+                            
+                            foreach ($component['arParam'] as $keyParam => $valueParam) { ?>
                                 <tr>
                                     <td><?=$keyParam?></td>
                                     <td>
-                                        <input type="text" value="<?=$valueParam?>" />
+                                        <textarea type="text" ><?=$valueParam?></textarea>
                                     </td>
                                 </tr>   
                             <?}?>

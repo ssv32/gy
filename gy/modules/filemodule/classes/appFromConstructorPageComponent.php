@@ -36,11 +36,13 @@ class appFromConstructorPageComponent{
         $codeIncludeComponent .= "   '".$componentName."',"."\n";
         $codeIncludeComponent .= "   '".$templateName."',"."\n";
         $codeIncludeComponent .= '   array('."\n";
-        foreach ($arParams as $key => $value) {
-            if(!is_numeric($value)){
-                $codeIncludeComponent .= "     '".$key."' => '".$value."',"."\n";
-            }else{
-                $codeIncludeComponent .= "     '".$key."' => ".$value.",\n";
+        if(!empty($arParams)){
+            foreach ($arParams as $key => $value) {
+                if(!is_numeric($value)){
+                    $codeIncludeComponent .= "     '".$key."' => '".$value."',"."\n";
+                }else{
+                    $codeIncludeComponent .= "     '".$key."' => ".$value.",\n";
+                }
             }
         }
         $codeIncludeComponent .= '   )'."\n";

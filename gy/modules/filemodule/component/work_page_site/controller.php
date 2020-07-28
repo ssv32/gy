@@ -95,15 +95,7 @@ if(!empty($data['action-6'])){
 global $app;
 
     ';
-    
-    //добавить перед всеми компонентами панель одминистрирования gy для текущей редактируемой страницы
-    $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent(
-        'admin-button-public-site', 
-        '0', 
-        array()
-    );
-    $codePage .= $codeIncludeComponent."\n"; 
-        
+            
     // добавить коды компонентов
     foreach ($data['component'] as $value) {
         $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);

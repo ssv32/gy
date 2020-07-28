@@ -46,99 +46,91 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
         
         <h4><?=$this->lang->GetMessage('title-action-5');?></h4>
         <?
-        $countIncludeComponentsInPageSite = count($arRes['dataIncludeAllComponentsInThisPageSite']);
-        if($countIncludeComponentsInPageSite > 0 ){?>
-            <p><?=$this->lang->GetMessage('text-include-components');?><?=$countIncludeComponentsInPageSite;?></p>
-            
-            
-            <form method="post">
-                <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
+        $countIncludeComponentsInPageSite = count($arRes['dataIncludeAllComponentsInThisPageSite']);?>
+        
+        <p><?=$this->lang->GetMessage('text-include-components');?><?=$countIncludeComponentsInPageSite;?></p>
+
+
+        <form method="post">
+            <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
+
+            <input <?// TODO?>
+                class="gy-admin-button" 
+                type="submit" 
+                name="action-2-1" 
+                value="<?=$this->lang->GetMessage('add-component');?>" 
+            />
+
+            <? foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $component) { ?>
+                <div class="data-component">
+                    =============================<?=$this->lang->GetMessage('include-component');?><?=$key?>============================
+                    <p><?=$this->lang->GetMessage('text-include-this-component');?><?=$component['name']?></p>
+                    <input type="hidden" name="component[<?=$key;?>][component]" value="<?=$component['name']?>">
+                    <p>
+                        <?=$this->lang->GetMessage('name-template');?>
+                        <input type="text" name="component[<?=$key;?>][tempalate]" value="<?=$component['template']?>">
+                    </p>
+                    <p>
+                        <?=$this->lang->GetMessage('params-component');?>
+                    </p>
+                    <table border="1" class="gy-table-all-users">
+                        <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
+                        <? 
+                        // TODO компонент includeHtml в параметре html с кавычками и всё ламается
+                        //    пока заменил input на textarea надо протестить
+
+                        foreach ($component['arParam'] as $keyParam => $valueParam) { ?>
+                            <tr>
+                                <td><?=$keyParam?></td>
+                                <td>
+                                    <textarea type="text" name="component[<?=$key;?>][params][<?=$keyParam?>]" ><?=$valueParam?></textarea>
+                                </td>
+                            </tr>   
+                        <?}?>
+                    </table>    
+
+                    <input 
+                        class="gy-admin-button" 
+                        type="submit" 
+                        name="action7_3[<?=$key;?>]" 
+                        value="<?=$this->lang->GetMessage('text-button-del-component');?>" 
+                    />
+                    <br/>
+                    <input 
+                        class="gy-admin-button" 
+                        type="submit" 
+                        name="action7_1[<?=$key;?>]" 
+                        value="<?=$this->lang->GetMessage('text-button-up-component');?>" 
+                    />
+                    <input
+                        class="gy-admin-button" 
+                        type="submit" 
+                        name="action7_2[<?=$key;?>]" 
+                        value="<?=$this->lang->GetMessage('text-button-down-component');?>" 
+                    />
+                    <br/>
+                    <input <?// TODO?>
+                        class="gy-admin-button" 
+                        type="submit" 
+                        name="action-2-1" 
+                        value="<?=$this->lang->GetMessage('add-component');?>" 
+                    />
+                    <br/>
+                    ==========================================================================
+                </div>
+            <?}?>
+
+            <br/>
+            <br/>
+            <input class="gy-admin-button" type="submit" name="action-6" value="<?=$this->lang->GetMessage('text-button-save2');?>" />
+            <br/>
+            *<?=$this->lang->GetMessage('warning-text-1');?>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+        </form>
                 
-                <input <?// TODO?>
-                    class="gy-admin-button" 
-                    type="submit" 
-                    name="action-2-1" 
-                    value="<?=$this->lang->GetMessage('add-component');?>" 
-                />
-                
-                <? foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $component) { ?>
-                    <div class="data-component">
-                        =============================<?=$this->lang->GetMessage('include-component');?><?=$key?>============================
-                        <p><?=$this->lang->GetMessage('text-include-this-component');?><?=$component['name']?></p>
-                        <input type="hidden" name="component[<?=$key;?>][component]" value="<?=$component['name']?>">
-                        <p>
-                            <?=$this->lang->GetMessage('name-template');?>
-                            <input type="text" name="component[<?=$key;?>][tempalate]" value="<?=$component['template']?>">
-                        </p>
-                        <p>
-                            <?=$this->lang->GetMessage('params-component');?>
-                        </p>
-                        <table border="1" class="gy-table-all-users">
-                            <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
-                            <? 
-                            // TODO компонент includeHtml в параметре html с кавычками и всё ламается
-                            //    пока заменил input на textarea надо протестить
-                            
-                            foreach ($component['arParam'] as $keyParam => $valueParam) { ?>
-                                <tr>
-                                    <td><?=$keyParam?></td>
-                                    <td>
-                                        <textarea type="text" name="component[<?=$key;?>][params][<?=$keyParam?>]" ><?=$valueParam?></textarea>
-                                    </td>
-                                </tr>   
-                            <?}?>
-                        </table>    
-                        
-                        <input <?// TODO?>
-                            class="gy-admin-button" 
-                            type="submit" 
-                            name="action-2-1" 
-                            value="<?=$this->lang->GetMessage('text-button-del-component');?>" 
-                        />
-                        <br/>
-                        <input <?// TODO?>
-                            class="gy-admin-button" 
-                            type="submit" 
-                            name="action-2-1" 
-                            value="<?=$this->lang->GetMessage('text-button-up-component');?>" 
-                        />
-                        <input <?// TODO?>
-                            class="gy-admin-button" 
-                            type="submit" 
-                            name="action-2-1" 
-                            value="<?=$this->lang->GetMessage('text-button-down-component');?>" 
-                        />
-                        <br/>
-                        <input <?// TODO?>
-                            class="gy-admin-button" 
-                            type="submit" 
-                            name="action-2-1" 
-                            value="<?=$this->lang->GetMessage('add-component');?>" 
-                        />
-                        <br/>
-                        ==========================================================================
-                    </div>
-                <?}?>
-                
-                <br/>
-                <br/>
-                <input class="gy-admin-button" type="submit" name="action-6" value="<?=$this->lang->GetMessage('text-button-save2');?>" />
-                <br/>
-                *<?=$this->lang->GetMessage('warning-text-1');?>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                
-            </form>
-                
-            <?
-//            echo "dataIncludeAllComponentsInThisPageSite<pre>";
-//            print_r($arRes['dataIncludeAllComponentsInThisPageSite']);
-//            echo "</pre>";
-            ?>
-        <?}else{?>
-            
-        <?}?>
     <?}
 }

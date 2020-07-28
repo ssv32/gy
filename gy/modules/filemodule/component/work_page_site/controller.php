@@ -3,6 +3,8 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
 $data = $_POST;
 
+global $arRes;
+
 // создание страницы сайта
 if( !empty($data['action-1']) ){
     
@@ -88,29 +90,91 @@ if( !empty($data['action-5']) ){
     $arRes['status'] = 'constructor';
 }
 
-// сохранить всю страницу по компонентам
-if(!empty($data['action-6'])){
+function getCodePageByArrayComponents($arrayComponents){
     $codePage = '<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
 global $app;
 
     ';
-            
+    
     // добавить коды компонентов
-    foreach ($data['component'] as $value) {
-        $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
-        $codePage .= $codeIncludeComponent."\n";   
-    }
-        
+    if(is_array($arrayComponents)){
+        foreach ($arrayComponents as $value) {
+            $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
+            $codePage .= $codeIncludeComponent."\n";   
+        }
+    }   
+    return $codePage;
+}
+
+function savePageByArrayComponents($page, $arrayComponents){
+    $codePage = getCodePageByArrayComponents($arrayComponents);
+    
     global $app;
     $sitePage = new sitePages($app->urlProject.'/');
             
-    $res = $sitePage->putContextPage( $data['url-site-page'], $codePage);
+    $res = $sitePage->putContextPage( $page, $codePage);
+    
+    global $arRes;
     if($res !== false){
         $arRes['status'] = 'edit-ok';
     }else{
         $arRes['status'] = 'err';
     }
+}
+
+// сохранить всю страницу по компонентам
+if(!empty($data['action-6'])){    
+    savePageByArrayComponents($data['url-site-page'], $data['component']);
+}
+
+// перемещение компонента ниже
+if(!empty($data['action7_2']) && is_array($data['action7_2'])){
+    foreach ($data['action7_2'] as $key => $value) {
+        //
+    }
+    
+    if(!empty($data['component'][$key+1]) ){
+        $temp = $data['component'][$key];
+        $data['component'][$key] = $data['component'][$key+1];
+        $data['component'][$key+1] = $temp;
+        unset($temp);
+    }
+    
+    // записать всё обратно из получившегося набора компонентов
+    savePageByArrayComponents($data['url-site-page'], $data['component']);
+                
+}
+
+// перемещение компонента выше
+if(!empty($data['action7_1']) && is_array($data['action7_1'])){
+    foreach ($data['action7_1'] as $key => $value) {
+        //
+    }
+    
+    if( ($key - 1) >= 0 ){
+        $temp = $data['component'][$key];
+        $data['component'][$key] = $data['component'][$key-1];
+        $data['component'][$key-1] = $temp;
+        unset($temp);
+    }
+    
+    // записать всё обратно из получившегося набора компонентов
+    savePageByArrayComponents($data['url-site-page'], $data['component']);
+}
+
+// удалить компонент
+if(!empty($data['action7_3']) && is_array($data['action7_3'])){
+    foreach ($data['action7_3'] as $key => $value) {
+        //
+    }
+    
+    if( !empty($data['component'][$key])){
+        unset($data['component'][$key]);
+    }
+    
+    // записать всё обратно из получившегося набора компонентов
+    savePageByArrayComponents($data['url-site-page'], $data['component']);
 }
 
 // показать шаблон

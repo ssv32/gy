@@ -38,7 +38,7 @@ if( !empty($data['action-2']) && empty($arRes['status']) ){
     
     global $app;
     $sitePage = new sitePages($app->urlProject.'/');
-        
+            
     $res = $sitePage->getContextPage($data['url-site-page']);
     
     if($res !== false){
@@ -86,6 +86,39 @@ if( !empty($data['action-5']) ){
     // вернём как было
     $app = $appGlobal;
     $arRes['status'] = 'constructor';
+}
+
+// сохранить всю страницу по компонентам
+if(!empty($data['action-6'])){
+    $codePage = '<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
+
+global $app;
+
+    ';
+    
+    //добавить перед всеми компонентами панель одминистрирования gy для текущей редактируемой страницы
+    $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent(
+        'admin-button-public-site', 
+        '0', 
+        array()
+    );
+    $codePage .= $codeIncludeComponent."\n"; 
+        
+    // добавить коды компонентов
+    foreach ($data['component'] as $value) {
+        $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
+        $codePage .= $codeIncludeComponent."\n";   
+    }
+        
+    global $app;
+    $sitePage = new sitePages($app->urlProject.'/');
+            
+    $res = $sitePage->putContextPage( $data['url-site-page'], $codePage);
+    if($res !== false){
+        $arRes['status'] = 'edit-ok';
+    }else{
+        $arRes['status'] = 'err';
+    }
 }
 
 // показать шаблон

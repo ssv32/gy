@@ -65,9 +65,10 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                     <div class="data-component">
                         =============================<?=$this->lang->GetMessage('include-component');?><?=$key?>============================
                         <p><?=$this->lang->GetMessage('text-include-this-component');?><?=$component['name']?></p>
+                        <input type="hidden" name="component[<?=$key;?>][component]" value="<?=$component['name']?>">
                         <p>
                             <?=$this->lang->GetMessage('name-template');?>
-                            <input type="text" value="<?=$component['template']?>">
+                            <input type="text" name="component[<?=$key;?>][tempalate]" value="<?=$component['template']?>">
                         </p>
                         <p>
                             <?=$this->lang->GetMessage('params-component');?>
@@ -75,14 +76,14 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                         <table border="1" class="gy-table-all-users">
                             <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
                             <? 
-                            // TODO компонент includeHtml в параметре html с кавычками и всё лакается
+                            // TODO компонент includeHtml в параметре html с кавычками и всё ламается
                             //    пока заменил input на textarea надо протестить
                             
                             foreach ($component['arParam'] as $keyParam => $valueParam) { ?>
                                 <tr>
                                     <td><?=$keyParam?></td>
                                     <td>
-                                        <textarea type="text" ><?=$valueParam?></textarea>
+                                        <textarea type="text" name="component[<?=$key;?>][params][<?=$keyParam?>]" ><?=$valueParam?></textarea>
                                     </td>
                                 </tr>   
                             <?}?>
@@ -121,8 +122,9 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                 
                 <br/>
                 <br/>
-                <input class="gy-admin-button" type="submit" name="action-2-1" value="<?=$this->lang->GetMessage('text-button-save2');?>" />
+                <input class="gy-admin-button" type="submit" name="action-6" value="<?=$this->lang->GetMessage('text-button-save2');?>" />
                 <br/>
+                *<?=$this->lang->GetMessage('warning-text-1');?>
                 <br/>
                 <br/>
                 <br/>

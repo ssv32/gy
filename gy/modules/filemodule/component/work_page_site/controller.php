@@ -76,13 +76,25 @@ if( !empty($data['action-5']) ){
     $appGlobal = $app;
     
     // переопределим app
-    $app = new appFromConstructorPageComponent();
+    $app = new appFromConstructorPageComponent($app->urlProject);
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
     
     include $url; // !! надо не подключать ядро
 
     $arRes['dataIncludeAllComponentsInThisPageSite'] = $app->getAllDataIncludeComponents();
+    
+    // хочу найти поля обьявленные в компоненте как возможные но не заполненные в коде
+    foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $value) {
+        if(!empty($value['componentInfo']['all-property'])){
+            foreach ($value['componentInfo']['all-property'] as $key2 => $value2) {
+                if(empty( $value['arParam'][$value2] )){
+                    $arRes['dataIncludeAllComponentsInThisPageSite'][$key]['arParam'][$value2] = '';
+                }
+            }
+        }
+    }
+    
     $arRes['url-site-page'] = $data['url-site-page'];
     
     // вернём как было

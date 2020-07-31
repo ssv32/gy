@@ -57,7 +57,6 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
         
         <p><?=$this->lang->GetMessage('text-include-components');?><?=$countIncludeComponentsInPageSite;?></p>
 
-
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
 
@@ -80,6 +79,19 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                     <p>
                         <?=$this->lang->GetMessage('params-component');?>
                     </p>
+                    
+                    <?if(!empty($component['componentInfo']['v'])){?>
+                        <p>
+                            <?=$this->lang->GetMessage('this_v_component');?>: <?=$component['componentInfo']['v']?>   
+                        </p>
+                    <?}?>
+                        
+                    <?if(!empty($component['componentInfo']['text-info'])){?>
+                        <p>
+                            <?=$this->lang->GetMessage('this_component_text_info');?>: <?=$component['componentInfo']['text-info']?> 
+                        </p>
+                    <?}?>    
+                        
                     <table border="1" class="gy-table-all-users">
                         <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
                         <? 
@@ -174,9 +186,19 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                 <?=$this->lang->GetMessage('this_component');?>: <?=$arRes['data-component']['name']?>
                 <input type="hidden" name="name_new_component" value="<?=$arRes['data-component']['name']?>">
             </p>
-            <p>
-                <?=$this->lang->GetMessage('this_v_component');?>: <?=$arRes['data-component']['componentInfo']['v']?>
-            </p>
+            
+            <?if (!empty($arRes['data-component']['componentInfo']['v'])){?>
+                <p>
+                    <?=$this->lang->GetMessage('this_v_component');?>: <?=$arRes['data-component']['componentInfo']['v']?>
+                </p>
+            <?}?>
+                
+            <?if(!empty($arRes['data-component']['componentInfo']['text-info'])){?>
+                <p>
+                    <?=$this->lang->GetMessage('this_component_text_info');?>: <?=$arRes['data-component']['componentInfo']['text-info']?> 
+                </p>
+            <?}?>   
+            
             <p>
                 <?=$this->lang->GetMessage('this_template_component');?>: <?=$arRes['data-component']['template']?>
                 <input type="hidden" name="name_new_template" value="<?=$arRes['data-component']['template']?>">

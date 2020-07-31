@@ -37,6 +37,7 @@ $mess['rus'] = array(
     'next_final' => 'Добавить компонент',
     'this_component' => 'Выбран компонент',
     'this_v_component' => 'Версия компонента',
+    'this_component_text_info' => 'Описание компонента',
     'this_template_component' => 'Выбранный шаблон компонента'
 );
 

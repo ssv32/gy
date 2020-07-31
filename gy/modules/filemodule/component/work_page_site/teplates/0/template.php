@@ -7,6 +7,7 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
     <form method="post">
         <h4><?=$this->lang->GetMessage('text-input-url-page');?></h4>
         <span>/</span><input type="text" name="url-site-page" /><span>/index.php</span>
+        <?// TODO сделать выбор из имеющихся?>
         <br/>
         <input class="gy-admin-button" type="submit" name="action-1" value="<?=$this->lang->GetMessage('title-add-page');?>" />
         <input class="gy-admin-button" type="submit" name="action-2" value="<?=$this->lang->GetMessage('title-edit-page');?>" />
@@ -17,7 +18,13 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
         <input class="gy-admin-button" type="submit" name="action-5" value="<?=$this->lang->GetMessage('title-action-5');?>" />
     </form>
 <?}else{
-    if( ($arRes['status'] != 'edit') && ($arRes['status'] != 'err') && ($arRes['status'] != 'constructor') ){?>
+    if( ($arRes['status'] != 'edit') 
+        && ($arRes['status'] != 'err') 
+        && ($arRes['status'] != 'constructor') 
+        && ($arRes['status'] != 'addConstructor') 
+        && ($arRes['status'] != 'error-not-component')          
+        && ($arRes['status'] != 'good-component')          
+    ){?>
         <div class="gy-admin-good-message"><?=$this->lang->GetMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
@@ -54,10 +61,10 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
 
-            <input <?// TODO?>
+            <input 
                 class="gy-admin-button" 
                 type="submit" 
-                name="action-2-1" 
+                name="action_8['-1']" 
                 value="<?=$this->lang->GetMessage('add-component');?>" 
             />
 
@@ -109,10 +116,10 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
                         value="<?=$this->lang->GetMessage('text-button-down-component');?>" 
                     />
                     <br/>
-                    <input <?// TODO?>
+                    <input
                         class="gy-admin-button" 
                         type="submit" 
-                        name="action-2-1" 
+                        name="action_8[<?=$key;?>]" 
                         value="<?=$this->lang->GetMessage('add-component');?>" 
                     />
                     <br/>
@@ -132,5 +139,70 @@ if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !==
 
         </form>
                 
-    <?}
+    <?}elseif($arRes['status'] == 'addConstructor'){ // если добавление компонента ?>
+        <h4><?=$this->lang->GetMessage('title-action-8');?></h4>
+        <form method="post">
+            <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
+            <input type="hidden" name="position_new_component" value="<?=$arRes['key']?>" />
+            <p>
+                <?=$this->lang->GetMessage('name-new-component');?>
+                <input type="text" name="name_new_component" value="<?=$component['template']?>">
+                <?// TODO сделать выбор из имеющихся + выводить описаие?>
+            </p>
+            <p>
+                <?=$this->lang->GetMessage('name-new-template');?>
+                <input type="text" name="name_new_template" value="<?=$component['template']?>">
+            </p>
+            <input
+                class="gy-admin-button" 
+                type="submit" 
+                name="action_8_1" 
+                value="<?=$this->lang->GetMessage('next');?>" 
+            />
+            
+        </form>    
+    <?}elseif( $arRes['status'] == 'error-not-component'){ // ошибка при добавление компонента (не найден компонент)?>
+        <div class="gy-admin-error-message"><?=$this->lang->GetMessage('not-component');?></div>
+        <br/>
+        <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <?}elseif($arRes['status'] == 'good-component'){ // последний шаг добавления компонента, ввод параметров компонента ?>   
+        <h4><?=$this->lang->GetMessage('title-action-8');?></h4>
+        <form method="post">
+            <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
+            <input type="hidden" name="position_new_component" value="<?=$arRes['position_new_component']?>" />
+            <p>
+                <?=$this->lang->GetMessage('this_component');?>: <?=$arRes['data-component']['name']?>
+                <input type="hidden" name="name_new_component" value="<?=$arRes['data-component']['name']?>">
+            </p>
+            <p>
+                <?=$this->lang->GetMessage('this_v_component');?>: <?=$arRes['data-component']['componentInfo']['v']?>
+            </p>
+            <p>
+                <?=$this->lang->GetMessage('this_template_component');?>: <?=$arRes['data-component']['template']?>
+                <input type="hidden" name="name_new_template" value="<?=$arRes['data-component']['template']?>">
+            </p>
+            
+            <table border="1" class="gy-table-all-users">
+                <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
+                <? 
+                foreach ($arRes['data-component']['arParam'] as $keyParam => $valueParam) { ?>
+                    <tr>
+                        <td><?=$valueParam?></td>
+                        <td>
+                            <textarea type="text" name="params[<?=$valueParam?>]" ></textarea>
+                        </td>
+                    </tr>   
+                <?}?>
+            </table>  
+            
+            <input
+                class="gy-admin-button" 
+                type="submit" 
+                name="action_8_2" 
+                value="<?=$this->lang->GetMessage('next_final');?>" 
+            />
+            
+        </form> 
+        
+    <?}    
 }

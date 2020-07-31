@@ -99,6 +99,7 @@ if( !empty($data['action-5']) ){
     
     // вернём как было
     $app = $appGlobal;
+    unset($appGlobal);
     $arRes['status'] = 'constructor';
 }
 
@@ -187,6 +188,131 @@ if(!empty($data['action7_3']) && is_array($data['action7_3'])){
     
     // записать всё обратно из получившегося набора компонентов
     savePageByArrayComponents($data['url-site-page'], $data['component']);
+}
+
+// добавление компонента
+if(!empty($data['action_8']) && is_array($data['action_8'])){
+    foreach ($data['action_8'] as $key => $value) {
+        //
+    }
+
+    $arRes['status'] = 'addConstructor';
+    $arRes['url-site-page'] = $data['url-site-page'];
+    $arRes['key'] = $key; // где вставлять компонент в какую позицию
+
+}
+
+// первый шаг добавления компонента
+if(!empty($data['action_8_1']) 
+    && !empty($data['url-site-page'])
+    && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
+    && !empty($data['name_new_component'])
+){
+    // шаблон по умолчанию 0
+    if (empty($data['name_new_template'])){
+        $data['name_new_template'] = '0';
+    }
+    
+    global $app;
+    
+    // проверим есть ли такой компонент (точнее файл информации о нём)
+    $dataComponent = appFromConstructorPageComponent::getInfoAboutComponent(
+        $data['name_new_component'], 
+        $data['name_new_template'],
+        array(),
+        $app->urlProject
+    );
+    
+    if(!empty($dataComponent)){
+        $arRes['status'] = 'good-component';
+
+        $arRes['url-site-page'] = $data['url-site-page'];
+        $arRes['position_new_component'] = $data['position_new_component'];
+        
+        $arRes['data-component'] = array(
+            'name' => $data['name_new_component'],
+            'template' => $data['name_new_template'],
+            'arParam' => $dataComponent['all-property'],
+            'componentInfo' => $dataComponent
+        );  
+    }else{
+        $arRes['status'] = 'error-not-component';
+    }
+}
+
+// надо добавить новый компонент на выбранную страницу
+if(!empty($data['action_8_2']) 
+    && !empty($data['url-site-page'])
+    && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
+    && !empty($data['name_new_component']) 
+    && (!empty($data['name_new_template']) || ($data['name_new_template'] == 0) )
+){
+    // надо взять все компоненты с редактируемой страницы
+    
+    // сохраним основной app обьект
+    global $app;
+    $appGlobal = $app;
+    
+    // переопределим app
+    $app = new appFromConstructorPageComponent($app->urlProject);
+
+    $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
+    
+    include $url; // !! надо не подключать ядро
+
+    $allComponentsThisPage = $app->getAllDataIncludeComponents();
+    // вернём как было
+    $app = $appGlobal;
+    unset($appGlobal);
+    
+    $newArrayComponents = array();
+    
+    if($data['position_new_component'] == "'-1'"){
+        $newArrayComponents[] = array(
+            'name' => $data['name_new_component'],
+            'template' => $data['name_new_template'],
+            'arParam' => $data['params']
+        );
+        foreach ($allComponentsThisPage as $value) {
+            $newArrayComponents[] = $value;
+        }
+    }elseif(is_numeric($data['position_new_component'])){
+        $data['position_new_component']++; 
+        $flagAdd = false;
+        foreach ($allComponentsThisPage as $key => $value) {
+            if($data['position_new_component'] == $key){
+                $newArrayComponents[] =  array(
+                    'name' => $data['name_new_component'],
+                    'template' => $data['name_new_template'],
+                    'arParam' => $data['params']
+                );
+                $flagAdd  = true;
+            }
+            $newArrayComponents[] = $value;
+        }
+        if(!$flagAdd){
+            $newArrayComponents[] =  array(
+                'name' => $data['name_new_component'],
+                'template' => $data['name_new_template'],
+                'arParam' => $data['params']
+            );
+        }
+    }
+    unset($allComponentsThisPage);
+        
+    // правильно подготовить массив с компонентами 
+    $trueNewArrayComponents = array();
+    foreach ($newArrayComponents as $value) {
+        $trueNewArrayComponents[] = array(
+            'component' => $value['name'],
+            'tempalate' => $value['template'],
+            'params' => $value['arParam']
+        );
+    }
+    
+    // сохранить всё на страницу
+    savePageByArrayComponents($data['url-site-page'], $trueNewArrayComponents);
+    
 }
 
 // показать шаблон

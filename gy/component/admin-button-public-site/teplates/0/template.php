@@ -1,4 +1,4 @@
-<?if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );?>
+<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 <div class="gy-admin-panel">
     <h2 class="gy-admin-logo">Админка gy framework</h2>

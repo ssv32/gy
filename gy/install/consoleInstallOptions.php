@@ -52,7 +52,7 @@ function createTextForFileCofig($options){
         
         $fileText = '
 <?'.$br.'
-if (!defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && GY_GLOBAL_FLAG_CORE_INCLUDE !== true ) die("err_core");'.$br.'
+if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$br.'
 
 $gy_config = array('.$br;
             

@@ -1,4 +1,4 @@
-<?if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );?>
+<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 <h4><?=$this->lang->GetMessage('title');?></H4>
 

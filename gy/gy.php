@@ -1,9 +1,9 @@
 <?php
 // если ядро не подключено подключаем всё а если уже подключено то не надо
-if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) {
+if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     ob_start();
-    define("GY_GLOBAL_FLAG_CORE_INCLUDE", true); // флаг о том что ядро подключено // flag include core
+    define("GY_CORE", true); // флаг о том что ядро подключено // flag include core
 
     include_once("config/gy_config.php"); // подключение настроек ядра // include options
 

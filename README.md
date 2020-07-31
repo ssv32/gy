@@ -66,7 +66,7 @@ gy php framework протестирован и будет работать на 
 `include "./gy/gy.php"; // подключить ядро // include core`<br/>
 
 ### Example of checking if the kernel is connected gy php framework
-`<?if ( !defined("GY_GLOBAL_FLAG_CORE_INCLUDE") && (GY_GLOBAL_FLAG_CORE_INCLUDE !== true) ) die( "gy: err include core" );?>`
+`<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>`
 
 ### Example run component:
 `<?`<br/>

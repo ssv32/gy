@@ -203,38 +203,44 @@ if(!empty($data['action_8']) && is_array($data['action_8'])){
 }
 
 // первый шаг добавления компонента
-if(!empty($data['action_8_1']) 
-    && !empty($data['url-site-page'])
-    && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
-    && !empty($data['name_new_component'])
-){
-    // шаблон по умолчанию 0
-    if (empty($data['name_new_template'])){
-        $data['name_new_template'] = '0';
-    }
+if( !empty($data['action_8_1']) ){
     
-    global $app;
+    if(
+        !empty($data['url-site-page'])
+        && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
+        && !empty($data['name_new_component'])
+    ){
     
-    // проверим есть ли такой компонент (точнее файл информации о нём)
-    $dataComponent = appFromConstructorPageComponent::getInfoAboutComponent(
-        $data['name_new_component'], 
-        $data['name_new_template'],
-        array(),
-        $app->urlProject
-    );
-    
-    if(!empty($dataComponent)){
-        $arRes['status'] = 'good-component';
+        // шаблон по умолчанию 0
+        if (empty($data['name_new_template'])){
+            $data['name_new_template'] = '0';
+        }
 
-        $arRes['url-site-page'] = $data['url-site-page'];
-        $arRes['position_new_component'] = $data['position_new_component'];
-        
-        $arRes['data-component'] = array(
-            'name' => $data['name_new_component'],
-            'template' => $data['name_new_template'],
-            'arParam' => $dataComponent['all-property'],
-            'componentInfo' => $dataComponent
-        );  
+        global $app;
+
+        // проверим есть ли такой компонент (точнее файл информации о нём)
+        $dataComponent = appFromConstructorPageComponent::getInfoAboutComponent(
+            $data['name_new_component'], 
+            $data['name_new_template'],
+            array(),
+            $app->urlProject
+        );
+
+        if(!empty($dataComponent)){
+            $arRes['status'] = 'good-component';
+
+            $arRes['url-site-page'] = $data['url-site-page'];
+            $arRes['position_new_component'] = $data['position_new_component'];
+
+            $arRes['data-component'] = array(
+                'name' => $data['name_new_component'],
+                'template' => $data['name_new_template'],
+                'arParam' => $dataComponent['all-property'],
+                'componentInfo' => $dataComponent
+            );  
+        }else{
+            $arRes['status'] = 'error-not-component';
+        }
     }else{
         $arRes['status'] = 'error-not-component';
     }

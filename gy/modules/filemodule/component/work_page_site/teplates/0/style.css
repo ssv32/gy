@@ -2,7 +2,37 @@
     background-color: #e5e5ff;
 }
 .data-component{
-    background-color: cadetblue;
-    margin-bottom: 50px;
-    margin-top: 50px;
+    background-color: #5f9ea0ba;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    width: 800px;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+    border: dashed #4f6c6d;
+}
+.title-n-component{
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #4f6b6d;
+}
+
+.gy-table-all-users th{
+    padding: 5px;
+    background-color: #21a2ff9e
+}
+.gy-table-all-users{
+    background-color: #8cc7f25e;
+}
+.button-function .gy-admin-button{
+    margin-bottom: 0px;
+}
+.button-function .gy-admin-button{
+    padding: 9px 30px 9px;
+    width: 500px;
+}
+
+.warning{
+    color: #c73838;
+    font-size: 14pt;
+    font-weight: 700;
 }

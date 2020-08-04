@@ -66,19 +66,16 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 name="action_8['-1']" 
                 value="<?=$this->lang->GetMessage('add-component');?>" 
             />
-
             <? foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $component) { ?>
                 <div class="data-component">
-                    =============================<?=$this->lang->GetMessage('include-component');?><?=$key?>============================
+                    <div class="title-n-component"><?=$this->lang->GetMessage('include-component');?><?=$key?></div>
                     <p><?=$this->lang->GetMessage('text-include-this-component');?><?=$component['name']?></p>
                     <input type="hidden" name="component[<?=$key;?>][component]" value="<?=$component['name']?>">
                     <p>
                         <?=$this->lang->GetMessage('name-template');?>
                         <input type="text" name="component[<?=$key;?>][tempalate]" value="<?=$component['template']?>">
                     </p>
-                    <p>
-                        <?=$this->lang->GetMessage('params-component');?>
-                    </p>
+                   
                     
                     <?if(!empty($component['componentInfo']['v'])){?>
                         <p>
@@ -92,6 +89,9 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                         </p>
                     <?}?>    
                         
+                    <p>
+                        <?=$this->lang->GetMessage('params-component');?>
+                    </p>
                     <table border="1" class="gy-table-all-users">
                         <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
                         <? 
@@ -107,43 +107,43 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                             </tr>   
                         <?}?>
                     </table>    
-
-                    <input 
-                        class="gy-admin-button" 
-                        type="submit" 
-                        name="action7_3[<?=$key;?>]" 
-                        value="<?=$this->lang->GetMessage('text-button-del-component');?>" 
-                    />
+                    
+                    <div class="button-function">
+                        <input 
+                            class="gy-admin-button" 
+                            type="submit" 
+                            name="action7_3[<?=$key;?>]" 
+                            value="<?=$this->lang->GetMessage('text-button-del-component');?>" 
+                        />
+                        <br/>
+                        <input 
+                            class="gy-admin-button" 
+                            type="submit" 
+                            name="action7_1[<?=$key;?>]" 
+                            value="<?=$this->lang->GetMessage('text-button-up-component');?>" 
+                        />
+                        <br/>
+                        <input
+                            class="gy-admin-button" 
+                            type="submit" 
+                            name="action7_2[<?=$key;?>]" 
+                            value="<?=$this->lang->GetMessage('text-button-down-component');?>" 
+                        />
+                        <br/>
+                        <input
+                            class="gy-admin-button" 
+                            type="submit" 
+                            name="action_8[<?=$key;?>]" 
+                            value="<?=$this->lang->GetMessage('add-component');?>" 
+                        />
+                    </div>
                     <br/>
-                    <input 
-                        class="gy-admin-button" 
-                        type="submit" 
-                        name="action7_1[<?=$key;?>]" 
-                        value="<?=$this->lang->GetMessage('text-button-up-component');?>" 
-                    />
-                    <input
-                        class="gy-admin-button" 
-                        type="submit" 
-                        name="action7_2[<?=$key;?>]" 
-                        value="<?=$this->lang->GetMessage('text-button-down-component');?>" 
-                    />
-                    <br/>
-                    <input
-                        class="gy-admin-button" 
-                        type="submit" 
-                        name="action_8[<?=$key;?>]" 
-                        value="<?=$this->lang->GetMessage('add-component');?>" 
-                    />
-                    <br/>
-                    ==========================================================================
                 </div>
             <?}?>
 
-            <br/>
-            <br/>
             <input class="gy-admin-button" type="submit" name="action-6" value="<?=$this->lang->GetMessage('text-button-save2');?>" />
             <br/>
-            *<?=$this->lang->GetMessage('warning-text-1');?>
+            <span class="warning">*<?=$this->lang->GetMessage('warning-text-1');?></span>
             <br/>
             <br/>
             <br/>

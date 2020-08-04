@@ -33,12 +33,13 @@ class appFromConstructorPageComponent{
         $componentInfo = array();     
         
         if ( file_exists($url.'/customDir/component/'.$name.'/componentInfo.php' ) ){ 
-            require_once $url.'/customDir/component/'.$name.'/componentInfo.php'; 
+            require $url.'/customDir/component/'.$name.'/componentInfo.php'; 
         }elseif(($urlComponentInModule !== false) && file_exists($urlComponentInModule.'/componentInfo.php' )){
-            require_once $urlComponentInModule.'/componentInfo.php'; // может и не быть
+            require $urlComponentInModule.'/componentInfo.php'; // может и не быть
         }elseif( file_exists($url.'/gy/component/'.$name.'/componentInfo.php' ) ){ 
-            require_once $url.'/gy/component/'.$name.'/componentInfo.php'; // может и не быть
+            require $url.'/gy/component/'.$name.'/componentInfo.php'; // может и не быть
         } 
+        
         return $componentInfo;
     }
 
@@ -53,7 +54,7 @@ class appFromConstructorPageComponent{
      * @param type $arParam
      */
     public function component($name, $template, $arParam  ){
-        global $app;
+        global $app;      
         $this->allDateIncludeComponents[$this->intKey] = array(
             'name' => $name,
             'template' => $template,

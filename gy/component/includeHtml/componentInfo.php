@@ -8,5 +8,8 @@ $componentInfo = array(
     'all-property' => array(
         'html',
         //'test'
+    ),
+    'all-property-text' => array(
+        'html' => 'Любой html код'
     )
 );

@@ -7,5 +7,8 @@ $componentInfo = array(
     'v' => '0.1',
     'all-property' => array(
         'ID'
+    ),
+    'all-property-text' => array(
+        'ID' => 'ID контейнера данных'
     )
 );

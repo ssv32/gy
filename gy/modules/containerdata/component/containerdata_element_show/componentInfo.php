@@ -9,5 +9,10 @@ $componentInfo = array(
         'container-data-code' ,
         'element-code',
         'cacheTime'
+    ),
+    'all-property-text' => array(
+        'container-data-code' => 'Код контейнера данных',
+        'element-code' => 'Код элемента',
+        'cacheTime' => 'Время кеширования'
     )
 );

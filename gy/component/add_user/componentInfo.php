@@ -7,5 +7,8 @@ $componentInfo = array(
     'v' => '0.1',
     'all-property' => array(
         'back-url',
+    ),
+    'all-property-text' => array(
+        'back-url' => 'Ссылка на страницу откуда идёт добавление пользователя',
     )
 );

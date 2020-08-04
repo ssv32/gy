@@ -49,8 +49,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
         <div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-    <?}elseif($arRes['status'] == 'constructor'){?>
-        
+    <?}elseif($arRes['status'] == 'constructor'){?>        
         <h4><?=$this->lang->GetMessage('title-action-5');?></h4>
         <?
         $countIncludeComponentsInPageSite = count($arRes['dataIncludeAllComponentsInThisPageSite']);?>
@@ -93,7 +92,11 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                         <?=$this->lang->GetMessage('params-component');?>
                     </p>
                     <table border="1" class="gy-table-all-users">
-                        <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
+                        <tr>
+                            <th><?=$this->lang->GetMessage('param-name');?></th>
+                            <th><?=$this->lang->GetMessage('param-value');?></th>
+                            <th><?=$this->lang->GetMessage('param-info-text');?></th>
+                        </tr>
                         <? 
                         // TODO компонент includeHtml в параметре html с кавычками и всё ламается
                         //    пока заменил input на textarea надо протестить
@@ -103,6 +106,11 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                                 <td><?=$keyParam?></td>
                                 <td>
                                     <textarea type="text" name="component[<?=$key;?>][params][<?=$keyParam?>]" ><?=$valueParam?></textarea>
+                                </td>
+                                <td>
+                                    <?if(!empty($component['componentInfo']['all-property-text'][$keyParam])){?>
+                                        <?=$component['componentInfo']['all-property-text'][$keyParam]?>
+                                    <?}?>
                                 </td>
                             </tr>   
                         <?}?>
@@ -203,15 +211,24 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 <?=$this->lang->GetMessage('this_template_component');?>: <?=$arRes['data-component']['template']?>
                 <input type="hidden" name="name_new_template" value="<?=$arRes['data-component']['template']?>">
             </p>
-            
+           
             <table border="1" class="gy-table-all-users">
-                <tr><th><?=$this->lang->GetMessage('param-name');?></th><th><?=$this->lang->GetMessage('param-value');?></th></tr>
+                <tr>
+                    <th><?=$this->lang->GetMessage('param-name');?></th>
+                    <th><?=$this->lang->GetMessage('param-value');?></th>
+                    <th><?=$this->lang->GetMessage('param-info-text');?></th>
+                </tr>
                 <? 
                 foreach ($arRes['data-component']['arParam'] as $keyParam => $valueParam) { ?>
                     <tr>
                         <td><?=$valueParam?></td>
                         <td>
                             <textarea type="text" name="params[<?=$valueParam?>]" ></textarea>
+                        </td>
+                        <td>
+                            <?if(!empty($arRes['data-component']['componentInfo']['all-property-text'][$valueParam])){?>
+                                <?=$arRes['data-component']['componentInfo']['all-property-text'][$valueParam]?>
+                            <?}?>
                         </td>
                     </tr>   
                 <?}?>

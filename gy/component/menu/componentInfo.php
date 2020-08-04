@@ -7,5 +7,8 @@ $componentInfo = array(
     'v' => '0.1',
     'all-property' => array(
         'buttons'
+    ),
+    'all-property-text' => array(
+        'buttons' => 'Массив с элементами меню, вида : названия кнопки => ссылка'
     )
 );

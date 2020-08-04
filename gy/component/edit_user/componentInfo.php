@@ -8,5 +8,9 @@ $componentInfo = array(
     'all-property' => array(
         'back-url',
         'id-user'
+    ),
+    'all-property-text' => array(
+        'back-url' => 'Ссылка на страницу откуда идёт редактирование',
+        'id-user' => 'Id Пользователя которого надо редактировать'
     )
 );

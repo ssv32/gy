@@ -6,16 +6,22 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
 <?if(empty($arRes['status'])){?>
     <form method="post">
         <h4><?=$this->lang->GetMessage('text-input-url-page');?></h4>
-        <span>/</span><input type="text" name="url-site-page" /><span>/index.php</span>
-        <?// TODO сделать выбор из имеющихся?>
-        <br/>
-        <input class="gy-admin-button" type="submit" name="action-1" value="<?=$this->lang->GetMessage('title-add-page');?>" />
-        <input class="gy-admin-button" type="submit" name="action-2" value="<?=$this->lang->GetMessage('title-edit-page');?>" />
-        <input class="gy-admin-button" type="submit" name="action-3" value="<?=$this->lang->GetMessage('title-delete-page');?>" />
-        <br/>
-        <br/>
-        <input class="gy-admin-button" type="submit" name="action-4" value="<?=$this->lang->GetMessage('title-action-4-show-page');?>" />
-        <input class="gy-admin-button" type="submit" name="action-5" value="<?=$this->lang->GetMessage('title-action-5');?>" />
+        <div class="button-function">
+            <span>/</span><input class="input-text" type="text" name="url-site-page" /><span>/index.php</span>
+            <?// TODO сделать выбор из имеющихся?>
+            <br/>
+            <input class="gy-admin-button" type="submit" name="action-1" value="<?=$this->lang->GetMessage('title-add-page');?>" />
+            <br/>
+            <input class="gy-admin-button" type="submit" name="action-2" value="<?=$this->lang->GetMessage('title-edit-page');?>" />
+            <br/>
+            <input class="gy-admin-button" type="submit" name="action-3" value="<?=$this->lang->GetMessage('title-delete-page');?>" />
+            <br/>
+            <br/>
+            <input class="gy-admin-button" type="submit" name="action-4" value="<?=$this->lang->GetMessage('title-action-4-show-page');?>" />
+            <br/>
+            <input class="gy-admin-button" type="submit" name="action-5" value="<?=$this->lang->GetMessage('title-action-5');?>" />
+            <br/>
+        </div>
     </form>
 <?}else{
     if( ($arRes['status'] != 'edit') 

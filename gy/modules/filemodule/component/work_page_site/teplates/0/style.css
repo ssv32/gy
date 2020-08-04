@@ -29,8 +29,14 @@
 .button-function .gy-admin-button{
     padding: 9px 30px 9px;
     width: 500px;
+    margin-left: 0px;
 }
-
+form > .button-function > .input-text{
+    padding: 9px 30px 9px;
+    width: 420px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
 .warning{
     color: #c73838;
     font-size: 14pt;

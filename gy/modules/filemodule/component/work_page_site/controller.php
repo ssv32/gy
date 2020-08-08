@@ -76,7 +76,7 @@ if( !empty($data['action-5']) ){
     $appGlobal = $app;
     
     // переопределим app
-    $app = new appFromConstructorPageComponent($app->urlProject);
+    $app = new appFromConstructorPageComponent($app->urlProject, $app->options );
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
     
@@ -260,7 +260,7 @@ if(!empty($data['action_8_2'])
     $appGlobal = $app;
     
     // переопределим app
-    $app = new appFromConstructorPageComponent($app->urlProject);
+    $app = new appFromConstructorPageComponent($app->urlProject, $app->options );
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
     

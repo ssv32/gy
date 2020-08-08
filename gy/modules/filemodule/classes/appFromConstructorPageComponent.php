@@ -10,10 +10,12 @@ class appFromConstructorPageComponent{
     
     private $allDateIncludeComponents = array();
     private $intKey = 0;
-    private $urlProject;
+    public $urlProject;
+    public $options; // настройки проекта 
     
-    public function __construct($urlProject) {
+    public function __construct($urlProject, $options) {
         $this->urlProject = $urlProject;
+        $this->options = $options;
     }
     
     /**

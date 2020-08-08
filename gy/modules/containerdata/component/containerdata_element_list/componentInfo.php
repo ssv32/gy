@@ -1,14 +1,18 @@
 <?
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
+global $app;
+$utlThisComponent = "/gy/modules/containerdata/component/containerdata_element_list/";
+$langComponentInfo = new lang($app->urlProject.$utlThisComponent, 'componentInfo', $app->options['lang']);
+
 $componentInfo = array(
     'name' => 'containerdata_element_list',
-    'text-info' => 'Работа с элементами контейнера данных',
+    'text-info' => $langComponentInfo->GetMessage('text-info'),
     'v' => '0.1',
     'all-property' => array(
         'container-data-id'
     ),
     'all-property-text' => array(
-        'container-data-id' => 'Id контейнера данных'
+        'container-data-id' => $langComponentInfo->GetMessage('property-container-data-id'),
     )
 );

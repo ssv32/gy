@@ -12,6 +12,7 @@ $gy_config = array(
         'db_user' => 'root', // заменить на настоящего пользователя // replace by true user 
         'db_pass' => '', 
         'db_name' => 'gy_db',
+        'db_port' => '31006',
         //---
         
         //--- example connect PhpFileSql---
@@ -29,6 +30,7 @@ $gy_config = array(
         //'db_user' => 'postgres', // заменить на настоящего пользователя // replace by true user 
         //'db_pass' => '', 
         //'db_name' => 'gy_db',
+        //'db_port' => '5432',
         //---
         
     ),

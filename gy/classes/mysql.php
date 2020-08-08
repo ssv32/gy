@@ -15,10 +15,11 @@ class mysql extends db{
     * @param $user
     * @param $pass 
     * @param $name_db
+    * @param $port
     * @return resurs, false
     */
-    public function connect($host, $user, $pass, $name_db){
-        $this->db = mysqli_connect($host, $user, $pass, $name_db);
+    public function connect($host, $user, $pass, $name_db, $port){
+        $this->db = mysqli_connect($host, $user, $pass, $name_db, $port);
         return $this->db;
     }
     
@@ -71,7 +72,16 @@ class mysql extends db{
     public function __construct($db_config) {
         if ( empty($this->db)){
             if (!empty($db_config)){
-                $this->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+                if( empty($db_config['db_port']) ){
+                    $db_config['db_port'] = ini_get("mysqli.default_port");
+                }
+                $this->connect(
+                    $db_config['db_host'], 
+                    $db_config['db_user'], 
+                    $db_config['db_pass'], 
+                    $db_config['db_name'], 
+                    $db_config['db_port']
+                );
             }
         }
     }

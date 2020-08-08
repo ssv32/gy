@@ -9,6 +9,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 class pgsql extends db{
     
     public $test = 'pgsql ok';
+    public $defaultPort = '5432';
     public $db;
     
     /* connect() - create connect in database
@@ -16,10 +17,11 @@ class pgsql extends db{
     * @param $user
     * @param $pass 
     * @param $name_db
+    * @param $port
     * @return resurs, false
     */
-    public function connect($host, $user, $pass, $name_db){        
-        $this->db = pg_connect("host=".$host." port=5432 dbname=".$name_db." user=".$user." password=".$pass);
+    public function connect($host, $user, $pass, $name_db, $port){        
+        $this->db = pg_connect("host=".$host." port=".$port." dbname=".$name_db." user=".$user." password=".$pass);
         return $this->db;
     }
     
@@ -72,7 +74,16 @@ class pgsql extends db{
     public function __construct($db_config) {
         if ( empty($this->db)){
             if (!empty($db_config)){
-                $this->connect($db_config['db_host'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+                if( empty($db_config['db_port']) ){
+                    $db_config['db_port'] = $this->defaultPort;
+                }
+                $this->connect(
+                    $db_config['db_host'], 
+                    $db_config['db_user'], 
+                    $db_config['db_pass'], 
+                    $db_config['db_name'], 
+                    $db_config['db_port']
+                );
             }
         }
     }

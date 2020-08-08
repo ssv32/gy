@@ -30,9 +30,10 @@ class PhpFileSqlClientForGy extends db{
     * @param $user
     * @param $pass 
     * @param $name_db
+    * @param $port - не используется
     * @return resurs, false
     */
-    public function connect($dir, $login, $pass, $name_db){
+    public function connect($dir, $login, $pass, $name_db, $port = false){
         $phpFileSql = new PhpFileSql($dir);
         $phpFileSql->connect($login, $pass, $name_db);
         

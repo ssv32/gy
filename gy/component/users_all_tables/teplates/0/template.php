@@ -40,6 +40,7 @@
                                 <br/>
                                 <a href="users.php?del-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('del-user');?></a>
                                 <a href="edit-user.php?edit-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-user');?></a>
+                                <a href="?show-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('show-user');?></a> <?// TODO ?>
                                 <br/>
                                 <br/>
                             <?} ?>
@@ -56,7 +57,12 @@
         <br/>
         <br>
         <br>
-        <a href="group-user.php" class="gy-admin-button">Настройка групп прав доступа</a>
+        <a href="group-user.php" class="gy-admin-button"><?=$this->lang->GetMessage('options-groups');?></a> 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <a href="edit-all-users-propertys.php" class="gy-admin-button"><?=$this->lang->GetMessage('list-all-user-propertys');?></a>
     <?}?>
 <?}?>
         

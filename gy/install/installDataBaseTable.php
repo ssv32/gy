@@ -204,7 +204,52 @@ if($isRunConsole){
     
     echo $br.'add users in user groups = OK';
     
+    // общие свойства для пользователей
+    echo $br.'install all users propertys = start';
+    // таблица с общими свойствами (список общих свойств для всех пользователей)
+    $res = $db->createTable(
+        'create_all_users_property',
+        array( 
+            'id int PRIMARY KEY AUTO_INCREMENT', 
+            'name_property varchar(255)', 
+            'type_property int', 
+            'code varchar(255)',
+        )
+    );
     
+    // типы общих свойств для пользователей
+    $res = $db->createTable(
+        'type_all_user_propertys',
+        array( 
+            'id int PRIMARY KEY AUTO_INCREMENT', 
+            'name_type varchar(255)', 
+            'info varchar(255)',
+            'code varchar(255)',
+        )
+    );
+    
+    $db->insertDb(
+        'type_all_user_propertys', 
+        array( 
+            'name_type' => 'text', 
+            'info' => 'input type text',
+            'code' => 'text',
+        )
+    );
+    
+    // значения общего свойства типа текст 
+    $res = $db->createTable(
+        'value_all_user_propertys_text',
+        array( 
+            'id int PRIMARY KEY AUTO_INCREMENT', 
+            'value varchar(255)', 
+            'id_users int',  
+            'id_property int',  
+        )
+    );
+
+    echo $br.'install all users propertys = OK';
+        
     echo $br.'install all modules db = start';
     
     // теперь установка частей БД относящихся к модулям

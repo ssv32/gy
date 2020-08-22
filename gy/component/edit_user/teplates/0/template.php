@@ -13,7 +13,7 @@ if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
 <?}?>
 <? if (empty($arRes["stat"]) || ($arRes["stat"] == 'edit') ) {?>
     <form>
-    <input type="hidden" name="edit-id" value="<?=$arParam['id-user'];?>" />
+        <input type="hidden" name="edit-id" value="<?=$arParam['id-user'];?>" />
         <? foreach ($arRes["user_property"] as $key => $val ){?>
             <?=$this->lang->GetMessage($val);?>:<br/>
             <?if ($val != 'groups'){?>
@@ -41,7 +41,10 @@ if (!empty($arParam['back-url']) && empty($arRes["stat"])){?>
         <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
 
     </form>	
-	
+    
+    <br/>
+    <a class="gy-admin-button" href="/gy/admin/edit-users-propertys.php?edit-id=<?=$arParam['id-user'];?>"><?=$this->lang->GetMessage('edit-propertys');?></a>
+    
 <?}elseif($arRes["stat"] == 'ok'){?>
     <div class="gy-admin-good-message"><?=$this->lang->GetMessage('stat-ok');?></div>
     <br/>

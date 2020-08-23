@@ -249,8 +249,10 @@ class user{
         );
         $result = $db->fetch($res, false);
         
-        // получить группы текущего пользователя
-        $result['groups'] = accessUserGroup::getListGroupsByUser($id);
+        if(!empty($result)){
+            // получить группы текущего пользователя
+            $result['groups'] = accessUserGroup::getListGroupsByUser($id);
+        }
         
         return $result;
     }

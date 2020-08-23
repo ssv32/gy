@@ -77,22 +77,43 @@ class allUsersPropertys{
             $result = true;		
         }
         
-        
-        //  TODO + удалить значения
+        //удалить значения
+        self::deleteAllValuesAllUserBypropertyId($id, 'text'); // text - т.к. пока других нет
         
         return $result;
     }
     
-    // взять все значения определённого типа свойства пользователя
-    public static function getAllValueUserProperty($idUser, $typeCode){
+    // удалить все значения определённого свойства у всех пользователей
+    public static function deleteAllValuesAllUserBypropertyId($idProperty, $typePropertyCode){
         $result = false;
         
-        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typeCode])){
+        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+            global $db;	
+            
+            $res = $db->deleteDb(
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
+                array( '=' => array('id_property', $idProperty) )
+            );
+
+            if ($res){
+                $result = true;		
+            }
+        }
+        
+        return $result;
+        
+    }
+    
+    // взять все значения определённого типа свойства пользователя
+    public static function getAllValueUserProperty($idUser, $typePropertyCode){
+        $result = false;
+        
+        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
             global $db;		        
             $res = $db->selectDb( 
-                self::$tableNameTypePropertysForCodeTypeProperty[$typeCode], 
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode], 
                 array('*'),
-                array()
+                array( '=' => array('id_users', $idUser) )
             );
             $result = $db->fetchAll($res, 'id_property');
         }
@@ -100,8 +121,83 @@ class allUsersPropertys{
         return $result;
     }
     
+    // добавить занчение своства
+    public static function addValueProperty($idUser, $typePropertyCode, $idProperty, $value){
+        $result = false;
+        
+        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+            global $db;
+            $res = $db->insertDb(
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode], 
+                array(
+                    'value' => $value,
+                    'id_users' => $idUser,
+                    'id_property' => $idProperty
+                )
+            );
+
+            if ($res){
+                $result = true;
+            }
+        }
+        
+        return $result;
+    }
+    
     // удалить значения конкретного свойства конкретного пользователя
+    public static function deleteValueProperty($idUser, $typePropertyCode, $idProperty){
+        $result = false;
+        
+        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+            global $db;	
+            
+            $res = $db->deleteDb(
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
+                array( 
+                    'AND' => array(
+                        array('=' => array('id_users', $idUser) ), 
+                        array('=' => array('id_property', $idProperty) ) 
+                    ),  
+                )
+            );
+
+            if ($res){
+                $result = true;		
+            }
+        }
+        
+        return $result;
+    }
     
     // изменить значение конкретного свойства конкретного пользователя
+    public static function updateValueProperty($idUser, $typePropertyCode, $idProperty, $value){
+        $result = false;
+        
+        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+            global $db;
+            $res = $db->updateDb(
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
+                array(
+                    'id_users' => $idUser,
+                    'id_property' => $idProperty,
+                    'value' => $value
+                ),
+                array( 
+                    'AND' => array(
+                        array('=' => array('id_users', $idUser) ), 
+                        array('=' => array('id_property', $idProperty) ) 
+                    ),  
+                )
+            );
+
+            if ($res){
+                $result = true;		
+            }
+            
+        }
+        
+        return $result;
+    }
+    
     
 }

@@ -12,7 +12,7 @@
         <div class="gy-admin-error-message"><?=$this->lang->GetMessage('stat-err');?></div>
         <br/>
     <?}?>
-    <a href="edit-all-users-propertys.php" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <a href="/gy/admin/edit-users-propertys.php?edit-id=<?=$arParam['id-user']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
 <?}else{?>
 
     <form method="post" >
@@ -27,19 +27,12 @@
             </tr>
             
             <? foreach ($arRes['propertys'] as $value) { ?>
-                <?if($value['id'] != '-'){?>
-                    <tr>
-                        <td><?=$value['name_property']?></td>
-                        <td>
-                            <input type="text" name="property[<?=$value['id']?>]" value="<?=$value['value']?>" >
-                        </td> 
-                    </tr>    
-                <?}else{?>
-                    <tr>
-                        <td><?=$value['name_property']?></td>
-                        <td><input type="text" name="new-property[<?=$value['id_property']?>]" value="<?=$value['value']?>" ></td> 
-                    </tr> 
-                <?}?>
+                <tr>
+                    <td><?=$value['name_property']?></td>
+                    <td>
+                        <input type="text" name="property[<?=$value['id_property']?>]" value="<?=$value['value']?>" >
+                    </td> 
+                </tr>    
             <?}?>
 
         </table>

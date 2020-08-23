@@ -28,10 +28,10 @@ if(!empty($this->arParam['id']) && is_numeric($this->arParam['id'])){
         // получить свойства и значения
         
         // получить все общие свойства пользователей которые были созданы
-        $allUsersCreatePropertys = allUsersPropertys::getAllUsersPropertys();
+        $allUsersCreatePropertys = generalUsersPropertys::getAllGeneralUsersPropertys();
 
         // получить значения свойств конкретного пользователя
-        $valuePropertysThisUser = allUsersPropertys::getAllValueUserProperty( $this->arParam['id'], 'text'); // text - т.к. пока только такие типы свойств реализованы
+        $valuePropertysThisUser = generalUsersPropertys::getAllValueUserProperty( $this->arParam['id'], 'text'); // text - т.к. пока только такие типы свойств реализованы
 
         // собираю общий массив
         $propertys = array();

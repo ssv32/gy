@@ -4,13 +4,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 $data = $_REQUEST;
 
 // получить все возможные типы свойств
-$arRes['allTypePropertys'] = allUsersPropertys::getAllTypeAllUsersPropertys();
+$arRes['allTypePropertys'] = generalUsersPropertys::getAllTypeAllUsersPropertys();
 
 // получить все общие свойства пользователей которые были созданы
-$arRes['allUsersCreatePropertys'] = allUsersPropertys::getAllUsersPropertys();
+$arRes['allUsersCreatePropertys'] = generalUsersPropertys::getAllGeneralUsersPropertys();
 
 // получить значения свойств конкретного пользователя
-$arRes['valuePropertysThisUser'] = allUsersPropertys::getAllValueUserProperty( $this->arParam['id-user'], 'text'); // text - т.к. пока только такие типы свойств реализованы
+$arRes['valuePropertysThisUser'] = generalUsersPropertys::getAllValueUserProperty( $this->arParam['id-user'], 'text'); // text - т.к. пока только такие типы свойств реализованы
 
 // собираю общий массив
 $arRes['propertys'] = array();
@@ -59,10 +59,10 @@ if(
     foreach ($data['property'] as $idProperty => $value) {
         if($arRes['valuePropertysThisUser'][$idProperty]){ // было ли уже задано когда то такое значение, для такого своства
             // если да то обновляем то что есть уже
-            allUsersPropertys::updateValueProperty($data['id-user'], 'text', $idProperty, $value);
+            generalUsersPropertys::updateValueProperty($data['id-user'], 'text', $idProperty, $value);
         }else{
             // если нет создаём новое значение
-            allUsersPropertys::addValueProperty($data['id-user'], 'text', $idProperty, $value);
+            generalUsersPropertys::addValueProperty($data['id-user'], 'text', $idProperty, $value);
         }
     }
     $arRes['stat'] = 'ok';

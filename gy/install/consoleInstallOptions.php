@@ -33,6 +33,10 @@ function parseOprions($optionsFromConsole){ // TODO надо распознав�
             $optionsFromConsole[$i+1] = '';
         }          
         
+        if($optionsFromConsole[$i+1] == '***'){
+            $optionsFromConsole[$i+1] = '';
+        }
+
         if (strripos($optionsFromConsole[$i], 'db') !== false){
             $arOptions['db_config'][$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];
         

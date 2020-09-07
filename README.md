@@ -4,11 +4,31 @@
 
 # gy php framework
 (ru):<br/>
+
+Gy – это php framework/CMS.
+
+### Системные требования:
+- php, необходимо скомпилировать с графической библиотекой GD, тестировалась на версиях версии 5.6, 7.0, 7.1 .
+- Поддерживаются базы данных (протестированы):
+  -	mySQL 5.6 ;
+  -	MariaDB-10.3 ;
+  -	PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql) ;
+  -	PostgreSQL 9.2 .
+  
+Вес файлов: 350 Кб (с демо данными).<br/>
+Вес базы данных: 208 Кб (с демо данными).
+
 ### Установка  gy php framework:
-- Установить пока можно php скриптом https://github.com/ssv32/install-gy-php-framework ;
+- Установить можно php скриптом от сюда - https://github.com/ssv32/install-gy-php-framework 
+  (имеется консольный и графический скрипт), или склонировать этот репозиторий;
 - После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом gy/install/consoleInstallOptions.php 
-  (или в файле /gy/config/gy_config.php);
+  (или отредактировав файл /gy/config/gy_config.php);
 - Затем надо установить таблицы в базу данных скриптом gy/install/installDataBaseTable.php (предварительно нужно создать БД и задать доступы и её имя на шаге выше).
+
+### Документация
+<p>Имеются файлы wiki по работе с framework, описанием реализованного (с точки зрения админки и пояснения для разработчиков)
+https://github.com/ssv32/gy/wiki</p>
+<br/><br/>
 
 ### Пример подключения gy php framework
 `<?`<br/>
@@ -34,32 +54,34 @@
 <br/>
 
 
-<p>Имеются файлы wiki по работе с framework, описанием реализованного (с точки зрения админки и пояснения для разработчиков)
-https://github.com/ssv32/gy/wiki</p>
-<br/><br/>
-Также gy php framework имеет элементы CMS, это админка и прочее для управления контентом на страницах.
-<br/><br/>
-gy php framework протестирован и будет работать на php версиях (необходимо скомпилировать PHP с графической библиотекой GD): <br/>
-
-- 5.6;<br/>
-- 7.0;<br/>
-- 7.1.<br/>
-<br/>
-
-Поддерживаются базы данных (протестированы): <br/>
-- mySQL 5.6 ; <br/>
-- MariaDB-10.3 ; <br/>
-- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql) ; <br/>
-- PostgreSQL 9.2 . <br/>
-<br/>
-
 -----
 (en):
+
+Gy – php framework/CMS.
+
+### System requirements:
+- php, you need to compile with the GD graphics library, tested on version versions 5.6, 7.0, 7.1 .
+- Databases supported (tested):
+  -	mySQL 5.6 ;
+  -	MariaDB-10.3 ;
+  -	PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql) ;
+  -	PostgreSQL 9.2 .
+  
+File weight: 350 Kb (with demo data).<br/>
+Database weight: 208 Kb (with demo data).
+
 ### Install gy php framework:
-- Can be installed with php script https://github.com/ssv32/install-gy-php-framework ;
-- After installation, you need to set the kernel settings gy framework, this can be done with a script  gy/install/consoleInstallOptions.php 
-  (or in file /gy/config/gy_config.php);
-- Then you need to create tables in the database, this is done by a script gy/install/installDataBaseTable.php (first you need to create a database and set access and its name in the step above).
+- You can install it with a php script from here - https://github.com/ssv32/install-gy-php-framework 
+  (there is a console and graphical script), or clone this repository;
+- After installation, you need to configure the gy framework core, this can be done with a script gy/install/consoleInstallOptions.php 
+  (or edited file /gy/config/gy_config.php);
+- Then you need to install the table into the database with a script gy/install/installDataBaseTable.php (initial creation of the database and set access and its name in the step above).
+
+
+### Документация
+<p>There are wiki pages that show how to work with gy framework. (in terms of admin panel and explanation for developers)
+https://github.com/ssv32/gy/wiki </p>
+<br/><br/>
 
 ### Example сonnection gy php framework
 `<?`<br/>
@@ -82,21 +104,5 @@ gy php framework протестирован и будет работать на 
 `⋅⋅⋅⋅),`<br/>
 `);`<br/>
 <br/>
-There are wiki pages that show how to work with gy framework. (in terms of admin panel and explanation for developers)
-https://github.com/ssv32/gy/wiki
-<br/><br/>
-Also, the gy php framework has CMS elements, this is the admin panel and more for managing content on pages.
-<br/><br/>
-gy php framework tested and will work on php versions (you need to compile PHP with the GD graphics library):<br/>
 
-- 5.6;<br/>
-- 7.0;<br/>
-- 7.1.<br/>
-<br/>
 
-Databases supported (tested): <br/>
-- mySQL 5.6 ; <br/>
-- MariaDB-10.3 ; <br/>
-- PhpFileSql v0.2-alpha (https://github.com/ssv32/PhpFileSql) ; <br/>
-- PostgreSQL 9.2 . <br/>
-<br/>

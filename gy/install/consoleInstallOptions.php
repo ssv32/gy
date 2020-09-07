@@ -54,8 +54,7 @@ function createTextForFileCofig($options){
     
     if (!empty($options)){
         
-        $fileText = '
-<?'.$br.'
+        $fileText = '<?'.$br.'
 if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$br.'
 
 $gy_config = array('.$br;

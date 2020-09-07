@@ -78,7 +78,7 @@ Database weight: 208 Kb (with demo data).
 - Then you need to install the table into the database with a script gy/install/installDataBaseTable.php (initial creation of the database and set access and its name in the step above).
 
 
-### Документация
+### Documentation
 <p>There are wiki pages that show how to work with gy framework. (in terms of admin panel and explanation for developers)
 https://github.com/ssv32/gy/wiki </p>
 <br/><br/>

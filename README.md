@@ -21,9 +21,14 @@ Gy – это php framework/CMS.
 ### Установка  gy php framework:
 - Установить можно php скриптом от сюда - https://github.com/ssv32/install-gy-php-framework 
   (имеется консольный и графический скрипт), или склонировать этот репозиторий;
-- После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом gy/install/consoleInstallOptions.php 
-  (или отредактировав файл /gy/config/gy_config.php);
+- После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом `gy/install/consoleInstallOptions.php` 
+  (или отредактировав файл `/gy/config/gy_config.php`);
 - Затем надо установить таблицы в базу данных скриптом gy/install/installDataBaseTable.php (предварительно нужно создать БД и задать доступы и её имя на шаге выше).
+
+### После установки
+- В админ панель можно попасть из браузера так `<домен вашего проекта>/gy/admin/` (admin admin).<br/>
+- Есть демо сайт, его можно установить консольным скриптом `gy/install/installDemoSite1.php` (Нужно послать первым параметром `start`, пример `php -f gy/install/installDemoSite1.php start`).<br/>
+- Демо сайт нужен для небольшой демонстрации, он включает в себя директорию `customDir`, с примером кастомизации шаблона компонента, раздел `classes` (для пользовательских классов или переопределения классов gy), и файл основной страницы `index.php`.
 
 ### Документация
 <p>Имеются файлы wiki по работе с framework, описанием реализованного (с точки зрения админки и пояснения для разработчиков)
@@ -76,6 +81,11 @@ Database weight: 208 Kb (with demo data).
 - After installation, you need to configure the gy framework core, this can be done with a script gy/install/consoleInstallOptions.php 
   (or edited file /gy/config/gy_config.php);
 - Then you need to install the table into the database with a script gy/install/installDataBaseTable.php (initial creation of the database and set access and its name in the step above).
+
+### After installation
+- You can get to the admin panel from the browser like this `<your project domain>/gy/admin/` (admin admin).<br/>
+- There is a demo site, you can install it with a console script `gy/install/installDemoSite1.php` (Should be sent as the first parameter `start`, example `php -f gy/install/installDemoSite1.php start`).<br/>
+- The demo site is needed for a small demonstration, it includes a directory `customDir`, with an example of customizing a component template, section `classes` (for custom classes or overriding classes gy), and the main page file `index.php`.
 
 
 ### Documentation

@@ -26,7 +26,7 @@ function showHelpFromInstall(){
 }
 
 
-function parseOprions($optionsFromConsole){ // TODO надо распознавать параметры db и правильно записывать
+function parseOprions($optionsFromConsole){ 
     $arOptions = array();
     for($i = 2; $i < (count($optionsFromConsole)-1); $i = $i+2){
         if (empty($optionsFromConsole[$i+1])) {

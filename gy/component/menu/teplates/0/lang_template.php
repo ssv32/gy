@@ -5,3 +5,7 @@ $mess['rus'] = array(
     'hi' => 'Админка gy framework',
 );
 
+$mess['rus'] = array(
+    'hi' => 'Admin panel - gy framework',
+);
+

@@ -16,3 +16,18 @@ $mess['rus'] = array(
     'title-add-property' => 'Добавление нового общего свойства для пользователей'
 );
 
+$mess['eng'] = array(
+    'ok' => 'Ok',
+    'title' => 'General user properties',
+    'name' => 'Property name',
+    'type' => 'Property type',
+    'code' => 'Property code',
+    'del-property' => 'Delete',
+    'edit-property' => 'Edit',
+    'stat-ok' => 'Action completed',
+    'stat-err' => 'An error has occurred',
+    'not-propertys' => 'No shared custom properties yet',
+    'add-property' => 'Add',
+    'title-add-property' => 'Adding a new shared property for users'
+);
+

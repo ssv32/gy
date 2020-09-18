@@ -5,3 +5,8 @@ $mess['rus'] = array(
     'text-info' => 'Компонент для вывода html кода',
     'property-html' => 'Любой html код'
 );
+
+$mess['eng'] = array(
+    'text-info' => 'Component for outputting html code',
+    'property-html' => 'Any html code'
+);

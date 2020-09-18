@@ -8,3 +8,10 @@ $mess['rus'] = array(
     'err_capcha' => '! Ошибка в capcha, попробуйте ещё раз'
 );
 
+$mess['eng'] = array(
+    'button' => 'Login',
+    'err1' => '! Login or password is incorrect.',
+    'exit' => 'Log off',
+    'err_capcha' => '! Capcha error, please try again'
+);
+

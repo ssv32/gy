@@ -5,3 +5,8 @@ $mess['rus'] = array(
     'text-info' => 'Меню',
     'property-buttons' => 'Массив с элементами меню, вида : названия кнопки => ссылка'
 );
+
+$mess['eng'] = array(
+    'text-info' => 'Menu',
+    'property-buttons' => 'Array of buttons with menu items, like: titles => link'
+);

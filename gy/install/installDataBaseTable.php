@@ -261,6 +261,6 @@ if($isRunConsole){
     echo $br.'-----install gy core taldes db = OK!-----'.$br;
     
 }else{
-	echo '! нужно запустить скрипт в консоли';
+	echo '! Error. You need to run the script in the console';
 
 }

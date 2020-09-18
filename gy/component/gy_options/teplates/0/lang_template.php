@@ -8,3 +8,10 @@ $mess['rus'] = array(
     'cacheClear-ok' => '! кеш сброшен'
 );
 
+$mess['eng'] = array(
+    'title' => 'Settings',
+    'cacheClear' => 'Flush cache',
+    'ok' => 'OK',
+    'cacheClear-ok' => '! cache flushed'
+);
+

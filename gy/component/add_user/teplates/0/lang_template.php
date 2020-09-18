@@ -15,3 +15,16 @@ $mess['rus'] = array(
     'add-err' => 'error, попробуйте заново'
 );
 
+$mess['eng'] = array(
+    'button' => 'Add',
+    'id' => 'id', 
+    'login' => 'Login', 
+    'name' => 'Name', 
+    'pass' => 'Password', 
+    'groups' => 'Group of rights',
+    'title-add' => 'Adding a new user',
+    'back' => '<< Back',
+    'ok' => 'ok',
+    'add-ok' => 'User added',
+    'add-err' => 'error, try again'
+);

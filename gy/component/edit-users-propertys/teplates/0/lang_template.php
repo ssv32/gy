@@ -7,7 +7,17 @@ $mess['rus'] = array(
     'save' => 'Сохранить',
     'stat-ok' => 'Данные сохранены',
     'stat-err' => 'Произошла ошибка',
-    'name-property' => 'Имя свофства',
+    'name-property' => 'Имя свойства',
     'value-property' => 'Значение свойства'
+);
+
+$mess['eng'] = array(
+    'ok' => 'Ok',
+    'title' => 'Editing user properties id=',
+    'save' => 'Save',
+    'stat-ok' => 'Data saved',
+    'stat-err' => 'An error has occurred',
+    'name-property' => 'Property name',
+    'value-property' => 'Property value'
 );
 

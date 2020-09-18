@@ -17,3 +17,19 @@ $mess['rus'] = array(
     'edit-propertys' => 'Изменить своства (общие свойства)'
 );
 
+$mess['eng'] = array(
+    'button' => 'Save',
+    'id' => 'id', 
+    'login' => 'Login', 
+    'name' => 'Name', 
+    'pass' => 'Password', 
+    'groups' => 'Group of rights',
+    'title' => 'User edit',
+    'back' => '<< Back',
+    'ok' => 'ok',
+    'stat-ok' => 'Data saved',
+    'edit-err' => 'error, try again',
+    'no-update-pass-text' => 'Do not change password',
+    'edit-propertys' => 'Change properties (general properties)'
+);
+

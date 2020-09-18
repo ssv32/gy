@@ -6,3 +6,9 @@ $mess['rus'] = array(
     'property-back-url' => 'Ссылка на страницу откуда идёт редактирование',
     'property-id-user' => 'Id Пользователя которого надо редактировать'
 );
+
+$mess['eng'] = array(
+    'text-info' => 'User editing',
+    'property-back-url' => 'Link to the page where the editing is coming from',
+    'property-id-user' => 'Id of the User to be edited'
+);

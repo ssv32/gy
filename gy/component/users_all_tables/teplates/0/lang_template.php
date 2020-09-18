@@ -14,3 +14,16 @@ $mess['rus'] = array(
     'show-user' => 'Посмотреть все данные'
 );
 
+$mess['eng'] = array(
+    'del-user' => 'Delete',
+    'edit-user' => 'Edit',
+    'title' => 'Users',
+    'add-user' => 'Add user',
+    'del-ok' => 'User - delete',
+    'del-err' => 'Error while deleting',
+    'ok' => 'Ok',
+    'options-groups' => 'Setting up access rights groups',
+    'list-all-user-propertys' => 'List of common custom properties',
+    'show-user' => 'View all data'
+);
+

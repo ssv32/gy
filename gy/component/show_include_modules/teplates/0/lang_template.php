@@ -5,3 +5,7 @@ $mess['rus'] = array(
     'hi' => 'Модули подключенные к ядру gy',
 );
 
+$mess['eng'] = array(
+    'hi' => 'Modules connected to the gy core',
+);
+

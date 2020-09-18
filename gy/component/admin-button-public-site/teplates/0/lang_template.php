@@ -8,3 +8,10 @@ $mess['rus'] = array(
     'button-work-page' => 'Работа со страницами сайта'
 );
 
+$mess['eng'] = array(
+    'button-admin' => 'Gy - site administration section',
+    'hi' => 'Hello, ',
+    'exit' => 'Log off',
+    'button-work-page' => 'Working with site pages'
+);
+

@@ -123,6 +123,6 @@ if($isRunConsole){ // пока запускать только из консол
     }
 	
 }else{
-	echo '! нужно запустить скрипт в консоли';
+	echo '! Error. You need to run the script in the console';
 
 }

@@ -18,3 +18,20 @@ $mess['rus'] = array(
     'ok' => 'ОК'
 );
 
+$mess['eng'] = array(
+    'ITEMS-NULL' => '!No items yet',
+    'title-add-element' => 'Add new item',
+    'add' => 'Add',
+    'save' => 'Edit',
+    'back' => 'Cancel',
+    'title' => 'Data container elements',
+    'add-ok' => 'Item added',
+    'add-err' => '!Error, please try again',
+    'el-edit' => 'Edit item',
+    'el-del' => 'Remove item',
+    'el-view-property' => 'View item properties',
+    'del-ok' => '! Item removed',
+    'edit-ok' => 'item edited',
+    'ok' => 'OK'
+);
+

@@ -199,6 +199,6 @@ if($isRunConsole){
     echo $br.'--install table module - containerData = OK!--'.$br;
     
 }else{
-    echo '! нужно запустить скрипт в консоли';
+    echo '! Error. You need to run the script in the console';
 
 }

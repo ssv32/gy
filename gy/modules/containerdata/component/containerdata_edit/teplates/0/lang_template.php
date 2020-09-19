@@ -11,3 +11,13 @@ $mess['rus'] = array(
     'edit-property' => 'Редактировать свойства этого контейнера данных'
 );
 
+$mess['eng'] = array(
+    'save' => 'Save',
+    'back' => 'Cancel',
+    'title' => 'Editing a data container',
+    'add-err' => 'Error! try again', 
+    'add-ok' => 'Data container changed successfully!',
+    'ok' => 'OK',
+    'edit-property' => 'Edit properties of this data container'
+);
+

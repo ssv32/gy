@@ -10,3 +10,12 @@ $mess['rus'] = array(
     'ok' => 'ОК'
 );
 
+$mess['eng'] = array(
+    'save' => 'Create',
+    'back' => 'Cancel',
+    'title' => 'Creating a data container',
+    'add-err' => 'Error! try again', 
+    'add-ok' => 'Data container created successfully!',
+    'ok' => 'OK'
+);
+

@@ -6,3 +6,9 @@ $mess['rus'] = array(
     'property-container-data-id' => 'Id контейнера данных',
     'property-el-id' => 'Id элемента'
 );
+
+$mess['eng'] = array(
+    'text-info' => 'Working with the properties of a specific item in a data container',
+    'property-container-data-id' => 'Data container id',
+    'property-el-id' => 'Item id'
+);

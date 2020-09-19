@@ -7,3 +7,10 @@ $mess['rus'] = array(
     'property-element-code' => 'Код элемента',
     'property-cacheTime' => 'Время кеширования'
 );
+
+$mess['eng'] = array(
+    'text-info' => 'Outputting a data container item',
+    'property-container-data-code' => 'Data container code',
+    'property-element-code' => 'Item code',
+    'property-cacheTime' => 'Caching time'
+);

@@ -5,7 +5,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 <?if ($arRes['info-modules']){?>
 
     <table border="1" class="gy-table-all-users">
-        <tr><th>Имя модуля</th><th>Версия</th></tr>
+        <tr><th><?=$this->lang->GetMessage('name')?></th><th><?=$this->lang->GetMessage('v')?></th></tr>
 
         <?foreach ($arRes['info-modules'] as $key => $val){?>
             <tr>

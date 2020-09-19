@@ -14,3 +14,16 @@ $mess['rus'] = array(
     'ok' => 'ОК'
 );
 
+$mess['eng'] = array(
+    'save' => 'Save',
+    'back' => 'Cancel',
+    'title' => 'Item property values',
+    'name' =>  'Name',
+    'code' =>  'Сode',
+    'type'  => 'Type property',
+    'value' => 'Value',
+    'save-ok' => 'Properties saved',
+    'PROPERTY_NULL' => '! No items found',
+    'ok' => 'OK'
+);
+

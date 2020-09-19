@@ -13,3 +13,16 @@ $mess['rus'] = array(
     'title-container-data' => 'Контейнеры данных'
 );
 
+$mess['eng'] = array(
+    'del' => 'Delete',
+    'add' => 'Add',
+    'edit' => 'Edit',
+    'show-element' => 'Working with data container elements',
+    'del-err' => 'Mistake! try again',
+    'del-ok' => 'Data container deleted!',
+    'not-element' => 'No data containers yet',
+    'ok' => 'OK',
+    'title-container-data' => 'Data containers'
+);
+
+

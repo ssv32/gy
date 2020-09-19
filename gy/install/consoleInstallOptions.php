@@ -79,9 +79,9 @@ $gy_config = array('.$br;
 }
 
 if($isRunConsole){ // пока запускать только из консоли
-	if ( empty($argv[1]) || ($argv[1] == 'help') ){
+    if ( empty($argv[1]) || ($argv[1] == 'help') ){
         showHelpFromInstall();
-	}elseif($argv[1] == 'set-all'){
+    }elseif($argv[1] == 'set-all'){
         echo 'run set-all'.$br;
 
         $options = parseOprions($argv);
@@ -93,7 +93,7 @@ if($isRunConsole){ // пока запускать только из консол
         }
         echo 'finish set-all'.$br;
      
-	}elseif($argv[1] == 'set-option'){
+    }elseif($argv[1] == 'set-option'){
         echo 'run set-option'.$br;
         $options = parseOprions($argv);
                

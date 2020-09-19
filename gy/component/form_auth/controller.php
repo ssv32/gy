@@ -69,7 +69,7 @@ if ($isShowAdminPanel === true){
     $arRes['form_input']["pass"] = "pass";
 }
 
-if ( !empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST['Выйти'])){
+if ( !empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST[ $this->lang->GetMessage('button-exit') ])){
     if ($user->userExit() ){
         header( 'Location: '.$redirectUrl );
     }

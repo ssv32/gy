@@ -26,7 +26,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
         
     </form>	
 <?else:?>
-    <h1>Привет, <?=$arRes["auth_user"];?></h1>
+    <h1><?=$this->lang->GetMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
     <form>
         <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
     </form>

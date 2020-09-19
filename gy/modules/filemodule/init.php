@@ -8,6 +8,10 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * (заранее обговорено какие есть разделы в модуле)
  */
 
+// языковой файл
+global $lang;
+include 'lang_init.php';
+
 // компоненты которые есть в модуле
 $componentsThisModule = array(
     'work_page_site'
@@ -27,7 +31,7 @@ $adminPageThisModule = array(
 
 // кнопки для меню админки
 $pagesFromAdminMenu = array(
-    'Работа со страницами сайта' => '/gy/admin/get-admin-page.php?page=work-page-site'
+    $mess[$lang]['name-button'] => '/gy/admin/get-admin-page.php?page=work-page-site'
 );
 
 // пользовательское действие, и если оно разрешено текущему пользователю то он увидит 

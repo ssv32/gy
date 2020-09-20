@@ -15,6 +15,6 @@ if ( empty($arRes["auth_ok"]) ) :?>
 
     </form>	
 <?else:?>
-    <h1>Привет, <?=$arRes["auth_user"];?></h1>
+    <h1><?=$this->lang->GetMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
 
 <?endif;?>

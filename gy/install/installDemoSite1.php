@@ -11,18 +11,26 @@ $br = "\n";
 if($isRunConsole){
     if($argv[1] == 'start'){
                 
-        if (!file_exists(__DIR__.'/../../index.php')) {          
+        if (!file_exists(__DIR__.'/../../index.php')) {
+            
+            define("GY_CORE", true); // хак
+            include_once(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
+            if(!empty($gy_config['lang']) && in_array($gy_config['lang'], array('rus', 'eng'))){
+                $lang = $gy_config['lang'];
+            }else{
+                $lang = 'rus';
+            }
             
             // записать основную страницу
-            file_put_contents(__DIR__.'/../../index.php', getCodeByUrlPage('index.php'));
+            file_put_contents(__DIR__.'/../../index.php', getCodeByUrlPage('index.php', $lang));
             
             mkdir(__DIR__.'/../../customDir/component/containerdata_element_show/teplates/0/', 0755, true);
             mkdir(__DIR__.'/../../customDir/classes/', 0755, true);
             
             // записать файлы /customDir
-            file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\template.php', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\template.php'));
-            file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\style.css', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\style.css'));
-            file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\lang_template.php', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\lang_template.php'));
+            file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\template.php', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\template.php', $lang));
+            file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\style.css', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\style.css', $lang));
+            file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\lang_template.php', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\lang_template.php', $lang));
 
             echo 'Install = OK!';
         }else{
@@ -37,7 +45,21 @@ if($isRunConsole){
     echo '! Error. You need to run the script in the console';
 }
 
-function getCodeByUrlPage($page){
+function getCodeByUrlPage($page, $lang){
+    $arLang = array(
+        'rus' => array(
+            'html-title' => 'Пример использования gy CMS/framework',
+            'title-show-component' => 'Вызов компонента',
+            'title-run-component' => 'Вызов компонента',
+        ),
+        'eng' => array(
+            'html-title' => 'Usage example gy CMS/framework',
+            'title-show-component' => 'Component launch',
+            'title-run-component' => 'Component launch',
+        )
+    );
+    
+    
     $arrayCodeByUrl = array(
         'index.php' => '<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
@@ -51,7 +73,7 @@ function getCodeByUrlPage($page){
                 \'includeHtml\',
                 \'0\',
                 array(
-                    \'html\' => \'<h1>Пример использования gy CMS/framework</h1>\'
+                    \'html\' => \'<h1>'.$arLang[$lang]['html-title'].'</h1>\'
                 )
             );
 
@@ -60,7 +82,7 @@ function getCodeByUrlPage($page){
                 \'includeHtml\',
                 \'0\',
                 array(
-                    \'html\' => \'<h4>Вызов компонента "form_auth_test" (1 раз)</h4>\'
+                    \'html\' => \'<h4>'.$arLang[$lang]['title-show-component'].' "form_auth_test" (№ 1)</h4>\'
                 )
             );
 
@@ -78,7 +100,7 @@ function getCodeByUrlPage($page){
                 \'includeHtml\',
                 \'0\',
                 array(
-                    \'html\' => \'<h4>Вызов компонента "form_auth_test" (2 раз)</h4>\'
+                    \'html\' => \'<h4>'.$arLang[$lang]['title-run-component'].' "form_auth_test" (№ 2)</h4>\'
                 )
             );
 
@@ -128,6 +150,10 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 $mess[\'rus\'] = array(
     \'add-custom-text\' => \'Сейчас запущен кастомный (пользовательский) шаблон компонента\'
+);
+
+$mess[\'eng\'] = array(
+    \'add-custom-text\' => \'The custom (custom) component template outputs this text to you\'
 );
 '
     );

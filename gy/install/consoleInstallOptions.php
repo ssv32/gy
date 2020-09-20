@@ -2,6 +2,7 @@
 
 global $argv;
 $isRunConsole = isset($argv);
+global $br;
 $br = "\n";
 
 //print_r($argv);

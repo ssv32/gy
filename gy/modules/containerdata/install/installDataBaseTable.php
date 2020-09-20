@@ -106,7 +106,7 @@ if($isRunConsole){
     echo $br.'install sest content - containerData = start';
 
     // добавить контейнер данных - контент
-    containerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2'));
+    containerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2 | Content2'));
 
     $dataContentContainerData = containerData::getContainerData(array('=' => array('code', "'Content'")), array('*'));
 
@@ -116,7 +116,7 @@ if($isRunConsole){
             'id_type_property' => 1,
             'id_container_data' => $dataContentContainerData[0]['id'],
             'code' => 'html-code',
-            'name' => 'html вставка'
+            'name' => 'html вставка | html code'
         )
     );
 
@@ -125,7 +125,7 @@ if($isRunConsole){
         array(
             'section_id' => 0,
             'code' => 'html-index-page',
-            'name' => 'Приветствие на главной',
+            'name' => 'Приветствие на главной | Welcome on the main',
             'id_container_data' => $dataContentContainerData[0]['id']
         )
     );
@@ -159,7 +159,8 @@ if($isRunConsole){
         $dataElement['id'], 
         $prop['id'],  
         'value_propertys_type_html', 
-        'Привет пользователь, тебя приветствует gy php framework'.$br.' и текст показан из его контентной части!!!'
+        'Привет пользователь, тебя приветствует gy php framework'.$br.' и текст показан из его контентной части!!!'.
+            '| Hello user, you are greeted by the gy php framework and the text is shown from its content part !!!'
     );
 
     echo $br.'install sest content - containerData = OK!';
@@ -171,7 +172,7 @@ if($isRunConsole){
         'action_user', 
         array(
             'code' => 'edit_container_data', 
-            'text' => 'Изменение всех container-data', 
+            'text' => 'Изменение всех container-data | Edit all container-data', 
         )
     );
     
@@ -187,8 +188,8 @@ if($isRunConsole){
         'access_group', 
         array(
             'code' => 'content', 
-            'name' => 'Контент',
-            'text' => 'Те кто изменяют контент сайта',
+            'name' => 'Контент | Сontent',
+            'text' => 'Те кто изменяют контент сайта | Those who can change the content of the site',
             'code_action_user' => 'edit_container_data'
         )
     );

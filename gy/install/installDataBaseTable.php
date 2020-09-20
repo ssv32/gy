@@ -80,7 +80,7 @@ if($isRunConsole){
             'action_user', 
             array(
                 'code' => 'show_admin_panel', 
-                'text' => 'Просматривать админку', 
+                'text' => 'Просматривать админку | View admin panel', 
             )
         );
         
@@ -88,7 +88,7 @@ if($isRunConsole){
             'action_user', 
             array(
                 'code' => 'action_all', 
-                'text' => 'Редактировать всё (Админ)', 
+                'text' => 'Редактировать всё (Админ) | Edit All (Admin)', 
             )
         );
         
@@ -96,7 +96,7 @@ if($isRunConsole){
             'action_user', 
             array(
                 'code' => 'edit_users', 
-                'text' => 'Изменение пользователей (кроме админов)', 
+                'text' => 'Изменение пользователей (кроме админов) | Edit users (except admins)', 
             )
         );  
     //}
@@ -123,8 +123,8 @@ if($isRunConsole){
             'access_group', 
             array(
                 'code' => 'admins', 
-                'name' => 'Админы',
-                'text' => 'Админы, есть права на всё',
+                'name' => 'Админы | Admins',
+                'text' => 'Админы, есть права на всё | Admins, have rights to everything',
                 'code_action_user' => 'action_all'
             )
         );
@@ -132,8 +132,8 @@ if($isRunConsole){
             'access_group', 
             array(
                 'code' => 'admins', 
-                'name' => 'Админы',
-                'text' => 'Админы, есть права на всё',
+                'name' => 'Админы | Admins',
+                'text' => 'Админы, есть права на всё | Admins, have rights to everything',
                 'code_action_user' => 'show_admin_panel'
             )
         );
@@ -143,8 +143,8 @@ if($isRunConsole){
             'access_group', 
             array(
                 'code' => 'content', 
-                'name' => 'Контент',
-                'text' => 'Те кто изменяют контент сайта',
+                'name' => 'Контент | Content',
+                'text' => 'Те кто изменяют контент сайта | Those who change the content of the site',
                 'code_action_user' => 'show_admin_panel'
             )
         );
@@ -153,8 +153,8 @@ if($isRunConsole){
             'access_group', 
             array(
                 'code' => 'user_admin', 
-                'name' => 'Админи по пользователям',
-                'text' => 'Могут изменять только пользователей', 
+                'name' => 'Админи по пользователям | Admin for users',
+                'text' => 'Могут изменять только пользователей | Can change users', 
                 'code_action_user' => 'edit_users'
             )
         );
@@ -162,8 +162,8 @@ if($isRunConsole){
             'access_group', 
             array(
                 'code' => 'user_admin', 
-                'name' => 'Админи по пользователям',
-                'text' => 'Могут изменять только пользователей', 
+                'name' => 'Админи по пользователям | Admin for users',
+                'text' => 'Могут изменять только пользователей | Can change users', 
                 'code_action_user' => 'show_admin_panel'
             )
         );

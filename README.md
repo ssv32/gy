@@ -5,7 +5,7 @@
 # gy php framework
 (ru):<br/>
 
-Gy – это php framework/CMS.
+Gy – это небольшой php framework, который включает в себя элементы cms. Нужен для создания небольших сайтов и веб проектов. 
 
 ### Системные требования:
 - php, необходимо скомпилировать с графической библиотекой GD, тестировалась на версиях версии 5.6, 7.0, 7.1 .
@@ -58,11 +58,21 @@ https://github.com/ssv32/gy/wiki</p>
 `);`<br/>
 <br/>
 
+### Основные цели
+   Основная цель проекта gy framework/cms, сделать бесплатный, доступный всем, простой в освоение, простой в реализации и архитектуре инструмент для создания простых (небольших) сайтов.<br/><br/>
+   Создаваемый инструмент должен быть максимально простым в освоение и не требующем от разработчика использующего gy каких либо сложных навыков или знаний, достаточно только основ php.<br/><br/>
+   Продукт не должен быть требовательным к платформе (модулям, зависимостям, в идеале без зависимостей) и техническим аспектам сервера.<br/><br/>
+   Продукт должен обеспечить наиболее лёгкий вход разработчику в веб, а в идеале должен позволять обычным людям, без опыта разработки или обладая лишь небольшими знаниями php, делать сайты.<br/><br/>
+   Продукт внутри, ядро (архитектура, внутренние особенности) должен быть максимально простым, и делиться на простые части, что бы любой мог разобраться в архитектуре и вносить изменения.<br/><br/>
+   Продукт не должен лицензионно и архитектурно ограничивать разработчика, а давать возможность переопределить/заменить любую часть ядра gy, либо сделать поверх необходимое. Т.е. должна быть возможность максимально просто расширяться, вплоть до полного изменения без изменения чего либо в раздела /gy/.<br/><br/>
+   Продукт должен включать в себя все необходимые компоненты для создания простого сайта, а также иметь в панели администрирования необходимые настройки для работы с контентом сайта.<br/><br/>
+
+
 
 -----
 (en):
 
-Gy – php framework/CMS.
+Gy – it is a small php framework that includes cms elements. Needed for creating small sites and web projects.
 
 ### System requirements:
 - php, you need to compile with the GD graphics library, tested on version versions 5.6, 7.0, 7.1 .
@@ -114,5 +124,15 @@ https://github.com/ssv32/gy/wiki </p>
 `⋅⋅⋅⋅),`<br/>
 `);`<br/>
 <br/>
+
+### Basic goals
+   The main goal of the gy framework/cms project is to make a free, accessible to everyone, easy to learn, easy to implement and architecture tool for creating simple (small) sites.<br/><br/>
+   The created tool should be as simple as possible to learn and does not require any complex skills or knowledge from the developer using gy, just the basics of php are enough.<br/><br/>
+   The product should not be demanding on the platform (modules, dependencies, ideally without dependencies) and technical aspects of the server.<br/><br/>
+   The product should provide the easiest entry for a developer to the web, and ideally should allow ordinary people, with no development experience or with only little knowledge of php, to create sites.<br/><br/>
+   The product inside, the core (architecture, internal features) should be as simple as possible, and divided into simple parts, so that anyone can understand the architecture and make changes.<br/><br/>
+   The product should not restrict the developer by license or architecture, but should provide the ability to redefine/replace any part of the gy core, or override what is needed. Those. it should be possible to expand as simply as possible, up to a complete change without changing anything in the `/gy/` section.<br/><br/>
+  The product must include all the necessary components for creating a simple site, and also have the necessary settings in the administration panel to work with the site's content.<br/><br/>
+
 
 

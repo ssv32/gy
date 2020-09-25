@@ -64,6 +64,18 @@ function getCodeByUrlPage($page, $lang){
         'index.php' => '<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
             $app->component(
+                \'header\',
+                \'0\',
+                array(
+                    \'seo-meta-tag-head\' => array(
+                        \'title\' => \'Gy - framework/CMS, demo site 1\',
+                        \'descriptions\' => \'Test text gy - framework/CMS demo site 1 meta descriptions\',
+                        \'keywords\' => \'gy, framework, CMS, demo, site, site 1\'
+                    ) 
+                )
+            );
+
+            $app->component(
                 \'admin-button-public-site\',
                 \'0\',
                 array()
@@ -127,6 +139,13 @@ function getCodeByUrlPage($page, $lang){
                     \'cacheTime\' => 86400 // закешить на 24 ч.
                 )
             );
+
+            $app->component(
+                \'footer\',
+                \'0\',
+                array()
+            );
+
         ',
         'customDir\component\containerdata_element_show\teplates\0\template.php' => '<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 

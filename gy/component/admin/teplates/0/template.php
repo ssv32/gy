@@ -1,5 +1,5 @@
-<?/*<H2><?=$this->lang->GetMessage('hi');?></h2>*/?>
-<?
+<?php /*<H2><?=$this->lang->GetMessage('hi');?></h2>*/?>
+<?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 global $app;

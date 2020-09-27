@@ -1,7 +1,7 @@
-<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 <h1><?=$this->lang->GetMessage('title');?><?=$arParam['id']?></h1>
 
-<?if(!empty($arRes['dataUser'])){?>
+<?php if(!empty($arRes['dataUser'])){?>
     <h3><?=$this->lang->GetMessage('title-property-standart');?></h3>
     <table border="1" class="gy-table-all-users">
 
@@ -25,21 +25,21 @@
         <tr>
             <td>groups</td>
             <td>
-                <?if(!empty($arRes['dataUser']['groups'])){?>
-                    <? foreach ($arRes['dataUser']['groups'] as $value) { ?>
+                <?php if(!empty($arRes['dataUser']['groups'])){?>
+                    <?php foreach ($arRes['dataUser']['groups'] as $value) { ?>
                         <?=$value?>
                         </br>
-                    <?}?>
-                <?}else{?>
+                    <?php }?>
+                <?php }else{?>
                     -
-                <?}?>
+                <?php }?>
             </td> 
         </tr>    
 
 
     </table>
 
-    <?if(!empty($arRes['dataUser']['propertys'])){?>
+    <?php if(!empty($arRes['dataUser']['propertys'])){?>
         <h3><?=$this->lang->GetMessage('title-property');?></h3>
 
         <table border="1" class="gy-table-all-users">
@@ -49,18 +49,18 @@
                 <th><?=$this->lang->GetMessage('value-property');?></th>
             </tr>
 
-            <? foreach ($arRes['dataUser']['propertys'] as $value) { ?>
+            <?php foreach ($arRes['dataUser']['propertys'] as $value) { ?>
                 <tr>
                     <td><?=$value['name_property']?></td>
                     <td>
                         <?=$value['value']?>
                     </td> 
                 </tr>    
-            <?}?>
+            <?php }?>
 
         </table>
-    <?}?>
-<?}else{?>
+    <?php }?>
+<?php }else{?>
     <?=$this->lang->GetMessage('err-data');?>
-<?}?>
+<?php }?>
 

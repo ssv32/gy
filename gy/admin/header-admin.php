@@ -1,4 +1,5 @@
-<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+<?php
+if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 global $app;
 global $user;
 
@@ -16,14 +17,18 @@ $langTextThisFile = new lang($app->urlProject."/gy/admin", 'header-admin', $app-
         
         
         <h2 class="gy-admin-logo"><?=$langTextThisFile->GetMessage('title')?></h2>
-        <?if(!empty($app->options['v-gy'])){?>
+        <?php
+        if(!empty($app->options['v-gy'])){
+        ?>
             <span class="version-gy-core">v <?=$app->options['v-gy']?></span>
             <br/>
-        <?}?>
+        <?php
+        }
+        ?>
         <a href="/" class="gy-admin-button-min" ><?=$langTextThisFile->GetMessage('site')?></a>
         <br/>
         <br/>
-        <?
+        <?php
         if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 
             // меню доступное для текущего пользователя

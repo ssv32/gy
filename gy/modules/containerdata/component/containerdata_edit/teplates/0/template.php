@@ -1,4 +1,4 @@
-<?
+<?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 
@@ -9,12 +9,12 @@ if (!empty($value)){
     <form method="post">
         <input name="ID" type="hidden" value="<?=$value['id']?>" />
         <table border="1" class="gy-table-all-users">
-            <? foreach ($arRes['property'] as $val){?>
+            <?php foreach ($arRes['property'] as $val){?>
                 <tr>
                     <td><?=$val?></td>
                     <td><input type="text" name="<?=$val?>" value="<?=$value[$val]?>" /></td>
                 </tr>
-            <?}?>
+            <?php }?>
         </table> 
         
         <input type="submit" class="gy-admin-button" value="<?=$this->lang->GetMessage('save');?>" />
@@ -25,18 +25,18 @@ if (!empty($value)){
     <br/>
     <br/>
     <a href="/gy/admin/get-admin-page.php?page=container-data-property-edit&container-data-id=<?=$value['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit-property');?></a>
-<?}?>    
+<?php }?>    
    
-<?if(!empty($arRes['status'])){?>    
-    <?if ($arRes['status'] == 'add-ok'){?>
+<?php if(!empty($arRes['status'])){?>    
+    <?php if ($arRes['status'] == 'add-ok'){?>
         <div class="gy-admin-good-message"><?=$this->lang->GetMessage('add-ok');?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-    <? } ?>
+    <?php } ?>
 
-    <?if ($arRes['status'] == 'add-err'){?>
+    <?php if ($arRes['status'] == 'add-err'){?>
         <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-    <? } ?>
-<?}
+    <?php } ?>
+<?php }

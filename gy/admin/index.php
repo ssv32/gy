@@ -1,4 +1,4 @@
-<?
+<?php
 include "../../gy/gy.php"; // подключить ядро // include core
 
 include "../../gy/admin/header-admin.php";

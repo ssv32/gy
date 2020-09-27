@@ -1,14 +1,14 @@
-<?
+<?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 <h1><?=$this->lang->GetMessage('title-edit-file');?></h1>
 
-<?if(empty($arRes['status'])){?>
+<?php if(empty($arRes['status'])){?>
     <form method="post">
         <h4><?=$this->lang->GetMessage('text-input-url-page');?></h4>
         <div class="button-function">
             <span>/</span><input class="input-text" type="text" name="url-site-page" /><span>/index.php</span>
-            <?// TODO сделать выбор из имеющихся?>
+            <?php // TODO сделать выбор из имеющихся?>
             <br/>
             <input class="gy-admin-button" type="submit" name="action-1" value="<?=$this->lang->GetMessage('title-add-page');?>" />
             <br/>
@@ -23,7 +23,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             <br/>
         </div>
     </form>
-<?}else{
+<?php }else{
     if( ($arRes['status'] != 'edit') 
         && ($arRes['status'] != 'err') 
         && ($arRes['status'] != 'constructor') 
@@ -34,7 +34,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
         <div class="gy-admin-good-message"><?=$this->lang->GetMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-    <?}elseif($arRes['status'] == 'edit'){ ?>       
+    <?php }elseif($arRes['status'] == 'edit'){ ?>       
         <form method="post">
             <h4><?=$this->lang->GetMessage('text-edit-page');?></h4>
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -51,13 +51,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             <br/>
             <br/>
         </form>
-    <?}elseif($arRes['status'] == 'err'){ ?>
+    <?php }elseif($arRes['status'] == 'err'){ ?>
         <div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-    <?}elseif($arRes['status'] == 'constructor'){?>        
+    <?php }elseif($arRes['status'] == 'constructor'){?>        
         <h4><?=$this->lang->GetMessage('title-action-5');?></h4>
-        <?
+        <?php
         $countIncludeComponentsInPageSite = count($arRes['dataIncludeAllComponentsInThisPageSite']);?>
         
         <p><?=$this->lang->GetMessage('text-include-components');?><?=$countIncludeComponentsInPageSite;?></p>
@@ -71,7 +71,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 name="action_8['-1']" 
                 value="<?=$this->lang->GetMessage('add-component');?>" 
             />
-            <? foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $component) { ?>
+            <?php foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $component) { ?>
                 <div class="data-component">
                     <div class="title-n-component"><?=$this->lang->GetMessage('include-component');?><?=$key?></div>
                     <p><?=$this->lang->GetMessage('text-include-this-component');?><?=$component['name']?></p>
@@ -82,17 +82,17 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                     </p>
                    
                     
-                    <?if(!empty($component['componentInfo']['v'])){?>
+                    <?php if(!empty($component['componentInfo']['v'])){?>
                         <p>
                             <?=$this->lang->GetMessage('this_v_component');?>: <?=$component['componentInfo']['v']?>   
                         </p>
-                    <?}?>
+                    <?php }?>
                         
-                    <?if(!empty($component['componentInfo']['text-info'])){?>
+                    <?php if(!empty($component['componentInfo']['text-info'])){?>
                         <p>
                             <?=$this->lang->GetMessage('this_component_text_info');?>: <?=$component['componentInfo']['text-info']?> 
                         </p>
-                    <?}?>    
+                    <?php }?>    
                         
                     <p>
                         <?=$this->lang->GetMessage('params-component');?>
@@ -103,7 +103,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                             <th><?=$this->lang->GetMessage('param-value');?></th>
                             <th><?=$this->lang->GetMessage('param-info-text');?></th>
                         </tr>
-                        <? 
+                        <?php 
                         // TODO компонент includeHtml в параметре html с кавычками и всё ламается
                         //    пока заменил input на textarea надо протестить
 
@@ -114,12 +114,12 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                                     <textarea type="text" name="component[<?=$key;?>][params][<?=$keyParam?>]" ><?=$valueParam?></textarea>
                                 </td>
                                 <td>
-                                    <?if(!empty($component['componentInfo']['all-property-text'][$keyParam])){?>
+                                    <?php if(!empty($component['componentInfo']['all-property-text'][$keyParam])){?>
                                         <?=$component['componentInfo']['all-property-text'][$keyParam]?>
-                                    <?}?>
+                                    <?php }?>
                                 </td>
                             </tr>   
-                        <?}?>
+                        <?php }?>
                     </table>    
                     
                     <div class="button-function">
@@ -153,7 +153,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                     </div>
                     <br/>
                 </div>
-            <?}?>
+            <?php }?>
 
             <input class="gy-admin-button" type="submit" name="action-6" value="<?=$this->lang->GetMessage('text-button-save2');?>" />
             <br/>
@@ -165,7 +165,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
 
         </form>
                 
-    <?}elseif($arRes['status'] == 'addConstructor'){ // если добавление компонента ?>
+    <?php }elseif($arRes['status'] == 'addConstructor'){ // если добавление компонента ?>
         <h4><?=$this->lang->GetMessage('title-action-8');?></h4>
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -173,7 +173,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             <p>
                 <?=$this->lang->GetMessage('name-new-component');?>
                 <input type="text" name="name_new_component" value="<?=$component['template']?>">
-                <?// TODO сделать выбор из имеющихся + выводить описаие?>
+                <?php // TODO сделать выбор из имеющихся + выводить описаие?>
             </p>
             <p>
                 <?=$this->lang->GetMessage('name-new-template');?>
@@ -187,11 +187,11 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             />
             
         </form>    
-    <?}elseif( $arRes['status'] == 'error-not-component'){ // ошибка при добавление компонента (не найден компонент)?>
+    <?php }elseif( $arRes['status'] == 'error-not-component'){ // ошибка при добавление компонента (не найден компонент)?>
         <div class="gy-admin-error-message"><?=$this->lang->GetMessage('not-component');?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-    <?}elseif($arRes['status'] == 'good-component'){ // последний шаг добавления компонента, ввод параметров компонента ?>   
+    <?php }elseif($arRes['status'] == 'good-component'){ // последний шаг добавления компонента, ввод параметров компонента ?>   
         <h4><?=$this->lang->GetMessage('title-action-8');?></h4>
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -201,17 +201,17 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 <input type="hidden" name="name_new_component" value="<?=$arRes['data-component']['name']?>">
             </p>
             
-            <?if (!empty($arRes['data-component']['componentInfo']['v'])){?>
+            <?php if (!empty($arRes['data-component']['componentInfo']['v'])){?>
                 <p>
                     <?=$this->lang->GetMessage('this_v_component');?>: <?=$arRes['data-component']['componentInfo']['v']?>
                 </p>
-            <?}?>
+            <?php }?>
                 
-            <?if(!empty($arRes['data-component']['componentInfo']['text-info'])){?>
+            <?php if(!empty($arRes['data-component']['componentInfo']['text-info'])){?>
                 <p>
                     <?=$this->lang->GetMessage('this_component_text_info');?>: <?=$arRes['data-component']['componentInfo']['text-info']?> 
                 </p>
-            <?}?>   
+            <?php }?>   
             
             <p>
                 <?=$this->lang->GetMessage('this_template_component');?>: <?=$arRes['data-component']['template']?>
@@ -224,7 +224,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                     <th><?=$this->lang->GetMessage('param-value');?></th>
                     <th><?=$this->lang->GetMessage('param-info-text');?></th>
                 </tr>
-                <? 
+                <?php
                 foreach ($arRes['data-component']['arParam'] as $keyParam => $valueParam) { ?>
                     <tr>
                         <td><?=$valueParam?></td>
@@ -232,12 +232,12 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                             <textarea type="text" name="params[<?=$valueParam?>]" ></textarea>
                         </td>
                         <td>
-                            <?if(!empty($arRes['data-component']['componentInfo']['all-property-text'][$valueParam])){?>
+                            <?php if(!empty($arRes['data-component']['componentInfo']['all-property-text'][$valueParam])){?>
                                 <?=$arRes['data-component']['componentInfo']['all-property-text'][$valueParam]?>
-                            <?}?>
+                            <?php }?>
                         </td>
                     </tr>   
-                <?}?>
+                <?php }?>
             </table>  
             
             <input
@@ -249,5 +249,5 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             
         </form> 
         
-    <?}    
+    <?php }    
 }

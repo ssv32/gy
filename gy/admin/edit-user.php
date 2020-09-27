@@ -1,4 +1,5 @@
-<?
+<?php
+
 include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;

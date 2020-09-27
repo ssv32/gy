@@ -1,4 +1,4 @@
-<? 
+<?php
 /**
  * Скрипт установит демо сайт 
  * 
@@ -61,7 +61,7 @@ function getCodeByUrlPage($page, $lang){
     
     
     $arrayCodeByUrl = array(
-        'index.php' => '<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
+        'index.php' => '<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
             $app->component(
                 \'header\',
@@ -147,15 +147,15 @@ function getCodeByUrlPage($page, $lang){
             );
 
         ',
-        'customDir\component\containerdata_element_show\teplates\0\template.php' => '<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+        'customDir\component\containerdata_element_show\teplates\0\template.php' => '<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 <div class="user_custom_div">
     
-    <?if(!empty($arRes[\'ITEMS\'])){?>
-        <? foreach ($arRes[\'ITEMS\'] as $value) { ?>
+    <?php if(!empty($arRes[\'ITEMS\'])){?>
+        <?php  foreach ($arRes[\'ITEMS\'] as $value) { ?>
             <?=((!empty($value[\'value\']))? $value[\'value\'] : \'\');?>
-        <?}?> 
-    <?}?>    
+        <?php }?> 
+    <?php }?>    
     
     <br/>(<?=$this->lang->GetMessage(\'add-custom-text\');?>)
       
@@ -164,7 +164,7 @@ function getCodeByUrlPage($page, $lang){
     background-color: #21a2ff; 
     color: #05ff07;
 }',
-        'customDir\component\containerdata_element_show\teplates\0\lang_template.php' => '<? // языковой файл для шаблона компонента
+        'customDir\component\containerdata_element_show\teplates\0\lang_template.php' => '<?php // языковой файл для шаблона компонента
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 $mess[\'rus\'] = array(

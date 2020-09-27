@@ -68,7 +68,7 @@ class cacheFiles extends cache {
             'cacheTime' => $this->cacheTime
         );  
         if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl) ){
-            file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<? $cacheData = '."'". json_encode($cacheData)."';" );  
+            file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<?php $cacheData = '."'". json_encode($cacheData)."';" );  
         }
         return true;
     }

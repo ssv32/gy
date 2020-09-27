@@ -104,7 +104,7 @@ if( !empty($data['action-5']) ){
 }
 
 function getCodePageByArrayComponents($arrayComponents){
-    $codePage = '<? include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
+    $codePage = '<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
 global $app;
 

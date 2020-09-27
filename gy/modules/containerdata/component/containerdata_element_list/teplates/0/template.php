@@ -1,18 +1,18 @@
-<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 <h4><?=$this->lang->GetMessage('title');?></H4>
 
-<?
+<?php
 $isEdit = (!empty($arRes['stat-del']) && ($arRes['stat-del'] == 'edit'));
 
 if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-del'])) || $isEdit ){?>
     
-    <?
+    <?php
     if(!empty($arRes['ITEMS'])){ ?>
         <table border="1" class="gy-table-all-users">
             <tr><th>code</th><th>name</th><th>section id</th><th></th><th></th><th></th></tr>
 
-            <?foreach ($arRes['ITEMS'] as $val){?>
+            <?php foreach ($arRes['ITEMS'] as $val){?>
                 <tr>
                     <td><?=$val['code']?></td>
                     <td><?=$val['name']?></td>
@@ -26,21 +26,21 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
                         </form>
                     </td>
                 </tr>
-            <?}?>
+            <?php }?>
         </table> 
-    <?}else{?>
+    <?php }else{?>
         <?=$this->lang->GetMessage('ITEMS-NULL');?>
-    <?}?>
+    <?php }?>
 
     <h4><?=$this->lang->GetMessage('title-add-element');?></H4>
     
     <form method="post">
         <input name="id_container_data" type="hidden" value="<?=$arParam['container-data-id']?>" />
-        <input name="section_id" type="hidden" value="0" /> <?// TODO пока так (всегда один раздел н можно доработать)?>
+        <input name="section_id" type="hidden" value="0" /> <?php // TODO пока так (всегда один раздел н можно доработать)?>
 
-        <?if($isEdit ){?>
+        <?php if($isEdit ){?>
             <input name="el_edit_id" type="hidden" value="<?=$arRes['edit-id']?>" />
-        <?}?>
+        <?php }?>
 
         <table border="1" class="gy-table-all-users">
 
@@ -58,30 +58,30 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
         </table> 
 
     </form>
-<?}else{?>
-    <?if (!empty($arRes['stat-del'])){ ?>
-        <?if($arRes['stat-del'] == 'ok'){?>
+<?php }else{?>
+    <?php if (!empty($arRes['stat-del'])){ ?>
+        <?php if($arRes['stat-del'] == 'ok'){?>
             <div class="gy-admin-good-message"><?=$this->lang->GetMessage('del-ok');?></div>
-        <?}elseif($arRes['stat-del'] == 'err'){?>
+        <?php }elseif($arRes['stat-del'] == 'err'){?>
             <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
-        <?}?>
-    <?}?>
+        <?php }?>
+    <?php }?>
     
-    <?if (!empty($arRes['stat'])){ ?>
-        <?if($arRes['stat'] == 'ok'){?>
+    <?php if (!empty($arRes['stat'])){ ?>
+        <?php if($arRes['stat'] == 'ok'){?>
             <div class="gy-admin-good-message"><?=$this->lang->GetMessage('add-ok');?></div>
-        <?}elseif($arRes['stat'] == 'err'){?>
+        <?php }elseif($arRes['stat'] == 'err'){?>
             <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
-        <?}?>
-    <?}?>
+        <?php }?>
+    <?php }?>
 
-    <?if (!empty($arRes['stat-edit'])){ ?>
-        <?if($arRes['stat-edit'] == 'ok'){?>
+    <?php if (!empty($arRes['stat-edit'])){ ?>
+        <?php if($arRes['stat-edit'] == 'ok'){?>
             <div class="gy-admin-good-message"><?=$this->lang->GetMessage('edit-ok');?></div>
-        <?}elseif($arRes['stat-edit'] == 'err'){?>
+        <?php }elseif($arRes['stat-edit'] == 'err'){?>
             <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
-        <?}?>
-    <?}?>
+        <?php }?>
+    <?php }?>
     
     <a href="<?=$_SERVER['SCRIPT_NAME']?>?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
-<?}  
+<?php }  

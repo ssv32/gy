@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined("GY_CORE") && GY_CORE !== true ) die('err_core');
 
 $gy_config = array(

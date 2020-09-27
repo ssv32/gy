@@ -1,10 +1,10 @@
-<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 global $app;
 ?>
 
 <html>
     <head>
-        <?
+        <?php
         // вывести title и СЕО метатеги
         if(!empty($arParam['seo-meta-tag-head'])){
             $app->component(

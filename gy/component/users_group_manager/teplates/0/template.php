@@ -5,13 +5,13 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
 
     <?php if(empty($arRes['status'])){?>
 
-        <h1><?=$this->lang->GetMessage('title');?></h1>
+        <h1><?=$this->lang->getMessage('title');?></h1>
         <form method="post">
             <table border="1" class="gy-table-all-users">
                 <tr>
-                    <th><?=$this->lang->GetMessage('groups');?></th>
-                    <th><?=$this->lang->GetMessage('text');?></th>
-                    <th><?=$this->lang->GetMessage('actions');?></th>
+                    <th><?=$this->lang->getMessage('groups');?></th>
+                    <th><?=$this->lang->getMessage('text');?></th>
+                    <th><?=$this->lang->getMessage('actions');?></th>
                     <th></th>
                 </tr>
                 <?php foreach ($arRes['allUsersGroups'] as $val){?>
@@ -33,13 +33,13 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
                         </td>
                         <td> 
                             <?php if(!empty($val['flag_del']) && ($val['flag_del'] == 'Y')){?> 
-                                <input type="checkbox" name="delete[<?=$val['code']?>]" /><?=$this->lang->GetMessage('delete');?> 
+                                <input type="checkbox" name="delete[<?=$val['code']?>]" /><?=$this->lang->getMessage('delete');?> 
                             <?php }?>
                         </td>
                     </tr>
                 <?php }?>
                 <tr>
-                    <td colspan="4"><b><?=$this->lang->GetMessage('title-add-group');?></b></td>
+                    <td colspan="4"><b><?=$this->lang->getMessage('title-add-group');?></b></td>
                 </tr>
                 <tr>
                     <td>
@@ -62,10 +62,10 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
                 </tr>
             </table> 
 
-            <input type="submit" name="button-form" class="gy-admin-button" value="<?=$this->lang->GetMessage('save');?>" />
+            <input type="submit" name="button-form" class="gy-admin-button" value="<?=$this->lang->getMessage('save');?>" />
         </form>    
         <br/>
-        <a href="" class="gy-admin-button"><?=$this->lang->GetMessage('back');?></a>
+        <a href="" class="gy-admin-button"><?=$this->lang->getMessage('back');?></a>
         <br/>
         <br/>
         <br/>
@@ -73,15 +73,15 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
    
     <?php if(!empty($arRes['status'])){?>    
         <?php if ($arRes['status'] == 'ok'){?>
-            <div class="gy-admin-good-message"><?=$this->lang->GetMessage('text-ok');?></div>
+            <div class="gy-admin-good-message"><?=$this->lang->getMessage('text-ok');?></div>
             <br/>
-            <a href="/gy/admin/group-user.php" class="gy-admin-button"><?=$this->lang->GetMessage('button-text-ok');?></a>
+            <a href="/gy/admin/group-user.php" class="gy-admin-button"><?=$this->lang->getMessage('button-text-ok');?></a>
         <?php } ?>
 
         <?php if ($arRes['status'] == 'add-err'){?>
-            <div class="gy-admin-error-message"><?=$this->lang->GetMessage('text-err');?></div>
+            <div class="gy-admin-error-message"><?=$this->lang->getMessage('text-err');?></div>
             <br/>
-            <a href="/gy/admin/group-user.php" class="gy-admin-button"><?=$this->lang->GetMessage('button-text-ok');?></a>
+            <a href="/gy/admin/group-user.php" class="gy-admin-button"><?=$this->lang->getMessage('button-text-ok');?></a>
         <?php } ?>
     <?php }?>
 

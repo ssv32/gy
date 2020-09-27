@@ -7,12 +7,12 @@ $langComponentInfo = new lang($app->urlProject.$utlThisComponent, 'componentInfo
 
 $componentInfo = array(
     'name' => 'edit-users-propertys',
-    'text-info' => $langComponentInfo->GetMessage('text-info'),
+    'text-info' => $langComponentInfo->getMessage('text-info'),
     'v' => '0.1',
     'all-property' => array(
         'id-user'
     ),
     'all-property-text' => array(
-        'id-user' => $langComponentInfo->GetMessage('property-id-user')
+        'id-user' => $langComponentInfo->getMessage('property-id-user')
     )
 );

@@ -7,7 +7,7 @@ $langComponentInfo = new lang($app->urlProject.$utlThisComponent, 'componentInfo
 
 $componentInfo = array(
     'name' => 'containerdata_element_show',
-    'text-info' => $langComponentInfo->GetMessage('text-info'),
+    'text-info' => $langComponentInfo->getMessage('text-info'),
     'v' => '0.1',
     'all-property' => array(
         'container-data-code' ,
@@ -15,8 +15,8 @@ $componentInfo = array(
         'cacheTime'
     ),
     'all-property-text' => array(
-        'container-data-code' => $langComponentInfo->GetMessage('property-container-data-code'),
-        'element-code' => $langComponentInfo->GetMessage('property-element-code'),
-        'cacheTime' => $langComponentInfo->GetMessage('property-cacheTime')
+        'container-data-code' => $langComponentInfo->getMessage('property-container-data-code'),
+        'element-code' => $langComponentInfo->getMessage('property-element-code'),
+        'cacheTime' => $langComponentInfo->getMessage('property-cacheTime')
     )
 );

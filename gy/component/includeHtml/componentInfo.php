@@ -7,13 +7,13 @@ $langComponentInfo = new lang($app->urlProject.$utlThisComponent, 'componentInfo
 
 $componentInfo = array(
     'name' => 'includeHtml',
-    'text-info' => $langComponentInfo->GetMessage('text-info'),
+    'text-info' => $langComponentInfo->getMessage('text-info'),
     'v' => '0.1',
     'all-property' => array(
         'html',
         //'test'
     ),
     'all-property-text' => array(
-        'html' => $langComponentInfo->GetMessage('property-html')
+        'html' => $langComponentInfo->getMessage('property-html')
     )
 );

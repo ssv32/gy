@@ -16,7 +16,7 @@ $langTextThisFile = new lang($app->urlProject."/gy/admin", 'header-admin', $app-
         
         
         
-        <h2 class="gy-admin-logo"><?=$langTextThisFile->GetMessage('title')?></h2>
+        <h2 class="gy-admin-logo"><?=$langTextThisFile->getMessage('title')?></h2>
         <?php
         if(!empty($app->options['v-gy'])){
         ?>
@@ -25,17 +25,17 @@ $langTextThisFile = new lang($app->urlProject."/gy/admin", 'header-admin', $app-
         <?php
         }
         ?>
-        <a href="/" class="gy-admin-button-min" ><?=$langTextThisFile->GetMessage('site')?></a>
+        <a href="/" class="gy-admin-button-min" ><?=$langTextThisFile->getMessage('site')?></a>
         <br/>
         <br/>
         <?php
         if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 
             // меню доступное для текущего пользователя
-            $menu[ $langTextThisFile->GetMessage('index-page') ] = '/gy/admin/index.php';
+            $menu[ $langTextThisFile->getMessage('index-page') ] = '/gy/admin/index.php';
 
             if(accessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()){ 
-                $menu[ $langTextThisFile->GetMessage('users') ] = '/gy/admin/users.php';
+                $menu[ $langTextThisFile->getMessage('users') ] = '/gy/admin/users.php';
             }
 
             // надо добавить пункты меню заданные в подключенных модулях
@@ -54,10 +54,10 @@ $langTextThisFile = new lang($app->urlProject."/gy/admin", 'header-admin', $app-
                 }
             }
 
-            $menu[ $langTextThisFile->GetMessage('modules') ] = '/gy/admin/modules.php';
+            $menu[ $langTextThisFile->getMessage('modules') ] = '/gy/admin/modules.php';
             
             if($user->isAdmin()){
-                $menu[ $langTextThisFile->GetMessage('options') ] = '/gy/admin/options.php';
+                $menu[ $langTextThisFile->getMessage('options') ] = '/gy/admin/options.php';
             }
 
             // menu

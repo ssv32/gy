@@ -10,22 +10,22 @@
     <?php }?>
     <div>
         <div class="div-button-admin-panel">
-            <a href="/gy/admin/" class="gy-admin-panel-button"><?=$this->lang->GetMessage('button-admin');?></a>
+            <a href="/gy/admin/" class="gy-admin-panel-button"><?=$this->lang->getMessage('button-admin');?></a>
            
         </div>
         <div class="div-login">
-            <?=$this->lang->GetMessage('hi');?><?=$arRes["auth_user"]?>
+            <?=$this->lang->getMessage('hi');?><?=$arRes["auth_user"]?>
             &nbsp;
             <a 
-                href="/gy/admin?<?=$this->lang->GetMessage('exit');?>=<?=$this->lang->GetMessage('exit');?>" 
+                href="/gy/admin?<?=$this->lang->getMessage('exit');?>=<?=$this->lang->getMessage('exit');?>" 
                 class="gy-admin-panel-button"
             >
-                <?=$this->lang->GetMessage('exit');?>
+                <?=$this->lang->getMessage('exit');?>
             </a>
         </div>
         
     </div>
     <div class="edit-button"> <?php // TODO надо что бы была возможность добавлять кнопки из модулей?>
-        <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-edit-button"><?=$this->lang->GetMessage('button-work-page');?></a>
+        <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-edit-button"><?=$this->lang->getMessage('button-work-page');?></a>
     </div>
 </div>

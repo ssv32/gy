@@ -7,14 +7,14 @@ $langComponentInfo = new lang($app->urlProject.$utlThisComponent, 'componentInfo
 
 $componentInfo = array(
     'name' => 'form_auth_test',
-    'text-info' => $langComponentInfo->GetMessage('text-info'),
+    'text-info' => $langComponentInfo->getMessage('text-info'),
     'v' => '0.1',
     'all-property' => array(
         'test',
         'idComponent',
     ),
     'all-property-text' => array(
-        'test' => $langComponentInfo->GetMessage('property-test'),
-        'idComponent' => $langComponentInfo->GetMessage('property-idComponent')
+        'test' => $langComponentInfo->getMessage('property-test'),
+        'idComponent' => $langComponentInfo->getMessage('property-idComponent')
     )
 );

@@ -10,7 +10,7 @@ class lang{
 
         if ( !empty($url) && !empty($fileName) && !empty($lang) ) {
             //load array text language
-            $this->textLang = $this->GetArrLangFromFilre( $url.'/lang_'.$fileName.'.php', $lang );
+            $this->textLang = $this->getArrLangFromFilre( $url.'/lang_'.$fileName.'.php', $lang );
         }
 
         return $result;
@@ -29,11 +29,11 @@ class lang{
     }
 
     /**
-     *  GetMessage вернуть текст для заданной переменной текущего языка
+     *  getMessage вернуть текст для заданной переменной текущего языка
      * @param string $nameVar - передать переменную 
      * @return вернёт текст или false
      */
-    function GetMessage($nameVar ){
+    function getMessage($nameVar ){
         $result = false;
         if ( !empty($this->textLang[$nameVar]) ){
             $result = $this->textLang[$nameVar];
@@ -42,13 +42,13 @@ class lang{
     }
 
     /**
-     * GetArrLangFromFilre загрузить массив с текстом нужного языка // load array text language
+     * getArrLangFromFilre загрузить массив с текстом нужного языка // load array text language
      * @param $urlFile ссылка на загружаемый файл // url load file
      * @param $lang - нужный язык // language // rus, eng ...
      * 
      * @return массив с текстом на выбранном языке // language text array 
      */
-    function GetArrLangFromFilre( $urlFile, $lang ){
+    function getArrLangFromFilre( $urlFile, $lang ){
         $mess = array();
 
         // если есть файл с языковыми параметрами

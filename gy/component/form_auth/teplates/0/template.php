@@ -19,15 +19,15 @@ if ( empty($arRes["auth_ok"]) ) :?>
         );?>
             
         <?php if ( !empty($arRes['err']) ){?>
-            <div class="gy-admin-error-message"><?=$this->lang->GetMessage($arRes['err']);?></div>
+            <div class="gy-admin-error-message"><?=$this->lang->getMessage($arRes['err']);?></div>
         <?php }?>	
 		
-        <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
+        <input class="gy-admin-button" type="submit" name="<?=$this->lang->getMessage('button');?>" value="<?=$this->lang->getMessage('button');?>" />
         
     </form>	
 <?php else:?>
-    <h1><?=$this->lang->GetMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
+    <h1><?=$this->lang->getMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
     <form>
-        <input class="gy-admin-button" type="submit" name="<?=$this->lang->GetMessage('exit');?>" value="<?=$this->lang->GetMessage('exit');?>" />
+        <input class="gy-admin-button" type="submit" name="<?=$this->lang->getMessage('exit');?>" value="<?=$this->lang->getMessage('exit');?>" />
     </form>
 <?php endif;?>

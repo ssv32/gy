@@ -157,7 +157,7 @@ function getCodeByUrlPage($page, $lang){
         <?php }?> 
     <?php }?>    
     
-    <br/>(<?=$this->lang->GetMessage(\'add-custom-text\');?>)
+    <br/>(<?=$this->lang->getMessage(\'add-custom-text\');?>)
       
 </div>',
         'customDir\component\containerdata_element_show\teplates\0\style.css' => '.user_custom_div{

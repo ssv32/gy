@@ -16,19 +16,19 @@ if(empty($arRes['status'])){?>
                         <form method="post">
                             <input type="hidden" name="del-property-id" value="<?=$val['id'];?>" />
                             <input type="hidden" name="del-proprty-container-data" value="<?=$arParam['container-data-id']?>" />
-                            <input type="submit" class="gy-admin-button" value="<?=$this->lang->GetMessage('del-btn')?>"  name="<?=$this->lang->GetMessage('del-btn')?>" />
+                            <input type="submit" class="gy-admin-button" value="<?=$this->lang->getMessage('del-btn')?>"  name="<?=$this->lang->getMessage('del-btn')?>" />
                         </form>
                     </td>
                 </tr>
             <?php }?>
         </table>
     <?php }else{?>
-        <?=$this->lang->GetMessage('not-property');?>
+        <?=$this->lang->getMessage('not-property');?>
         <br/>
     <?php }?>
 
     <form method="post" >    
-        <h4><?=$this->lang->GetMessage('title-add-property');?></h4>
+        <h4><?=$this->lang->getMessage('title-add-property');?></h4>
         <table border="1" class="gy-table-all-users">
             <tr>
                 <td>
@@ -47,31 +47,31 @@ if(empty($arRes['status'])){?>
             <tr><td>code</td><td><input type="text" name="code" /></td></tr>    
 
         </table>
-        <input type="submit" class="gy-admin-button" value="<?=$this->lang->GetMessage('add-property');?>" />
+        <input type="submit" class="gy-admin-button" value="<?=$this->lang->getMessage('add-property');?>" />
     </form>
 
     
 <?php }else{?>    
     <?php if ($arRes['status'] == 'add-ok'){?>
-        <div class="gy-admin-good-message"><?=$this->lang->GetMessage('add-ok');?></div>
+        <div class="gy-admin-good-message"><?=$this->lang->getMessage('add-ok');?></div>
         <br/>
     <?php } ?>
 
     <?php if ($arRes['status'] == 'add-err'){?>
-        <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
+        <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err');?></div>
         <br/>
     <?php } ?>
     
     <?php if ($arRes['status'] == 'add-err-not-type'){?>
-        <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err-not-type');?></div>
+        <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err-not-type');?></div>
         <br/>
     <?php } ?>
     
     <?php if ($arRes['status'] == 'del-property-ok'){?>
-        <div class="gy-admin-good-message"><?=$this->lang->GetMessage('del-property-ok');?></div>
+        <div class="gy-admin-good-message"><?=$this->lang->getMessage('del-property-ok');?></div>
         <br/>
     <?php } ?>
-    <a href="<?=$_SERVER['REQUEST_URI']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <a href="<?=$_SERVER['REQUEST_URI']?>" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
 <?php }
   
     

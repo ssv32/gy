@@ -3,7 +3,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 if ( empty($arRes["auth_ok"]) ) :?>
     <form>
-    <p><?=$this->lang->GetMessage('get-text');?></p>
+    <p><?=$this->lang->getMessage('get-text');?></p>
         <?php 
         foreach ($arRes as $key => $value) {
         ?>
@@ -11,10 +11,10 @@ if ( empty($arRes["auth_ok"]) ) :?>
             <input type="text" name="<?=$key;?>"  />
         <?php }?>
 
-        <input type="submit" name="<?=$this->lang->GetMessage('button');?>" value="<?=$this->lang->GetMessage('button');?>" />
+        <input type="submit" name="<?=$this->lang->getMessage('button');?>" value="<?=$this->lang->getMessage('button');?>" />
 
     </form>	
 <?php else:?>
-    <h1><?=$this->lang->GetMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
+    <h1><?=$this->lang->getMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
 
 <?php endif;?>

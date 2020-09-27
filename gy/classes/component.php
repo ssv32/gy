@@ -33,7 +33,7 @@ class component{
             $template = new template($url.'/gy/component/'.$name.'/teplates/'.$template, $lang );
         } else {
             $err = 1;
-            $errText = $this->lang->GetMessage('err_not_controller');
+            $errText = $this->lang->getMessage('err_not_controller');
         }
                 
         if (($err == 0) && file_exists($url.'/customDir/component/'.$name.'/controller.php' ) ){ 
@@ -44,18 +44,18 @@ class component{
             $this->controller = new controller($url.'/gy/component/'.$name, $lang); // всегда один
         } else {
             $err = 2;
-            $errText = $this->lang->GetMessage('err_not_controller') ;
+            $errText = $this->lang->getMessage('err_not_controller') ;
         }
                 
         if ( ($err == 0) && file_exists($url.'/customDir/component/'.$name.'/model.php' ) ){ 
             $model = new model($url.'/customDir/component/'.$name.'/model.php'); // может и не быть
-            $this->controller->SetModel($model);
+            $this->controller->setModel($model);
         }elseif(($urlComponentInModule !== false) && file_exists($urlComponentInModule.'/model.php' )){
             $model = new model($urlComponentInModule.'/model.php'); // может и не быть
-            $this->controller->SetModel($model);
+            $this->controller->setModel($model);
         }elseif( ($err == 0) && file_exists($url.'/gy/component/'.$name.'/model.php' ) ){ 
             $model = new model($url.'/gy/component/'.$name.'/model.php'); // может и не быть
-            $this->controller->SetModel($model);
+            $this->controller->setModel($model);
         } 
 
         // TODO вывести ошибку если что то не найдено // значит файлы не все есть
@@ -64,8 +64,8 @@ class component{
             $this->ShowErr($errText);
         } else { // иначе запускаем компонент
 
-            $this->controller->SetTemplate($template); // задать шаблон	
-            $this->controller->SetArParam($arParam); // передать параметры компонента // set array property component 
+            $this->controller->setTemplate($template); // задать шаблон	
+            $this->controller->setArParam($arParam); // передать параметры компонента // set array property component 
 
             $this->run();
         }

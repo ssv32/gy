@@ -1,6 +1,6 @@
 <?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
-<h4><?=$this->lang->GetMessage('title');?></H4>
+<h4><?=$this->lang->getMessage('title');?></H4>
 
 <?php
 $isEdit = (!empty($arRes['stat-del']) && ($arRes['stat-del'] == 'edit'));
@@ -17,22 +17,22 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
                     <td><?=$val['code']?></td>
                     <td><?=$val['name']?></td>
                     <td><?=$val['section_id']?></td>
-                    <td><a href="?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-edit');?></a></td>
-                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-element-property&container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('el-view-property');?></a></td>
+                    <td><a href="?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->getMessage('el-edit');?></a></td>
+                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-element-property&container-data-id=<?=$arParam['container-data-id']?>&el-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->getMessage('el-view-property');?></a></td>
                     <td>
                         <form method="post">
                             <input type="hidden" name="id" value="<?=$val['id']?>" />
-                            <input type="submit" class="gy-admin-button" name="del-el" value="<?=$this->lang->GetMessage('el-del');?>" />
+                            <input type="submit" class="gy-admin-button" name="del-el" value="<?=$this->lang->getMessage('el-del');?>" />
                         </form>
                     </td>
                 </tr>
             <?php }?>
         </table> 
     <?php }else{?>
-        <?=$this->lang->GetMessage('ITEMS-NULL');?>
+        <?=$this->lang->getMessage('ITEMS-NULL');?>
     <?php }?>
 
-    <h4><?=$this->lang->GetMessage('title-add-element');?></H4>
+    <h4><?=$this->lang->getMessage('title-add-element');?></H4>
     
     <form method="post">
         <input name="id_container_data" type="hidden" value="<?=$arParam['container-data-id']?>" />
@@ -51,8 +51,8 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" class="gy-admin-button" value="<?=(($isEdit)? $this->lang->GetMessage('save'): $this->lang->GetMessage('add'));?>" /> 
-                    <a href="" class="gy-admin-button"><?=$this->lang->GetMessage('back');?></a>
+                    <input type="submit" class="gy-admin-button" value="<?=(($isEdit)? $this->lang->getMessage('save'): $this->lang->getMessage('add'));?>" /> 
+                    <a href="" class="gy-admin-button"><?=$this->lang->getMessage('back');?></a>
                 </td>
             </tr>
         </table> 
@@ -61,27 +61,27 @@ if( (empty($arRes['stat']) && empty($arRes['stat-edit']) && empty($arRes['stat-d
 <?php }else{?>
     <?php if (!empty($arRes['stat-del'])){ ?>
         <?php if($arRes['stat-del'] == 'ok'){?>
-            <div class="gy-admin-good-message"><?=$this->lang->GetMessage('del-ok');?></div>
+            <div class="gy-admin-good-message"><?=$this->lang->getMessage('del-ok');?></div>
         <?php }elseif($arRes['stat-del'] == 'err'){?>
-            <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
+            <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err');?></div>
         <?php }?>
     <?php }?>
     
     <?php if (!empty($arRes['stat'])){ ?>
         <?php if($arRes['stat'] == 'ok'){?>
-            <div class="gy-admin-good-message"><?=$this->lang->GetMessage('add-ok');?></div>
+            <div class="gy-admin-good-message"><?=$this->lang->getMessage('add-ok');?></div>
         <?php }elseif($arRes['stat'] == 'err'){?>
-            <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
+            <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err');?></div>
         <?php }?>
     <?php }?>
 
     <?php if (!empty($arRes['stat-edit'])){ ?>
         <?php if($arRes['stat-edit'] == 'ok'){?>
-            <div class="gy-admin-good-message"><?=$this->lang->GetMessage('edit-ok');?></div>
+            <div class="gy-admin-good-message"><?=$this->lang->getMessage('edit-ok');?></div>
         <?php }elseif($arRes['stat-edit'] == 'err'){?>
-            <div class="gy-admin-error-message"><?=$this->lang->GetMessage('add-err');?></div>
+            <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err');?></div>
         <?php }?>
     <?php }?>
     
-    <a href="<?=$_SERVER['SCRIPT_NAME']?>?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <a href="<?=$_SERVER['SCRIPT_NAME']?>?page=container-data-element-list&container-data-id=<?=$arParam['container-data-id']?>" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
 <?php }  

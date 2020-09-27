@@ -1,19 +1,19 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
-<h1><?=$this->lang->GetMessage('title-container-data');?></h1>
+<h1><?=$this->lang->getMessage('title-container-data');?></h1>
 
 <?php if (!empty($arRes['status']) ){?>
     <?php if ( $arRes['status'] == 'del-ok'){ ?>
-        <div class="gy-admin-good-message"><?=$this->lang->GetMessage('del-ok');?></div>
+        <div class="gy-admin-good-message"><?=$this->lang->getMessage('del-ok');?></div>
         <br/>
     <?php }?>
 
     <?php if ($arRes['status'] == 'del-err'){?>
-        <div class="gy-admin-error-message"><?=$this->lang->GetMessage('del-err');?></div>
+        <div class="gy-admin-error-message"><?=$this->lang->getMessage('del-err');?></div>
         <br/>
     <?php }?>
-    <a href="<?=$_SERVER['REQUEST_URI']?>" class="gy-admin-button"><?=$this->lang->GetMessage('ok');?></a>
+    <a href="<?=$_SERVER['REQUEST_URI']?>" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
 <?php }else{?>
         
     <?php if ($arRes['ITEMS']){?>
@@ -27,22 +27,22 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                     <td>
                         <form method="post">
                             <input type="hidden" name="ID" value="<?=$val['id']?>" />
-                            <input type="submit" class="gy-admin-button" name="<?=$this->lang->GetMessage('del');?>" value="<?=$this->lang->GetMessage('del');?>" />
+                            <input type="submit" class="gy-admin-button" name="<?=$this->lang->getMessage('del');?>" value="<?=$this->lang->getMessage('del');?>" />
                         </form>
                     </td>
-                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-edit&ID=<?=$val['id']?>" class="gy-admin-button"><?=$this->lang->GetMessage('edit');?></a></td>
-                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-element-list&container-data-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->GetMessage('show-element');?></a></td>
+                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-edit&ID=<?=$val['id']?>" class="gy-admin-button"><?=$this->lang->getMessage('edit');?></a></td>
+                    <td><a href="/gy/admin/get-admin-page.php?page=container-data-element-list&container-data-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->getMessage('show-element');?></a></td>
                 </tr>
             <?php }?>
         </table>
 
     <?php }else{?>
-        <?=$this->lang->GetMessage('not-element');?>
+        <?=$this->lang->getMessage('not-element');?>
         <br/>
         <br/>
         <br/>
     <?php }?>
     <br/>
     <br/>
-    <a href="/gy/admin/get-admin-page.php?page=container-data-add" class="gy-admin-button"><?=$this->lang->GetMessage('add');?></a>
+    <a href="/gy/admin/get-admin-page.php?page=container-data-add" class="gy-admin-button"><?=$this->lang->getMessage('add');?></a>
 <?php }

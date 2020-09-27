@@ -14,26 +14,26 @@ class controller{
     }
 	
     /**
-     * SetModel
+     * setModel
      * @param type $model
      */
-    public function SetModel($model){ // установить ссылку на модель если есть
+    public function setModel($model){ // установить ссылку на модель если есть
         $this->model = $model;
     }
 
     /**
-     * SetTemplate - задать шаблон
+     * setTemplate - задать шаблон
      * @param object class template $template
      */
-    public function SetTemplate($template){  
+    public function setTemplate($template){  
         $this->template = $template;	
     }
 
     /**
-     * SetArParam - задать параметры компонента // set array property component
+     * setArParam - задать параметры компонента // set array property component
      * @param type $arParam
      */
-    public function SetArParam($arParam){ 
+    public function setArParam($arParam){ 
         $this->arParam = $arParam;
     }
 

@@ -1,13 +1,13 @@
 <?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
-<h1><?=$this->lang->GetMessage('title');?><?=$arParam['id']?></h1>
+<h1><?=$this->lang->getMessage('title');?><?=$arParam['id']?></h1>
 
 <?php if(!empty($arRes['dataUser'])){?>
-    <h3><?=$this->lang->GetMessage('title-property-standart');?></h3>
+    <h3><?=$this->lang->getMessage('title-property-standart');?></h3>
     <table border="1" class="gy-table-all-users">
 
         <tr>
-            <th><?=$this->lang->GetMessage('name-property');?></th>
-            <th><?=$this->lang->GetMessage('value-property');?></th>
+            <th><?=$this->lang->getMessage('name-property');?></th>
+            <th><?=$this->lang->getMessage('value-property');?></th>
         </tr>
 
         <tr>
@@ -40,13 +40,13 @@
     </table>
 
     <?php if(!empty($arRes['dataUser']['propertys'])){?>
-        <h3><?=$this->lang->GetMessage('title-property');?></h3>
+        <h3><?=$this->lang->getMessage('title-property');?></h3>
 
         <table border="1" class="gy-table-all-users">
 
             <tr>
-                <th><?=$this->lang->GetMessage('name-property');?></th>
-                <th><?=$this->lang->GetMessage('value-property');?></th>
+                <th><?=$this->lang->getMessage('name-property');?></th>
+                <th><?=$this->lang->getMessage('value-property');?></th>
             </tr>
 
             <?php foreach ($arRes['dataUser']['propertys'] as $value) { ?>
@@ -61,6 +61,6 @@
         </table>
     <?php }?>
 <?php }else{?>
-    <?=$this->lang->GetMessage('err-data');?>
+    <?=$this->lang->getMessage('err-data');?>
 <?php }?>
 

@@ -1,8 +1,8 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-function GetMessageCore($code_text) {
-    $msg = "gy: err core function GetMessageCore";
+function getMessageCore($code_text) {
+    $msg = "gy: err core function getMessageCore";
 
     global $arLong;
 

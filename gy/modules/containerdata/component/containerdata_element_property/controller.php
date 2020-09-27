@@ -59,7 +59,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     if(!empty($data['propertyUpdate']) ){
         
         foreach($data['propertyUpdate'] as $key => $val){
-            $res = containerData::UpdateValuePropertyContainerData(
+            $res = containerData::updateValuePropertyContainerData(
                 $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['name_table'],  
                 $key,  
                 $val

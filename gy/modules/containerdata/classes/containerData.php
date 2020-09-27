@@ -231,14 +231,14 @@ class containerData{
     }
     
     /**
-     * UpdateValuePropertyContainerData - обновить значение свойства элемента container-data
+     * updateValuePropertyContainerData - обновить значение свойства элемента container-data
      * @global type $db
      * @param type $tableName
      * @param type $id
      * @param type $value
      * @return boolean
      */
-    public static function UpdateValuePropertyContainerData($tableName, $id, $value){
+    public static function updateValuePropertyContainerData($tableName, $id, $value){
         $result = false;
         global $db;
         

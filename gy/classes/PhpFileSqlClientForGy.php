@@ -6,7 +6,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * class work PhpFileSql 
  */
 
-class PhpFileSqlClientForGy extends db{
+class PhpFileSqlClientForGy extends Db{
     
     public $test = 'PhpFileSqlClient ok';
     public $db; //TODO private

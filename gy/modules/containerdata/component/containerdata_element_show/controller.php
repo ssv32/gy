@@ -27,7 +27,7 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
     if( !$isCache || ($isCache && !$initCache) ){
                 
         // найти container-data
-        $dataContainerData = containerData::getContainerData(
+        $dataContainerData = ContainerData::getContainerData(
             array(
                 '=' => array( 'code', "'".$this->arParam['container-data-code']."'") 
             ), 
@@ -37,10 +37,10 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
         $dataContainerData = $dataContainerData[0]; 
 
         // взять типы свойств что бы знать названия таблиц где их искать
-        $dataTypeProperty = containerData::getAllTypePropertysContainerData();
+        $dataTypeProperty = ContainerData::getAllTypePropertysContainerData();
 
         // найти его свойства
-        $propertyContainerData = containerData::getPropertysContainerData(
+        $propertyContainerData = ContainerData::getPropertysContainerData(
             array(
                 '='=>array(
                     'id_container_data', 
@@ -50,7 +50,7 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
         );
 
         // найти элемент
-        $dataElement = containerData::getElementContainerData(
+        $dataElement = ContainerData::getElementContainerData(
             array(
                 'AND' => array(
                     array( '=' => array( 'id_container_data', $dataContainerData['id'])),
@@ -63,7 +63,7 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
         $arRes['ITEMS'] = array();
 
         foreach ($propertyContainerData as $val) {
-            $arRes['ITEMS'][$val['id']] = containerData::getValuePropertysContainerData(
+            $arRes['ITEMS'][$val['id']] = ContainerData::getValuePropertysContainerData(
                 $dataContainerData['id'], 
                 $dataElement['id'], 
                 $val['id'],  

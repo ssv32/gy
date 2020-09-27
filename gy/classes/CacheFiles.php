@@ -6,7 +6,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * cache - класс для работы с кешем
  * для даботы нужен раздел gy/cache/
  */
-class cacheFiles extends cache {
+class CacheFiles extends Cache {
     private $urlCache = '/cache/';
     private $urlProject = '/';
     private $data = array();

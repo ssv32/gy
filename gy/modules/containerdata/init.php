@@ -25,7 +25,7 @@ $componentsThisModule = array(
 
 // классы этого можуля
 $classesThisModule = array(
-    'containerData'
+    'ContainerData'
 );
 
 // страници админки

@@ -24,7 +24,7 @@ if(!empty($_REQUEST['auth'])){
 
 global $user;
 
-$isShowAdminPanel = accessUserGroup::accessThisUserByAction( 'show_admin_panel');
+$isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
@@ -36,10 +36,10 @@ if ($isShowAdminPanel === true){
 		
 } elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
 	
-    if( capcha::chackCapcha($_REQUEST['capcha']) ){
+    if( Capcha::chackCapcha($_REQUEST['capcha']) ){
 
         $user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
-        $isShowAdminPanel = accessUserGroup::accessThisUserByAction( 'show_admin_panel');
+        $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
         if ($isShowAdminPanel === false){
             $arRes["err"] = 'err1'; 

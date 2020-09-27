@@ -18,7 +18,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     // подключить модули
     //global $module;
-    $module = module::getInstance();
+    $module = Module::getInstance();
     $module->setUrlGyCore(__DIR__);
     //$module->includeModule('containerdata');
     $module->includeAllModules();
@@ -52,12 +52,12 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     }
     
     // обезопасить получаемый конфиг
-    $gy_config = security::filterInputData($gy_config);
+    $gy_config = Security::filterInputData($gy_config);
     
     global $app;
     // добавлю версию ядра gy 
     $gy_config['v-gy'] = '0.2-alpha';
-    $app = app::createApp($urlProject, $gy_config);
+    $app = App::createApp($urlProject, $gy_config);
     unset($gy_config);
 
     // подключить класс работы с базой данный // include class work database
@@ -73,13 +73,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     }
 
     global $crypto;	
-    $crypto = new crypto();
+    $crypto = new Crypto();
     if (!empty($app->options['sole'])){
             $crypto->setSole($app->options['sole']);
     }
 
     global $user;
-    $user = new user(); 
+    $user = new User(); 
 
     // объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
     if (!isset($app->options['type_cache'])) {  
@@ -96,9 +96,9 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     if( ($app->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')  
         && ($_REQUEST['page'] != 'container-data-element-property' ) 
     ){
-        $_REQUEST = security::filterInputData($_REQUEST);
-        $_GET = security::filterInputData($_GET);
-        $_POST = security::filterInputData($_POST);
+        $_REQUEST = Security::filterInputData($_REQUEST);
+        $_GET = Security::filterInputData($_GET);
+        $_POST = Security::filterInputData($_POST);
     }
 
 

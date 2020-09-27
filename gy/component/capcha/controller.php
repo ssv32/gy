@@ -5,7 +5,7 @@ global $app;
 
 $arRes = array();
 
-$capcha = new capcha( $app->url.capcha::$defaultUrlFonts );
+$capcha = new Capcha( $app->url.capcha::$defaultUrlFonts );
 
 $data = $_REQUEST;
 

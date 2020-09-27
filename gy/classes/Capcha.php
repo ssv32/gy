@@ -2,9 +2,9 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * class capcha - для работы с капчей
+ * class Capcha - для работы с капчей
  */
-class capcha{
+class Capcha{
     
     // символы которые будут в капче
     //private static $letters = 'abcdefghijklmnopqrstuvwxyzABCDRFGHIJKLMNOPQRSTUVWXYZ0123456789';

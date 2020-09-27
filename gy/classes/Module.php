@@ -2,9 +2,9 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * module - работа с модулями фреймворка
+ * Module - работа с модулями фреймворка
  */
-class module{
+class Module{
     
     // массив подключённых модулей
     public $arrayIncludeModules = array(); 
@@ -267,7 +267,7 @@ class module{
     /**
      * getFlagShowButtonsAdminPanelByModule
      *  - вернуть условие показа кнопок в админке,
-     *  это код для метода accessUserGroup::accessThisUserByAction
+     *  это код для метода AccessUserGroup::accessThisUserByAction
      *  т.е. действие и если оно разрешено пользователю то покажется пункты меню в админке
      *  
      * 

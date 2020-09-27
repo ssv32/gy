@@ -2,9 +2,9 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * generalUsersPropertys - класс для работы с общими свойствами пользователей
+ * GeneralUsersPropertys - класс для работы с общими свойствами пользователей
  */
-class generalUsersPropertys{
+class GeneralUsersPropertys{
     
     private static $tableNameCreatePropertys = 'create_all_users_property';
     private static $tableNameTypePropertys = 'type_all_user_propertys';

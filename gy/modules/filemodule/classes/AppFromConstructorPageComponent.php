@@ -2,11 +2,11 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * class appFromConstructorPageComponent подменит собой обьект app 
+ * class AppFromConstructorPageComponent подменит собой обьект app 
  *  что бы подловить подключаемые компоненты
  */
 
-class appFromConstructorPageComponent{
+class AppFromConstructorPageComponent{
     
     private $allDateIncludeComponents = array();
     private $intKey = 0;
@@ -30,7 +30,7 @@ class appFromConstructorPageComponent{
      */
     public function getInfoAboutComponent( $name, $template, $arParam, $url ){
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
-        $module = module::getInstance();
+        $module = Module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
         $componentInfo = array();     
         

@@ -5,10 +5,10 @@ $arRes = array();
 
 if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id'])  ){
     // получить свойства container-data
-    $arRes['PROPERTY'] = containerData::getPropertysContainerData( array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
+    $arRes['PROPERTY'] = ContainerData::getPropertysContainerData( array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
     
     // получить все типы свойств
-    $arRes['PROPERTY_TYPE'] = containerData::getAllTypePropertysContainerData();
+    $arRes['PROPERTY_TYPE'] = ContainerData::getAllTypePropertysContainerData();
 
     $data = $_REQUEST;
 
@@ -16,7 +16,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     if(!empty($data['propertyAdd']) ){
         
         foreach($data['propertyAdd'] as $key => $val){
-            $res = containerData::addValuePropertyContainerData(
+            $res = ContainerData::addValuePropertyContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'], 
                 $key,  
@@ -35,7 +35,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     // получить значения
     if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
         foreach($arRes['PROPERTY'] as $key => $val){
-            $propertyValue = containerData::getValuePropertysContainerData(
+            $propertyValue = ContainerData::getValuePropertysContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'],
                 $val['id'],
@@ -59,7 +59,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     if(!empty($data['propertyUpdate']) ){
         
         foreach($data['propertyUpdate'] as $key => $val){
-            $res = containerData::updateValuePropertyContainerData(
+            $res = ContainerData::updateValuePropertyContainerData(
                 $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['name_table'],  
                 $key,  
                 $val
@@ -77,7 +77,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     // получить значения
     if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
         foreach($arRes['PROPERTY'] as $key => $val){
-            $propertyValue = containerData::getValuePropertysContainerData(
+            $propertyValue = ContainerData::getValuePropertysContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'],
                 $val['id'],

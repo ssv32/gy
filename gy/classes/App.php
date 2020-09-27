@@ -1,7 +1,7 @@
 <?php 
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-final class app{
+final class App{
 
     public $url;
     public $options; // настройки проекта
@@ -22,7 +22,7 @@ final class app{
         $this->urlProject = $url;
         
         // если есть языковой файл то надо подключить его
-        $this->lang = new lang($url, 'app', $this->options['lang']);
+        $this->lang = new Lang($url, 'app', $this->options['lang']);
     }
 
     /**
@@ -52,10 +52,10 @@ final class app{
     public function component($name, $template, $arParam  ){
         if($name != 'includeHtml'){
             // обезопасим входные параметры
-            $arParam = security::filterInputData($arParam);
+            $arParam = Security::filterInputData($arParam);
         }
         
-        $component = new component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
+        $component = new Component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
         return $component;
     }
 

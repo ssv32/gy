@@ -2,9 +2,9 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * classsitePages - класс для работы со страницами сайта
+ * SitePages - класс для работы со страницами сайта
  */
-class sitePages{
+class SitePages{
     
     /**
      * разделы в которых нельзя редактировать страницы
@@ -55,7 +55,7 @@ class sitePages{
             if(file_exists($this->urlProject.$urlPage.'/') === false){ // TODO вынести в класс files
                 mkdir($this->urlProject.$urlPage.'/', 0755, true);   
             }            
-            return files::createFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
+            return Files::createFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
         }else{
             return false;
         }
@@ -70,7 +70,7 @@ class sitePages{
      */
     public function deleteSitePage($urlPage){
         if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
-            $res = files::deleteFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
+            $res = Files::deleteFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
             
             // если файлов не осталось удалить директорию // TODO вынести в класс files
             if($res !== false){
@@ -94,7 +94,7 @@ class sitePages{
      */
     public function getContextPage($urlPage){
         if( ($this->urlProject !== false) &&  $this->checkUrl('/'.$urlPage.'/')   ){
-            return files::getContentFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
+            return Files::getContentFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
         }else{
             return false;
         }
@@ -110,7 +110,7 @@ class sitePages{
      */
     public function putContextPage($urlPage, $date){
         if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
-            return files::saveFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite, $date);
+            return Files::saveFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite, $date);
         }else{
             return false;
         }

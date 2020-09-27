@@ -1,7 +1,7 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class containerData{            
+class ContainerData{            
     public static $table_container_data = 'container_data';
     public static $table_list_propertys_container_data = 'list_propertys_container_data';
     public static $table_types_property_container_data = 'types_property_container_data'; 
@@ -377,10 +377,10 @@ class containerData{
         global $db;	
         
         // взять все типы контент блоков что бы знать в каких таблицах искать значения
-        $dataTypeProperty = containerData::getAllTypePropertysContainerData();
+        $dataTypeProperty = ContainerData::getAllTypePropertysContainerData();
         
         // найти все свойства container-data      
-        $propertyContainerData = containerData::getPropertysContainerData(
+        $propertyContainerData = ContainerData::getPropertysContainerData(
             array(
                 '='=>array(
                     'id_container_data', 

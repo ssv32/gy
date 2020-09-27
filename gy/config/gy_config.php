@@ -7,7 +7,7 @@ $gy_config = array(
     'db_config' => array(
         
         //--- example connect mysql---
-        'db_type' => 'mysql', 
+        'db_type' => 'MySql', 
         'db_host' => 'localhost',
         'db_user' => 'root', // заменить на настоящего пользователя // replace by true user 
         'db_pass' => '', 
@@ -25,7 +25,7 @@ $gy_config = array(
         //---
         
         //--- example connect PostgreSQL---
-        //'db_type' => 'pgsql', 
+        //'db_type' => 'PgSql', 
         //'db_host' => 'localhost',
         //'db_user' => 'postgres', // заменить на настоящего пользователя // replace by true user 
         //'db_pass' => '', 

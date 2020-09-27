@@ -11,7 +11,7 @@ if( !empty($data['add-group-name'])
     && !empty( $data['groupsActions']['add-group-action-user'])
 ){
     
-    $res = accessUserGroup::addUserGroup(
+    $res = AccessUserGroup::addUserGroup(
         array(
             'code' => $data['add-group-code'],
             'text' => $data['add-group-text'],
@@ -25,15 +25,15 @@ if( !empty($data['add-group-name'])
 // удалить группы, отмеченные для удаления
 if(!empty($data['delete'])){
     foreach ($data['delete'] as $codeDeleteGroup => $val) {
-        accessUserGroup::deleteUserGroupByCode($codeDeleteGroup);
+        AccessUserGroup::deleteUserGroupByCode($codeDeleteGroup);
     }
 }
 
 // взять все группы пользователей
-$arRes['allUsersGroups'] = accessUserGroup::getAccessGroup();
+$arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
 
 // взять все дефствия поьзователей 
-$arRes['allActionUser'] = accessUserGroup::getUserAction();
+$arRes['allActionUser'] = AccessUserGroup::getUserAction();
 
 // коды групп пользователей которые даны по умолчанию (их нельзя будет удалять)
 $standartGroup = array(
@@ -59,10 +59,10 @@ if(!empty($data['button-form'])
 ){ // нужно сохранить новые настроки прав
     foreach ($data['groupsActions'] as $key => $listActionUser){
         // удалить все настройки для определённой группы
-        accessUserGroup::deleteAllActionsForGroup($key);
+        AccessUserGroup::deleteAllActionsForGroup($key);
         
         foreach ($listActionUser as $nameActionsUser) {
-            accessUserGroup::addOptionsGroup($key, $nameActionsUser);
+            AccessUserGroup::addOptionsGroup($key, $nameActionsUser);
         }
     }
     $arRes['status'] = 'ok';

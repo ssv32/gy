@@ -2,7 +2,7 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 //global $user;
-//$arRes['ITEMS'] = containerData::getContainerData(array(), array('*') );
+//$arRes['ITEMS'] = ContainerData::getContainerData(array(), array('*') );
 
 // найти текущие значения
 
@@ -21,7 +21,7 @@ if(!empty($data)){
         $saveData[$val] = $data[$val]; 
     }
 
-    $res = containerData::addContainerData($saveData);
+    $res = ContainerData::addContainerData($saveData);
 
     if ($res){
         $arRes['status'] = 'add-ok';

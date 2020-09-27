@@ -2,10 +2,10 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * files - класс для работы с файлами
+ * Files - класс для работы с файлами
  */
 
-class files{
+class Files{
         
      
     /**

@@ -8,7 +8,7 @@ $data = $_REQUEST;
 if (!empty($data['id_container_data']) && !empty($data['name']) && !empty($data['code']) ){
     
     if(empty($data['el-id'])){ // добавить новый элемент container-data
-        $res = containerData::addElementContainerData(
+        $res = ContainerData::addElementContainerData(
             array(
                 'section_id' => $data['section_id'],
                 'name' => $data['name'],
@@ -25,7 +25,7 @@ if (!empty($data['id_container_data']) && !empty($data['name']) && !empty($data[
     }elseif(!empty($data['el_edit_id']) && is_numeric($data['el_edit_id'])){ // изменить элемент container-data
         
         
-        $res = containerData::updateElementContainerData(
+        $res = ContainerData::updateElementContainerData(
             array(
                 'section_id' => $data['section_id'],
                 'name' => $data['name'],
@@ -49,7 +49,7 @@ if (!empty($data['id_container_data']) && !empty($data['name']) && !empty($data[
 }
 
 if( !empty($data['del-el']) && !empty($data['id']) ){
-    $res = containerData::deleteElementContainerData( $data['id']);
+    $res = ContainerData::deleteElementContainerData( $data['id']);
     if($res){ 
         $arRes['stat-del'] = 'ok';
     }else{
@@ -58,7 +58,7 @@ if( !empty($data['del-el']) && !empty($data['id']) ){
 }
 
 if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])){
-    $arRes['ITEMS'] = containerData::getAllElementContainerData($this->arParam['container-data-id']);
+    $arRes['ITEMS'] = ContainerData::getAllElementContainerData($this->arParam['container-data-id']);
       
     if(!empty($data['el-id']) && is_numeric($data['el-id']) && empty($arRes['stat-edit']) ){
         

@@ -1,7 +1,7 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class user{ 
+class User{ 
 	
     protected $authorized = false;
     protected $dataUser;
@@ -164,7 +164,7 @@ class user{
                 $this->dataUser = $dataUser;
 
                 // получить группы к каким относится пользователь
-                $this->dataUser['groups'] = accessUserGroup::getListGroupsByUser($dataUser['id']);
+                $this->dataUser['groups'] = AccessUserGroup::getListGroupsByUser($dataUser['id']);
 
                 $this->authorized = true;
                 if ( !empty($this->dataUser['groups']['admins']) ){
@@ -225,7 +225,7 @@ class user{
         
         // получить группы пользователей
         foreach ($result as $key => $value) {
-            $result[$key]['groups'] = accessUserGroup::getListGroupsByUser($value['id']);
+            $result[$key]['groups'] = AccessUserGroup::getListGroupsByUser($value['id']);
         }
         
         return $result;
@@ -251,7 +251,7 @@ class user{
         
         if(!empty($result)){
             // получить группы текущего пользователя
-            $result['groups'] = accessUserGroup::getListGroupsByUser($id);
+            $result['groups'] = AccessUserGroup::getListGroupsByUser($id);
         }
         
         return $result;

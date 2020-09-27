@@ -4,7 +4,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 $data = $_POST;
 
 if( !empty($data['ID']) && is_numeric($data['ID']) ){
-    $res = containerData::deleteContainerData($data['ID']);
+    $res = ContainerData::deleteContainerData($data['ID']);
     
     if($res){
         $arRes['status'] = 'del-ok';
@@ -14,7 +14,7 @@ if( !empty($data['ID']) && is_numeric($data['ID']) ){
 }
 
 global $user;
-$arRes['ITEMS'] = containerData::getContainerData(array(), array('*') );
+$arRes['ITEMS'] = ContainerData::getContainerData(array(), array('*') );
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

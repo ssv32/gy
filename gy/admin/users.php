@@ -5,11 +5,11 @@ global $user;
 
 $data = $_REQUEST;
 
-if (accessUserGroup::accessThisUserByAction( 'show_admin_panel')){
+if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
 	
     include "../../gy/admin/header-admin.php";
 
-    if(accessUserGroup::accessThisUserByAction( 'edit_users')){
+    if(AccessUserGroup::accessThisUserByAction( 'edit_users')){
         
         if(isset($data['show-id']) && is_numeric($data['show-id']) ){ 
             // если есть параметр show-id то просто просмотреть все данные по конкретному пользователю  

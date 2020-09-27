@@ -9,7 +9,7 @@ $data = $_REQUEST;
 
 global $user;
 
-if (accessUserGroup::accessThisUserByAction( 'show_admin_panel') && !empty($data['action'])){
+if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel') && !empty($data['action'])){
     // действие удалить пользователя
     if (($data['action'] == 'user-del') && !empty($data['id-user'])  ) {
 

@@ -1,7 +1,7 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class template{
+class Template{
     public $templateUrl; // ссылка на шаблон
     // public $name; // имя шаблона
     public $lang;
@@ -21,7 +21,7 @@ class template{
             $this->urlFileJs = $url.'/script.js';
         }
 
-        $this->lang = new lang($url, 'template', $lang);
+        $this->lang = new Lang($url, 'template', $lang);
     }
 
     /* show - нарисовать/показать шаблон 

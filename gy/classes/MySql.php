@@ -1,15 +1,13 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-/** 
- * pgsql - класс для работы с базой данных PostgreSQL
- * class work PostgreSQL 
+/* MySql - класс для работы с базой данных mysql
+ * class work mysql 
  */
 
-class pgsql extends db{
+class MySql extends Db{
     
-    public $test = 'pgsql ok';
-    public $defaultPort = '5432';
+    public $test = 'mysql ok';
     public $db;
     
     /* connect() - create connect in database
@@ -20,8 +18,8 @@ class pgsql extends db{
     * @param $port
     * @return resurs, false
     */
-    public function connect($host, $user, $pass, $name_db, $port){        
-        $this->db = pg_connect("host=".$host." port=".$port." dbname=".$name_db." user=".$user." password=".$pass);
+    public function connect($host, $user, $pass, $name_db, $port){
+        $this->db = mysqli_connect($host, $user, $pass, $name_db, $port);
         return $this->db;
     }
     
@@ -30,7 +28,7 @@ class pgsql extends db{
      * @return true - ok OR false - not ok
      */
     public function query($query){
-        return pg_query($this->db, $query);
+        return mysqli_query($this->db, $query);
     }
     
     /*  close() - close connect database
@@ -38,7 +36,7 @@ class pgsql extends db{
      * @return true - ok OR false - not ok
      */
     public function close(){
-        return pg_close($this->db);
+        return mysqli_close($this->db);
     }
 	
     /**
@@ -49,7 +47,7 @@ class pgsql extends db{
     public function fetch($res){
     $result = array();
     if ($res !== false){
-        $result = pg_fetch_assoc($res);
+        $result = mysqli_fetch_assoc($res);
     }
         return $result;
     }
@@ -75,7 +73,7 @@ class pgsql extends db{
         if ( empty($this->db)){
             if (!empty($db_config)){
                 if( empty($db_config['db_port']) ){
-                    $db_config['db_port'] = $this->defaultPort;
+                    $db_config['db_port'] = ini_get("mysqli.default_port");
                 }
                 $this->connect(
                     $db_config['db_host'], 
@@ -188,10 +186,8 @@ class pgsql extends db{
     private function getStrOneTypeWhere($where){
         $result = false;
         if(!empty($where['='])){
-            $where['='][0] = $where['='][0];
             $result = $where['='][0]." = ".$where['='][1];
         }elseif( !empty($where['!=']) ){
-            $where['!='][0] = $where['='][0];
             $result = $where['!='][0]." != ".$where['!='][1];
         }
         return $result;
@@ -259,28 +255,17 @@ class pgsql extends db{
      */
     public function selectDb($tableName, $propertys, $where = array()){
         $query = 'SELECT ';
-        
-        //$propertys = $this->allValueArrayInMbStrtolower($propertys);
-        
         $strPropertys = implode(",", $propertys);
-       
+
         if(!empty($where)){            
             $where = ' WHERE '.$this->parseWhereForQuery($where);
         }else{
             $where = '';
         }
-   
+              
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
            
         return  $this->query($query);
-    }
-    
-    private static function allValueArrayInMbStrtolower($array){
-        
-        foreach ($array as $key => $value) {
-            $where[$key] = mb_strtolower($value);
-        }
-        return $where;
     }
     
     /**
@@ -359,15 +344,11 @@ class pgsql extends db{
     public function createTable($tableName, $propertys){
         $query = '';
         $textPropertys = '';
-        
         foreach($propertys as $val){
-            $strPos = strpos($val, 'int PRIMARY KEY AUTO_INCREMENT');
-            if($strPos !== false ){
-                $val = str_replace('int PRIMARY KEY AUTO_INCREMENT', 'SERIAL PRIMARY KEY', $val);
-            }
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$val;
-        }       
-        $query = 'CREATE TABLE IF NOT EXISTS '.$tableName.' ('.$textPropertys.');';
+        }
+        
+        $query = 'CREATE TABLE '.$tableName.' ('.$textPropertys.');';
 
         return  $this->query($query);
     }

@@ -2,11 +2,11 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /** 
- * security - класс с методами для обеспечения безопасности gy framework
+ * Security - класс с методами для обеспечения безопасности gy framework
  * class work security 
  */
 
-class security{
+class Security{
     
     /**
      * filterInputData 

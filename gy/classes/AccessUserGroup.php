@@ -2,10 +2,10 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /**
- * accessUserGroup - будет всё что связано с правами доступов пользователей 
+ * AccessUserGroup - будет всё что связано с правами доступов пользователей 
  * (и групп пользователей)
  */
-class accessUserGroup{
+class AccessUserGroup{
     
     private static $tableNameAccessGroup = 'access_group';
     private static $tableNameUserActions = 'action_user';

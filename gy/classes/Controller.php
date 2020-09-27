@@ -1,7 +1,7 @@
 <?php 
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class controller{
+class Controller{
     public $model;
     public $controller; // ссылка для запуска выбранного контроллера компонента
     public $lang;
@@ -10,7 +10,7 @@ class controller{
 
     public function __construct($url, $lang){
         $this->controller = $url.'/controller.php';
-        $this->lang = new lang($url, 'controller', $lang);
+        $this->lang = new Lang($url, 'controller', $lang);
     }
 	
     /**

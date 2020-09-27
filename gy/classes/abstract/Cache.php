@@ -2,9 +2,9 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 /** 
- * abstract class cache - описывает класс работы с кешем
+ * abstract class Cache - описывает класс работы с кешем
  */
-abstract class cache{
+abstract class Cache{
 
     /**
      * cacheInit - инициализация кеша

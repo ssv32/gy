@@ -1,10 +1,10 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-/* image class work with image // wrapper class php GD
- * image класс для работы с изображениями // обёртка класса php GD
+/* Image class work with image // wrapper class php GD
+ * Image класс для работы с изображениями // обёртка класса php GD
  */
-class image{
+class Image{
     
     /** 
      * imageResized function compression image (jpeg)

@@ -7,18 +7,18 @@ $data = $_POST;
 
 // удаления свойства container-data
 if(!empty($data['del-property-id']) && !empty($data['del-proprty-container-data']) ){
-    containerData::deletePropertyContainerData( $data['del-property-id'], $data['del-proprty-container-data']);
+    ContainerData::deletePropertyContainerData( $data['del-property-id'], $data['del-proprty-container-data']);
     $arRes['status'] = 'del-property-ok';
 }else{
 
-    $arRes['TYPE_PROPERTYS'] = containerData::getAllTypePropertysContainerData();
+    $arRes['TYPE_PROPERTYS'] = ContainerData::getAllTypePropertysContainerData();
 
     if(!empty($data)){
 
         if( !empty($data['type_property']) && ($data['type_property'] != 'null') && !empty($arRes['TYPE_PROPERTYS'][$data['type_property']]) ){
             if( !empty($data['name']) && !empty($data['code']) ){
 
-                $res = containerData::addPropertyContainerData( 
+                $res = ContainerData::addPropertyContainerData( 
                     array(
                         'id_type_property' => $data['type_property'],
                         'id_container_data' => $this->arParam['container-data-id'],
@@ -43,7 +43,7 @@ if(!empty($data['del-property-id']) && !empty($data['del-proprty-container-data'
 
     // найти свойства текущего container-data
     if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])){
-        $arRes['PROPERTYS'] = containerData::getPropertysContainerData(array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
+        $arRes['PROPERTYS'] = ContainerData::getPropertysContainerData(array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
     }
 }
     

@@ -2,7 +2,7 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 //global $user;
-//$arRes['ITEMS'] = containerData::getContainerData(array(), array('*') );
+//$arRes['ITEMS'] = ContainerData::getContainerData(array(), array('*') );
 
 // найти текущие значения
 
@@ -22,7 +22,7 @@ if (!empty($data['ID'])){
         $saveData[$val] = $data[$val]; 
     }
         
-    $res = containerData::updateContainerData($saveData, array('=' => array('id', $data['ID'])));
+    $res = ContainerData::updateContainerData($saveData, array('=' => array('id', $data['ID'])));
     
     if ($res){
         $arRes['status'] = 'add-ok';
@@ -32,7 +32,7 @@ if (!empty($data['ID'])){
     
 } else {
     if(!empty($this->arParam['ID'])){
-        $arRes['data-this-nfo-box'] = containerData::getContainerData(array( '=' =>array( 'id', $this->arParam['ID'])), array('*') );
+        $arRes['data-this-nfo-box'] = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['ID'])), array('*') );
     }
 }
 

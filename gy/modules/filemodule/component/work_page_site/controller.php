@@ -9,7 +9,7 @@ global $arRes;
 if( !empty($data['action-1']) ){
     
     global $app;
-    $sitePage = new sitePages($app->urlProject.'/');
+    $sitePage = new SitePages($app->urlProject.'/');
         
     $res = $sitePage->createSitePage($data['url-site-page']);
     
@@ -24,7 +24,7 @@ if( !empty($data['action-1']) ){
 if( !empty($data['action-3']) && empty($arRes['status']) ){
     
     global $app;
-    $sitePage = new sitePages($app->urlProject.'/');
+    $sitePage = new SitePages($app->urlProject.'/');
         
     $res = $sitePage->deleteSitePage($data['url-site-page']);
     
@@ -39,7 +39,7 @@ if( !empty($data['action-3']) && empty($arRes['status']) ){
 if( !empty($data['action-2']) && empty($arRes['status']) ){
     
     global $app;
-    $sitePage = new sitePages($app->urlProject.'/');
+    $sitePage = new SitePages($app->urlProject.'/');
             
     $res = $sitePage->getContextPage($data['url-site-page']);
     
@@ -55,7 +55,7 @@ if( !empty($data['action-2']) && empty($arRes['status']) ){
 // изменение файла
 if( !empty($data['action-2-1'])  && !empty($data['url-site-page'])  && !empty($data['new-text-page']) ){
     global $app;
-    $sitePage = new sitePages($app->urlProject.'/');
+    $sitePage = new SitePages($app->urlProject.'/');
         
     $res = $sitePage->putContextPage($data['url-site-page'], $data['new-text-page']);
     if($res !== false){
@@ -76,7 +76,7 @@ if( !empty($data['action-5']) ){
     $appGlobal = $app;
     
     // переопределим app
-    $app = new appFromConstructorPageComponent($app->urlProject, $app->options );
+    $app = new AppFromConstructorPageComponent($app->urlProject, $app->options );
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
     
@@ -113,7 +113,7 @@ global $app;
     // добавить коды компонентов
     if(is_array($arrayComponents)){
         foreach ($arrayComponents as $value) {
-            $codeIncludeComponent = appFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
+            $codeIncludeComponent = AppFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
             $codePage .= $codeIncludeComponent."\n";   
         }
     }   
@@ -124,7 +124,7 @@ function savePageByArrayComponents($page, $arrayComponents){
     $codePage = getCodePageByArrayComponents($arrayComponents);
     
     global $app;
-    $sitePage = new sitePages($app->urlProject.'/');
+    $sitePage = new SitePages($app->urlProject.'/');
             
     $res = $sitePage->putContextPage( $page, $codePage);
     
@@ -219,7 +219,7 @@ if( !empty($data['action_8_1']) ){
         global $app;
 
         // проверим есть ли такой компонент (точнее файл информации о нём)
-        $dataComponent = appFromConstructorPageComponent::getInfoAboutComponent(
+        $dataComponent = AppFromConstructorPageComponent::getInfoAboutComponent(
             $data['name_new_component'], 
             $data['name_new_template'],
             array(),
@@ -260,7 +260,7 @@ if(!empty($data['action_8_2'])
     $appGlobal = $app;
     
     // переопределим app
-    $app = new appFromConstructorPageComponent($app->urlProject, $app->options );
+    $app = new AppFromConstructorPageComponent($app->urlProject, $app->options );
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
     

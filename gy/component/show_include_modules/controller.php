@@ -2,7 +2,7 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 // подключить даныне по всем подключенным модулям
-$module = module::getInstance();
+$module = Module::getInstance();
 $arRes['info-modules'] = $module->getInfoAllIncludeModules();
 
 // показать шаблон

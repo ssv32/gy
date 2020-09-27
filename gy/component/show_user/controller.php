@@ -7,7 +7,7 @@ if(!empty($this->arParam['id']) && is_numeric($this->arParam['id'])){
 
     if(!empty($dateUser)){
         // взять все группы пользователей
-        $allUsersGroups = accessUserGroup::getAccessGroup();
+        $allUsersGroups = AccessUserGroup::getAccessGroup();
         
         $arRes['dataUser'] = array(
             'id' => $dateUser['id'],

@@ -106,12 +106,12 @@ if($isRunConsole){
     echo $br.'install sest content - containerData = start';
 
     // добавить контейнер данных - контент
-    containerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2 | Content2'));
+    ContainerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2 | Content2'));
 
-    $dataContentContainerData = containerData::getContainerData(array('=' => array('code', "'Content'")), array('*'));
+    $dataContentContainerData = ContainerData::getContainerData(array('=' => array('code', "'Content'")), array('*'));
 
     //добавить свойство
-    containerData::addPropertyContainerData(
+    ContainerData::addPropertyContainerData(
         array(
             'id_type_property' => 1,
             'id_container_data' => $dataContentContainerData[0]['id'],
@@ -121,7 +121,7 @@ if($isRunConsole){
     );
 
     // добавить элемент контейнера данных
-    containerData::addElementContainerData(
+    ContainerData::addElementContainerData(
         array(
             'section_id' => 0,
             'code' => 'html-index-page',
@@ -131,9 +131,9 @@ if($isRunConsole){
     );
 
     // взять типы свойств что бы знать названия таблиц где их искать
-    //$dataTypeProperty = containerData::getAllTypePropertysContainerData();
+    //$dataTypeProperty = ContainerData::getAllTypePropertysContainerData();
     // найти элемент
-    $dataElement = containerData::getElementContainerData(
+    $dataElement = ContainerData::getElementContainerData(
         array(
             'AND' => array(
                 array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
@@ -143,7 +143,7 @@ if($isRunConsole){
     );
 
     // найти его свойства
-    $propertyContainerData = containerData::getPropertysContainerData(
+    $propertyContainerData = ContainerData::getPropertysContainerData(
         array(
             '='=>array(
                 'id_container_data', 
@@ -154,7 +154,7 @@ if($isRunConsole){
     $prop = array_shift($propertyContainerData);
 
     // добавить значение свойства для элемента созданного выше
-    containerData::addValuePropertyContainerData(
+    ContainerData::addValuePropertyContainerData(
         $dataContentContainerData[0]['id'], 
         $dataElement['id'], 
         $prop['id'],  

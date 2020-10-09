@@ -15,23 +15,23 @@ $arRes['property'] = array(
 
 $data = $_POST;
 
-if (!empty($data['ID'])){
+if (!empty($data['ID'])) {
     
     $saveData = array(); 
-    foreach ($arRes['property'] as $val){
+    foreach ($arRes['property'] as $val) {
         $saveData[$val] = $data[$val]; 
     }
         
     $res = ContainerData::updateContainerData($saveData, array('=' => array('id', $data['ID'])));
     
-    if ($res){
+    if ($res) {
         $arRes['status'] = 'add-ok';
-    }else{
+    } else {
         $arRes['status'] = 'add-err';
     }
     
 } else {
-    if(!empty($this->arParam['ID'])){
+    if (!empty($this->arParam['ID'])) {
         $arRes['data-this-nfo-box'] = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['ID'])), array('*') );
     }
 }

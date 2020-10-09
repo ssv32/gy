@@ -60,10 +60,10 @@ class PhpFileSqlClientForGy extends Db
      */
     public function close()
     {
-        if ( !empty($this->db)){
+        if (!empty($this->db)) {
             $phpFileSql = $this->db;
             return $phpFileSql->close();
-        }else{
+        } else {
             return false;
         }
     }
@@ -78,7 +78,7 @@ class PhpFileSqlClientForGy extends Db
         $res = $this->dataSelectForFetch;
         
         $result = false;
-        if(($res !== false) && is_array($res)) {
+        if (($res !== false) && is_array($res)) {
                         
             // беру первое значение из него
             $result = array_shift($res);
@@ -99,14 +99,14 @@ class PhpFileSqlClientForGy extends Db
     {
         $result = false;
         
-        if(($res !== false) && is_array($res)) {
-            if($key !== false ){
+        if (($res !== false) && is_array($res)) {
+            if ($key !== false ) {
                 foreach ($res as $value) {
-                    if(!empty($value[$key])){
+                    if (!empty($value[$key])) {
                         $result[$value[$key]] = $value;
                     }
                 }
-            }else{
+            } else {
                 $result = $res;
             }
         }
@@ -116,8 +116,8 @@ class PhpFileSqlClientForGy extends Db
 
     public function __construct($db_config) 
     {
-        if ( empty($this->db)){
-            if (!empty($db_config)){
+        if ( empty($this->db)) {
+            if (!empty($db_config)) {
                 $this->connect($db_config['db_url'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
             }
         }
@@ -135,7 +135,7 @@ class PhpFileSqlClientForGy extends Db
     {
 
         // чуть подправить для совместимости
-        if($propertys[0] == '*'){
+        if ($propertys[0] == '*') {
             $propertys = '*';
         }
 
@@ -164,7 +164,7 @@ class PhpFileSqlClientForGy extends Db
         global $crypto;
 
         // если встречается пароль то засолить и зашифровать его
-        if(!empty($propertys['pass'])){
+        if (!empty($propertys['pass'])) {
             $propertys['pass'] = md5($propertys['pass'].$crypto->getSole());
         }
 
@@ -188,7 +188,7 @@ class PhpFileSqlClientForGy extends Db
 
         // если встречается пароль то засолить и зашифровать его
         global $crypto;
-        if(!empty($propertys['pass'])){
+        if (!empty($propertys['pass'])) {
             $propertys['pass'] = md5($propertys['pass'].$crypto->getSole());
         }
 
@@ -210,17 +210,17 @@ class PhpFileSqlClientForGy extends Db
         $arrayColumns = array();
 
         // нужно подогнать свойства под метод класса PhpFileSql
-        foreach($propertys as $val){
+        foreach ($propertys as $val) {
             $attr = explode(' ', $val);
             if( (count($attr)>2) 
                 && ($attr[1] == 'int' )
                 && ($attr[2] == 'PRIMARY')
                 && ($attr[3] == 'KEY')
                 && ($attr[4] == 'AUTO_INCREMENT')
-            ){ 
+            ) { 
                 // PRIMARY KEY AUTO_INCREMENT
                 $arrayColumns[] = array($attr[0], 'PRIMARY_KEY_AUTO_INCREMENT' );
-            }else{
+            } else {
                 $arrayColumns[] = $attr[0];
             }
         }
@@ -255,11 +255,11 @@ class PhpFileSqlClientForGy extends Db
     public function createTrueArrayWhereFromPhpFileSql($where)
     {
         
-        if(is_array($where)){
+        if (is_array($where)) {
             foreach ($where as $key0 => $value0) {
-                if(in_array($key0, array('=', '!='))){
+                if (in_array($key0, array('=', '!='))) {
                     $where[$key0][1] = str_replace("'", '', $where[$key0][1]);
-                }elseif(in_array($key0, array('AND', 'OR'))){
+                } elseif (in_array($key0, array('AND', 'OR'))) {
                     foreach ($value0 as $key1 => $value1) {
                         foreach ($value1 as $key2 => $value2) {
                             $where[$key0][$key1][$key2][1] = str_replace("'", '', $where[$key0][$key1][$key2][1]);

@@ -3,7 +3,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 $arRes = array();
 
-if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id'])  ){
+if (!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id'])) {
     // получить свойства container-data
     $arRes['PROPERTY'] = ContainerData::getPropertysContainerData( array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
     
@@ -13,9 +13,9 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     $data = $_REQUEST;
 
     // сохранение свойств
-    if(!empty($data['propertyAdd']) ){
+    if (!empty($data['propertyAdd'])) {
         
-        foreach($data['propertyAdd'] as $key => $val){
+        foreach ($data['propertyAdd'] as $key => $val) {
             $res = ContainerData::addValuePropertyContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'], 
@@ -23,7 +23,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
                 $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$key]['id_type_property']]['name_table'], 
                 $val
             );
-            if($res){
+            if ($res) {
                 $arRes['stat-save'] = 'ok';
             }
             
@@ -33,8 +33,8 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     $arRes['PROPERTY_VALUE'] = array();
     
     // получить значения
-    if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
-        foreach($arRes['PROPERTY'] as $key => $val){
+    if (!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY'])) {
+        foreach ($arRes['PROPERTY'] as $key => $val) {
             $propertyValue = ContainerData::getValuePropertysContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'],
@@ -42,7 +42,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
                 $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
             );
 
-            if(!empty($propertyValue)){
+            if (!empty($propertyValue)) {
                 $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
             }
         }
@@ -56,15 +56,15 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
         
     // обновление
     // сохранение свойств
-    if(!empty($data['propertyUpdate']) ){
+    if (!empty($data['propertyUpdate'])) {
         
-        foreach($data['propertyUpdate'] as $key => $val){
+        foreach ($data['propertyUpdate'] as $key => $val) {
             $res = ContainerData::updateValuePropertyContainerData(
                 $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['name_table'],  
                 $key,  
                 $val
             );
-            if($res){
+            if ($res) {
                 $arRes['stat-save'] = 'ok';
             }
             
@@ -75,8 +75,8 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
     $arRes['PROPERTY_VALUE'] = array();
     
     // получить значения
-    if(!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY']) ){
-        foreach($arRes['PROPERTY'] as $key => $val){
+    if (!empty($arRes['PROPERTY']) && is_array($arRes['PROPERTY'])) {
+        foreach ($arRes['PROPERTY'] as $key => $val) {
             $propertyValue = ContainerData::getValuePropertysContainerData(
                 $this->arParam['container-data-id'], 
                 $this->arParam['el-id'],
@@ -84,7 +84,7 @@ if(!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id']
                 $arRes['PROPERTY_TYPE'][$val['id_type_property']]['name_table']
             );
 
-            if(!empty($propertyValue)){
+            if (!empty($propertyValue)) {
                 $arRes['PROPERTY_VALUE'][$val['id']] = $propertyValue;
             }
         }

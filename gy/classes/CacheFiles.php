@@ -35,13 +35,13 @@ class CacheFiles extends Cache
         $this->cacheName = $cacheName;
         $this->cacheTime = $cacheTime;
 
-        if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)){
+        if (file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)) {
             $cacheData = array();
             include $this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl;
             
-            if(!empty($cacheData) ){
+            if (!empty($cacheData)) {
                 $cacheData = json_decode($cacheData, true);
-                if( ((int) $cacheData['createTime'] + (int) $cacheData['cacheTime']) > time()) {
+                if (((int) $cacheData['createTime'] + (int) $cacheData['cacheTime']) > time()) {
                     $this->data = $cacheData['data'];
                     unset($cacheData);
                 }
@@ -72,7 +72,7 @@ class CacheFiles extends Cache
             'createTime' => time(),
             'cacheTime' => $this->cacheTime
         );  
-        if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl) ){
+        if (file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)) {
             file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<?php $cacheData = '."'". json_encode($cacheData)."';" );  
         }
         return true;
@@ -83,7 +83,7 @@ class CacheFiles extends Cache
      */
     public function clearThisCache()
     {
-        if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)){
+        if (file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)) {
             unlink($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl);
         }
     }

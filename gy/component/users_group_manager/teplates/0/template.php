@@ -1,9 +1,9 @@
 <?php 
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
+if (!empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"])) {?>
 
-    <?php if(empty($arRes['status'])){?>
+    <?php if (empty($arRes['status'])) {?>
 
         <h1><?=$this->lang->getMessage('title');?></h1>
         <form method="post">
@@ -14,7 +14,7 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
                     <th><?=$this->lang->getMessage('actions');?></th>
                     <th></th>
                 </tr>
-                <?php foreach ($arRes['allUsersGroups'] as $val){?>
+                <?php foreach ($arRes['allUsersGroups'] as $val) {?>
                     <tr>
                         
                         <td><?=$val['name']?>(<?=$val['code']?>)</td>
@@ -32,7 +32,7 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
                             </select>
                         </td>
                         <td> 
-                            <?php if(!empty($val['flag_del']) && ($val['flag_del'] == 'Y')){?> 
+                            <?php if (!empty($val['flag_del']) && ($val['flag_del'] == 'Y')) {?> 
                                 <input type="checkbox" name="delete[<?=$val['code']?>]" /><?=$this->lang->getMessage('delete');?> 
                             <?php }?>
                         </td>
@@ -71,14 +71,14 @@ if ( !empty($arRes["allUsersGroups"]) && !empty($arRes["allActionUser"]) ) {?>
         <br/>
     <?php }?>
    
-    <?php if(!empty($arRes['status'])){?>    
-        <?php if ($arRes['status'] == 'ok'){?>
+    <?php if (!empty($arRes['status'])) {?>    
+        <?php if ($arRes['status'] == 'ok') {?>
             <div class="gy-admin-good-message"><?=$this->lang->getMessage('text-ok');?></div>
             <br/>
             <a href="/gy/admin/group-user.php" class="gy-admin-button"><?=$this->lang->getMessage('button-text-ok');?></a>
         <?php } ?>
 
-        <?php if ($arRes['status'] == 'add-err'){?>
+        <?php if ($arRes['status'] == 'add-err') {?>
             <div class="gy-admin-error-message"><?=$this->lang->getMessage('text-err');?></div>
             <br/>
             <a href="/gy/admin/group-user.php" class="gy-admin-button"><?=$this->lang->getMessage('button-text-ok');?></a>

@@ -6,7 +6,7 @@ global $app;
     <head>
         <?php
         // вывести title и СЕО метатеги
-        if(!empty($arParam['seo-meta-tag-head'])){
+        if (!empty($arParam['seo-meta-tag-head'])) {
             $app->component(
                 'hed-meta-tag-seo',
                 '0',

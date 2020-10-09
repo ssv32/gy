@@ -18,7 +18,7 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
         
         <h2 class="gy-admin-logo"><?=$langTextThisFile->getMessage('title')?></h2>
         <?php
-        if(!empty($app->options['v-gy'])){
+        if (!empty($app->options['v-gy'])) {
         ?>
             <span class="version-gy-core">v <?=$app->options['v-gy']?></span>
             <br/>
@@ -29,12 +29,12 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
         <br/>
         <br/>
         <?php
-        if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
+        if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
             // меню доступное для текущего пользователя
             $menu[ $langTextThisFile->getMessage('index-page') ] = '/gy/admin/index.php';
 
-            if(AccessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()){ 
+            if (AccessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()) { 
                 $menu[ $langTextThisFile->getMessage('users') ] = '/gy/admin/users.php';
             }
 
@@ -42,12 +42,13 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
             $module = Module::getInstance();
             foreach ($module->getButtonsMenuAllModules() as $nameModule => $arButton) {
                 // условия показа пункта меню (задаётся модулем) или если админ
-                if(
+                if (
                     (
                         !empty($module->getFlagShowButtonsAdminPanelByModule[$nameModule])
                         && AccessUserGroup::accessThisUserByAction( $module->getFlagShowButtonsAdminPanelByModule[$nameModule]) 
                     )
-                    || $user->isAdmin() ){
+                    || $user->isAdmin() 
+                ) {
                     foreach ($arButton as $buttonName => $buttonUrl) {
                         $menu[$buttonName] = $buttonUrl;
                     }
@@ -56,7 +57,7 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
 
             $menu[ $langTextThisFile->getMessage('modules') ] = '/gy/admin/modules.php';
             
-            if($user->isAdmin()){
+            if ($user->isAdmin()) {
                 $menu[ $langTextThisFile->getMessage('options') ] = '/gy/admin/options.php';
             }
 

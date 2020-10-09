@@ -36,10 +36,10 @@ class SitePages
 
     public function __construct($urlProject)
     {
-        if(file_exists($urlProject)){
+        if (file_exists($urlProject)) {
             $this->urlProject = $urlProject;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -53,13 +53,13 @@ class SitePages
      */
     public function createSitePage($urlPage)
     {
-        if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
+        if (($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/')) {
             // если нет директории создать её
-            if(file_exists($this->urlProject.$urlPage.'/') === false){ // TODO вынести в класс files
+            if (file_exists($this->urlProject.$urlPage.'/') === false) { // TODO вынести в класс files
                 mkdir($this->urlProject.$urlPage.'/', 0755, true);   
             }            
             return Files::createFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
-        }else{
+        } else {
             return false;
         }
     }
@@ -73,18 +73,18 @@ class SitePages
      */
     public function deleteSitePage($urlPage)
     {
-        if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
+        if (($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/')) {
             $res = Files::deleteFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
             
             // если файлов не осталось удалить директорию // TODO вынести в класс files
-            if($res !== false){
-                if( count(scandir($this->urlProject.$urlPage.'/')) == 2 ){  // 2ва т.е. . и .. в разделе всегда есть
+            if ($res !== false) {
+                if (count(scandir($this->urlProject.$urlPage.'/')) == 2) {  // 2ва т.е. . и .. в разделе всегда есть
                     rmdir( $this->urlProject.$urlPage.'/' );
                 }
             }
             
             return $res;
-        }else{
+        } else {
             return false;
         }
     }
@@ -98,9 +98,9 @@ class SitePages
      */
     public function getContextPage($urlPage)
     {
-        if( ($this->urlProject !== false) &&  $this->checkUrl('/'.$urlPage.'/')   ){
+        if (($this->urlProject !== false) &&  $this->checkUrl('/'.$urlPage.'/')) {
             return Files::getContentFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
-        }else{
+        } else {
             return false;
         }
     }
@@ -115,9 +115,9 @@ class SitePages
      */
     public function putContextPage($urlPage, $date)
     {
-        if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
+        if (($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/')) {
             return Files::saveFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite, $date);
-        }else{
+        } else {
             return false;
         }
     }
@@ -133,7 +133,7 @@ class SitePages
     {
         $result = true;
         foreach ($this->notEditPages as $value) {
-            if(strripos($url, $value) !== false ){
+            if (strripos($url, $value) !== false) {
                 $result = false;
             }
         }

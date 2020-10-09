@@ -6,17 +6,17 @@ $arRes = array();
 $data = $_POST;
 
 // удаления свойства container-data
-if(!empty($data['del-property-id']) && !empty($data['del-proprty-container-data']) ){
+if (!empty($data['del-property-id']) && !empty($data['del-proprty-container-data'])) {
     ContainerData::deletePropertyContainerData( $data['del-property-id'], $data['del-proprty-container-data']);
     $arRes['status'] = 'del-property-ok';
 }else{
 
     $arRes['TYPE_PROPERTYS'] = ContainerData::getAllTypePropertysContainerData();
 
-    if(!empty($data)){
+    if (!empty($data)) {
 
-        if( !empty($data['type_property']) && ($data['type_property'] != 'null') && !empty($arRes['TYPE_PROPERTYS'][$data['type_property']]) ){
-            if( !empty($data['name']) && !empty($data['code']) ){
+        if (!empty($data['type_property']) && ($data['type_property'] != 'null') && !empty($arRes['TYPE_PROPERTYS'][$data['type_property']])) {
+            if (!empty($data['name']) && !empty($data['code'])) {
 
                 $res = ContainerData::addPropertyContainerData( 
                     array(
@@ -27,22 +27,22 @@ if(!empty($data['del-property-id']) && !empty($data['del-proprty-container-data'
                     )
                 );
 
-                if($res){
+                if ($res) {
                     $arRes['status'] = 'add-ok';
-                } else{
+                } else {
                     $arRes['status'] = 'add-err';
                 }
 
-            }else{
+            } else {
                 $arRes['status'] = 'add-err';
             }
-        }else{
+        } else {
             $arRes['status'] = 'add-err-not-type';
         }
     }
 
     // найти свойства текущего container-data
-    if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])){
+    if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])) {
         $arRes['PROPERTYS'] = ContainerData::getPropertysContainerData(array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
     }
 }

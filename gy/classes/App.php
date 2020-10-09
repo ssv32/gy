@@ -34,7 +34,7 @@ final class App
      */
     public static function createApp($url, $options)
     {
-        if (  static::$app === null ){
+        if (static::$app === null) {
             static::$app = new static($url, $options);
         }
         return static::$app;
@@ -54,7 +54,7 @@ final class App
      */
     public function component($name, $template, $arParam  )
     {
-        if($name != 'includeHtml'){
+        if ($name != 'includeHtml') {
             // обезопасим входные параметры
             $arParam = Security::filterInputData($arParam);
         }

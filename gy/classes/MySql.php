@@ -50,10 +50,10 @@ class MySql extends Db
      */
     public function fetch($res)
     {
-    $result = array();
-    if ($res !== false){
-        $result = mysqli_fetch_assoc($res);
-    }
+        $result = array();
+        if ($res !== false) {
+            $result = mysqli_fetch_assoc($res);
+        }
         return $result;
     }
 	
@@ -65,10 +65,10 @@ class MySql extends Db
     public function fetchAll($res, $key = 'id')
     {
         $result = array();
-        while ($arRes = self::fetch($res)){
-            if($key !== false){
+        while ($arRes = self::fetch($res)) {
+            if ($key !== false) {
                 $result[$arRes[$key]] = $arRes;
-            }else{
+            } else {
                 $result[] = $arRes;
             }
         }
@@ -77,9 +77,9 @@ class MySql extends Db
     
     public function __construct($db_config) 
     {
-        if ( empty($this->db)){
-            if (!empty($db_config)){
-                if( empty($db_config['db_port']) ){
+        if (empty($this->db)) {
+            if (!empty($db_config)) {
+                if (empty($db_config['db_port'])) {
                     $db_config['db_port'] = ini_get("mysqli.default_port");
                 }
                 $this->connect(
@@ -116,9 +116,9 @@ class MySql extends Db
     private function isOneVersionWhere($where)
     {
         $result = false;
-        if (count($where) == 1){
+        if (count($where) == 1) {
             foreach ($where as $key => $value) {
-                if( in_array($key, array('=', '!=' )) && (count($value) == 2) ){
+                if (in_array($key, array('=', '!=' )) && (count($value) == 2)) {
                     $result = true;
                 }
             }
@@ -168,13 +168,13 @@ class MySql extends Db
     {
         $result = true;
         foreach ($where as $key => $value) {
-            if(in_array($key, array('OR', 'AND'))){
+            if (in_array($key, array('OR', 'AND'))) {
                 foreach ($value as $value2) {
-                    if(!$this->isOneVersionWhere($value2)){
+                    if (!$this->isOneVersionWhere($value2)) {
                         $result = false;
                     }
                 }
-            }else{
+            } else {
                 $result = false;
             }
         }
@@ -195,9 +195,9 @@ class MySql extends Db
     private function getStrOneTypeWhere($where)
     {
         $result = false;
-        if(!empty($where['='])){
+        if (!empty($where['='])) {
             $result = $where['='][0]." = ".$where['='][1];
-        }elseif( !empty($where['!=']) ){
+        } elseif ( !empty($where['!=']) ) {
             $result = $where['!='][0]." != ".$where['!='][1];
         }
         return $result;
@@ -217,12 +217,12 @@ class MySql extends Db
     private function getStrTwoTypeWhere($where)
     {
         $result = '';
-        if( !empty($where['AND']) ){
-            foreach($where['AND'] as $val){
+        if (!empty($where['AND'])) {
+            foreach ($where['AND'] as $val) {
                 $result .= ((!empty($result))? ' AND ': '').$this->getStrOneTypeWhere( $val );
             }
-        }elseif( !empty($where['OR'])){
-            foreach($where['OR'] as $val){
+        } elseif ( !empty($where['OR'])) {
+            foreach ($where['OR'] as $val) {
                 $result .= ((!empty($result))? ' OR ': '').$this->getStrOneTypeWhere($val);
             }
         }
@@ -241,12 +241,12 @@ class MySql extends Db
     { 
         
         $strWhere = '';
-        if($this->isOneVersionWhere($where) ){
+        if ($this->isOneVersionWhere($where)) {
             // (ru) - если условия 1 варианта
             // (en) - if conditions 1 options
             $strWhere = $this->getStrOneTypeWhere($where);
 
-        }elseif($this->isTwoVersionWhere($where) ){
+        } elseif($this->isTwoVersionWhere($where)) {
             // (ru) - если условие 2 варианта
             // (en) - if condition 2 options
             $strWhere = $this->getStrTwoTypeWhere($where);
@@ -270,9 +270,9 @@ class MySql extends Db
         $query = 'SELECT ';
         $strPropertys = implode(",", $propertys);
 
-        if(!empty($where)){            
+        if (!empty($where)) {            
             $where = ' WHERE '.$this->parseWhereForQuery($where);
-        }else{
+        } else {
             $where = '';
         }
               
@@ -295,14 +295,14 @@ class MySql extends Db
         global $crypto;
         $nameProperty = '';
         $valueProperty = '';
-        foreach ($propertys as $key=> $val){
+        foreach ($propertys as $key=> $val) {
             $nameProperty .= (($nameProperty != '')? ', ': '').$key;
 
-            if ($key == 'pass'){
+            if ($key == 'pass') {
                 $val = md5($val.$crypto->getSole());
             }
 
-            if (!is_numeric($val)){
+            if (!is_numeric($val)) {
                 $val = "'".$val."'";
             }
 
@@ -329,19 +329,19 @@ class MySql extends Db
         global $crypto;
         foreach ($propertys as $key => $val){
 
-            if ($key == 'pass'){
+            if ($key == 'pass') {
                 $val = md5($val.$crypto->getSole());
             }
 
-            if (!is_numeric($val)){
+            if (!is_numeric($val)) {
                 $val = "'".$val."'";
             }
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$key.'='.$val;
         }
 
-        if(!empty($where)){            
+        if (!empty($where)) {            
             $where = ' WHERE '.$this->parseWhereForQuery($where); 
-        }else{
+        } else {
             $where = '';
         }
 
@@ -360,13 +360,13 @@ class MySql extends Db
     {
         $query = '';
         $textPropertys = '';
-        foreach($propertys as $val){
+        foreach ($propertys as $val) {
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$val;
         }
 
         $query = 'CREATE TABLE '.$tableName.' ('.$textPropertys.');';
 
-        return  $this->query($query);
+        return $this->query($query);
     }
 
     /**
@@ -378,9 +378,9 @@ class MySql extends Db
     public function deleteDb($tableName, $where)
     {
         $query = '';
-        if(!empty($where)){            
+        if (!empty($where)) {            
             $where = ' WHERE '.$this->parseWhereForQuery($where);
-        }else{
+        } else {
             $where = '';
         }
         
@@ -391,7 +391,7 @@ class MySql extends Db
     
     public function __destruct() 
     {
-        if ( !empty($this->db)){
+        if (!empty($this->db)) {
             $this->close($this->db);
         }
     }

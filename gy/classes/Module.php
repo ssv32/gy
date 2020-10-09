@@ -52,7 +52,7 @@ class Module
      */
     public function getInstance()
     {
-        if (static::$module === null){
+        if (static::$module === null) {
             static::$module = new static();
         }
         return static::$module;
@@ -75,7 +75,7 @@ class Module
     public function includeModule($nameModule)
     {
         $result = false;
-        if($this->urlGyCore !== false){
+        if ($this->urlGyCore !== false) {
             $result = $this->IncludeModuleByUrl($this->urlGyCore.'/modules/'.$nameModule.'/');
         } // TODO возможно кудато вывести ошибку
         
@@ -93,15 +93,15 @@ class Module
     { // TODO можно добавить проверки на ошибки 
         $result = false;
 
-        if(file_exists($urlModule.'init.php' )){
+        if (file_exists($urlModule.'init.php' )) {
             include $urlModule.'init.php';
 
             // тут имя модуля
-            if (!empty($nameThisModule)){
+            if (!empty($nameThisModule)) {
                 $this->arrayIncludeModules[$nameThisModule] = $urlModule;
                 //unset($nameThisModule);
 
-                if(!empty($versionThisModule)){
+                if (!empty($versionThisModule)) {
                     $this->arrayIncludeModulesAndVersion[$nameThisModule] = $versionThisModule;
                     unset($versionThisModule);
                 }
@@ -109,7 +109,7 @@ class Module
             }
 
             // тут список компонентов модуля
-            if (!empty($componentsThisModule)){ 
+            if (!empty($componentsThisModule)) { 
 
                 foreach ($componentsThisModule as $value) {
                     $this->nameModuleByComponentName[$value] = $nameThisModule;
@@ -119,7 +119,7 @@ class Module
             }
 
             // тут список классов модуля
-            if (!empty($classesThisModule)){
+            if (!empty($classesThisModule)) {
 
                 foreach ($classesThisModule as $value) {
                     $this->nameClassModuleByNameModule[$value] = $nameThisModule;
@@ -128,7 +128,7 @@ class Module
             }
 
             // тут список страниц админки
-            if (!empty($adminPageThisModule)){
+            if (!empty($adminPageThisModule)) {
 
                 foreach ($adminPageThisModule as $value) {      
                     $this->nameModuleByNameAdminPage[$value] = $nameThisModule;
@@ -137,13 +137,13 @@ class Module
             }
 
             // пункты меню в админке
-            if (!empty($pagesFromAdminMenu)){
+            if (!empty($pagesFromAdminMenu)) {
                 $this->buttonMenuAdminPanel[$nameThisModule] = $pagesFromAdminMenu;
                 unset($pagesFromAdminMenu);
             }
 
             // условия показа пунктов меню админки для подключённых модулей
-            if (!empty($isShowButtonsMenuAdminPanetThisModule)){
+            if (!empty($isShowButtonsMenuAdminPanetThisModule)) {
                 $this->isShowButtonsMenuAdminPanelModules[$nameThisModule] = $isShowButtonsMenuAdminPanetThisModule;
                 unset($isShowButtonsMenuAdminPanetThisModule);
             } 
@@ -163,7 +163,7 @@ class Module
     {
         $result = false;
 
-        if(!empty($this->nameModuleByComponentName[$nameComponent])){
+        if (!empty($this->nameModuleByComponentName[$nameComponent])) {
             $result = $this->arrayIncludeModules[ $this->nameModuleByComponentName[$nameComponent] ].'component/'.$nameComponent;
         }
 
@@ -180,7 +180,7 @@ class Module
     public function getUrlModuleClassByNameClass($nameClass)
     {
         $result = false;
-        if(!empty($this->nameClassModuleByNameModule[$nameClass])){
+        if (!empty($this->nameClassModuleByNameModule[$nameClass])) {
             $result = $this->arrayIncludeModules[ $this->nameClassModuleByNameModule[$nameClass] ].'classes/'.$nameClass.'.php';
         }
         return $result;
@@ -195,9 +195,9 @@ class Module
     public function searchAllModules()
     {
         $result = array();
-        if ($handleDirs = opendir( $this->urlGyCore.'/modules/' ) ) {
+        if ($handleDirs = opendir( $this->urlGyCore.'/modules/' )) {
             while (false !== ($dirName = readdir($handleDirs))) { 
-                if( ($dirName != '.') && ($dirName != '..') ){
+                if (($dirName != '.') && ($dirName != '..')) {
                     $result[$dirName] = $dirName;
                 }
             }
@@ -214,7 +214,7 @@ class Module
     public function includeAllModules()
     {
         $allModules = $this->searchAllModules();
-        if(!empty($allModules)){
+        if (!empty($allModules)) {
             foreach ($allModules as $value) {
                 $this->includeModule($value);
             }
@@ -232,7 +232,7 @@ class Module
     { // TODO пока только установка для mysql
         $result = false;
         
-        if(file_exists($this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' )){
+        if (file_exists($this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' )) {
             include_once( $this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' );
             $result = true;
         }
@@ -247,7 +247,7 @@ class Module
     public function installBdAllModules()
     {
         $allModules = $this->searchAllModules();
-        if(!empty($allModules)){
+        if (!empty($allModules)) {
             foreach ($allModules as $value) {
                 $this->installDbModuleByNameModule($value);
             }

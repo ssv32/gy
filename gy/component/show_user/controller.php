@@ -1,11 +1,11 @@
 <?php 
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-if(!empty($this->arParam['id']) && is_numeric($this->arParam['id'])){
+if (!empty($this->arParam['id']) && is_numeric($this->arParam['id'])) { 
     global $user;
     $dateUser = $user->getUserById($this->arParam['id']);
 
-    if(!empty($dateUser)){
+    if (!empty($dateUser)) {
         // взять все группы пользователей
         $allUsersGroups = AccessUserGroup::getAccessGroup();
         
@@ -16,9 +16,9 @@ if(!empty($this->arParam['id']) && is_numeric($this->arParam['id'])){
         );
         
         $groups = array();
-        if(!empty($dateUser['groups'])){
+        if (!empty($dateUser['groups'])) {
             foreach ($dateUser['groups'] as $value) {
-                if(!empty($allUsersGroups[$value])){
+                if (!empty($allUsersGroups[$value])) {
                     $groups[$value] = $allUsersGroups[$value]['name'].' - '.$allUsersGroups[$value]['text'];
                 }
             }
@@ -38,7 +38,7 @@ if(!empty($this->arParam['id']) && is_numeric($this->arParam['id'])){
         foreach ($allUsersCreatePropertys as $key => $value) {
 
             $val = '';
-            if(!empty($valuePropertysThisUser[$value['id']])){
+            if (!empty($valuePropertysThisUser[$value['id']])) {
                 $val = $valuePropertysThisUser[$value['id']]['value'];
             }
 

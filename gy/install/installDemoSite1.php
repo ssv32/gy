@@ -8,16 +8,16 @@ global $argv;
 $isRunConsole = isset($argv);
 $br = "\n";
 
-if($isRunConsole){
-    if($argv[1] == 'start'){
+if ($isRunConsole) {
+    if ($argv[1] == 'start') {
 
         if (!file_exists(__DIR__.'/../../index.php')) {
 
             define("GY_CORE", true); // хак
             include(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
-            if(!empty($gy_config['lang']) && in_array($gy_config['lang'], array('rus', 'eng'))){
+            if (!empty($gy_config['lang']) && in_array($gy_config['lang'], array('rus', 'eng'))) {
                 $lang = $gy_config['lang'];
-            }else{
+            } else {
                 $lang = 'rus';
             }
 
@@ -33,15 +33,15 @@ if($isRunConsole){
             file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\lang_template.php', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\lang_template.php', $lang));
 
             echo 'Install = OK!';
-        }else{
+        } else {
             echo '! Did not install. The main page file already exists.';
         }
-    } else{
+    } else {
         echo $br.'This script will install demo data and one title page. Demo site 1.';
         echo $br.'To start the installation, enter the start parameter when invoking the script in the console.';
         echo $br.'!!! Carefully the script can destroy the main page and the customDir directory !!!';
     }
-}else{
+} else {
     echo '! Error. You need to run the script in the console';
 }
 

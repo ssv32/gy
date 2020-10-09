@@ -2,24 +2,24 @@
 
 <h1><?=$this->lang->getMessage('title');?></h1>
 
-<?php if (!empty($arRes['del-stat']) ){?>
-    <?php if ( $arRes['del-stat'] == 'ok'){ ?>
+<?php if (!empty($arRes['del-stat'])) {?>
+    <?php if ($arRes['del-stat'] == 'ok') { ?>
         <div class="gy-admin-good-message"><?=$this->lang->getMessage('del-ok');?></div>
         <br/>
     <?php }?>
 
-    <?php if ($arRes['del-stat'] == 'err'){?>
+    <?php if ($arRes['del-stat'] == 'err') {?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage('del-err');?></div>
         <br/>
     <?php }?>
     <a href="users.php" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-<?php }else{?>
+<?php } else {?>
 
-    <?php if ($arRes['allUsers']){?>
+    <?php if ($arRes['allUsers']) {?>
         <table border="1" class="gy-table-all-users">
             <tr><th>id</th><th>login</th><th>name</th><th>group</th><th></th></tr>
 
-                <?php foreach ($arRes['allUsers'] as $key => $val){?>
+                <?php foreach ($arRes['allUsers'] as $key => $val) {?>
                     <tr>
                         <td><?=$val['id'];?></td>
                         <td><?=$val['login'];?></td>
@@ -36,7 +36,7 @@
 
                         </td>
                         <td>
-                            <?php if ($val['id'] != 1){?>
+                            <?php if ($val['id'] != 1) {?>
                                 <br/>
                                 <a href="users.php?del-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->getMessage('del-user');?></a>
                                 <a href="edit-user.php?edit-id=<?=$val['id'];?>" class="gy-admin-button"><?=$this->lang->getMessage('edit-user');?></a>

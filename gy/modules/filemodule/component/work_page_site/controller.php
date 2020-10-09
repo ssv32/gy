@@ -6,71 +6,71 @@ $data = $_POST;
 global $arRes;
 
 // создание страницы сайта
-if( !empty($data['action-1']) ){
+if (!empty($data['action-1'])) {
     
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
         
     $res = $sitePage->createSitePage($data['url-site-page']);
     
-    if($res !== false){
+    if ($res !== false) {
         $arRes['status'] = 'add-ok';
-    }else{
+    } else {
         $arRes['status'] = 'err';
     }
 }
 
 // удаление страницы
-if( !empty($data['action-3']) && empty($arRes['status']) ){
+if (!empty($data['action-3']) && empty($arRes['status'])) {
     
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
         
     $res = $sitePage->deleteSitePage($data['url-site-page']);
     
-    if($res !== false){
+    if ($res !== false) {
         $arRes['status'] = 'del-ok';
-    }else{
+    } else {
         $arRes['status'] = 'err';
     }
 }
 
 // изменение страницы
-if( !empty($data['action-2']) && empty($arRes['status']) ){
+if (!empty($data['action-2']) && empty($arRes['status'])) {
     
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
             
     $res = $sitePage->getContextPage($data['url-site-page']);
     
-    if($res !== false){
+    if ($res !== false) {
         $arRes['data-file'] = $res;
         $arRes['url-site-page'] = $data['url-site-page'];
         $arRes['status'] = 'edit';
-    }else{
+    } else {
         $arRes['status'] = 'err';
     }
 }
 
 // изменение файла
-if( !empty($data['action-2-1'])  && !empty($data['url-site-page'])  && !empty($data['new-text-page']) ){
+if (!empty($data['action-2-1'])  && !empty($data['url-site-page']) && !empty($data['new-text-page'])) {
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
         
     $res = $sitePage->putContextPage($data['url-site-page'], $data['new-text-page']);
-    if($res !== false){
+    if ($res !== false) {
         $arRes['status'] = 'edit-ok';
-    }else{
+    } else {
         $arRes['status'] = 'err';
     }
 }
 
 // открыть редактируемую страницу
-if( !empty($data['action-4']) ){
+if (!empty($data['action-4'])) {
     header("Location: /".$data['url-site-page'] );
 }
 
-if( !empty($data['action-5']) ){
+if (!empty($data['action-5'])) {
     // сохраним основной app обьект
     global $app;
     $appGlobal = $app;
@@ -86,9 +86,9 @@ if( !empty($data['action-5']) ){
     
     // хочу найти поля обьявленные в компоненте как возможные но не заполненные в коде
     foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $value) {
-        if(!empty($value['componentInfo']['all-property'])){
+        if (!empty($value['componentInfo']['all-property'])) {
             foreach ($value['componentInfo']['all-property'] as $key2 => $value2) {
-                if(empty( $value['arParam'][$value2] )){
+                if (empty($value['arParam'][$value2])) {
                     $arRes['dataIncludeAllComponentsInThisPageSite'][$key]['arParam'][$value2] = '';
                 }
             }
@@ -111,7 +111,7 @@ global $app;
     ';
     
     // добавить коды компонентов
-    if(is_array($arrayComponents)){
+    if (is_array($arrayComponents)) {
         foreach ($arrayComponents as $value) {
             $codeIncludeComponent = AppFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
             $codePage .= $codeIncludeComponent."\n";   
@@ -129,25 +129,25 @@ function savePageByArrayComponents($page, $arrayComponents){
     $res = $sitePage->putContextPage( $page, $codePage);
     
     global $arRes;
-    if($res !== false){
+    if ($res !== false) {
         $arRes['status'] = 'edit-ok';
-    }else{
+    } else {
         $arRes['status'] = 'err';
     }
 }
 
 // сохранить всю страницу по компонентам
-if(!empty($data['action-6'])){    
+if (!empty($data['action-6'])) {    
     savePageByArrayComponents($data['url-site-page'], $data['component']);
 }
 
 // перемещение компонента ниже
-if(!empty($data['action7_2']) && is_array($data['action7_2'])){
+if (!empty($data['action7_2']) && is_array($data['action7_2'])) {
     foreach ($data['action7_2'] as $key => $value) {
         //
     }
     
-    if(!empty($data['component'][$key+1]) ){
+    if (!empty($data['component'][$key+1])) {
         $temp = $data['component'][$key];
         $data['component'][$key] = $data['component'][$key+1];
         $data['component'][$key+1] = $temp;
@@ -160,12 +160,12 @@ if(!empty($data['action7_2']) && is_array($data['action7_2'])){
 }
 
 // перемещение компонента выше
-if(!empty($data['action7_1']) && is_array($data['action7_1'])){
+if (!empty($data['action7_1']) && is_array($data['action7_1'])) {
     foreach ($data['action7_1'] as $key => $value) {
         //
     }
     
-    if( ($key - 1) >= 0 ){
+    if (($key - 1) >= 0) {
         $temp = $data['component'][$key];
         $data['component'][$key] = $data['component'][$key-1];
         $data['component'][$key-1] = $temp;
@@ -177,12 +177,12 @@ if(!empty($data['action7_1']) && is_array($data['action7_1'])){
 }
 
 // удалить компонент
-if(!empty($data['action7_3']) && is_array($data['action7_3'])){
+if (!empty($data['action7_3']) && is_array($data['action7_3'])) {
     foreach ($data['action7_3'] as $key => $value) {
         //
     }
     
-    if( !empty($data['component'][$key])){
+    if (!empty($data['component'][$key])) {
         unset($data['component'][$key]);
     }
     
@@ -191,7 +191,7 @@ if(!empty($data['action7_3']) && is_array($data['action7_3'])){
 }
 
 // добавление компонента
-if(!empty($data['action_8']) && is_array($data['action_8'])){
+if (!empty($data['action_8']) && is_array($data['action_8'])) {
     foreach ($data['action_8'] as $key => $value) {
         //
     }
@@ -203,16 +203,16 @@ if(!empty($data['action_8']) && is_array($data['action_8'])){
 }
 
 // первый шаг добавления компонента
-if( !empty($data['action_8_1']) ){
+if (!empty($data['action_8_1'])) {
     
-    if(
+    if (
         !empty($data['url-site-page'])
         && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
         && !empty($data['name_new_component'])
-    ){
+    ) {
     
         // шаблон по умолчанию 0
-        if (empty($data['name_new_template'])){
+        if (empty($data['name_new_template'])) {
             $data['name_new_template'] = '0';
         }
 
@@ -226,7 +226,7 @@ if( !empty($data['action_8_1']) ){
             $app->urlProject
         );
 
-        if(!empty($dataComponent)){
+        if (!empty($dataComponent)) {
             $arRes['status'] = 'good-component';
 
             $arRes['url-site-page'] = $data['url-site-page'];
@@ -238,21 +238,21 @@ if( !empty($data['action_8_1']) ){
                 'arParam' => $dataComponent['all-property'],
                 'componentInfo' => $dataComponent
             );  
-        }else{
+        } else {
             $arRes['status'] = 'error-not-component';
         }
-    }else{
+    } else {
         $arRes['status'] = 'error-not-component';
     }
 }
 
 // надо добавить новый компонент на выбранную страницу
-if(!empty($data['action_8_2']) 
+if( !empty($data['action_8_2']) 
     && !empty($data['url-site-page'])
     && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
     && !empty($data['name_new_component']) 
     && (!empty($data['name_new_template']) || ($data['name_new_template'] == 0) )
-){
+) {
     // надо взять все компоненты с редактируемой страницы
     
     // сохраним основной app обьект
@@ -273,7 +273,7 @@ if(!empty($data['action_8_2'])
     
     $newArrayComponents = array();
     
-    if($data['position_new_component'] == "'-1'"){
+    if ($data['position_new_component'] == "'-1'") {
         $newArrayComponents[] = array(
             'name' => $data['name_new_component'],
             'template' => $data['name_new_template'],
@@ -282,11 +282,11 @@ if(!empty($data['action_8_2'])
         foreach ($allComponentsThisPage as $value) {
             $newArrayComponents[] = $value;
         }
-    }elseif(is_numeric($data['position_new_component'])){
+    } elseif (is_numeric($data['position_new_component'])) {
         $data['position_new_component']++; 
         $flagAdd = false;
         foreach ($allComponentsThisPage as $key => $value) {
-            if($data['position_new_component'] == $key){
+            if ($data['position_new_component'] == $key) {
                 $newArrayComponents[] =  array(
                     'name' => $data['name_new_component'],
                     'template' => $data['name_new_template'],
@@ -296,7 +296,7 @@ if(!empty($data['action_8_2'])
             }
             $newArrayComponents[] = $value;
         }
-        if(!$flagAdd){
+        if (!$flagAdd) {
             $newArrayComponents[] =  array(
                 'name' => $data['name_new_component'],
                 'template' => $data['name_new_template'],

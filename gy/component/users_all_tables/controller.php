@@ -10,15 +10,15 @@ $arRes['allUsers'] = $user->getAllDataUsers();
 $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
 
 // если идёт удаление пользователя 
-if(!empty($data['del-id']) 
+if (!empty($data['del-id']) 
     && is_numeric($data['del-id'])
     && ($data['del-id'] != 1)
     && AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
-){
+) {
     $res = $user->deleteUserById($data['del-id']);
-    if ($res){
+    if ($res) {
         $arRes['del-stat'] = 'ok';
-    }else{
+    } else {
         $arRes['del-stat'] = 'err';
     }
 }

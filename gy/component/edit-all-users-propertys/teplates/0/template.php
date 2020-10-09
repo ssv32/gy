@@ -2,20 +2,20 @@
 
 <h1><?=$this->lang->getMessage('title');?></h1>
 
-<?php if (!empty($arRes['stat']) ){?>
-    <?php if ( $arRes['stat'] == 'ok'){ ?>
+<?php if (!empty($arRes['stat'])) {?>
+    <?php if ($arRes['stat'] == 'ok') { ?>
         <div class="gy-admin-good-message"><?=$this->lang->getMessage('stat-ok');?></div>
         <br/>
     <?php }?>
 
-    <?php if ($arRes['stat'] == 'err'){?>
+    <?php if ($arRes['stat'] == 'err') {?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage('stat-err');?></div>
         <br/>
     <?php }?>
     <a href="edit-all-users-propertys.php" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-<?php }else{?>
+<?php } else {?>
 
-    <?php if($arRes['allUsersCreatePropertys']){?>
+    <?php if ($arRes['allUsersCreatePropertys']) {?>
         <table border="1" class="gy-table-all-users">
             <tr>
                 <th>id</th>
@@ -25,7 +25,7 @@
                 <th></th>
             </tr>
 
-                <?php foreach ($arRes['allUsersCreatePropertys'] as $key => $val){?>
+                <?php foreach ($arRes['allUsersCreatePropertys'] as $key => $val) {?>
                     <tr>
                         <td><?=$val['id'];?></td>
                         <td><?=$val['name_property'];?></td>
@@ -42,14 +42,14 @@
                 <?php }?>
 
         </table>
-    <?php }else{?>
+    <?php } else {?>
         <?=$this->lang->getMessage('not-propertys');?>
     <?php }?>
     
     <br/>
     <br/>
     
-    <?php if (!empty($arRes['allTypePropertys'])){?>
+    <?php if (!empty($arRes['allTypePropertys'])) {?>
     
         <h3><?=$this->lang->getMessage('title-add-property');?></h3>
     

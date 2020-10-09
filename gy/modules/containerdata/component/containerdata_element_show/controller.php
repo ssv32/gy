@@ -9,22 +9,22 @@ $arRes = array();
 * container-data-code код container-data
 * element-code - code элемента
 */
-if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['element-code'])){
+if (!empty($this->arParam['container-data-code']) && !empty($this->arParam['element-code'])) {
     
     $isCache = (!empty($this->arParam['cacheTime']) && is_numeric($this->arParam['cacheTime']));
     
-    if($isCache){
+    if ($isCache) {
         global $app; 
         global $cacheClassName;
         $cache = new $cacheClassName($app->url);
         $initCache = $cache->cacheInit('component_container_data_element_show', $this->arParam['cacheTime']);
     }
     
-    if($isCache && $initCache){
+    if ($isCache && $initCache) {
         $arRes = $cache->getCacheData();
     }
     
-    if( !$isCache || ($isCache && !$initCache) ){
+    if (!$isCache || ($isCache && !$initCache)) {
                 
         // найти container-data
         $dataContainerData = ContainerData::getContainerData(
@@ -71,7 +71,7 @@ if(!empty($this->arParam['container-data-code']) && !empty($this->arParam['eleme
             );
         }
         
-        if($isCache){
+        if ($isCache) {
             $cache->setCacheData($arRes);
         }
     }  

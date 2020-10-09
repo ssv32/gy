@@ -3,7 +3,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
 
 <h1><?=$this->lang->getMessage('title-edit-file');?></h1>
 
-<?php if(empty($arRes['status'])){?>
+<?php if (empty($arRes['status'])) {?>
     <form method="post">
         <h4><?=$this->lang->getMessage('text-input-url-page');?></h4>
         <div class="button-function">
@@ -23,18 +23,18 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             <br/>
         </div>
     </form>
-<?php }else{
-    if( ($arRes['status'] != 'edit') 
+<?php } else {
+    if ( ($arRes['status'] != 'edit') 
         && ($arRes['status'] != 'err') 
         && ($arRes['status'] != 'constructor') 
         && ($arRes['status'] != 'addConstructor') 
         && ($arRes['status'] != 'error-not-component')          
         && ($arRes['status'] != 'good-component')          
-    ){?>
+    ) {?>
         <div class="gy-admin-good-message"><?=$this->lang->getMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-    <?php }elseif($arRes['status'] == 'edit'){ ?>       
+    <?php } elseif ($arRes['status'] == 'edit') { ?>       
         <form method="post">
             <h4><?=$this->lang->getMessage('text-edit-page');?></h4>
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -51,11 +51,11 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             <br/>
             <br/>
         </form>
-    <?php }elseif($arRes['status'] == 'err'){ ?>
+    <?php } elseif ($arRes['status'] == 'err') { ?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-    <?php }elseif($arRes['status'] == 'constructor'){?>        
+    <?php } elseif ($arRes['status'] == 'constructor') {?>        
         <h4><?=$this->lang->getMessage('title-action-5');?></h4>
         <?php
         $countIncludeComponentsInPageSite = count($arRes['dataIncludeAllComponentsInThisPageSite']);?>
@@ -82,13 +82,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                     </p>
                    
                     
-                    <?php if(!empty($component['componentInfo']['v'])){?>
+                    <?php if (!empty($component['componentInfo']['v'])) {?>
                         <p>
                             <?=$this->lang->getMessage('this_v_component');?>: <?=$component['componentInfo']['v']?>   
                         </p>
                     <?php }?>
                         
-                    <?php if(!empty($component['componentInfo']['text-info'])){?>
+                    <?php if (!empty($component['componentInfo']['text-info'])) {?>
                         <p>
                             <?=$this->lang->getMessage('this_component_text_info');?>: <?=$component['componentInfo']['text-info']?> 
                         </p>
@@ -114,7 +114,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                                     <textarea type="text" name="component[<?=$key;?>][params][<?=$keyParam?>]" ><?=$valueParam?></textarea>
                                 </td>
                                 <td>
-                                    <?php if(!empty($component['componentInfo']['all-property-text'][$keyParam])){?>
+                                    <?php if (!empty($component['componentInfo']['all-property-text'][$keyParam])) {?>
                                         <?=$component['componentInfo']['all-property-text'][$keyParam]?>
                                     <?php }?>
                                 </td>
@@ -165,7 +165,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
 
         </form>
                 
-    <?php }elseif($arRes['status'] == 'addConstructor'){ // если добавление компонента ?>
+    <?php } elseif ($arRes['status'] == 'addConstructor') { // если добавление компонента ?>
         <h4><?=$this->lang->getMessage('title-action-8');?></h4>
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -187,11 +187,11 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             />
             
         </form>
-    <?php }elseif( $arRes['status'] == 'error-not-component'){ // ошибка при добавление компонента (не найден компонент)?>
+    <?php } elseif ( $arRes['status'] == 'error-not-component') { // ошибка при добавление компонента (не найден компонент)?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage('not-component');?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-    <?php }elseif($arRes['status'] == 'good-component'){ // последний шаг добавления компонента, ввод параметров компонента ?>   
+    <?php } elseif ($arRes['status'] == 'good-component') { // последний шаг добавления компонента, ввод параметров компонента ?>   
         <h4><?=$this->lang->getMessage('title-action-8');?></h4>
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -201,13 +201,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 <input type="hidden" name="name_new_component" value="<?=$arRes['data-component']['name']?>">
             </p>
             
-            <?php if (!empty($arRes['data-component']['componentInfo']['v'])){?>
+            <?php if (!empty($arRes['data-component']['componentInfo']['v'])) {?>
                 <p>
                     <?=$this->lang->getMessage('this_v_component');?>: <?=$arRes['data-component']['componentInfo']['v']?>
                 </p>
             <?php }?>
                 
-            <?php if(!empty($arRes['data-component']['componentInfo']['text-info'])){?>
+            <?php if (!empty($arRes['data-component']['componentInfo']['text-info'])) {?>
                 <p>
                     <?=$this->lang->getMessage('this_component_text_info');?>: <?=$arRes['data-component']['componentInfo']['text-info']?>
                 </p>
@@ -232,7 +232,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                             <textarea type="text" name="params[<?=$valueParam?>]" ></textarea>
                         </td>
                         <td>
-                            <?php if(!empty($arRes['data-component']['componentInfo']['all-property-text'][$valueParam])){?>
+                            <?php if (!empty($arRes['data-component']['componentInfo']['all-property-text'][$valueParam])) {?>
                                 <?=$arRes['data-component']['componentInfo']['all-property-text'][$valueParam]?>
                             <?php }?>
                         </td>

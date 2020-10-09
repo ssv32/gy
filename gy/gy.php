@@ -7,7 +7,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
-    if(in_array($gy_config['lang'], array('rus', 'eng'))){
+    if (in_array($gy_config['lang'], array('rus', 'eng'))) {
         global $lang;
         $lang = $gy_config['lang'];
     }
@@ -34,18 +34,18 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
         global $module;
         $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
-        if($meyByClassModule !== false){
+        if ($meyByClassModule !== false) {
             require_once( $meyByClassModule );
-        }else{
+        } else {
 
-            if(file_exists($urlProject."/customDir/classes/".$calssname.".php" ) ){ // сюда будут подключаться пользовательские классы
+            if (file_exists($urlProject."/customDir/classes/".$calssname.".php" )) { // сюда будут подключаться пользовательские классы
                 require_once( $urlProject."/customDir/classes/".$calssname.".php" );   
-            }elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )){
+            } elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )) {
                 require_once( "classes/$calssname.php" );          
-            } elseif(file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )){
+            } elseif (file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )) {
                 // подключение abstract классов (что бы они хранились в отдельном разделе)
                 require_once( "classes/abstract/$calssname.php" );   
-            }else{
+            } else {
                 die('class '.$calssname.' not find' );
             }
         }
@@ -67,14 +67,14 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         && isset($app->options['db_config']['db_user']) 
         && isset($app->options['db_config']['db_pass']) 
         && isset($app->options['db_config']['db_name']) 
-    ){
+    ) {
         global $db;
         $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
     }
 
     global $crypto;	
     $crypto = new Crypto();
-    if (!empty($app->options['sole'])){
+    if (!empty($app->options['sole'])) {
         $crypto->setSole($app->options['sole']);
     }
 
@@ -95,7 +95,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     // TODO - может как то это пофиксить
     if( ($app->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')  
         && ($_REQUEST['page'] != 'container-data-element-property' ) 
-    ){
+    ) {
         $_REQUEST = Security::filterInputData($_REQUEST);
         $_GET = Security::filterInputData($_GET);
         $_POST = Security::filterInputData($_POST);

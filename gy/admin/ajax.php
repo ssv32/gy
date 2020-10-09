@@ -11,12 +11,12 @@ global $user;
 
 if ( AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
     && !empty($data['action'])
-){
+) {
     // действие удалить пользователя
-    if (($data['action'] == 'user-del') && !empty($data['id-user'])  ) {
+    if (($data['action'] == 'user-del') && !empty($data['id-user'])) {
 
         $res = $user->deleteUserById($data['id-user']);
-        if ($res){
+        if ($res) {
             $result['stat'] = 'ok';
         }
     }

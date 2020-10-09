@@ -19,7 +19,7 @@ class Image
     {
         $result = false;
         $arImg = getimagesize($urlImgIn);
-        if ($arImg[2] == 2){// jpeg ли это ? // if jpeg image
+        if ($arImg[2] == 2) {// jpeg ли это ? // if jpeg image
             $img = imageCreateFromJpeg($urlImgIn);// загрузить изображение сжимаемое // loading Image
             $img2 = imageCreateTrueColor($arImg[0], $arImg[1] ); // создать изображение для сохранение с тем же разрешением // create out image 
             imageCopyResampled($img2, $img, 0, 0, 0, 0, $arImg[0], $arImg[1], $arImg[0], $arImg[1]); 

@@ -4,7 +4,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 // контроллер компонента form_auth (форма авторизации)
 
 // подключить модель // include model this component
-if (isset($this->model) ){
+if (isset($this->model)) {
     $this->model->includeModel(); 
 }
 
@@ -18,7 +18,7 @@ $isChackIdComponent = ( empty($this->arParam['idComponent'])
 
 $isShowAdminPanel = false;
 
-if(!empty($_REQUEST['auth'])){
+if (!empty($_REQUEST['auth'])) {
     $thisLogin = $_REQUEST['auth'];
 }
 
@@ -34,18 +34,18 @@ if ($isShowAdminPanel === true){
     $arRes["auth_ok"] = 'ok';
     $arRes["auth_user"] = $thisLogin;
 
-} elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
+} elseif (!empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
 
-    if( Capcha::chackCapcha($_REQUEST['capcha']) ){
+    if (Capcha::chackCapcha($_REQUEST['capcha'])) {
 
         $user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
         $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
-        if ($isShowAdminPanel === false){
+        if ($isShowAdminPanel === false) {
             $arRes["err"] = 'err1';
         }
 
-        if ($isChackIdComponent && $isShowAdminPanel){
+        if ($isChackIdComponent && $isShowAdminPanel) {
             $arRes["auth_ok"] = 'ok';
             $arRes["auth_user"] = $thisLogin;
 
@@ -56,21 +56,21 @@ if ($isShowAdminPanel === true){
             header( 'Location: '.$redirectUrl.'?err=err1' );
 
         }
-    }else{
+    } else {
         $arRes['form_input']["auth"] = "auth";
         $arRes['form_input']["pass"] = "pass";
         header( 'Location: '.$redirectUrl.'?err=err_capcha' );
     }
 } else {
-    if (!empty($_REQUEST['err'])){
+    if (!empty($_REQUEST['err'])) {
         $arRes["err"] = $_REQUEST['err']; 
     }
     $arRes['form_input']["auth"] = "auth";
     $arRes['form_input']["pass"] = "pass";
 }
 
-if ( !empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST[ $this->lang->getMessage('button-exit') ])){
-    if ($user->userExit() ){
+if (!empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST[ $this->lang->getMessage('button-exit') ])) {
+    if ($user->userExit()) {
         header( 'Location: '.$redirectUrl );
     }
 }

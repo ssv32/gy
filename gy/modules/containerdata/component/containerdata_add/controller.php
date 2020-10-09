@@ -15,20 +15,20 @@ $arRes['property'] = array(
 
 $data = $_POST;
 
-if(!empty($data)){
+if (!empty($data)) {
     $saveData = array(); 
-    foreach ($arRes['property'] as $val){
+    foreach ($arRes['property'] as $val) {
         $saveData[$val] = $data[$val]; 
     }
 
     $res = ContainerData::addContainerData($saveData);
 
-    if ($res){
+    if ($res) {
         $arRes['status'] = 'add-ok';
-    }else{
+    } else {
         $arRes['status'] = 'add-err';
     }
-}else{
+} else {
     $arRes['status'] = 'add';
 }
 

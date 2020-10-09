@@ -17,7 +17,7 @@ $arRes['propertys'] = array();
 foreach ($arRes['allUsersCreatePropertys'] as $key => $value) {
     
     $val = '';
-    if(!empty($arRes['valuePropertysThisUser'][$value['id']])){
+    if (!empty($arRes['valuePropertysThisUser'][$value['id']])) {
         $val = $arRes['valuePropertysThisUser'][$value['id']]['value'];
     }
     
@@ -38,7 +38,7 @@ foreach ($arRes['allUsersCreatePropertys'] as $key => $value) {
 function isTrueDataInProperty($propertys, $allUsersCreatePropertys){
     $result = true;
     foreach ($propertys as $idProperty => $value) {
-        if(!isset($allUsersCreatePropertys[$idProperty])){
+        if (!isset($allUsersCreatePropertys[$idProperty])) {
             $result = false;
         }
     }
@@ -46,7 +46,7 @@ function isTrueDataInProperty($propertys, $allUsersCreatePropertys){
 }
 
 // сохраняем пришедшее
-if(
+if (
     !empty($data['edit-id']) 
     && is_numeric($data['edit-id'])
     && !empty($data['id-user'])
@@ -55,12 +55,12 @@ if(
     && !empty($data['property'])
     && is_array($data['property'])
     && isTrueDataInProperty($data['property'], $arRes['allUsersCreatePropertys'])
-){
+) {
     foreach ($data['property'] as $idProperty => $value) {
-        if($arRes['valuePropertysThisUser'][$idProperty]){ // было ли уже задано когда то такое значение, для такого своства
+        if ($arRes['valuePropertysThisUser'][$idProperty]) { // было ли уже задано когда то такое значение, для такого своства
             // если да то обновляем то что есть уже
             generalUsersPropertys::updateValueProperty($data['id-user'], 'text', $idProperty, $value);
-        }else{
+        } else {
             // если нет создаём новое значение
             generalUsersPropertys::addValueProperty($data['id-user'], 'text', $idProperty, $value);
         }

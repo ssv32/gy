@@ -22,7 +22,7 @@ class User
     public function getThisUserGroups()
     {
         $arResult = array();
-        if(!empty($this->dataUser['groups'])){
+        if (!empty($this->dataUser['groups'])) {
             $arResult = $this->dataUser['groups'];
         }
         return $arResult;
@@ -102,7 +102,7 @@ class User
             )    
         );
 
-        if ($arRes = $db->fetch($res)){
+        if ($arRes = $db->fetch($res)) {
 
             //$this->setUserCookie($arRes['id'] , $crypto->getRandString());
             $this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
@@ -167,18 +167,18 @@ class User
 
         global $_COOKIE;
 
-        if(!empty($_COOKIE[$this->nameCookie]) ){
+        if (!empty($_COOKIE[$this->nameCookie])) {
 
             $dataUser = $this->findUserByCookie($_COOKIE[$this->nameCookie]);
 
-            if ($dataUser !== false){
+            if ($dataUser !== false) {
                 $this->dataUser = $dataUser;
 
                 // получить группы к каким относится пользователь
                 $this->dataUser['groups'] = AccessUserGroup::getListGroupsByUser($dataUser['id']);
 
                 $this->authorized = true;
-                if ( !empty($this->dataUser['groups']['admins']) ){
+                if (!empty($this->dataUser['groups']['admins'])) {
                     $this->admin = true;
                 }
                 $result = true;
@@ -205,7 +205,7 @@ class User
             array( '=' => array('hash_auth', "'".$cookie."'") ) 
         );
 
-        if ($arRes = $db->fetch($res)){
+        if ($arRes = $db->fetch($res)) {
             $result = $arRes;
         }
 
@@ -264,7 +264,7 @@ class User
         );
         $result = $db->fetch($res, false);
         
-        if(!empty($result)){
+        if (!empty($result)) {
             // получить группы текущего пользователя
             $result['groups'] = AccessUserGroup::getListGroupsByUser($id);
         }
@@ -287,7 +287,7 @@ class User
         global $db;
         $res = $db->insertDb($this->tableName, $data);
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -310,7 +310,7 @@ class User
         global $db;
         $res = $db->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
         
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -327,12 +327,12 @@ class User
     {
         $result = false;
 
-        if (is_numeric($id_user) && ($id_user != 1)){
+        if (is_numeric($id_user) && ($id_user != 1)) {
             global $db;
 
             $res = $db->deleteDb($this->tableName, array('='=>array('id', $id_user)));
 
-            if ($res){
+            if ($res) {
                 $result = true;
             }
         }

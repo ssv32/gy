@@ -102,7 +102,7 @@ class GeneralUsersPropertys
             array('='=>array('id', $id))
         );
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -125,7 +125,7 @@ class GeneralUsersPropertys
     {
         $result = false;
 
-        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+        if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;
 
             $res = $db->deleteDb(
@@ -133,7 +133,7 @@ class GeneralUsersPropertys
                 array( '=' => array('id_property', $idProperty) )
             );
 
-            if ($res){
+            if ($res) {
                 $result = true;
             }
         }
@@ -154,7 +154,7 @@ class GeneralUsersPropertys
     {
         $result = false;
 
-        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+        if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;
             $res = $db->selectDb( 
                 self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode], 
@@ -181,7 +181,7 @@ class GeneralUsersPropertys
     {
         $result = false;
 
-        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+        if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;
             $res = $db->insertDb(
                 self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode], 
@@ -192,7 +192,7 @@ class GeneralUsersPropertys
                 )
             );
 
-            if ($res){
+            if ($res) {
                 $result = true;
             }
         }
@@ -213,7 +213,7 @@ class GeneralUsersPropertys
     {
         $result = false;
 
-        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+        if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;	
 
             $res = $db->deleteDb(
@@ -226,7 +226,7 @@ class GeneralUsersPropertys
                 )
             );
 
-            if ($res){
+            if ($res) {
                 $result = true;
             }
         }
@@ -249,7 +249,7 @@ class GeneralUsersPropertys
     {
         $result = false;
 
-        if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
+        if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;
             $res = $db->updateDb(
                 self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
@@ -266,7 +266,7 @@ class GeneralUsersPropertys
                 )
             );
 
-            if ($res){
+            if ($res) {
                 $result = true;
             }
         }

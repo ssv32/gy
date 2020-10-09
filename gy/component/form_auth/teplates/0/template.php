@@ -1,7 +1,7 @@
 <?php // шаблон компонента // template component form_auth
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-if ( empty($arRes["auth_ok"]) ) :?>
+if (empty($arRes["auth_ok"])) :?>
     <form>
         <input type="hidden" name="idComponent" value="<?=$arParam['idComponent']?>" />
 
@@ -18,7 +18,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
             )
         );?>
             
-        <?php if ( !empty($arRes['err']) ){?>
+        <?php if (!empty($arRes['err'])) {?>
             <div class="gy-admin-error-message"><?=$this->lang->getMessage($arRes['err']);?></div>
         <?php }?>
 

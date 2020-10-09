@@ -18,11 +18,11 @@ class Security
      */
     public static function filterInputData($data)
     {
-        if(is_array($data)){
+        if (is_array($data)) {
             foreach ($data as $key => $value) {
                 $data[$key] = self::filterInputData($value);
             }
-        }else{
+        } else {
             return self::clearValue($data);
         }
         return $data;

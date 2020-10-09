@@ -5,11 +5,11 @@ $arRes = array();
 $data = $_REQUEST;
 
 // добавить новую группу если добавляется новая
-if( !empty($data['add-group-name'])
+if ( !empty($data['add-group-name'])
     && !empty( $data['add-group-code'])
     && !empty( $data['add-group-text'])
     && !empty( $data['groupsActions']['add-group-action-user'])
-){
+) {
     
     $res = AccessUserGroup::addUserGroup(
         array(
@@ -23,7 +23,7 @@ if( !empty($data['add-group-name'])
 }
 
 // удалить группы, отмеченные для удаления
-if(!empty($data['delete'])){
+if (!empty($data['delete'])) {
     foreach ($data['delete'] as $codeDeleteGroup => $val) {
         AccessUserGroup::deleteUserGroupByCode($codeDeleteGroup);
     }
@@ -42,7 +42,7 @@ $standartGroup = array(
     'user_admin'
 );
 foreach ($arRes['allUsersGroups'] as $key => $value) {
-    if(!in_array($value['code'], $standartGroup)){
+    if (!in_array($value['code'], $standartGroup)) {
         $arRes['allUsersGroups'][$key]['flag_del'] = 'Y'; // флаг что можно удалить группу
     }
 }
@@ -52,12 +52,12 @@ global $user;
 // надо убрать админа из списка что бы права нельзя было менять никому
 unset($data['groupsActions']['admins']);
 
-if(!empty($data['button-form'])
+if (!empty($data['button-form'])
     && ($data['button-form'] == 'Сохранить')
     && $user->isAdmin() // TODO пока только админы могут это делать
     && !empty($data['groupsActions'])
-){ // нужно сохранить новые настроки прав
-    foreach ($data['groupsActions'] as $key => $listActionUser){
+) { // нужно сохранить новые настроки прав
+    foreach ($data['groupsActions'] as $key => $listActionUser) {
         // удалить все настройки для определённой группы
         AccessUserGroup::deleteAllActionsForGroup($key);
         
@@ -66,7 +66,7 @@ if(!empty($data['button-form'])
         }
     }
     $arRes['status'] = 'ok';
-} elseif(!empty($data['button-form']) ){
+} elseif (!empty($data['button-form'])) {
     $arRes['status'] = 'add-err';
 }
 

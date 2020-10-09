@@ -5,12 +5,12 @@ global $app;
 
 $data = $_POST;
 
-if(!empty($data['cacheClear'])){
+if (!empty($data['cacheClear'])) {
     // нужно удалить все файлы из раздела /gy/cache/
        
     $files = glob($app->url.'/cache/*'); 
-    foreach($files as $file){
-        if(is_file($file)){
+    foreach ($files as $file) {
+        if (is_file($file)) {
             unlink($file); 
         }
     }
@@ -29,7 +29,7 @@ $arRes['langs'] = array(
 
 $arRes['this-lang'] = $app->options['lang'];
 
-if(!empty($data['save']) && in_array($data['lang'], $arRes['langs'])){
+if (!empty($data['save']) && in_array($data['lang'], $arRes['langs'])) {
 
     // задать настройки сразу ядра
     global $argv;
@@ -44,9 +44,9 @@ if(!empty($data['save']) && in_array($data['lang'], $arRes['langs'])){
     $consoleLog = ob_get_contents();
     ob_end_clean();
 
-    if($consoleLog != "run set-option\nfinish set-option\n"){
+    if ($consoleLog != "run set-option\nfinish set-option\n") {
         $arRes['status'] = 'save-ok'; 
-    }else{
+    } else {
         $arRes['status'] = 'save-err'; 
         $arRes['status-text'] = $consoleLog;
     }

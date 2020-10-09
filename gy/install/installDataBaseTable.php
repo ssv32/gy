@@ -5,7 +5,7 @@ global $argv;
 $isRunConsole = isset($argv);
 $br = "\n";
 
-if($isRunConsole){
+if ($isRunConsole) {
 
     include __DIR__."/../gy.php"; // подключить ядро // include core
 
@@ -252,7 +252,7 @@ if($isRunConsole){
 
     echo $br.'-----install gy core taldes db = OK!-----'.$br;
 
-}else{
+} else {
     echo '! Error. You need to run the script in the console';
 
 }

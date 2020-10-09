@@ -29,19 +29,19 @@ function showHelpFromInstall(){
 
 function parseOprions($optionsFromConsole){ 
     $arOptions = array();
-    for($i = 2; $i < (count($optionsFromConsole)-1); $i = $i+2){
+    for ($i = 2; $i < (count($optionsFromConsole)-1); $i = $i+2) {
         if (empty($optionsFromConsole[$i+1])) {
             $optionsFromConsole[$i+1] = '';
         }
 
-        if($optionsFromConsole[$i+1] == '***'){
+        if ($optionsFromConsole[$i+1] == '***') {
             $optionsFromConsole[$i+1] = '';
         }
 
-        if (strripos($optionsFromConsole[$i], 'db') !== false){
+        if (strripos($optionsFromConsole[$i], 'db') !== false) {
             $arOptions['db_config'][$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];
         
-        } else{
+        } else {
             $arOptions[$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];  
         }
     }
@@ -53,20 +53,20 @@ function createTextForFileCofig($options){
     global $br;
     $fileText = '';
 
-    if (!empty($options)){
+    if (!empty($options)) { 
 
         $fileText = '<?php '.$br.'
 if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$br.'
 
 $gy_config = array('.$br;
 
-        foreach($options as $key => $val){
+        foreach ($options as $key => $val) {
 
-            if (!is_array($val)){
+            if (!is_array($val)) {
                 $fileText .= '    "'.$key.'" => "'.$val.'",'.$br;
-            }else{
+            } else {
                 $fileText .= '    "'.$key.'" => array('.$br;
-                foreach($val as $key2 => $val2){
+                foreach ($val as $key2 => $val2) {
                     $fileText .= '        "'.$key2.'" => "'.$val2.'",'.$br;
                 }
                 $fileText .= '    ),'.$br;
@@ -79,22 +79,22 @@ $gy_config = array('.$br;
     return $fileText;
 }
 
-if($isRunConsole){ // пока запускать только из консоли
-    if ( empty($argv[1]) || ($argv[1] == 'help') ){
+if ($isRunConsole) { // пока запускать только из консоли
+    if (empty($argv[1]) || ($argv[1] == 'help')) {
         showHelpFromInstall();
-    }elseif($argv[1] == 'set-all'){
+    } elseif ($argv[1] == 'set-all') {
         echo 'run set-all'.$br;
 
         $options = parseOprions($argv);
 
-        if (!empty($options)){
+        if (!empty($options)) {
             $file = fopen(__DIR__.'/../config/gy_config.php', 'w');
             fwrite($file, createTextForFileCofig($options) );
             fclose($file);
         }
         echo 'finish set-all'.$br;
 
-    }elseif($argv[1] == 'set-option'){
+    } elseif ($argv[1] == 'set-option') {
         echo 'run set-option'.$br;
         $options = parseOprions($argv);
 
@@ -103,18 +103,18 @@ if($isRunConsole){ // пока запускать только из консол
 
         print_r($old_options);
 
-        foreach ($options as $key => $val){
-            if (is_array($val)){
+        foreach ($options as $key => $val) {
+            if (is_array($val)) {
                 //$tempArr = $old_options[$key];
-                foreach($val as $key2 => $val2){
+                foreach ($val as $key2 => $val2) {
                     $old_options[$key][$key2] = $val2;
                 }
-            }else{
+            } else {
                 $old_options[$key] = $val;
             }
         }
 
-        if (!empty($old_options)){
+        if (!empty($old_options)) {
             $file = fopen(__DIR__.'/../config/gy_config.php', 'w');
             fwrite($file, createTextForFileCofig($old_options) );
             fclose($file);
@@ -123,7 +123,7 @@ if($isRunConsole){ // пока запускать только из консол
 
     }
 
-}else{
+} else {
     echo '! Error. You need to run the script in the console';
 
 }

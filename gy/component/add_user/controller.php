@@ -17,20 +17,20 @@ $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
     $result = true;
-    foreach ($arRes['user_property'] as $val){	
-        if (empty($arr[$val])){
+    foreach ($arRes['user_property'] as $val) {	
+        if (empty($arr[$val])) {
             $result = false;
         }    
     }
     
-    if($result){
+    if ($result) {
         foreach ($arr['groups'] as $value) {  // TODO протестировать
             
-            if( empty($arRes['allUsersGroups'][$value]) ){
+            if (empty($arRes['allUsersGroups'][$value])) {
                 $result = false;
             }
             
-            if(!empty($arr['groups']['admins']) && !$user->isAdmin()){ // TODO протестировать
+            if (!empty($arr['groups']['admins']) && !$user->isAdmin()) { // TODO протестировать
                 $result = false;
             }
         }
@@ -40,18 +40,18 @@ function checkProperty($arr, $arRes){
 }
 
 if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
-    if(checkProperty($data, $arRes)){
+    if (checkProperty($data, $arRes)) {
         // добавление пользователя
         global $user;
         $arDaraUser = array();
-        foreach ($arRes['user_property'] as $val){
+        foreach ($arRes['user_property'] as $val) {
             $arDaraUser[$val] = $data[$val];
         }
 		
         // убрать группы из добавления
         unset($arDaraUser['groups']);
        
-        if( $user->addUsers($arDaraUser)){
+        if ($user->addUsers($arDaraUser)) {
             // найти id добавленного пользователя
             global $db;		   
             global $crypto;
@@ -74,22 +74,22 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
             }
 
             $arRes["stat"] = 'ok';
-        } else{
+        } else {
             $arRes["stat"] = 'err';
         }
 
-    }else{
+    } else {
         $arRes["stat-text"] = '! Не все поля заполнены';
         $arRes["stat"] = 'err';
     }
 
-} elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
+} elseif ((!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"])) {
     $arRes["stat"] = 'add';
 }
 
-if (empty($data['stat'])){
+if (empty($data['stat'])) {
     header( 'Location: '.$redirectUrl.'?stat='.$arRes["stat"] );
-}else{
+} else {
     $arRes["stat"] = $data['stat'];
 }
 

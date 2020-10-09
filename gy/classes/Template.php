@@ -14,12 +14,12 @@ class Template
         $this->templateUrl = $url.'/template.php';
 
         // проверить существует ли файл стилей для компонента
-        if(file_exists($url.'/style.css')){
+        if (file_exists($url.'/style.css')) {
             $this->urlFileStyle = $url.'/style.css';
         }
 
         // если есть файл js 
-        if(file_exists($url.'/script.js')){
+        if (file_exists($url.'/script.js')) {
             $this->urlFileJs = $url.'/script.js';
         }
 
@@ -45,7 +45,7 @@ class Template
     {
 
         // если есть стили то добавить стили
-        if(!empty($this->urlFileStyle)){
+        if (!empty($this->urlFileStyle)) {
             echo '<style>';
             include $this->urlFileStyle;
             echo '</style>';
@@ -55,7 +55,7 @@ class Template
         include $this->templateUrl;
 
         // если есть js то добавить его
-        if(!empty($this->urlFileJs)){
+        if (!empty($this->urlFileJs)) {
             echo '<script>';
             include $this->urlFileJs;
             echo '</script>';

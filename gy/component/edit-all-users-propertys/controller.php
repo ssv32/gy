@@ -7,22 +7,22 @@ $data = $_REQUEST;
 $arRes['allTypePropertys'] = GeneralUsersPropertys::getAllTypeAllUsersPropertys();
 
 // сохранить новое свойство
-if(
+if (
     !empty($data['name_property'])
     && !empty($data['type_property'])   
     && !empty($arRes['allTypePropertys'] )   
     && !empty($arRes['allTypePropertys'][$data['type_property']]) 
     && !empty($data['code'])
-){
+) {
     $flag = GeneralUsersPropertys::addUsersPropertys(
         $data['name_property'], 
         $data['type_property'], 
         $data['code'] 
     );
     
-    if($flag){
+    if ($flag) {
         $arRes['stat'] = 'ok';
-    }else{
+    } else {
         $arRes['stat'] = 'err';
     }
 }
@@ -32,15 +32,15 @@ if(
 $arRes['allUsersCreatePropertys'] = GeneralUsersPropertys::getAllGeneralUsersPropertys();
 
 // если удаление свойства
-if(
+if (
     is_numeric($data['del-id'])    
     && !empty($data['del-id'])
     && !empty($arRes['allUsersCreatePropertys'][$data['del-id']])
-){
+) {
     $flag = GeneralUsersPropertys::deleteUserProperty($data['del-id']);
-    if($flag){
+    if ($flag) {
         $arRes['stat'] = 'ok';
-    }else{
+    } else {
         $arRes['stat'] = 'err';
     }
 }

@@ -2,18 +2,18 @@
 
 <h1><?=$this->lang->getMessage('title');?><?=$arParam['id-user']?></h1>
 
-<?php if (!empty($arRes['stat']) ){?>
-    <?php if ( $arRes['stat'] == 'ok'){ ?>
+<?php if (!empty($arRes['stat'])) {?>
+    <?php if ($arRes['stat'] == 'ok') { ?>
         <div class="gy-admin-good-message"><?=$this->lang->getMessage('stat-ok');?></div>
         <br/>
     <?php }?>
 
-    <?php if ($arRes['stat'] == 'err'){?>
+    <?php if ($arRes['stat'] == 'err') {?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage('stat-err');?></div>
         <br/>
     <?php }?>
     <a href="/gy/admin/edit-users-propertys.php?edit-id=<?=$arParam['id-user']?>" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-<?php }else{?>
+<?php } else {?>
 
     <form method="post" >
 

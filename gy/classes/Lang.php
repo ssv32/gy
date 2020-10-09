@@ -10,7 +10,7 @@ class Lang
     {
         $result = false; 
 
-        if ( !empty($url) && !empty($fileName) && !empty($lang) ) {
+        if (!empty($url) && !empty($fileName) && !empty($lang)) {
             //load array text language
             $this->textLang = $this->getArrLangFromFilre( $url.'/lang_'.$fileName.'.php', $lang );
         }
@@ -39,7 +39,7 @@ class Lang
     public function getMessage($nameVar )
     {
         $result = false;
-        if ( !empty($this->textLang[$nameVar]) ){
+        if (!empty($this->textLang[$nameVar])) {
             $result = $this->textLang[$nameVar];
         }
         return $result;
@@ -57,7 +57,7 @@ class Lang
         $mess = array();
 
         // если есть файл с языковыми параметрами
-        if ( file_exists($urlFile) === true ){	
+        if (file_exists($urlFile) === true) {	
             include $urlFile;
             $mess = $mess[$lang];
         }

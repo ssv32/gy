@@ -1,11 +1,11 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-if ($arRes['status'] == 'add'){ ?>
+if ($arRes['status'] == 'add') { ?>
     <h1><?=$this->lang->getMessage('title');?></h1>
     <form method="post">
         <table border="1" class="gy-table-all-users">
-            <?php foreach ($arRes['property'] as $val){?>
+            <?php foreach ($arRes['property'] as $val) {?>
                 <tr>
                     <td><?=$val?></td>
                     <td><input type="text" name="<?=$val?>" value="" /></td>
@@ -24,7 +24,7 @@ if ($arRes['status'] == 'add'){ ?>
     <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
 <?php } ?>
     
-<?php if ($arRes['status'] == 'add-err'){?>
+<?php if ($arRes['status'] == 'add-err') {?>
     <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err');?></div>
     <br/>
     <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>

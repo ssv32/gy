@@ -7,7 +7,7 @@ class Model
 
     public function __construct($url)
     {
-            $this->url = $url;
+        $this->url = $url;
     }
 
     /**

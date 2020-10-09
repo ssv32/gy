@@ -50,7 +50,7 @@ class ContainerData
         global $db;		
         $res = $db->insertDb(self::$table_container_data, $arParams);
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -71,7 +71,7 @@ class ContainerData
         global $db;		
         $res = $db->deleteDb(self::$table_container_data, array('=' => array('id', $id)));
 
-        if ($res){
+        if ($res) {
 
             //нужно удалить все элементы связанные с ним свойства и значения свойств
 
@@ -113,7 +113,7 @@ class ContainerData
         global $db;
         $res = $db->updateDb(self::$table_container_data, $arParams, $where);
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -172,7 +172,7 @@ class ContainerData
         global $db;		
         $res = $db->insertDb(self::$table_list_propertys_container_data, $arParams);
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -204,7 +204,7 @@ class ContainerData
             )
         );
 
-        if ($arRes = $db->fetch($res)){
+        if ($arRes = $db->fetch($res)) {
             $result = $arRes;
         }
         return $result;
@@ -232,7 +232,7 @@ class ContainerData
                 'value' => $value
             )
         );
-        if($res){
+        if ($res) {
             $result = true;
         }
         return $result;
@@ -259,7 +259,7 @@ class ContainerData
             )
         );
 
-        if($res){
+        if ($res) {
             $result = true;
         }
         return $result;
@@ -321,7 +321,7 @@ class ContainerData
         global $db;
         $res = $db->insertDb(self::$table_element_container_data, $arParams);
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 
@@ -340,7 +340,7 @@ class ContainerData
         global $db;
         $res = $db->deleteDb(self::$table_element_container_data, array('=' => array('id', $id)));
 
-        if ($res){
+        if ($res) {
             // надо удалить все свойства этого элемента
             $db->deleteDb( // удалить всё для свойств html
                 self::$table_value_propertys_type_html, 
@@ -371,7 +371,7 @@ class ContainerData
         global $db;
         $res = $db->updateDb(self::$table_element_container_data, $arParams, $where);
 
-        if ($res){
+        if ($res) {
             $result = true;
         }
 

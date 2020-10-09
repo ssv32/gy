@@ -37,11 +37,11 @@ class AppFromConstructorPageComponent
         $urlComponentInModule = $module->getModulesComponent($name);
         $componentInfo = array();
 
-        if ( file_exists($url.'/customDir/component/'.$name.'/componentInfo.php' ) ){
+        if (file_exists($url.'/customDir/component/'.$name.'/componentInfo.php')) {
             require $url.'/customDir/component/'.$name.'/componentInfo.php';
-        }elseif(($urlComponentInModule !== false) && file_exists($urlComponentInModule.'/componentInfo.php' )){
+        } elseif (($urlComponentInModule !== false) && file_exists($urlComponentInModule.'/componentInfo.php' )) {
             require $urlComponentInModule.'/componentInfo.php'; // может и не быть
-        }elseif( file_exists($url.'/gy/component/'.$name.'/componentInfo.php' ) ){
+        } elseif (file_exists($url.'/gy/component/'.$name.'/componentInfo.php')) {
             require $url.'/gy/component/'.$name.'/componentInfo.php'; // может и не быть
         }
 
@@ -98,11 +98,11 @@ class AppFromConstructorPageComponent
         $codeIncludeComponent .= "   '".$componentName."',"."\n";
         $codeIncludeComponent .= "   '".$templateName."',"."\n";
         $codeIncludeComponent .= '   array('."\n";
-        if(!empty($arParams)){
+        if (!empty($arParams)) {
             foreach ($arParams as $key => $value) {
-                if(!is_numeric($value)){
+                if (!is_numeric($value)) {
                     $codeIncludeComponent .= "     '".$key."' => '".$value."',"."\n";
-                }else{
+                } else {
                     $codeIncludeComponent .= "     '".$key."' => ".$value.",\n";
                 }
             }

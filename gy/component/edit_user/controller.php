@@ -14,7 +14,7 @@ $arRes['user_property'] = array(
 );
 
 // если идёт обновление пользователя без пароля то убрать пароль из списка свойств пользователя
-if($notUpdatePass){
+if ($notUpdatePass) {
     unset($arRes['user_property']['pass']);
 }
 
@@ -25,8 +25,8 @@ $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
     $result = true;
-    foreach ($arRes['user_property'] as $val){	
-        if (empty($arr[$val])){
+    foreach ($arRes['user_property'] as $val) {	
+        if (empty($arr[$val])) {
             $result = false;
         } 
     }
@@ -34,11 +34,11 @@ function checkProperty($arr, $arRes){
     if($result){
         foreach ($arr['groups'] as $value) {  // TODO протестировать
             
-            if( empty($arRes['allUsersGroups'][$value]) ){
+            if (empty($arRes['allUsersGroups'][$value])) {
                 $result = false;
             }
             
-            if(!empty($arr['groups']['admins']) && !$user->isAdmin()){ // TODO протестировать
+            if (!empty($arr['groups']['admins']) && !$user->isAdmin()) { // TODO протестировать
                 $result = false;
             }
         }
@@ -48,7 +48,7 @@ function checkProperty($arr, $arRes){
 }
 
 // получить данные пользователя
-if(!empty($this->arParam['id-user'])){  
+if (!empty($this->arParam['id-user'])) {  
     $arRes['userData'] = $user->getUserById($this->arParam['id-user']);  
     unset($arRes['userData']['pass']);
 }
@@ -60,7 +60,7 @@ if (!empty($data['Сохранить'])
     && ($data['edit-id'] != 1)  
 ) {
         
-    if(checkProperty($data, $arRes)){
+    if (checkProperty($data, $arRes)) {
 
         // подготовить массив данных для обновления пользователей
         $dataUpdateUser = array();
@@ -79,26 +79,26 @@ if (!empty($data['Сохранить'])
         global $user;
         $res = $user->updateUserById($data['edit-id'], $dataUpdateUser);
         
-        if($res){
+        if ($res) {
             $arRes["stat"] = 'ok';
-        }else{
+        } else {
             $arRes["stat-text"] = '! Не все поля заполнены';
             $arRes["stat"] = 'err';
         }
         			
-    }else{
+    } else {
         $arRes["stat-text"] = '! Не все поля заполнены';
         $arRes["stat"] = 'err';
     }
 
 
-} elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
+} elseif ((!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"])) {
     $arRes["stat"] = 'edit';
 }
 
-if (empty($data['stat'])){
+if (empty($data['stat'])) {
     header( 'Location: ?stat='.$arRes["stat"].'&edit-id='.$this->arParam['id-user'] );
-}else{
+} else {
     $arRes["stat"] = $data['stat'];
 }
 

@@ -3,12 +3,12 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 $data = $_POST;
 
-if( !empty($data['ID']) && is_numeric($data['ID']) ){
+if (!empty($data['ID']) && is_numeric($data['ID'])) {
     $res = ContainerData::deleteContainerData($data['ID']);
     
-    if($res){
+    if ($res) {
         $arRes['status'] = 'del-ok';
-    }else{
+    } else {
         $arRes['status'] = 'del-err';
     }
 }

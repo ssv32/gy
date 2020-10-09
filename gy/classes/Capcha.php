@@ -40,7 +40,7 @@ class Capcha
     {
         $arResult = false; 
         // проверит код с капчи
-        if ($_SESSION['capcha'] == mb_strtoupper($code) ){ // всё приводится к верхнему регистру что бы пользователю проще было угадать капчу
+        if ($_SESSION['capcha'] == mb_strtoupper($code)) { // всё приводится к верхнему регистру что бы пользователю проще было угадать капчу
             $arResult = true; 
         }
         self::clearCapcha();
@@ -94,7 +94,7 @@ class Capcha
 
         // нарисовать шум (рендомной длинны в рендомные стороны)
         $j = rand(5, 10);
-        for($i = 0; $i < $j; $i++){
+        for ($i = 0; $i < $j; $i++) {
             
             // произвольно задать цвет
             $r = rand(50, 230);
@@ -112,7 +112,7 @@ class Capcha
         }
 
         // рисуется код капчи
-        for($i = 0; $i < strlen($code); $i++){
+        for ($i = 0; $i < strlen($code); $i++) {
             
             // произвольно задать цвет
             $r = rand(50, 230);
@@ -123,19 +123,19 @@ class Capcha
             $font = rand(5, 7); // размер шрифта
 
             $j = rand(0,1);
-            if($j == 0){
+            if ($j == 0) {
                 $y = sin($i)*10;
-            }else{
+            } else {
                 $y = cos($i)*10;
             }
 
             $x = rand(3, 10);
 
-            if ($this->urlFonts == false){ 
+            if ($this->urlFonts == false) { 
                 // если не задан шрифт то будет штатным рисоваться но без поворота букв
                 imagestring($img, $font, $x+($i*20), 10+$y,  $code[$i], $text_color);          
                 imagestring($img, $font, $x+1+($i*20), 11+$y,  $code[$i], $text_color); 
-            }else{ 
+            } else { 
                 // иначе заданным шрифтом рисует с поворотом букв
                 $a = 30 - rand(0, 60); // угол от -30 до 30
                 imagettftext($img, $font*3, $a, $x+($i*20), 30+$y, $text_color, $this->urlFonts, $code[$i]); 
@@ -156,7 +156,7 @@ class Capcha
     public function getRandLetters($count)
     {
         $randLetters = '';
-        for($i = 0; $i < $count; $i++){
+        for ($i = 0; $i < $count; $i++) {
             $randLetters .= self::getRandLetter();
         }
         return $randLetters;

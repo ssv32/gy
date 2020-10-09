@@ -4,7 +4,7 @@ include "../../gy/gy.php"; // подключить ядро // include core
 
 global $user;
 
-if ($user->isAdmin()){
+if ($user->isAdmin()) {
 
     include "../../gy/admin/header-admin.php";
 

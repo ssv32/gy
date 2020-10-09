@@ -9,7 +9,7 @@ if (!empty($value)){
     <form method="post">
         <input name="ID" type="hidden" value="<?=$value['id']?>" />
         <table border="1" class="gy-table-all-users">
-            <?php foreach ($arRes['property'] as $val){?>
+            <?php foreach ($arRes['property'] as $val) {?>
                 <tr>
                     <td><?=$val?></td>
                     <td><input type="text" name="<?=$val?>" value="<?=$value[$val]?>" /></td>
@@ -27,14 +27,14 @@ if (!empty($value)){
     <a href="/gy/admin/get-admin-page.php?page=container-data-property-edit&container-data-id=<?=$value['id']?>" class="gy-admin-button"><?=$this->lang->getMessage('edit-property');?></a>
 <?php }?>    
    
-<?php if(!empty($arRes['status'])){?>    
-    <?php if ($arRes['status'] == 'add-ok'){?>
+<?php if (!empty($arRes['status'])) {?>    
+    <?php if ($arRes['status'] == 'add-ok') {?>
         <div class="gy-admin-good-message"><?=$this->lang->getMessage('add-ok');?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
     <?php } ?>
 
-    <?php if ($arRes['status'] == 'add-err'){?>
+    <?php if ($arRes['status'] == 'add-err') {?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage('add-err');?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=container-data" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>

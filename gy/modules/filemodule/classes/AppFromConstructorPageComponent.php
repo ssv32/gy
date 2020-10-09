@@ -7,17 +7,17 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  */
 
 class AppFromConstructorPageComponent{
-    
+
     private $allDateIncludeComponents = array();
     private $intKey = 0;
     public $urlProject;
     public $options; // настройки проекта 
-    
+
     public function __construct($urlProject, $options) {
         $this->urlProject = $urlProject;
         $this->options = $options;
     }
-    
+
     /**
      * getInfoAboutComponent
      *  - получить информацию о компоненте если есть файл componentInfo.php 
@@ -32,16 +32,16 @@ class AppFromConstructorPageComponent{
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
         $module = Module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
-        $componentInfo = array();     
-        
-        if ( file_exists($url.'/customDir/component/'.$name.'/componentInfo.php' ) ){ 
-            require $url.'/customDir/component/'.$name.'/componentInfo.php'; 
+        $componentInfo = array();
+
+        if ( file_exists($url.'/customDir/component/'.$name.'/componentInfo.php' ) ){
+            require $url.'/customDir/component/'.$name.'/componentInfo.php';
         }elseif(($urlComponentInModule !== false) && file_exists($urlComponentInModule.'/componentInfo.php' )){
             require $urlComponentInModule.'/componentInfo.php'; // может и не быть
-        }elseif( file_exists($url.'/gy/component/'.$name.'/componentInfo.php' ) ){ 
+        }elseif( file_exists($url.'/gy/component/'.$name.'/componentInfo.php' ) ){
             require $url.'/gy/component/'.$name.'/componentInfo.php'; // может и не быть
-        } 
-        
+        }
+
         return $componentInfo;
     }
 
@@ -56,17 +56,17 @@ class AppFromConstructorPageComponent{
      * @param type $arParam
      */
     public function component($name, $template, $arParam  ){
-        global $app;      
+        global $app;
         $this->allDateIncludeComponents[$this->intKey] = array(
             'name' => $name,
             'template' => $template,
             'arParam' => $arParam,
             'componentInfo' => self::getInfoAboutComponent( $name, $template, $arParam, $this->urlProject)
-        ); 
-         
+        );
+
         $this->intKey++;
     }
-    
+
     /**
      * getAllDataIncludeComponents
      *  - получить данные по всем подключенным компонентам
@@ -76,7 +76,7 @@ class AppFromConstructorPageComponent{
     public function getAllDataIncludeComponents(){
         return $this->allDateIncludeComponents;
     }
-    
+
     /**
      * getCodeIncludeComponent
      *  - сделать php код вызова коппонента из переданных параметров
@@ -87,7 +87,7 @@ class AppFromConstructorPageComponent{
      * @return string
      */
     public static function getCodeIncludeComponent($componentName, $templateName, $arParams){
-        
+
         $codeIncludeComponent = "\n".'$app->component('."\n";
         $codeIncludeComponent .= "   '".$componentName."',"."\n";
         $codeIncludeComponent .= "   '".$templateName."',"."\n";
@@ -102,10 +102,10 @@ class AppFromConstructorPageComponent{
             }
         }
         $codeIncludeComponent .= '   )'."\n";
-        
+
         $codeIncludeComponent .= ');'."\n";
-        
+
         return $codeIncludeComponent;
     }
-    
+
 }

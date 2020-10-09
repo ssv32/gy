@@ -31,8 +31,8 @@ if (!empty($arParam['back-url'])){?>
         <?php }?>
     <input class="gy-admin-button" type="submit" name="<?=$this->lang->getMessage('button');?>" value="<?=$this->lang->getMessage('button');?>" />
 
-    </form>	
-	
+    </form>
+
 <?php }elseif($arRes["stat"] == 'ok'){?>
     <div class="gy-admin-good-message"><?=$this->lang->getMessage('add-ok');?></div>
     <br/>

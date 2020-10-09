@@ -5,7 +5,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * SitePages - класс для работы со страницами сайта
  */
 class SitePages{
-    
+
     /**
      * разделы в которых нельзя редактировать страницы
      * @var array 
@@ -14,19 +14,19 @@ class SitePages{
         '/gy/',
         '/customDir/'
     );
-    
+
     /**
      * имя файла страницы сайта
      * @var string 
      */
     private $nameFilePageSite = 'index.php';
-   
+
     /**
      * путь до проекта
      * @var string/false (false - пока не определён) 
      */
     private $urlProject = false;
-    
+
     /**
      * - текст ошибки
      * @var false/string - (false - нет ошибок, или текст ошибки)
@@ -41,7 +41,7 @@ class SitePages{
             return false;
         }
     }
-    
+
     /**
      * createSitePage
      *  - создать страницу сайта (пустую)
@@ -60,7 +60,7 @@ class SitePages{
             return false;
         }
     }
-    
+
     /**
      * deleteSitePage 
      *  - удалить страницу сайта 
@@ -84,7 +84,7 @@ class SitePages{
             return false;
         }
     }
-    
+
     /**
      * getContextPage 
      *  - получить содержимое страницы, просто в виде текста
@@ -99,7 +99,7 @@ class SitePages{
             return false;
         }
     }
-    
+
     /**
      * putContextPage 
      *  - сохранить на страницу текст
@@ -115,7 +115,7 @@ class SitePages{
             return false;
         }
     }
-    
+
     /**
      * checkUrl
      *  - проверит можно ли работать с урлом
@@ -132,5 +132,5 @@ class SitePages{
         }
         return $result;
     }
-    
+
 }

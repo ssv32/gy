@@ -72,17 +72,17 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
             foreach ($data['groups'] as $value) {
                 AccessUserGroup::addUserInGroup($dataAddNewUser['id'], $value);
             }
-            
+
             $arRes["stat"] = 'ok';
         } else{
             $arRes["stat"] = 'err';
         }
-				
+
     }else{
         $arRes["stat-text"] = '! Не все поля заполнены';
         $arRes["stat"] = 'err';
     }
-	
+
 } elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
     $arRes["stat"] = 'add';
 }

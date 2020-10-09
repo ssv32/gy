@@ -10,9 +10,9 @@ $br = "\n";
 
 if($isRunConsole){
     if($argv[1] == 'start'){
-                
+
         if (!file_exists(__DIR__.'/../../index.php')) {
-            
+
             define("GY_CORE", true); // хак
             include(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
             if(!empty($gy_config['lang']) && in_array($gy_config['lang'], array('rus', 'eng'))){
@@ -20,13 +20,13 @@ if($isRunConsole){
             }else{
                 $lang = 'rus';
             }
-            
+
             // записать основную страницу
             file_put_contents(__DIR__.'/../../index.php', getCodeByUrlPage('index.php', $lang));
-            
+
             mkdir(__DIR__.'/../../customDir/component/containerdata_element_show/teplates/0/', 0755, true);
             mkdir(__DIR__.'/../../customDir/classes/', 0755, true);
-            
+
             // записать файлы /customDir
             file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\template.php', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\template.php', $lang));
             file_put_contents(__DIR__.'/../../customDir\component\containerdata_element_show\teplates\0\style.css', getCodeByUrlPage('customDir\component\containerdata_element_show\teplates\0\style.css', $lang));
@@ -58,8 +58,7 @@ function getCodeByUrlPage($page, $lang){
             'title-run-component' => 'Component launch',
         )
     );
-    
-    
+
     $arrayCodeByUrl = array(
         'index.php' => '<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 

@@ -6,7 +6,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 // подключить модель // include model this component
 if (isset($this->model) ){
     $this->model->includeModel(); 
-}	
+}
 
 // были доступны параметры
 //echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';
@@ -29,20 +29,20 @@ $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
 $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 if ($isShowAdminPanel === true){
-		
-    $thisLogin = $user->getDataThisUser()['name'];	
+
+    $thisLogin = $user->getDataThisUser()['name'];
     $arRes["auth_ok"] = 'ok';
     $arRes["auth_user"] = $thisLogin;
-		
+
 } elseif ( !empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
-	
+
     if( Capcha::chackCapcha($_REQUEST['capcha']) ){
 
         $user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
         $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
         if ($isShowAdminPanel === false){
-            $arRes["err"] = 'err1'; 
+            $arRes["err"] = 'err1';
         }
 
         if ($isChackIdComponent && $isShowAdminPanel){

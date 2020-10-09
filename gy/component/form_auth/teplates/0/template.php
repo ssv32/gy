@@ -20,11 +20,11 @@ if ( empty($arRes["auth_ok"]) ) :?>
             
         <?php if ( !empty($arRes['err']) ){?>
             <div class="gy-admin-error-message"><?=$this->lang->getMessage($arRes['err']);?></div>
-        <?php }?>	
-		
+        <?php }?>
+
         <input class="gy-admin-button" type="submit" name="<?=$this->lang->getMessage('button');?>" value="<?=$this->lang->getMessage('button');?>" />
         
-    </form>	
+    </form>
 <?php else:?>
     <h1><?=$this->lang->getMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
     <form>

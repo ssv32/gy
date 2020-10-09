@@ -32,8 +32,8 @@ function parseOprions($optionsFromConsole){
     for($i = 2; $i < (count($optionsFromConsole)-1); $i = $i+2){
         if (empty($optionsFromConsole[$i+1])) {
             $optionsFromConsole[$i+1] = '';
-        }          
-        
+        }
+
         if($optionsFromConsole[$i+1] == '***'){
             $optionsFromConsole[$i+1] = '';
         }
@@ -45,21 +45,21 @@ function parseOprions($optionsFromConsole){
             $arOptions[$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];  
         }
     }
-            
+
     return $arOptions;
 }
 
 function createTextForFileCofig($options){
     global $br;
     $fileText = '';
-    
+
     if (!empty($options)){
-        
+
         $fileText = '<?php '.$br.'
 if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$br.'
 
 $gy_config = array('.$br;
-            
+
         foreach($options as $key => $val){
 
             if (!is_array($val)){
@@ -74,8 +74,8 @@ $gy_config = array('.$br;
 
         }
         $fileText .= ');'.$br;
-    }        
-    
+    }
+
     return $fileText;
 }
 
@@ -86,23 +86,23 @@ if($isRunConsole){ // пока запускать только из консол
         echo 'run set-all'.$br;
 
         $options = parseOprions($argv);
-                
+
         if (!empty($options)){
             $file = fopen(__DIR__.'/../config/gy_config.php', 'w');
             fwrite($file, createTextForFileCofig($options) );
             fclose($file);
         }
         echo 'finish set-all'.$br;
-     
+
     }elseif($argv[1] == 'set-option'){
         echo 'run set-option'.$br;
         $options = parseOprions($argv);
-               
+
         include __DIR__."/../gy.php";
         $old_options = $app->options;
-        
+
         print_r($old_options);
-        
+
         foreach ($options as $key => $val){
             if (is_array($val)){
                 //$tempArr = $old_options[$key];
@@ -113,17 +113,17 @@ if($isRunConsole){ // пока запускать только из консол
                 $old_options[$key] = $val;
             }
         }
-        
+
         if (!empty($old_options)){
             $file = fopen(__DIR__.'/../config/gy_config.php', 'w');
             fwrite($file, createTextForFileCofig($old_options) );
             fclose($file);
-        }  
+        }
         echo 'finish set-option'.$br;
 
     }
-	
+
 }else{
-	echo '! Error. You need to run the script in the console';
+    echo '! Error. You need to run the script in the console';
 
 }

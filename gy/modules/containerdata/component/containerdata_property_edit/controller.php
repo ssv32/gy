@@ -46,6 +46,6 @@ if(!empty($data['del-property-id']) && !empty($data['del-proprty-container-data'
         $arRes['PROPERTYS'] = ContainerData::getPropertysContainerData(array('='=>array('id_container_data', $this->arParam['container-data-id'])) );
     }
 }
-    
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

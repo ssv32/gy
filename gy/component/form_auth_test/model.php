@@ -8,7 +8,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * this is model component, here function for component and include class
  * 
  * TODO может модель сделать универсальной и не писать свою для каждого класса
- * 		надо подумать
+ *   надо подумать
  */
 
 function model_setAuth($auth){ // test model

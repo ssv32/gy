@@ -186,7 +186,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 value="<?=$this->lang->getMessage('next');?>" 
             />
             
-        </form>    
+        </form>
     <?php }elseif( $arRes['status'] == 'error-not-component'){ // ошибка при добавление компонента (не найден компонент)?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage('not-component');?></div>
         <br/>
@@ -209,9 +209,9 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                 
             <?php if(!empty($arRes['data-component']['componentInfo']['text-info'])){?>
                 <p>
-                    <?=$this->lang->getMessage('this_component_text_info');?>: <?=$arRes['data-component']['componentInfo']['text-info']?> 
+                    <?=$this->lang->getMessage('this_component_text_info');?>: <?=$arRes['data-component']['componentInfo']['text-info']?>
                 </p>
-            <?php }?>   
+            <?php }?>
             
             <p>
                 <?=$this->lang->getMessage('this_template_component');?>: <?=$arRes['data-component']['template']?>
@@ -239,7 +239,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
                     </tr>   
                 <?php }?>
             </table>  
-            
+
             <input
                 class="gy-admin-button" 
                 type="submit" 
@@ -248,6 +248,6 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?
             />
             
         </form> 
-        
-    <?php }    
+
+    <?php }
 }

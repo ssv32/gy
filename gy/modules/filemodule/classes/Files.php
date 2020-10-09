@@ -6,8 +6,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  */
 
 class Files{
-        
-     
+
     /**
      * createFile 
      *  - создать файл по урлу
@@ -18,7 +17,7 @@ class Files{
     static function createFile($url){
         return file_put_contents($url, '');
     }
-    
+
     /**
      * deleteFile
      *  - удалить файл по урлу
@@ -29,7 +28,7 @@ class Files{
     static function deleteFile($url){
         return unlink($url);
     }
-    
+
     /**
      * saveFile
      *  - сохранить текст в файл по урлу
@@ -41,7 +40,7 @@ class Files{
     static function saveFile($url, $date){
         return file_put_contents($url, $date);
     }
-    
+
     /**
      * getContentFile
      *  - прочитать файл
@@ -50,8 +49,7 @@ class Files{
      * @return boolean
      */
     static function getContentFile($url){
-        return file_get_contents($url); 
+        return file_get_contents($url);
     }
-    
-    
-} 
+
+}

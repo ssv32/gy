@@ -6,7 +6,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 // подключить модель // include model this component
 if (isset($this->model) ){
     $this->model->includeModel(); 
-}	
+}
 
 // были доступны параметры
 //echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';

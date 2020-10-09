@@ -13,7 +13,7 @@ if ( empty($arRes["auth_ok"]) ) :?>
 
         <input type="submit" name="<?=$this->lang->getMessage('button');?>" value="<?=$this->lang->getMessage('button');?>" />
 
-    </form>	
+    </form>
 <?php else:?>
     <h1><?=$this->lang->getMessage('hi');?>, <?=$arRes["auth_user"];?></h1>
 

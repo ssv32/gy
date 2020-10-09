@@ -2,11 +2,11 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
-	
+
     include "../../gy/admin/header-admin.php";
-    
+
     if(AccessUserGroup::accessThisUserByAction( 'edit_container_data')){
-    
+
         $data = $_GET;
 
         if ( (!empty($data['container-data-id']) && is_numeric($data['container-data-id'])) && (!empty($data['el-id']) && is_numeric($data['el-id'])   ) ){
@@ -24,7 +24,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
             echo 'error not id container-data';
         }
     }
-	
+
     include "../../gy/admin/footer-admin.php";
 
 } else {

@@ -50,7 +50,7 @@ if(!empty($this->arParam['id']) && is_numeric($this->arParam['id'])){
         }
         $arRes['dataUser']['propertys'] = $propertys;
     }
-        
+
 }
 
 // показать шаблон

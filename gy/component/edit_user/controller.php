@@ -90,8 +90,8 @@ if (!empty($data['Сохранить'])
         $arRes["stat-text"] = '! Не все поля заполнены';
         $arRes["stat"] = 'err';
     }
-	
-	
+
+
 } elseif( (!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"]) ) {
     $arRes["stat"] = 'edit';
 }
@@ -101,6 +101,6 @@ if (empty($data['stat'])){
 }else{
     $arRes["stat"] = $data['stat'];
 }
-     
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

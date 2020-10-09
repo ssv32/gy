@@ -1,11 +1,13 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class Lang{
+class Lang
+{
 
     public $textLang; // тексты определённого языка
 
-    function __construct($url, $fileName, $lang){
+    public function __construct($url, $fileName, $lang)
+    {
         $result = false; 
 
         if ( !empty($url) && !empty($fileName) && !empty($lang) ) {
@@ -24,7 +26,8 @@ class Lang{
      * @return
      */
 
-    function autoLoadLang($namePHPFile, $lang ){
+    public function autoLoadLang($namePHPFile, $lang )
+    {
 
     }
 
@@ -33,7 +36,8 @@ class Lang{
      * @param string $nameVar - передать переменную 
      * @return вернёт текст или false
      */
-    function getMessage($nameVar ){
+    public function getMessage($nameVar )
+    {
         $result = false;
         if ( !empty($this->textLang[$nameVar]) ){
             $result = $this->textLang[$nameVar];
@@ -48,7 +52,8 @@ class Lang{
      * 
      * @return массив с текстом на выбранном языке // language text array 
      */
-    function getArrLangFromFilre( $urlFile, $lang ){
+    public function getArrLangFromFilre( $urlFile, $lang )
+    {
         $mess = array();
 
         // если есть файл с языковыми параметрами

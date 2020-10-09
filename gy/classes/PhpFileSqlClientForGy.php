@@ -6,7 +6,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * class work PhpFileSql 
  */
 
-class PhpFileSqlClientForGy extends Db{
+class PhpFileSqlClientForGy extends Db
+{
 
     public $test = 'PhpFileSqlClient ok';
     public $db; //TODO private
@@ -20,7 +21,8 @@ class PhpFileSqlClientForGy extends Db{
      * 
      * @return boolean
      */
-    private function clearResultMethodSelect(){
+    private function clearResultMethodSelect()
+    {
         $this->dataSelectForFetch = array();
         return true;
     }
@@ -33,7 +35,8 @@ class PhpFileSqlClientForGy extends Db{
     * @param $port - не используется
     * @return resurs, false
     */
-    public function connect($dir, $login, $pass, $name_db, $port = false){
+    public function connect($dir, $login, $pass, $name_db, $port = false)
+    {
         $phpFileSql = new PhpFileSql($dir);
         $phpFileSql->connect($login, $pass, $name_db);
         
@@ -46,7 +49,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
-    public function query($query){	
+    public function query($query)
+    {	
         // 
     }
 
@@ -54,7 +58,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param $db - resurs (create self::connect()) 
      * @return true - ok OR false - not ok
      */
-    public function close(){
+    public function close()
+    {
         if ( !empty($this->db)){
             $phpFileSql = $this->db;
             return $phpFileSql->close();
@@ -68,7 +73,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param $res - результат отработки запроса в БД
      * @return array
      */
-    public function fetch($res){
+    public function fetch($res)
+    {
         $res = $this->dataSelectForFetch;
         
         $result = false;
@@ -89,7 +95,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param $res - результат отработки запроса в БД
      * @return array
      */
-    public function fetchAll($res, $key = 'id'){
+    public function fetchAll($res, $key = 'id')
+    {
         $result = false;
         
         if(($res !== false) && is_array($res)) {
@@ -107,7 +114,8 @@ class PhpFileSqlClientForGy extends Db{
         return $result;
     }
 
-    public function __construct($db_config) {
+    public function __construct($db_config) 
+    {
         if ( empty($this->db)){
             if (!empty($db_config)){
                 $this->connect($db_config['db_url'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
@@ -123,7 +131,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function selectDb($tableName, $propertys = '*', $where = false){
+    public function selectDb($tableName, $propertys = '*', $where = false)
+    {
 
         // чуть подправить для совместимости
         if($propertys[0] == '*'){
@@ -147,7 +156,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param array $propertys - параметры (поле = значение)
      * @return - false or object result query
      */
-    public function insertDb($tableName, $propertys){  
+    public function insertDb($tableName, $propertys)
+    {  
         // сбросить данные предыдущего вызова метода select
         $this->clearResultMethodSelect();
 
@@ -168,7 +178,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function updateDb($tableName, $propertys, $where = array()){
+    public function updateDb($tableName, $propertys, $where = array())
+    {
         // сбросить данные предыдущего вызова метода select
         $this->clearResultMethodSelect();
 
@@ -190,7 +201,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
      * @return - false or object result query
      */
-    public function createTable($tableName, $propertys){
+    public function createTable($tableName, $propertys)
+    {
         // сбросить данные предыдущего вызова метода select
         $this->clearResultMethodSelect();
 
@@ -222,7 +234,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param array $where - условия запроса, что удалять
      * @return boolean
      */
-    public function deleteDb($tableName, $where){
+    public function deleteDb($tableName, $where)
+    {
         // сбросить данные предыдущего вызова метода select
         $this->clearResultMethodSelect();
         
@@ -239,7 +252,8 @@ class PhpFileSqlClientForGy extends Db{
      * @param array $where
      * @return array
      */
-    public function createTrueArrayWhereFromPhpFileSql($where){
+    public function createTrueArrayWhereFromPhpFileSql($where)
+    {
         
         if(is_array($where)){
             foreach ($where as $key0 => $value0) {
@@ -258,7 +272,8 @@ class PhpFileSqlClientForGy extends Db{
         return $where;
     }
     
-    public function __destruct() {
+    public function __destruct() 
+    {
         $this->close();
     }
 }

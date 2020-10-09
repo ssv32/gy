@@ -5,7 +5,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * class work mysql 
  */
 
-class MySql extends Db{
+class MySql extends Db
+{
     
     public $test = 'mysql ok';
     public $db;
@@ -18,7 +19,8 @@ class MySql extends Db{
     * @param $port
     * @return resurs, false
     */
-    public function connect($host, $user, $pass, $name_db, $port){
+    public function connect($host, $user, $pass, $name_db, $port)
+    {
         $this->db = mysqli_connect($host, $user, $pass, $name_db, $port);
         return $this->db;
     }
@@ -27,7 +29,8 @@ class MySql extends Db{
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
-    public function query($query){
+    public function query($query)
+    {
         return mysqli_query($this->db, $query);
     }
     
@@ -35,7 +38,8 @@ class MySql extends Db{
      * @param $db - resurs (create self::connect()) 
      * @return true - ok OR false - not ok
      */
-    public function close(){
+    public function close()
+    {
         return mysqli_close($this->db);
     }
 	
@@ -44,7 +48,8 @@ class MySql extends Db{
      * @param $res - результат отработки запроса в БД
      * @return array
      */
-    public function fetch($res){
+    public function fetch($res)
+    {
     $result = array();
     if ($res !== false){
         $result = mysqli_fetch_assoc($res);
@@ -57,7 +62,8 @@ class MySql extends Db{
      * @param $res - результат отработки запроса в БД
      * @return array
      */
-    public function fetchAll($res, $key = 'id'){
+    public function fetchAll($res, $key = 'id')
+    {
         $result = array();
         while ($arRes = self::fetch($res)){
             if($key !== false){
@@ -69,7 +75,8 @@ class MySql extends Db{
         return $result;
     }
     
-    public function __construct($db_config) {
+    public function __construct($db_config) 
+    {
         if ( empty($this->db)){
             if (!empty($db_config)){
                 if( empty($db_config['db_port']) ){
@@ -106,7 +113,8 @@ class MySql extends Db{
      *        (en) - condition (example above, something like a tree)
      * @return boolean
      */        
-    private function isOneVersionWhere($where){
+    private function isOneVersionWhere($where)
+    {
         $result = false;
         if (count($where) == 1){
             foreach ($where as $key => $value) {
@@ -156,7 +164,8 @@ class MySql extends Db{
      *        (en) - condition (example above, something like a tree)
      * @return boolean
      */ 
-    private function isTwoVersionWhere($where){
+    private function isTwoVersionWhere($where)
+    {
         $result = true;
         foreach ($where as $key => $value) {
             if(in_array($key, array('OR', 'AND'))){
@@ -183,7 +192,8 @@ class MySql extends Db{
      * @param array $where
      * @return string
      */
-    private function getStrOneTypeWhere($where){
+    private function getStrOneTypeWhere($where)
+    {
         $result = false;
         if(!empty($where['='])){
             $result = $where['='][0]." = ".$where['='][1];
@@ -204,7 +214,8 @@ class MySql extends Db{
      * @param array $where
      * @return string
      */
-    private function getStrTwoTypeWhere($where){
+    private function getStrTwoTypeWhere($where)
+    {
         $result = '';
         if( !empty($where['AND']) ){
             foreach($where['AND'] as $val){
@@ -226,7 +237,8 @@ class MySql extends Db{
      * @param type $key2
      * @return type
      */    
-    private function parseWhereForQuery($where){ 
+    private function parseWhereForQuery($where)
+    { 
         
         $strWhere = '';
         if($this->isOneVersionWhere($where) ){
@@ -253,7 +265,8 @@ class MySql extends Db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function selectDb($tableName, $propertys, $where = array()){
+    public function selectDb($tableName, $propertys, $where = array())
+    {
         $query = 'SELECT ';
         $strPropertys = implode(",", $propertys);
 
@@ -274,7 +287,8 @@ class MySql extends Db{
      * @param array $propertys - параметры (поле = значение)
      * @return - false or object result query
      */
-    public function insertDb($tableName, $propertys){
+    public function insertDb($tableName, $propertys)
+    {
         $query = '';
         
         // разбить параметры на два списка через запятую // TODO вынести куда то
@@ -308,7 +322,8 @@ class MySql extends Db{
      * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
      * @return - false or object result query
      */
-    public function updateDb($tableName, $propertys, $where = array()){
+    public function updateDb($tableName, $propertys, $where = array())
+    {
         $query = 'UPDATE ';
         $textPropertys = '';
         global $crypto;
@@ -341,7 +356,8 @@ class MySql extends Db{
      * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
      * @return - false or object result query
      */
-    public function createTable($tableName, $propertys){
+    public function createTable($tableName, $propertys)
+    {
         $query = '';
         $textPropertys = '';
         foreach($propertys as $val){
@@ -359,7 +375,8 @@ class MySql extends Db{
      * @param array $where - условия запроса, что удалять
      * @return boolean
      */
-    public function deleteDb($tableName, $where){
+    public function deleteDb($tableName, $where)
+    {
         $query = '';
         if(!empty($where)){            
             $where = ' WHERE '.$this->parseWhereForQuery($where);
@@ -372,7 +389,8 @@ class MySql extends Db{
         return  $this->query($query);
     }
     
-    public function __destruct() {
+    public function __destruct() 
+    {
         if ( !empty($this->db)){
             $this->close($this->db);
         }

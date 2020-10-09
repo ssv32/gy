@@ -1,7 +1,8 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class Crypto{
+class Crypto
+{
 
     private $sole; 
 
@@ -10,7 +11,8 @@ class Crypto{
      * @param string $sole
      * @return boolean true
      */
-    public function setSole($sole){
+    public function setSole($sole)
+    {
         $this->sole = $sole;
         return true;
     }
@@ -19,7 +21,8 @@ class Crypto{
      * getSole - получить значение соли
      * @return string
      */
-    public function getSole(){
+    public function getSole()
+    {
         return $this->sole;
     }
 
@@ -27,7 +30,8 @@ class Crypto{
      * getRandString - даст произвольную строку
      * @return string
      */
-    public function getRandString(){
+    public function getRandString()
+    {
         return md5(microtime().$this->sole);
     }
 
@@ -39,7 +43,8 @@ class Crypto{
      * @param int $id
      * @return string (md5)
      */
-    public function getStringForUserCookie($login, $name, $id){
+    public function getStringForUserCookie($login, $name, $id)
+    {
         return md5(microtime().$login.$this->sole.$name.$id);
     }
 

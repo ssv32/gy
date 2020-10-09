@@ -4,7 +4,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 /**
  * Module - работа с модулями фреймворка
  */
-class Module{
+class Module
+{
 
     // массив подключённых модулей
     public $arrayIncludeModules = array(); 
@@ -33,7 +34,8 @@ class Module{
     // объект класса (всегда будет один)
     private static $module; 
 
-    private function  __construct(){
+    private function  __construct()
+    {
         // заполнить пустотой
         $this->arrayIncludeModulesAndVersion = array();
         $this->arrayIncludeModules = array();
@@ -48,14 +50,16 @@ class Module{
      * 
      * @return jbject this class
      */
-    public function getInstance(){
+    public function getInstance()
+    {
         if (static::$module === null){
             static::$module = new static();
         }
         return static::$module;
     }
 
-    public function setUrlGyCore($urlGyCore){
+    public function setUrlGyCore($urlGyCore)
+    {
         $this->urlGyCore = $urlGyCore;
     }
 
@@ -68,7 +72,8 @@ class Module{
      * 
      * @return bool - вернёт true если модуль найден и подключен или false если нет
      */
-    public function includeModule($nameModule){
+    public function includeModule($nameModule)
+    {
         $result = false;
         if($this->urlGyCore !== false){
             $result = $this->IncludeModuleByUrl($this->urlGyCore.'/modules/'.$nameModule.'/');
@@ -84,7 +89,8 @@ class Module{
      * @param string $urlModule
      * @return boolean
      */
-    public function includeModuleByUrl($urlModule){ // TODO можно добавить проверки на ошибки 
+    public function includeModuleByUrl($urlModule)
+    { // TODO можно добавить проверки на ошибки 
         $result = false;
 
         if(file_exists($urlModule.'init.php' )){
@@ -153,7 +159,8 @@ class Module{
      * @param string $nameComponent
      * @return string
      */
-    public function getModulesComponent($nameComponent){
+    public function getModulesComponent($nameComponent)
+    {
         $result = false;
 
         if(!empty($this->nameModuleByComponentName[$nameComponent])){
@@ -170,7 +177,8 @@ class Module{
      * @param string $nameClass
      * @return string
      */
-    public function getUrlModuleClassByNameClass($nameClass){
+    public function getUrlModuleClassByNameClass($nameClass)
+    {
         $result = false;
         if(!empty($this->nameClassModuleByNameModule[$nameClass])){
             $result = $this->arrayIncludeModules[ $this->nameClassModuleByNameModule[$nameClass] ].'classes/'.$nameClass.'.php';
@@ -184,7 +192,8 @@ class Module{
      * 
      * @return array
      */
-    public function searchAllModules(){
+    public function searchAllModules()
+    {
         $result = array();
         if ($handleDirs = opendir( $this->urlGyCore.'/modules/' ) ) {
             while (false !== ($dirName = readdir($handleDirs))) { 
@@ -202,7 +211,8 @@ class Module{
      *  - подключить все имеющиеся модули
      * 
      */
-    public function includeAllModules(){
+    public function includeAllModules()
+    {
         $allModules = $this->searchAllModules();
         if(!empty($allModules)){
             foreach ($allModules as $value) {
@@ -218,7 +228,8 @@ class Module{
      * @param string $nameModule - имя модуля
      * @return boolean
      */
-    public function installDbModuleByNameModule($nameModule){ // TODO пока только установка для mysql
+    public function installDbModuleByNameModule($nameModule)
+    { // TODO пока только установка для mysql
         $result = false;
         
         if(file_exists($this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' )){
@@ -233,7 +244,8 @@ class Module{
      * installBdAllModules 
      *  - установить части БД для всех модулей
      */
-    public function installBdAllModules(){
+    public function installBdAllModules()
+    {
         $allModules = $this->searchAllModules();
         if(!empty($allModules)){
             foreach ($allModules as $value) {
@@ -249,7 +261,8 @@ class Module{
      * @param string $nameModule - код модуля
      * @return array - массив с кнопками где ключ это название пункта меню а значение url
      */
-    public function getButtonsMenuByModule($nameModule){
+    public function getButtonsMenuByModule($nameModule)
+    {
         return $this->buttonMenuAdminPanel[$nameModule];
     }
 
@@ -260,7 +273,8 @@ class Module{
      * @return array - массив с кнопками где ключ это код модуля, 
      *   а значения как результат getButtonsMenuByModule
      */
-    public function getButtonsMenuAllModules(){
+    public function getButtonsMenuAllModules()
+    {
         return $this->buttonMenuAdminPanel;
     }
 
@@ -274,11 +288,13 @@ class Module{
      * @param string $nameModule - код модуля
      * @return string - код действия 
      */
-    public function getFlagShowButtonsAdminPanelByModule($nameModule){
+    public function getFlagShowButtonsAdminPanelByModule($nameModule)
+    {
         return $this->isShowButtonsMenuAdminPanelModules[$nameModule];
     }
 
-    public function getInfoAllIncludeModules(){
+    public function getInfoAllIncludeModules()
+    {
         return $this->arrayIncludeModulesAndVersion;
     }
 

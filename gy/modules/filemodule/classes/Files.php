@@ -5,7 +5,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * Files - класс для работы с файлами
  */
 
-class Files{
+class Files
+{
 
     /**
      * createFile 
@@ -14,7 +15,8 @@ class Files{
      * @param string $url - путь к файлу
      * @return boolean
      */
-    static function createFile($url){
+    public static function createFile($url)
+    {
         return file_put_contents($url, '');
     }
 
@@ -25,7 +27,8 @@ class Files{
      * @param string $url - путь к файлу
      * @return boolean
      */
-    static function deleteFile($url){
+    public static function deleteFile($url)
+    {
         return unlink($url);
     }
 
@@ -37,7 +40,8 @@ class Files{
      * @param string $date - данные для записи в файл
      * @return boolean
      */
-    static function saveFile($url, $date){
+    public static function saveFile($url, $date)
+    {
         return file_put_contents($url, $date);
     }
 
@@ -48,7 +52,8 @@ class Files{
      * @param string $url
      * @return boolean
      */
-    static function getContentFile($url){
+    public static function getContentFile($url)
+    {
         return file_get_contents($url);
     }
 

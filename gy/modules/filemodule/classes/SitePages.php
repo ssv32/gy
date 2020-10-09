@@ -4,7 +4,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 /**
  * SitePages - класс для работы со страницами сайта
  */
-class SitePages{
+class SitePages
+{
 
     /**
      * разделы в которых нельзя редактировать страницы
@@ -33,7 +34,8 @@ class SitePages{
      */
     public $err = false;
 
-    public function __construct($urlProject){
+    public function __construct($urlProject)
+    {
         if(file_exists($urlProject)){
             $this->urlProject = $urlProject;
             return true;
@@ -49,7 +51,8 @@ class SitePages{
      * @param string $urlPage - путь к файлу (до раздела без index.php)
      * @return boolean
      */
-    public function createSitePage($urlPage){
+    public function createSitePage($urlPage)
+    {
         if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
             // если нет директории создать её
             if(file_exists($this->urlProject.$urlPage.'/') === false){ // TODO вынести в класс files
@@ -68,7 +71,8 @@ class SitePages{
      * @param string $urlPage - путь к файлу (до раздела без index.php)
      * @return boolean
      */
-    public function deleteSitePage($urlPage){
+    public function deleteSitePage($urlPage)
+    {
         if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
             $res = Files::deleteFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
             
@@ -92,7 +96,8 @@ class SitePages{
      * @param string $urlPage - путь к файлу (до раздела без index.php)
      * @return false/string
      */
-    public function getContextPage($urlPage){
+    public function getContextPage($urlPage)
+    {
         if( ($this->urlProject !== false) &&  $this->checkUrl('/'.$urlPage.'/')   ){
             return Files::getContentFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
         }else{
@@ -108,7 +113,8 @@ class SitePages{
      * @param string $date - содержимое страницы
      * @return boolean
      */
-    public function putContextPage($urlPage, $date){
+    public function putContextPage($urlPage, $date)
+    {
         if( ($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/') ){
             return Files::saveFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite, $date);
         }else{
@@ -123,7 +129,8 @@ class SitePages{
      * @param string $url
      * @return boolean
      */
-    private function checkUrl($url){
+    private function checkUrl($url)
+    {
         $result = true;
         foreach ($this->notEditPages as $value) {
             if(strripos($url, $value) !== false ){

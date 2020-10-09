@@ -6,14 +6,16 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  *  что бы подловить подключаемые компоненты
  */
 
-class AppFromConstructorPageComponent{
+class AppFromConstructorPageComponent
+{
 
     private $allDateIncludeComponents = array();
     private $intKey = 0;
     public $urlProject;
     public $options; // настройки проекта 
 
-    public function __construct($urlProject, $options) {
+    public function __construct($urlProject, $options) 
+    {
         $this->urlProject = $urlProject;
         $this->options = $options;
     }
@@ -28,7 +30,8 @@ class AppFromConstructorPageComponent{
      * @param string $url
      * @return array
      */
-    public function getInfoAboutComponent( $name, $template, $arParam, $url ){
+    public function getInfoAboutComponent( $name, $template, $arParam, $url )
+    {
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
         $module = Module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
@@ -55,7 +58,8 @@ class AppFromConstructorPageComponent{
      * @param type $template
      * @param type $arParam
      */
-    public function component($name, $template, $arParam  ){
+    public function component($name, $template, $arParam  )
+    {
         global $app;
         $this->allDateIncludeComponents[$this->intKey] = array(
             'name' => $name,
@@ -73,7 +77,8 @@ class AppFromConstructorPageComponent{
      *
      * @return array
      */
-    public function getAllDataIncludeComponents(){
+    public function getAllDataIncludeComponents()
+    {
         return $this->allDateIncludeComponents;
     }
 
@@ -86,7 +91,8 @@ class AppFromConstructorPageComponent{
      * @param array $arParams
      * @return string
      */
-    public static function getCodeIncludeComponent($componentName, $templateName, $arParams){
+    public static function getCodeIncludeComponent($componentName, $templateName, $arParams)
+    {
 
         $codeIncludeComponent = "\n".'$app->component('."\n";
         $codeIncludeComponent .= "   '".$componentName."',"."\n";

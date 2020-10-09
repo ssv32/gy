@@ -1,7 +1,8 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class ContainerData{            
+class ContainerData
+{            
     public static $table_container_data = 'container_data';
     public static $table_list_propertys_container_data = 'list_propertys_container_data';
     public static $table_types_property_container_data = 'types_property_container_data'; 
@@ -22,7 +23,8 @@ class ContainerData{
      * @param type $arProperty
      * @return array
      */
-    public static function getContainerData($arFilter, $arProperty){
+    public static function getContainerData($arFilter, $arProperty)
+    {
         $result = array();
         global $db;
         $res = $db->selectDb(
@@ -40,7 +42,8 @@ class ContainerData{
      * addContainerData - добавить ContainerData
      * @return boolean
      */
-    public static function addContainerData($arParams){
+    public static function addContainerData($arParams)
+    {
         $result = false;
 
         // id, login, name, pass, groups
@@ -60,7 +63,8 @@ class ContainerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function deleteContainerData($id){
+    public static function deleteContainerData($id)
+    {
         $result = false;
 
         // id, login, name, pass, groups
@@ -102,7 +106,8 @@ class ContainerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function updateContainerData($arParams, $where){
+    public static function updateContainerData($arParams, $where)
+    {
         $result = false;
 
         global $db;
@@ -119,7 +124,8 @@ class ContainerData{
      * getAllTypePropertysContainerData - получить все типы свойств ContainerData 
      * @return array
      */
-    public static function getAllTypePropertysContainerData(){
+    public static function getAllTypePropertysContainerData()
+    {
 
         $result = array();
         global $db;
@@ -138,7 +144,8 @@ class ContainerData{
      * getAllPropertysContainerData - получить свойства ContainerData (! не значения)
      * @return array
      */
-    public static function getPropertysContainerData($where){
+    public static function getPropertysContainerData($where)
+    {
         $result = array();
         global $db;
         $res = $db->selectDb(
@@ -157,7 +164,8 @@ class ContainerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function addPropertyContainerData($arParams){
+    public static function addPropertyContainerData($arParams)
+    {
         $result = false;
 
         // id, login, name, pass, groups
@@ -180,7 +188,8 @@ class ContainerData{
      * @param type $tableName
      * @return array
      */
-    public static function getValuePropertysContainerData($idContainerData, $idElementContainerData, $idProperty,  $tableName){
+    public static function getValuePropertysContainerData($idContainerData, $idElementContainerData, $idProperty,  $tableName)
+    {
         $result = array();
         global $db;
         $res = $db->selectDb(
@@ -210,7 +219,8 @@ class ContainerData{
      * @param mixed $value
      * @return boolean
      */
-    public static function addValuePropertyContainerData($idContainerData, $idElementContainerData, $idProperty,  $tableName, $value){
+    public static function addValuePropertyContainerData($idContainerData, $idElementContainerData, $idProperty,  $tableName, $value)
+    {
         $result = false;
         global $db;
         $res = $db->insertDb(
@@ -236,7 +246,8 @@ class ContainerData{
      * @param type $value
      * @return boolean
      */
-    public static function updateValuePropertyContainerData($tableName, $id, $value){
+    public static function updateValuePropertyContainerData($tableName, $id, $value)
+    {
         $result = false;
         global $db;
 
@@ -259,7 +270,8 @@ class ContainerData{
      * @param int $idContainerData
      * @return array
      */
-    public static function getAllElementContainerData($idContainerData){
+    public static function getAllElementContainerData($idContainerData)
+    {
 
         $result = array();
         global $db;
@@ -301,7 +313,8 @@ class ContainerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function addElementContainerData($arParams){
+    public static function addElementContainerData($arParams)
+    {
         $result = false;
 
         // id, login, name, pass, groups
@@ -320,7 +333,8 @@ class ContainerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function deleteElementContainerData($id){
+    public static function deleteElementContainerData($id)
+    {
         $result = false;
 
         global $db;
@@ -349,7 +363,8 @@ class ContainerData{
      * @param type $arParams
      * @return boolean
      */
-    public static function updateElementContainerData($arParams, $where){
+    public static function updateElementContainerData($arParams, $where)
+    {
         $result = false;
 
         // id, login, name, pass, groups
@@ -369,7 +384,8 @@ class ContainerData{
      * @param int $containerData
      * @return boolean
      */
-    public static function deletePropertyContainerData($idProperty, $containerData){
+    public static function deletePropertyContainerData($idProperty, $containerData)
+    {
         //---надо взять все имеющиеся для этого свойства значения у элементов и удалить тоже
         global $db;
 

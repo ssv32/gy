@@ -1,7 +1,8 @@
 <?php 
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-final class App{
+final class App
+{
 
     public $url;
     public $options; // настройки проекта
@@ -11,7 +12,8 @@ final class App{
 
     private static $app;
 
-    private function  __construct($url, $options){
+    private function  __construct($url, $options)
+    {
         // подключить настройки
         $this->options = $options; 
         
@@ -30,7 +32,8 @@ final class App{
      * @param string $url - расположение проекта
      * @return object class app
      */
-    public static function createApp($url, $options){
+    public static function createApp($url, $options)
+    {
         if (  static::$app === null ){
             static::$app = new static($url, $options);
         }
@@ -49,7 +52,8 @@ final class App{
      *  или возможность подключать много моделей разных
      *  maybe includ many model in component
      */
-    public function component($name, $template, $arParam  ){
+    public function component($name, $template, $arParam  )
+    {
         if($name != 'includeHtml'){
             // обезопасим входные параметры
             $arParam = Security::filterInputData($arParam);
@@ -65,7 +69,8 @@ final class App{
      * 
      * @return string
      */
-    public function getAllUrlTisPage(){
+    public function getAllUrlTisPage()
+    {
         return $_SERVER['REQUEST_URI'];
     }
 
@@ -75,7 +80,8 @@ final class App{
      * 
      * @return string
      */
-    public function getUrlTisPageNotGetProperty(){
+    public function getUrlTisPageNotGetProperty()
+    {
         return $_SERVER['SCRIPT_NAME'];
     }
 

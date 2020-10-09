@@ -1,7 +1,8 @@
 <?php 
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class Component{
+class Component
+{
 
     public $template; // тут будут объект класса template
     public $controller;
@@ -9,7 +10,8 @@ class Component{
     public $url;
     public $lang; 
 
-    public function __construct( $name, $template, $arParam, $url, $lang ){
+    public function __construct( $name, $template, $arParam, $url, $lang )
+    {
         $this->lang = new Lang($url.'/classes/', 'component', $lang);
 
         // TODO $template - сюда можно и пустую строку записать
@@ -76,7 +78,8 @@ class Component{
     /**
      * run() 
      */
-    public function run(){
+    public function run()
+    {
         $this->controller->run();
         //$this->template->show($arRes);
     }
@@ -85,7 +88,8 @@ class Component{
      * ShowErr 
      * @param type $err
      */
-    public function ShowErr($err){ // TODO вынести в отдельный класс про ошибки
+    public function ShowErr($err)
+    { // TODO вынести в отдельный класс про ошибки
         echo '<div class=gy_err>'.$err.'</div>';
     }
 

@@ -1,14 +1,16 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class Template{
+class Template
+{
     public $templateUrl; // ссылка на шаблон
     // public $name; // имя шаблона
     public $lang;
     private $urlFileStyle; // url на файл со стилями, для этого шаблона
     private $urlFileJs; // url для файла с js, для этого шаблона
     
-    public function __construct($url, $lang){
+    public function __construct($url, $lang)
+    {
         $this->templateUrl = $url.'/template.php';
 
         // проверить существует ли файл стилей для компонента
@@ -39,7 +41,8 @@ class Template{
      * 
      * @return void - ничего не вернёт, подключится файл шаблона // include template
      */
-    public function show($arRes, $arParam){
+    public function show($arRes, $arParam)
+    {
 
         // если есть стили то добавить стили
         if(!empty($this->urlFileStyle)){

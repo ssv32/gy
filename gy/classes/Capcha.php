@@ -4,7 +4,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 /**
  * class Capcha - для работы с капчей
  */
-class Capcha{
+class Capcha
+{
     
     // символы которые будут в капче
     //private static $letters = 'abcdefghijklmnopqrstuvwxyzABCDRFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -16,7 +17,8 @@ class Capcha{
     private $urlFonts; // путь до шрифта (шрифт нужен что бы поворачивать буквы)
     public static $defaultUrlFonts = "/fonts/18018.otf"; // 
     
-    public function __construct($urlFonts = false){
+    public function __construct($urlFonts = false)
+    {
         $this->urlFonts = $urlFonts;
         $this->setCapchaValue( self::getRandLetters($this->count) );
     }
@@ -24,7 +26,8 @@ class Capcha{
     /**
      * clearCapcha - очистить текущий код капчи
      */
-    public static function clearCapcha(){
+    public static function clearCapcha()
+    {
         unset($_SESSION['capcha']);
     }
 
@@ -33,7 +36,8 @@ class Capcha{
      * @param string $code
      * @return boolean
      */
-    public static function chackCapcha( $code){
+    public static function chackCapcha( $code)
+    {
         $arResult = false; 
         // проверит код с капчи
         if ($_SESSION['capcha'] == mb_strtoupper($code) ){ // всё приводится к верхнему регистру что бы пользователю проще было угадать капчу
@@ -47,7 +51,8 @@ class Capcha{
      * setCapchaValue - установить код капчи
      * @param type $value
      */
-    private function setCapchaValue($value){
+    private function setCapchaValue($value)
+    {
         // задать код в классе
         $this->code = $value;
         
@@ -60,7 +65,8 @@ class Capcha{
      * getImageCapcha - вызовет createImageCapcha с нужным кодом
      * это всё чтобы нарисовать картинку капчи
      */
-    public function getImageCapcha(){
+    public function getImageCapcha()
+    {
         // задаст стандартные настройки и вызовет createImageCapcha для определённого кода
         $this->createImageCapcha($this->code);
     }
@@ -69,7 +75,8 @@ class Capcha{
      * createImageCapcha - нарисовать картинку капчи по заданному коду
      * @param string $code
      */
-    private function createImageCapcha($code){
+    private function createImageCapcha($code)
+    {
 
         // постоянные ширина и высота
         $gX = 100;
@@ -146,7 +153,8 @@ class Capcha{
      * @param int $count
      * @return string
      */
-    public function getRandLetters($count){
+    public function getRandLetters($count)
+    {
         $randLetters = '';
         for($i = 0; $i < $count; $i++){
             $randLetters .= self::getRandLetter();
@@ -158,7 +166,8 @@ class Capcha{
      * getRandLetter - получить произвольный символ из заданного набора символов self::$arrayLetters
      * @return type
      */
-    private function getRandLetter(){
+    private function getRandLetter()
+    {
         $countLetters = strlen(self::$letters);
         $randLetter = rand(0, ($countLetters-1) );
         return substr(self::$letters, $randLetter, 1);

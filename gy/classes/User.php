@@ -1,7 +1,8 @@
 <?php
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
-class User{ 
+class User
+{ 
 
     protected $authorized = false;
     protected $dataUser;
@@ -9,7 +10,8 @@ class User{
     protected $admin = false; 
     public $tableName = 'users';
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->checkUserCookie();
     }
 
@@ -17,7 +19,8 @@ class User{
      * getThisUserGroups - получить группы текущего пользователя
      * @return array
      */
-    public function getThisUserGroups(){
+    public function getThisUserGroups()
+    {
         $arResult = array();
         if(!empty($this->dataUser['groups'])){
             $arResult = $this->dataUser['groups'];
@@ -29,7 +32,8 @@ class User{
      * getDataThisUser - получить данные по текущему, авторизованному пользователю
      * @return array
      */
-    public function getDataThisUser(){
+    public function getDataThisUser()
+    {
         return $this->dataUser;
     }
 
@@ -37,7 +41,8 @@ class User{
      * isAdmin - проверить является ли текущий, авторизованный пользователем администратором
      * @return booleand
      */
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->admin;
     }
 
@@ -45,7 +50,8 @@ class User{
      * getAuthorized - узнать авторизован ли пользователь
      * @return booleand
      */
-    public function getAuthorized(){
+    public function getAuthorized()
+    {
         return $this->authorized;
     }
 
@@ -63,7 +69,8 @@ class User{
      * @param type $pass - пароль
      * @return booleand 
      */
-    public function authorized($log, $pass ){
+    public function authorized($log, $pass )
+    {
         $result = $this->chackUser($log, $pass);
         $this->authorized = $result;
         return $result;
@@ -77,7 +84,8 @@ class User{
      * @param type $pass - пароль
      * @return booleand
      */
-    protected function chackUser($log, $pass) { 
+    protected function chackUser($log, $pass) 
+    { 
         $result = false;
 
         global $db;
@@ -112,7 +120,8 @@ class User{
      * @param string $StringCookie - строка, значение куки
      * @return boolean
      */
-    protected function setUserCookie($userId, $StringCookie){
+    protected function setUserCookie($userId, $StringCookie)
+    {
         setcookie($this->nameCookie, $StringCookie, 0, '/');
         global $db;
         
@@ -132,7 +141,8 @@ class User{
      * @param int $userId - id пользователя
      * @return boolean
      */
-    protected function deleteUserCookie($userId){
+    protected function deleteUserCookie($userId)
+    {
         global $_COOKIE;
         unset($_COOKIE[$this->nameCookie]);
         global $db;
@@ -151,7 +161,8 @@ class User{
      * @global type $_COOKIE
      * @return boolean
      */
-    public function checkUserCookie(){
+    public function checkUserCookie()
+    {
         $result = false;
 
         global $_COOKIE;
@@ -182,7 +193,8 @@ class User{
      * @param string $cookie
      * @return array - данные пользователя
      */
-    protected function findUserByCookie($cookie){
+    protected function findUserByCookie($cookie)
+    {
         $result = false;
 
         global $db;
@@ -204,7 +216,8 @@ class User{
      * userExit - сделать выход для пользователя 
      * @return boolean
      */
-    public function userExit(){
+    public function userExit()
+    {
         return $this->deleteUserCookie($this->dataUser['id']);
     }
 
@@ -213,7 +226,8 @@ class User{
      * @global type $db
      * @return array
      */
-    public function getAllDataUsers(){
+    public function getAllDataUsers()
+    {
         $result = array();
 
         global $db;
@@ -237,7 +251,8 @@ class User{
      * @param type $id
      * @return array
      */
-    public function getUserById($id){
+    public function getUserById($id)
+    {
         $result = array();
         global $db;		        
         $res = $db->selectDb( 
@@ -264,7 +279,8 @@ class User{
      * @param type $data
      * @return boolean
      */
-    public function addUsers($data){
+    public function addUsers($data)
+    {
         $result = false;
 
         // id, login, name, pass, groups
@@ -285,7 +301,8 @@ class User{
      * @param array $arParams - данные пользователя
      * @return boolean
      */
-    public function updateUserById($userId, $arParams){
+    public function updateUserById($userId, $arParams)
+    {
         $result = false;
 
         unset($arParams['id']);
@@ -306,7 +323,8 @@ class User{
      * @param int $id_user - id пользователя
      * @return string
      */
-    public function deleteUserById($id_user){
+    public function deleteUserById($id_user)
+    {
         $result = false;
 
         if (is_numeric($id_user) && ($id_user != 1)){

@@ -5,7 +5,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * 
  * 
  */
-abstract class Db{
+abstract class Db
+{
     /** connect() - create connect in database
      * @param string $host - адрис хоста
      * @param string $user - логин

@@ -6,7 +6,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * cache - класс для работы с кешем
  * для даботы нужен раздел gy/cache/
  */
-class CacheFiles extends Cache {
+class CacheFiles extends Cache 
+{
     private $urlCache = '/cache/';
     private $urlProject = '/';
     private $data = array();
@@ -18,7 +19,8 @@ class CacheFiles extends Cache {
      * 
      * @param type $urlProject - путь к проекту
      */
-    public function __construct($urlProject) {
+    public function __construct($urlProject) 
+    {
         $this->urlProject = $urlProject;
     }
 
@@ -28,7 +30,8 @@ class CacheFiles extends Cache {
      * @param int $cacheTime - время кеширования в секундах
      * @return boolean
      */
-    public function cacheInit($cacheName, $cacheTime){
+    public function cacheInit($cacheName, $cacheTime)
+    {
         $this->cacheName = $cacheName;
         $this->cacheTime = $cacheTime;
 
@@ -52,7 +55,8 @@ class CacheFiles extends Cache {
      * getCacheData - получить данные из кеша
      * @return mixed - может быть массив или одиночное значение любого типа
      */
-    public function getCacheData(){
+    public function getCacheData()
+    {
         return $this->data;
     }
 
@@ -61,7 +65,8 @@ class CacheFiles extends Cache {
      * @param mixed $data - может быть массив или одиночное значение
      * @return boolean true
      */
-    public function setCacheData($data){
+    public function setCacheData($data)
+    {
         $cacheData = array(
             'data' => $data,
             'createTime' => time(),
@@ -76,7 +81,8 @@ class CacheFiles extends Cache {
     /**
      * clearThisCache - удалит текущий кеш (кеш связанный с текущим объектом)
      */
-    public function clearThisCache(){
+    public function clearThisCache()
+    {
         if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)){
             unlink($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl);
         }

@@ -5,7 +5,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * AccessUserGroup - будет всё что связано с правами доступов пользователей 
  * (и групп пользователей)
  */
-class AccessUserGroup{
+class AccessUserGroup
+{
     
     private static $tableNameAccessGroup = 'access_group';
     private static $tableNameUserActions = 'action_user';
@@ -22,7 +23,8 @@ class AccessUserGroup{
      * @param string $thisAction - проверяемое действие пользователя
      * @return boolean
      */
-    private static function checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $thisAction){
+    private static function checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $thisAction)
+    {
         $arResult = false;
 
         // определить все действия разрешённые для данного пользователя
@@ -48,7 +50,8 @@ class AccessUserGroup{
      * @param string $actionUser - код пользовательского действия
      * @return boolean
      */
-    public static function accessUser($userId, $actionUser){
+    public static function accessUser($userId, $actionUser)
+    {
 
         // получить данные по пользователю 
         global $user;
@@ -69,7 +72,8 @@ class AccessUserGroup{
      * @param string $action - код действия 
      * @return boolean
      */
-    public static function accessThisUserByAction($action){
+    public static function accessThisUserByAction($action)
+    {
         global $user;
         $groupsThisUser = $user->getThisUserGroups();
         
@@ -82,14 +86,13 @@ class AccessUserGroup{
         return $arResult;
     }
 
-
-
     /**
      * getAccessGroup() - получить все группы пользователей какие есть
      *  + вернутся заданные в группах разрешения на пользовательские действия
      * @return array
      */
-    public static function getAccessGroup(){
+    public static function getAccessGroup()
+    {
         $arResult = array();
 
         global $app;
@@ -125,7 +128,8 @@ class AccessUserGroup{
      * @global type $app
      * @global type $cacheClassName
      */
-    public static function clearCacheForFunctionGetAccessGroup(){
+    public static function clearCacheForFunctionGetAccessGroup()
+    {
         global $app;
         global $cacheClassName;
         $cache = new $cacheClassName($app->url);
@@ -137,7 +141,8 @@ class AccessUserGroup{
      * getUserAction() - получить все какие есть пользовательские действия
      * @return array
      */
-    public static function getUserAction(){ 
+    public static function getUserAction()
+    { 
         $arResult = array();
 
         global $app;
@@ -168,7 +173,8 @@ class AccessUserGroup{
      * @param int $id_users - id пользователя
      * @return array
      */
-    public static function getListGroupsByUser($id_users){
+    public static function getListGroupsByUser($id_users)
+    {
         $arResult = array();
 
         // определить id групп к каким относится пользователь
@@ -181,14 +187,14 @@ class AccessUserGroup{
         return $arResult;   
     }
 
-
     /**
      * addUserInGroup() - добавить пользователя в группуы
      * @param int $id_users - id пользователя
      * @param string $code_group - код группы
      * @return boolean
      */
-    public static function addUserInGroup($id_user, $code_group){
+    public static function addUserInGroup($id_user, $code_group)
+    {
         $arResult = false;
         global $db;
         $res = $db->insertDb(
@@ -210,7 +216,8 @@ class AccessUserGroup{
      * @param int $id_users - id пользователя
      * @return boolean
      */
-    public static function deleteUserInAllGroups($id_user){
+    public static function deleteUserInAllGroups($id_user)
+    {
         $arResult = false;
         global $db;
         $res = $db->deleteDb(self::$tableNameUsersInGroupss, array('=' => array('id_user', $id_user)) );
@@ -228,7 +235,8 @@ class AccessUserGroup{
      * @param string $codeUserGroup
      * @return boolean
      */
-    public static function deleteAllActionsForGroup($codeUserGroup){ 
+    public static function deleteAllActionsForGroup($codeUserGroup)
+    { 
         $arResult = false;
         global $db;
         $dataAllGroup = self::getAccessGroup();
@@ -252,7 +260,6 @@ class AccessUserGroup{
                 }
             }
         }
-
     }
 
     /**
@@ -264,7 +271,8 @@ class AccessUserGroup{
      * @param string $codeAction - код пользовательского действия
      * @return boolean
      */
-    public static function addOptionsGroup($codeUserGroup, $codeAction){
+    public static function addOptionsGroup($codeUserGroup, $codeAction)
+    {
         $arResult = false;
         global $db;
         $dataAllGroup = self::getAccessGroup();
@@ -317,7 +325,8 @@ class AccessUserGroup{
      * @param array $arActionUserThisGroup - массив с разрешёнными для этой группы действиями
      * @return boolean
      */
-    public static function addUserGroup($arDataNewGroup, $arActionUserThisGroup){
+    public static function addUserGroup($arDataNewGroup, $arActionUserThisGroup)
+    {
         global $db;
         $arResult = true; 
         foreach ($arActionUserThisGroup as $value) {
@@ -351,7 +360,8 @@ class AccessUserGroup{
      * @param string $code_group - код удаляемой группы
      * @return boolean
      */
-    public static function deleteUserGroupByCode($code_group){
+    public static function deleteUserGroupByCode($code_group)
+    {
         global $db;
         $arResult = false;
         // удалить все связи пользователей с этой группой

@@ -4,7 +4,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 /* Image class work with image // wrapper class php GD
  * Image класс для работы с изображениями // обёртка класса php GD
  */
-class Image{
+class Image
+{
     
     /** 
      * imageResized function compression image (jpeg)
@@ -14,7 +15,8 @@ class Image{
      * @param int $compression - сжатие (0-100) 100 - это наилучшее качество // compression (0-100) 100 max quality
      * @return bool true or false
      */
-    static function imageResized($urlImgIn, $urlImageOut, $compression){
+    public static function imageResized($urlImgIn, $urlImageOut, $compression)
+    {
         $result = false;
         $arImg = getimagesize($urlImgIn);
         if ($arImg[2] == 2){// jpeg ли это ? // if jpeg image

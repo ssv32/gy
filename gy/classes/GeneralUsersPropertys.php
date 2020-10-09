@@ -4,7 +4,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 /**
  * GeneralUsersPropertys - класс для работы с общими свойствами пользователей
  */
-class GeneralUsersPropertys{
+class GeneralUsersPropertys
+{
     
     private static $tableNameCreatePropertys = 'create_all_users_property';
     private static $tableNameTypePropertys = 'type_all_user_propertys';
@@ -20,7 +21,8 @@ class GeneralUsersPropertys{
      * @global type $db
      * @return array
      */
-    public static function getAllGeneralUsersPropertys(){ 
+    public static function getAllGeneralUsersPropertys()
+    { 
         global $db;
         $res = $db->selectDb( 
             self::$tableNameCreatePropertys, 
@@ -38,7 +40,8 @@ class GeneralUsersPropertys{
      * @global type $db
      * @return array
      */
-    public static function getAllTypeAllUsersPropertys(){
+    public static function getAllTypeAllUsersPropertys()
+    {
         global $db;		        
         $res = $db->selectDb( 
             self::$tableNameTypePropertys, 
@@ -61,7 +64,8 @@ class GeneralUsersPropertys{
      * @param string $code - код
      * @return boolean
      */
-    public static function addUsersPropertys($name, $idType, $code){
+    public static function addUsersPropertys($name, $idType, $code)
+    {
         $result = false;
 
         global $db;
@@ -88,7 +92,8 @@ class GeneralUsersPropertys{
      * @param int $id - id общего пользовательского свойства
      * @return boolean
      */
-    public static function deleteUserProperty($id){
+    public static function deleteUserProperty($id)
+    {
         $result = false;
         global $db;
 
@@ -116,7 +121,8 @@ class GeneralUsersPropertys{
      * @param string $typePropertyCode - пока у всех значение text
      * @return boolean
      */
-    public static function deleteAllValuesAllUserBypropertyId($idProperty, $typePropertyCode){
+    public static function deleteAllValuesAllUserBypropertyId($idProperty, $typePropertyCode)
+    {
         $result = false;
 
         if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
@@ -144,7 +150,8 @@ class GeneralUsersPropertys{
      * @param string $typePropertyCode - пока у всех значение text
      * @return boolean/array
      */
-    public static function getAllValueUserProperty($idUser, $typePropertyCode){
+    public static function getAllValueUserProperty($idUser, $typePropertyCode)
+    {
         $result = false;
 
         if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
@@ -170,7 +177,8 @@ class GeneralUsersPropertys{
      * @param string $value - пока тип text, тут только строка
      * @return boolean
      */
-    public static function addValueProperty($idUser, $typePropertyCode, $idProperty, $value){
+    public static function addValueProperty($idUser, $typePropertyCode, $idProperty, $value)
+    {
         $result = false;
 
         if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
@@ -201,7 +209,8 @@ class GeneralUsersPropertys{
      * @param int $idProperty - id пользовательского свойства
      * @return boolean
      */
-    public static function deleteValueProperty($idUser, $typePropertyCode, $idProperty){
+    public static function deleteValueProperty($idUser, $typePropertyCode, $idProperty)
+    {
         $result = false;
 
         if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){
@@ -236,7 +245,8 @@ class GeneralUsersPropertys{
      * @param string $value - пока тип text, тут только строка
      * @return boolean
      */
-    public static function updateValueProperty($idUser, $typePropertyCode, $idProperty, $value){
+    public static function updateValueProperty($idUser, $typePropertyCode, $idProperty, $value)
+    {
         $result = false;
 
         if(!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])){

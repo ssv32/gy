@@ -2,7 +2,7 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 class User{ 
-	
+
     protected $authorized = false;
     protected $dataUser;
     protected $nameCookie = 'gy_user_auth';
@@ -12,7 +12,7 @@ class User{
     public function __construct() {
         $this->checkUserCookie();
     }
-    
+
     /**
      * getThisUserGroups - получить группы текущего пользователя
      * @return array
@@ -23,8 +23,8 @@ class User{
             $arResult = $this->dataUser['groups'];
         }
         return $arResult;
-    }    
-    
+    }
+
     /**
      * getDataThisUser - получить данные по текущему, авторизованному пользователю
      * @return array
@@ -32,7 +32,7 @@ class User{
     public function getDataThisUser(){
         return $this->dataUser;
     }
-	
+
     /**
      * isAdmin - проверить является ли текущий, авторизованный пользователем администратором
      * @return booleand
@@ -40,7 +40,7 @@ class User{
     public function isAdmin(){
         return $this->admin;
     }
-	
+
     /**
      * getAuthorized - узнать авторизован ли пользователь
      * @return booleand
@@ -68,7 +68,7 @@ class User{
         $this->authorized = $result;
         return $result;
     }
-	
+
     /**
      * chackUser - проверить существует ли пользователь
      * @global type $db
@@ -81,8 +81,8 @@ class User{
         $result = false;
 
         global $db;
-        global $crypto;		
-			
+        global $crypto;
+
         $res = $db->selectDb(
             $this->tableName, 
             array('*'), 
@@ -93,18 +93,18 @@ class User{
                 ),   
             )    
         );
-        
-        if ($arRes = $db->fetch($res)){				
+
+        if ($arRes = $db->fetch($res)){
 
             //$this->setUserCookie($arRes['id'] , $crypto->getRandString());
             $this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
-            $result = true;		
+            $result = true;
         }
 
         return $result;
-		
+
     }
-	
+
     /**
      * setUserCookie - установить пользовательскую куку
      * @global type $db
@@ -124,7 +124,7 @@ class User{
         
         return true;
     }
-	
+
     /**
      * deleteUserCookie - удалить пользовательскую куку
      * @global type $_COOKIE
@@ -140,12 +140,12 @@ class User{
         $res = $db->updateDb(
             $this->tableName, 
             array('hash_auth' => 'NULL'), 
-            array( '=' => array('id' , $userId ) )    
+            array( '=' => array('id' , $userId ) )
         );
         
         return true;
     }
-	
+
     /**
      * checkUserCookie - проверить пользовательскую куку
      * @global type $_COOKIE
@@ -175,7 +175,7 @@ class User{
         }
         return $result;
     }
-	
+
     /**
      * findUserByCookie - найти пользователя по значению куки
      * @global type $db
@@ -194,12 +194,12 @@ class User{
         );
 
         if ($arRes = $db->fetch($res)){
-            $result = $arRes;		
+            $result = $arRes;
         }
 
         return $result;
     }
-	
+
     /**
      * userExit - сделать выход для пользователя 
      * @return boolean
@@ -207,7 +207,7 @@ class User{
     public function userExit(){
         return $this->deleteUserCookie($this->dataUser['id']);
     }
-	
+
     /**
      * getAllDataUsers - получить данные по пользователю 
      * @global type $db
@@ -215,22 +215,22 @@ class User{
      */
     public function getAllDataUsers(){
         $result = array();
-        
-        global $db;		        
+
+        global $db;
         $res = $db->selectDb( 
             $this->tableName, 
             array('*')
         );
         $result = $db->fetchAll($res, false);
-        
+
         // получить группы пользователей
         foreach ($result as $key => $value) {
             $result[$key]['groups'] = AccessUserGroup::getListGroupsByUser($value['id']);
         }
-        
+
         return $result;
     }
-	
+
     /**
      * getUserById - получить данные по пользователю по id
      * @global type $db
@@ -256,7 +256,7 @@ class User{
         
         return $result;
     }
-    
+
     /**
      * addUsers - добавить пользователя
      * @global type $db
@@ -268,16 +268,16 @@ class User{
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;		
+        global $db;
         $res = $db->insertDb($this->tableName, $data);
-                
+
         if ($res){
             $result = true;
         }
-			
+
         return $result;
     }
-	
+
     /**
      * updateUserById - обновление данных пользователя
      * @global type $db
@@ -290,16 +290,16 @@ class User{
 
         unset($arParams['id']);
         
-        global $db;		
+        global $db;
         $res = $db->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
         
         if ($res){
             $result = true;
         }
-			
+
         return $result; 
     }
-    
+
     /**
      * deleteUserById - удалить пользователя
      * @global type $db
@@ -315,10 +315,10 @@ class User{
             $res = $db->deleteDb($this->tableName, array('='=>array('id', $id_user)));
 
             if ($res){
-                $result = true;		
+                $result = true;
             }
-        }		
+        }
         return $result;
     }
-	
+
 }

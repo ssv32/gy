@@ -11,7 +11,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         global $lang;
         $lang = $gy_config['lang'];
     }
-    
+
     // подключаем класс модуля 
     // (нужен для подключения модулей до определения авто подключения классов)
     include_once(__DIR__ . '/classes/module.php');
@@ -30,7 +30,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     // авто подключение классов
     function __autoload($calssname){ 
         global $urlProject;
-        
+
         // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
         global $module;
         $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
@@ -50,10 +50,10 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
             }
         }
     }
-    
+
     // обезопасить получаемый конфиг
     $gy_config = Security::filterInputData($gy_config);
-    
+
     global $app;
     // добавлю версию ядра gy 
     $gy_config['v-gy'] = '0.2-alpha';
@@ -75,7 +75,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     global $crypto;	
     $crypto = new Crypto();
     if (!empty($app->options['sole'])){
-            $crypto->setSole($app->options['sole']);
+        $crypto->setSole($app->options['sole']);
     }
 
     global $user;

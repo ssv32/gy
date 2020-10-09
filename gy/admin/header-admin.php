@@ -11,7 +11,7 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
         <title>gy -admin</title>
         <link href="../../gy/style/main.css" rel="stylesheet">
         <script src="../../gy/js/main.js"></script>
-    </head>	
+    </head>
     <body class="gy-body-admin">
         
         
@@ -64,7 +64,7 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
             $app->component(
                 'menu',
                 '0',
-                array(			
+                array(
                     'buttons' => $menu
                 )
             );

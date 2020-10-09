@@ -2,9 +2,9 @@
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
 
 class Crypto{
-	
+
     private $sole; 
-	
+
     /**
      * setSole - установить соль (некая строка)
      * @param string $sole
@@ -14,7 +14,7 @@ class Crypto{
         $this->sole = $sole;
         return true;
     }
-	
+
     /**
      * getSole - получить значение соли
      * @return string
@@ -22,7 +22,7 @@ class Crypto{
     public function getSole(){
         return $this->sole;
     }
-	
+
     /**
      * getRandString - даст произвольную строку
      * @return string
@@ -30,7 +30,7 @@ class Crypto{
     public function getRandString(){
         return md5(microtime().$this->sole);
     }
-	
+
     /**
      * getStringForUserCookie - даст строку для пользовательской куки
      *  (склеит соль имя id пользователя и сделает md5)

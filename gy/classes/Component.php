@@ -21,7 +21,7 @@ class Component{
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
         $module = Module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
-                
+
         if (($err == 0) && file_exists($url.'/customDir/component/'.$name.'/teplates/'.$template.'/template.php' ) ){
             // если есть такой компонент и указанный шаблон в папке /customDir/ то подключить от туда
             $template = new Template($url.'/customDir/component/'.$name.'/teplates/'.$template, $lang ); 
@@ -35,7 +35,7 @@ class Component{
             $err = 1;
             $errText = $this->lang->getMessage('err_not_controller');
         }
-                
+
         if (($err == 0) && file_exists($url.'/customDir/component/'.$name.'/controller.php' ) ){ 
             $this->controller = new Controller($url.'/customDir/component/'.$name, $lang); // всегда один
         }elseif(($urlComponentInModule !== false) && file_exists($urlComponentInModule.'/controller.php' ) ){              
@@ -46,7 +46,7 @@ class Component{
             $err = 2;
             $errText = $this->lang->getMessage('err_not_controller') ;
         }
-                
+
         if ( ($err == 0) && file_exists($url.'/customDir/component/'.$name.'/model.php' ) ){ 
             $model = new Model($url.'/customDir/component/'.$name.'/model.php'); // может и не быть
             $this->controller->setModel($model);

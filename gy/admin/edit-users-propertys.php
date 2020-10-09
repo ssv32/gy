@@ -9,9 +9,9 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     && is_numeric($data['edit-id']) 
     && ($data['edit-id'] != 1) 
 ){
-	
+
     include "../../gy/admin/header-admin.php";
-	
+
     if (AccessUserGroup::accessThisUserByAction( 'edit_users')){
 
         // редактирование общих свойств пользователей

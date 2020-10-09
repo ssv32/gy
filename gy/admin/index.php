@@ -9,6 +9,6 @@ $app->component(
     '0',
     array()
 );
-	
+
 include "../../gy/admin/footer-admin.php";
 

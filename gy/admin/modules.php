@@ -4,7 +4,7 @@ include "../../gy/gy.php"; // подключить ядро // include core
 global $user;
 
 if ($user->isAdmin()){
-	
+
     include "../../gy/admin/header-admin.php";
 
     // таблица с пользователями
@@ -13,7 +13,7 @@ if ($user->isAdmin()){
         '0',
         array()
     );
-	
+
     include "../../gy/admin/footer-admin.php";
 
 } else {

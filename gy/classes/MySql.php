@@ -297,7 +297,7 @@ class MySql extends Db{
         ////
 
         $query = "INSERT INTO ".$tableName." (".$nameProperty." ) VALUES(".$valueProperty.")";
-               
+
         return  $this->query($query);
     }
     
@@ -313,11 +313,11 @@ class MySql extends Db{
         $textPropertys = '';
         global $crypto;
         foreach ($propertys as $key => $val){
-            
+
             if ($key == 'pass'){
                 $val = md5($val.$crypto->getSole());
             }
-            
+
             if (!is_numeric($val)){
                 $val = "'".$val."'";
             }
@@ -329,9 +329,9 @@ class MySql extends Db{
         }else{
             $where = '';
         }
-                
+
         $query .= $tableName.' SET '.$textPropertys.$where.';';
-                    
+
         return  $this->query($query);
     }
     
@@ -347,12 +347,12 @@ class MySql extends Db{
         foreach($propertys as $val){
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$val;
         }
-        
+
         $query = 'CREATE TABLE '.$tableName.' ('.$textPropertys.');';
 
         return  $this->query($query);
     }
-    
+
     /**
      * deleteDb - удаление строк из таблицы
      * @param string $tableName - имя таблицы

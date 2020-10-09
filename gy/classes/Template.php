@@ -40,17 +40,17 @@ class Template{
      * @return void - ничего не вернёт, подключится файл шаблона // include template
      */
     public function show($arRes, $arParam){
-        
+
         // если есть стили то добавить стили
         if(!empty($this->urlFileStyle)){
             echo '<style>';
             include $this->urlFileStyle;
             echo '</style>';
         }
-        
+
         // файл шаблона
         include $this->templateUrl;
-        
+
         // если есть js то добавить его
         if(!empty($this->urlFileJs)){
             echo '<script>';

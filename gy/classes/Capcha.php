@@ -20,14 +20,14 @@ class Capcha{
         $this->urlFonts = $urlFonts;
         $this->setCapchaValue( self::getRandLetters($this->count) );
     }
-    
+
     /**
      * clearCapcha - очистить текущий код капчи
      */
     public static function clearCapcha(){
         unset($_SESSION['capcha']);
     }
-    
+
     /**
      * chackCapcha - проверить код с установленным кодом в капче
      * @param string $code
@@ -55,7 +55,7 @@ class Capcha{
         $_SESSION['capcha'] = mb_strtoupper($this->code);
         
     }
-    
+
     /**
      * getImageCapcha - вызовет createImageCapcha с нужным кодом
      * это всё чтобы нарисовать картинку капчи
@@ -70,15 +70,15 @@ class Capcha{
      * @param string $code
      */
     private function createImageCapcha($code){
-              
+
         // постоянные ширина и высота
         $gX = 100;
         $gY = 50;
-        
+
         ob_clean(); // очистить вывод до этого момента
         header ("Content-type: image/png");
         $img = imagecreatetruecolor($gX, $gY);
-        
+
         // определяем белый цвет
         $white = imagecolorallocate($img, 0xFF, 0xFF, 0xFF);
 
@@ -103,7 +103,7 @@ class Capcha{
             
             imageline($img, $x1, $y1, $x2, $y2, $text_color);
         }
-        
+
         // рисуется код капчи
         for($i = 0; $i < strlen($code); $i++){
             
@@ -112,18 +112,18 @@ class Capcha{
             $g = rand(50, 230);
             $b = rand(50, 230);
             $text_color = imagecolorallocate($img, $r, $g, $b);
-            
+
             $font = rand(5, 7); // размер шрифта
-            
+
             $j = rand(0,1);
             if($j == 0){
                 $y = sin($i)*10;
             }else{
                 $y = cos($i)*10;
             }
-            
+
             $x = rand(3, 10);
-            
+
             if ($this->urlFonts == false){ 
                 // если не задан шрифт то будет штатным рисоваться но без поворота букв
                 imagestring($img, $font, $x+($i*20), 10+$y,  $code[$i], $text_color);          
@@ -135,12 +135,12 @@ class Capcha{
                 imagettftext($img, $font*3, $a, $x+1+($i*20), 31+$y, $text_color, $this->urlFonts, $code[$i]); 
             }
         }
-        
+
         imagepng($img);
         imagedestroy($img);
         die(); // что бы не было вывода после
     }
-    
+
     /**
      * getRandLetters - получить рендомный набор символов, указанной длинны
      * @param int $count
@@ -153,7 +153,7 @@ class Capcha{
         }
         return $randLetters;
     }
-    
+
     /**
      * getRandLetter - получить произвольный символ из заданного набора символов self::$arrayLetters
      * @return type

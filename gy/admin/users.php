@@ -6,7 +6,7 @@ global $user;
 $data = $_REQUEST;
 
 if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
-	
+
     include "../../gy/admin/header-admin.php";
 
     if(AccessUserGroup::accessThisUserByAction( 'edit_users')){
@@ -20,7 +20,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
                     'id' => $data['show-id']
                 )
             );
-            
+
         }else{ // просмотр всех пользователей
             // таблица с пользователями
             $app->component(
@@ -29,7 +29,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')){
                 array()
             );
         }
-        
+
     }
     include "../../gy/admin/footer-admin.php";
 

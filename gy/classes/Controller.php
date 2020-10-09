@@ -12,7 +12,7 @@ class Controller{
         $this->controller = $url.'/controller.php';
         $this->lang = new Lang($url, 'controller', $lang);
     }
-	
+
     /**
      * setModel
      * @param type $model

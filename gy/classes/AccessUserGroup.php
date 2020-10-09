@@ -60,7 +60,7 @@ class AccessUserGroup{
         // определить пользователю с таким набором групп доступно ли указанное действие
         return self::checkAccessUserGroupsByUserAction($dataUserFind['groups'], $dataAllGroups, $actionUser);
     }
-    
+
     /**
      * accessThisUserByAction - проверить разрешено ли текущему пользователю 
      *   указанное действие
@@ -81,9 +81,9 @@ class AccessUserGroup{
 
         return $arResult;
     }
-    
 
-    
+
+
     /**
      * getAccessGroup() - получить все группы пользователей какие есть
      *  + вернутся заданные в группах разрешения на пользовательские действия
@@ -91,16 +91,16 @@ class AccessUserGroup{
      */
     public static function getAccessGroup(){
         $arResult = array();
-        
+
         global $app;
         global $cacheClassName;
         $cache = new $cacheClassName($app->url);
         $initCache = $cache->cacheInit('getAccessGroup', self::$cacheTimeGetData);
-        
+
         if ($initCache){
             $arResult = $cache->getCacheData();
         }else{
-            
+
             global $db;
             $res = $db->selectDb(self::$tableNameAccessGroup, array('*'));
             while($arRes = $db->fetch($res)){
@@ -111,13 +111,13 @@ class AccessUserGroup{
                 $arResult[$arRes['code']]['code'] = $arRes['code'];
                 $arResult[$arRes['code']]['text'] = $arRes['text'];
             }
-            
+
             $cache->setCacheData($arResult);
         }
-        
+
         return $arResult;
     }
-        
+
     /**
      * clearCacheForFunctionGetAccessGroup -
      *  сбросить кеш на получение разрешений для групп и всех данных по группам
@@ -132,36 +132,36 @@ class AccessUserGroup{
         $cache->cacheInit('getAccessGroup', self::$cacheTimeGetData);
         $cache->clearThisCache();
     }
-    
+
     /**
      * getUserAction() - получить все какие есть пользовательские действия
      * @return array
      */
     public static function getUserAction(){ 
         $arResult = array();
-        
+
         global $app;
         global $cacheClassName;
         $cache = new $cacheClassName($app->url);
         $initCache = $cache->cacheInit('getUserAction', self::$cacheTimeGetData);
-        
+
         if ($initCache){
             $arResult = $cache->getCacheData();
         }else{
-            
+
             global $db;
             $res = $db->selectDb(self::$tableNameUserActions, array('*'));
             while($arRes = $db->fetch($res)){
                 $arResult[$arRes['code']]['code'] = $arRes['code'];
                 $arResult[$arRes['code']]['text'] = $arRes['text'];
             }
-        
+
             $cache->setCacheData($arResult);
         }
-            
+
         return $arResult;
     }
-    
+
     /**
      * getListGroupsByUser() - получить список групп к каким относится пользователь
      * 
@@ -177,11 +177,11 @@ class AccessUserGroup{
         while($arRes = $db->fetch($res)){
             $arResult[$arRes['code_group']] = $arRes['code_group'];
         }
-        
+
         return $arResult;   
     }
-    
-    
+
+
     /**
      * addUserInGroup() - добавить пользователя в группуы
      * @param int $id_users - id пользователя
@@ -203,7 +203,7 @@ class AccessUserGroup{
         }
         return $arResult;
     }
-    
+
     /**
      * deleteUserInAllGroups - удалить пользователя из всех групп 
      *  (где он состоит)
@@ -219,7 +219,7 @@ class AccessUserGroup{
         }
         return $arResult;
     }
-    
+
     /**
      * deleteAllActionsForGroup() 
      * - удалить все заданные, разрешённые действия пользователей для указанной группы
@@ -232,15 +232,15 @@ class AccessUserGroup{
         $arResult = false;
         global $db;
         $dataAllGroup = self::getAccessGroup();
-                
+
         if( !empty($dataAllGroup[$codeUserGroup])){
             // тут будут данные по нужной группе
             $dataThisGroup = $dataAllGroup[$codeUserGroup];
             $dataThisGroup['code_action_user'] = '';
-            
+
             // удаляем все данные по этой группе из БД
             $res = $db->deleteDb(self::$tableNameAccessGroup, array('=' => array('code', "'".$codeUserGroup."'")) );
-                        
+
             if($res){
                 // добавляем пустую группу
                 $res2 = $db->insertDb(
@@ -252,9 +252,9 @@ class AccessUserGroup{
                 }
             }
         }
-           
+
     }
-    
+
     /**
      * addOptionsGroup() 
      * - добавить для указанной группы пользователей разрешённое действие
@@ -268,10 +268,10 @@ class AccessUserGroup{
         $arResult = false;
         global $db;
         $dataAllGroup = self::getAccessGroup();
-                
+
         if( !empty($dataAllGroup[$codeUserGroup])){
             $dataThisGroup = $dataAllGroup[$codeUserGroup];
-          
+
             // если действий для пользователя нет обновить группу (добавить действия)
             if(empty($dataThisGroup['code_action_user'])){
                 $dataThisGroup['code_action_user'] = $codeAction;
@@ -299,15 +299,15 @@ class AccessUserGroup{
                     $arResult = true;
                 }
             }
-            
+
         }
-                
+
         // сбросить кеш на получение разрешений для групп и всех данных по группам
         self::clearCacheForFunctionGetAccessGroup();
-        
+
         return $arResult;
     }
-    
+
     /**
      * addUserGroup
      *  - добавить новую пользовательскую группу 
@@ -336,13 +336,13 @@ class AccessUserGroup{
                 $arResult = false;
             }
         }
-        
+
         // сбросить кеш на получение разрешений для групп и всех данных по группам
         self::clearCacheForFunctionGetAccessGroup();
         
         return $arResult;
     }
-    
+
     /**
      * deleteUserGroupByCode
      *  - удалить пользовательскую группу по коду группы
@@ -355,7 +355,7 @@ class AccessUserGroup{
         global $db;
         $arResult = false;
         // удалить все связи пользователей с этой группой
-        
+
         $res = $db->deleteDb(
             self::$tableNameUsersInGroupss,
             array('=' => array('code_group' , "'".$code_group."'" ) )
@@ -363,7 +363,7 @@ class AccessUserGroup{
         if($res){
             $arResult = true;
         }
-                
+
         // удалить группу по коду уруппы
         if($arResult){
             $arResult = false;
@@ -375,11 +375,11 @@ class AccessUserGroup{
                 $arResult = true;
             }
         }
-        
+
         // сбросить кеш на получение разрешений для групп и всех данных по группам
         self::clearCacheForFunctionGetAccessGroup();
-        
-        return $arResult;   
+
+        return $arResult;
     }
-       
+
 }

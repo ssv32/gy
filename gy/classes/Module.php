@@ -5,34 +5,34 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  * Module - работа с модулями фреймворка
  */
 class Module{
-    
+
     // массив подключённых модулей
     public $arrayIncludeModules = array(); 
-    
+
     // массив подключённых модулей и их версии
     public $arrayIncludeModulesAndVersion = array(); 
-    
+
     // соответствие компонентов подключенным модулям
     public $nameModuleByComponentName = array();
-    
+
     // соответствие имени класса (находящегося в модуле) и имени модуля 
     public $nameClassModuleByNameModule = array();
-    
+
     // связь имени страницы и модуля
     public $nameModuleByNameAdminPage = array();
-    
+
     // пункты меню для админ панели (связанные с модулями)
     public $buttonMenuAdminPanel = array();
-    
+
     // условия показа пунктов меню админки для подключённых модулей
     public $isShowButtonsMenuAdminPanelModules = array();
-    
+
     // url до папки gy в проекте
     private $urlGyCore = false;
-    
+
     // объект класса (всегда будет один)
     private static $module; 
-    
+
     private function  __construct(){
         // заполнить пустотой
         $this->arrayIncludeModulesAndVersion = array();
@@ -40,7 +40,7 @@ class Module{
         $this->nameModuleByComponentName = array();
         $this->nameClassModuleByNameModule = array();
     }
-    
+
     /**
      * getInstance 
      *  - получение объекта класса (всегда один обьект)
@@ -54,11 +54,11 @@ class Module{
         }
         return static::$module;
     }
-    
+
     public function setUrlGyCore($urlGyCore){
         $this->urlGyCore = $urlGyCore;
     }
-    
+
     /**
      * IncludeModule 
      *  - подключить указанный модуль
@@ -76,7 +76,7 @@ class Module{
         
         return $result;
     }
-    
+
     /**
      * includeModuleByUrl
      *  - подключить модуль по указанному урлу 
@@ -86,56 +86,56 @@ class Module{
      */
     public function includeModuleByUrl($urlModule){ // TODO можно добавить проверки на ошибки 
         $result = false;
-                
+
         if(file_exists($urlModule.'init.php' )){
             include $urlModule.'init.php';
-            
+
             // тут имя модуля
             if (!empty($nameThisModule)){
                 $this->arrayIncludeModules[$nameThisModule] = $urlModule;
                 //unset($nameThisModule);
-                
+
                 if(!empty($versionThisModule)){
                     $this->arrayIncludeModulesAndVersion[$nameThisModule] = $versionThisModule;
                     unset($versionThisModule);
                 }
-                
+
             }
-            
+
             // тут список компонентов модуля
             if (!empty($componentsThisModule)){ 
 
                 foreach ($componentsThisModule as $value) {
                     $this->nameModuleByComponentName[$value] = $nameThisModule;
                 }
-                        
+
                 unset($componentsThisModule);
             }
-            
+
             // тут список классов модуля
             if (!empty($classesThisModule)){
 
-                foreach ($classesThisModule as $value) {      
-                    $this->nameClassModuleByNameModule[$value] = $nameThisModule;    
+                foreach ($classesThisModule as $value) {
+                    $this->nameClassModuleByNameModule[$value] = $nameThisModule;
                 }
                 unset($classesThisModule);
             }
-            
+
             // тут список страниц админки
             if (!empty($adminPageThisModule)){
 
                 foreach ($adminPageThisModule as $value) {      
-                    $this->nameModuleByNameAdminPage[$value] = $nameThisModule;    
+                    $this->nameModuleByNameAdminPage[$value] = $nameThisModule;
                 }
                 unset($adminPageThisModule);
             }
-            
+
             // пункты меню в админке
             if (!empty($pagesFromAdminMenu)){
                 $this->buttonMenuAdminPanel[$nameThisModule] = $pagesFromAdminMenu;
                 unset($pagesFromAdminMenu);
             }
-             
+
             // условия показа пунктов меню админки для подключённых модулей
             if (!empty($isShowButtonsMenuAdminPanetThisModule)){
                 $this->isShowButtonsMenuAdminPanelModules[$nameThisModule] = $isShowButtonsMenuAdminPanetThisModule;
@@ -144,7 +144,7 @@ class Module{
         }
         return $result;
     }
-    
+
 
     /**
      * getModulesComponent
@@ -155,14 +155,14 @@ class Module{
      */
     public function getModulesComponent($nameComponent){
         $result = false;
-        
+
         if(!empty($this->nameModuleByComponentName[$nameComponent])){
-            $result = $this->arrayIncludeModules[ $this->nameModuleByComponentName[$nameComponent] ].'component/'.$nameComponent;                 
+            $result = $this->arrayIncludeModules[ $this->nameModuleByComponentName[$nameComponent] ].'component/'.$nameComponent;
         }
-        
+
         return $result;
     } 
-    
+
     /**
      * getUrlModuleClassByNameClass
      *  - по имени класса, если он есть в одном из подключённых модулей выдать урл на класс
@@ -177,7 +177,7 @@ class Module{
         }
         return $result;
     }
-       
+
     /**
      * searchAllModules()
      *  - найти все разделы из раздела /gy/modules , т.е. все имеющиеся модули
@@ -186,7 +186,7 @@ class Module{
      */
     public function searchAllModules(){
         $result = array();
-        if ($handleDirs = opendir( $this->urlGyCore.'/modules/' ) ) {      
+        if ($handleDirs = opendir( $this->urlGyCore.'/modules/' ) ) {
             while (false !== ($dirName = readdir($handleDirs))) { 
                 if( ($dirName != '.') && ($dirName != '..') ){
                     $result[$dirName] = $dirName;
@@ -196,7 +196,7 @@ class Module{
         }
         return $result;
     }
-    
+
     /**
      * includeAllModules()
      *  - подключить все имеющиеся модули
@@ -210,7 +210,7 @@ class Module{
             }
         }
     }
-       
+
     /**
      * installDbModuleByNameModule 
      *  - установить часть БД связанную с этим модулем
@@ -225,10 +225,10 @@ class Module{
             include_once( $this->urlGyCore.'/modules/'.$nameModule.'/install/installDataBaseTable.php' );
             $result = true;
         }
-        
+
         return $result;
     }
-    
+
     /**
      * installBdAllModules 
      *  - установить части БД для всех модулей
@@ -241,7 +241,7 @@ class Module{
             }
         }
     }
-    
+
     /**
      * getButtonsMenuByModule
      *  - вернуть кнопки меню панели администратора определённые в указанном модуле
@@ -252,7 +252,7 @@ class Module{
     public function getButtonsMenuByModule($nameModule){
         return $this->buttonMenuAdminPanel[$nameModule];
     }
-    
+
     /**
      * getButtonsMenuAllModules
      *  - вернуть все пункты меню админки всех подключённых модулей 
@@ -263,7 +263,7 @@ class Module{
     public function getButtonsMenuAllModules(){
         return $this->buttonMenuAdminPanel;
     }
-    
+
     /**
      * getFlagShowButtonsAdminPanelByModule
      *  - вернуть условие показа кнопок в админке,
@@ -277,9 +277,9 @@ class Module{
     public function getFlagShowButtonsAdminPanelByModule($nameModule){
         return $this->isShowButtonsMenuAdminPanelModules[$nameModule];
     }
-    
+
     public function getInfoAllIncludeModules(){
         return $this->arrayIncludeModulesAndVersion;
     }
-    
+
 }

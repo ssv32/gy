@@ -21,7 +21,7 @@ class CacheFiles extends Cache {
     public function __construct($urlProject) {
         $this->urlProject = $urlProject;
     }
-    
+
     /**
      * cacheInit - инициализация кеша, надо проверить есть кеш по заданным параметрам
      * @param string $cacheName
@@ -31,7 +31,7 @@ class CacheFiles extends Cache {
     public function cacheInit($cacheName, $cacheTime){
         $this->cacheName = $cacheName;
         $this->cacheTime = $cacheTime;
-                
+
         if(file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)){
             $cacheData = array();
             include $this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl;
@@ -42,12 +42,12 @@ class CacheFiles extends Cache {
                     $this->data = $cacheData['data'];
                     unset($cacheData);
                 }
-            }    
+            }
         }
-        
+
         return !empty($this->data); 
     }
-    
+
     /**
      * getCacheData - получить данные из кеша
      * @return mixed - может быть массив или одиночное значение любого типа
@@ -55,7 +55,7 @@ class CacheFiles extends Cache {
     public function getCacheData(){
         return $this->data;
     }
-    
+
     /**
      * setCacheData - установить данные в кеш
      * @param mixed $data - может быть массив или одиночное значение
@@ -72,7 +72,7 @@ class CacheFiles extends Cache {
         }
         return true;
     }
-    
+
     /**
      * clearThisCache - удалит текущий кеш (кеш связанный с текущим объектом)
      */
@@ -81,5 +81,5 @@ class CacheFiles extends Cache {
             unlink($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl);
         }
     }
-    
+
 }

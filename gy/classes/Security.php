@@ -7,7 +7,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
  */
 
 class Security{
-    
+
     /**
      * filterInputData 
      *  - фильтр входных данных, в присланных данных уберёт лишнее
@@ -25,8 +25,8 @@ class Security{
         }
         return $data;
     }
-    
-    
+
+
     /**
      * clearValue 
      *  - обработать одно значение, что бы лишнее не прошло
@@ -39,11 +39,11 @@ class Security{
         $value = trim($value);
         $value = stripslashes($value);
         $value = strip_tags($value);
-        $value = htmlspecialchars($value);   
+        $value = htmlspecialchars($value);
         return $value;
     }
 
-    
+
 }
-    
+
 

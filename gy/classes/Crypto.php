@@ -4,7 +4,7 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 class Crypto
 {
 
-    private $sole; 
+    private $sole;
 
     /**
      * setSole - установить соль (некая строка)

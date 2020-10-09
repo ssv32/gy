@@ -6,10 +6,10 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
  */
 class GeneralUsersPropertys
 {
-    
+
     private static $tableNameCreatePropertys = 'create_all_users_property';
     private static $tableNameTypePropertys = 'type_all_user_propertys';
-    
+
     private static $tableNameTypePropertysForCodeTypeProperty = array(
         'text' => 'value_all_user_propertys_text'
     );
@@ -24,8 +24,8 @@ class GeneralUsersPropertys
     public static function getAllGeneralUsersPropertys()
     { 
         global $db;
-        $res = $db->selectDb( 
-            self::$tableNameCreatePropertys, 
+        $res = $db->selectDb(
+            self::$tableNameCreatePropertys,
             array('*'),
             array()
         );
@@ -34,7 +34,7 @@ class GeneralUsersPropertys
     }
 
     /**
-     * getAllTypeAllUsersPropertys 
+     * getAllTypeAllUsersPropertys
      *  - получить все возможные типы пользовательских свойств
      * 
      * @global type $db
@@ -42,12 +42,11 @@ class GeneralUsersPropertys
      */
     public static function getAllTypeAllUsersPropertys()
     {
-        global $db;		        
-        $res = $db->selectDb( 
-            self::$tableNameTypePropertys, 
+        global $db;
+        $res = $db->selectDb(
+            self::$tableNameTypePropertys,
             array('*'),
             array(
-                
             )
         );
         $result = $db->fetchAll($res, 'id');
@@ -70,7 +69,7 @@ class GeneralUsersPropertys
 
         global $db;
         $res = $db->insertDb(
-            self::$tableNameCreatePropertys, 
+            self::$tableNameCreatePropertys,
             array(
                 'name_property' => $name,
                 'type_property' => $idType,
@@ -98,7 +97,7 @@ class GeneralUsersPropertys
         global $db;
 
         $res = $db->deleteDb(
-            self::$tableNameCreatePropertys, 
+            self::$tableNameCreatePropertys,
             array('='=>array('id', $id))
         );
 
@@ -156,8 +155,8 @@ class GeneralUsersPropertys
 
         if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;
-            $res = $db->selectDb( 
-                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode], 
+            $res = $db->selectDb(
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
                 array('*'),
                 array( '=' => array('id_users', $idUser) )
             );
@@ -184,7 +183,7 @@ class GeneralUsersPropertys
         if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
             global $db;
             $res = $db->insertDb(
-                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode], 
+                self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
                 array(
                     'value' => $value,
                     'id_users' => $idUser,
@@ -214,15 +213,15 @@ class GeneralUsersPropertys
         $result = false;
 
         if (!empty(self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode])) {
-            global $db;	
+            global $db;
 
             $res = $db->deleteDb(
                 self::$tableNameTypePropertysForCodeTypeProperty[$typePropertyCode],
                 array( 
                     'AND' => array(
-                        array('=' => array('id_users', $idUser) ), 
-                        array('=' => array('id_property', $idProperty) ) 
-                    ),  
+                        array('=' => array('id_users', $idUser) ),
+                        array('=' => array('id_property', $idProperty) )
+                    ),
                 )
             );
 
@@ -258,11 +257,11 @@ class GeneralUsersPropertys
                     'id_property' => $idProperty,
                     'value' => $value
                 ),
-                array( 
+                array(
                     'AND' => array(
-                        array('=' => array('id_users', $idUser) ), 
-                        array('=' => array('id_property', $idProperty) ) 
-                    ),  
+                        array('=' => array('id_users', $idUser) ),
+                        array('=' => array('id_property', $idProperty) )
+                    ),
                 )
             );
 

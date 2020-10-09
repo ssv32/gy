@@ -4,9 +4,9 @@ include "../../gy/gy.php"; // подключить ядро // include core
 global $user;
 $data = $_REQUEST;
 
-if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
-    && !empty($data['edit-id']) 
-    && is_numeric($data['edit-id']) 
+if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
+    && !empty($data['edit-id'])
+    && is_numeric($data['edit-id'])
     && ($data['edit-id'] != 1) 
 ) {
 

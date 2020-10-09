@@ -4,9 +4,9 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 $data  = $_REQUEST;
 
 $arRes['user_property'] = array(
-    'login', 
-    'name', 
-    'pass', 
+    'login',
+    'name',
+    'pass',
     'groups'
 );
 
@@ -17,25 +17,25 @@ $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
     $result = true;
-    foreach ($arRes['user_property'] as $val) {	
+    foreach ($arRes['user_property'] as $val) {
         if (empty($arr[$val])) {
             $result = false;
-        }    
+        }
     }
-    
+
     if ($result) {
         foreach ($arr['groups'] as $value) {  // TODO протестировать
-            
+
             if (empty($arRes['allUsersGroups'][$value])) {
                 $result = false;
             }
-            
+
             if (!empty($arr['groups']['admins']) && !$user->isAdmin()) { // TODO протестировать
                 $result = false;
             }
         }
     }
-    
+
     return $result;
 }
 
@@ -47,16 +47,16 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
         foreach ($arRes['user_property'] as $val) {
             $arDaraUser[$val] = $data[$val];
         }
-		
+
         // убрать группы из добавления
         unset($arDaraUser['groups']);
-       
+
         if ($user->addUsers($arDaraUser)) {
             // найти id добавленного пользователя
-            global $db;		   
+            global $db;
             global $crypto;
-            $res = $db->selectDb( 
-                $user->tableName, 
+            $res = $db->selectDb(
+                $user->tableName,
                 array('*'),
                 array(
                     'AND' => array(
@@ -66,7 +66,7 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
                 )
             );
             $dataAddNewUser = $db->fetch($res);
-            
+
             // добавить пользователя к указанным группам
             AccessUserGroup::deleteUserInAllGroups($dataAddNewUser['id']);
             foreach ($data['groups'] as $value) {

@@ -9,7 +9,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
         $app->component(
             'containerdata_add',
             '0',
-            array() 
+            array()
         );
     }
 

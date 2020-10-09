@@ -8,15 +8,15 @@ class Module
 {
 
     // массив подключённых модулей
-    public $arrayIncludeModules = array(); 
+    public $arrayIncludeModules = array();
 
     // массив подключённых модулей и их версии
-    public $arrayIncludeModulesAndVersion = array(); 
+    public $arrayIncludeModulesAndVersion = array();
 
     // соответствие компонентов подключенным модулям
     public $nameModuleByComponentName = array();
 
-    // соответствие имени класса (находящегося в модуле) и имени модуля 
+    // соответствие имени класса (находящегося в модуле) и имени модуля
     public $nameClassModuleByNameModule = array();
 
     // связь имени страницы и модуля
@@ -32,7 +32,7 @@ class Module
     private $urlGyCore = false;
 
     // объект класса (всегда будет один)
-    private static $module; 
+    private static $module;
 
     private function  __construct()
     {
@@ -109,7 +109,7 @@ class Module
             }
 
             // тут список компонентов модуля
-            if (!empty($componentsThisModule)) { 
+            if (!empty($componentsThisModule)) {
 
                 foreach ($componentsThisModule as $value) {
                     $this->nameModuleByComponentName[$value] = $nameThisModule;
@@ -130,7 +130,7 @@ class Module
             // тут список страниц админки
             if (!empty($adminPageThisModule)) {
 
-                foreach ($adminPageThisModule as $value) {      
+                foreach ($adminPageThisModule as $value) {
                     $this->nameModuleByNameAdminPage[$value] = $nameThisModule;
                 }
                 unset($adminPageThisModule);
@@ -146,7 +146,7 @@ class Module
             if (!empty($isShowButtonsMenuAdminPanetThisModule)) {
                 $this->isShowButtonsMenuAdminPanelModules[$nameThisModule] = $isShowButtonsMenuAdminPanetThisModule;
                 unset($isShowButtonsMenuAdminPanetThisModule);
-            } 
+            }
         }
         return $result;
     }
@@ -196,7 +196,7 @@ class Module
     {
         $result = array();
         if ($handleDirs = opendir( $this->urlGyCore.'/modules/' )) {
-            while (false !== ($dirName = readdir($handleDirs))) { 
+            while (false !== ($dirName = readdir($handleDirs))) {
                 if (($dirName != '.') && ($dirName != '..')) {
                     $result[$dirName] = $dirName;
                 }
@@ -268,9 +268,9 @@ class Module
 
     /**
      * getButtonsMenuAllModules
-     *  - вернуть все пункты меню админки всех подключённых модулей 
+     *  - вернуть все пункты меню админки всех подключённых модулей
      * 
-     * @return array - массив с кнопками где ключ это код модуля, 
+     * @return array - массив с кнопками где ключ это код модуля,
      *   а значения как результат getButtonsMenuByModule
      */
     public function getButtonsMenuAllModules()

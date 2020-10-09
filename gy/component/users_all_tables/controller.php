@@ -9,8 +9,8 @@ $arRes['allUsers'] = $user->getAllDataUsers();
 // взять все группы пользователей
 $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
 
-// если идёт удаление пользователя 
-if (!empty($data['del-id']) 
+// если идёт удаление пользователя
+if (!empty($data['del-id'])
     && is_numeric($data['del-id'])
     && ($data['del-id'] != 1)
     && AccessUserGroup::accessThisUserByAction( 'show_admin_panel')

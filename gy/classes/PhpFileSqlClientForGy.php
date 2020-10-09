@@ -12,7 +12,7 @@ class PhpFileSqlClientForGy extends Db
     public $test = 'PhpFileSqlClient ok';
     public $db; //TODO private
 
-    // даныне после запроса селект для метода fetch() 
+    // даныне после запроса селект для метода fetch()
     private $dataSelectForFetch = array();  
 
     /**
@@ -79,13 +79,13 @@ class PhpFileSqlClientForGy extends Db
         
         $result = false;
         if (($res !== false) && is_array($res)) {
-                        
+
             // беру первое значение из него
             $result = array_shift($res);
-            
+
             // записываем без первого значения
             $this->dataSelectForFetch = $res;
-            
+
         }
         return $result;
     }
@@ -98,7 +98,7 @@ class PhpFileSqlClientForGy extends Db
     public function fetchAll($res, $key = 'id')
     {
         $result = false;
-        
+
         if (($res !== false) && is_array($res)) {
             if ($key !== false ) {
                 foreach ($res as $value) {
@@ -114,7 +114,7 @@ class PhpFileSqlClientForGy extends Db
         return $result;
     }
 
-    public function __construct($db_config) 
+    public function __construct($db_config)
     {
         if ( empty($this->db)) {
             if (!empty($db_config)) {
@@ -171,7 +171,7 @@ class PhpFileSqlClientForGy extends Db
         return  $this->db->insertInto($tableName, $propertys);
     }
 
-    /** 
+    /**
      * updateDb - обновить поле таблицы
      * @param string $tableName - имя таблицы
      * @param array $propertys - параметры (поле = значение)
@@ -246,7 +246,7 @@ class PhpFileSqlClientForGy extends Db
     }
 
     /**
-     * createTrueArrayWhereFromPhpFileSql 
+     * createTrueArrayWhereFromPhpFileSql
      *  - сделать массив where к виду подходящему для класса PhpFileSql
      * 
      * @param array $where
@@ -254,7 +254,7 @@ class PhpFileSqlClientForGy extends Db
      */
     public function createTrueArrayWhereFromPhpFileSql($where)
     {
-        
+
         if (is_array($where)) {
             foreach ($where as $key0 => $value0) {
                 if (in_array($key0, array('=', '!='))) {
@@ -271,8 +271,8 @@ class PhpFileSqlClientForGy extends Db
 
         return $where;
     }
-    
-    public function __destruct() 
+
+    public function __destruct()
     {
         $this->close();
     }

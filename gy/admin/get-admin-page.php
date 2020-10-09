@@ -7,7 +7,7 @@ global $app;
 
 $data  = $_GET;
 
-if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
+if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     && !empty($data['page']) 
 ) {
 
@@ -20,7 +20,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     if (!empty($module->nameModuleByNameAdminPage[$data['page']])) {
         include_once( $app->url.'/modules/'.$module->nameModuleByNameAdminPage[$data['page']].'/admin/'.$data['page'].'.php' );
     }
-    
+
 } else {
     header( 'Location: /gy/admin/' );
 }

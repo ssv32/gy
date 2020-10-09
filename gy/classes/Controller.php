@@ -6,7 +6,7 @@ class Controller
     public $model;
     public $controller; // ссылка для запуска выбранного контроллера компонента
     public $lang;
-    public $template; // объект шаблона 
+    public $template; // объект шаблона
     public $arParam;
 
     public function __construct($url, $lang)
@@ -46,7 +46,7 @@ class Controller
      * run 
      */
     public function run()
-    {		
+    {
         include $this->controller;
     }
 

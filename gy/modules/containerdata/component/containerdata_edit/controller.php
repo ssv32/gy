@@ -29,7 +29,7 @@ if (!empty($data['ID'])) {
     } else {
         $arRes['status'] = 'add-err';
     }
-    
+
 } else {
     if (!empty($this->arParam['ID'])) {
         $arRes['data-this-nfo-box'] = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['ID'])), array('*') );

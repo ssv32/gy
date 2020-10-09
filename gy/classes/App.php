@@ -15,7 +15,7 @@ final class App
     private function  __construct($url, $options)
     {
         // подключить настройки
-        $this->options = $options; 
+        $this->options = $options;
         
         // записать ещё путь c /gy
         $this->url = $url.'/gy';
@@ -52,13 +52,13 @@ final class App
      *  или возможность подключать много моделей разных
      *  maybe includ many model in component
      */
-    public function component($name, $template, $arParam  )
+    public function component($name, $template, $arParam)
     {
         if ($name != 'includeHtml') {
             // обезопасим входные параметры
             $arParam = Security::filterInputData($arParam);
         }
-        
+
         $component = new Component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
         return $component;
     }

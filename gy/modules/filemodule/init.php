@@ -26,7 +26,7 @@ $classesThisModule = array(
 
 // страници админки
 $adminPageThisModule = array(
-    'work-page-site',   
+    'work-page-site',
 );
 
 // кнопки для меню админки

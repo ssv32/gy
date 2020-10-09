@@ -17,11 +17,11 @@ if ($isRunConsole) {
     $res = $db->createTable(
         'users',
         array( 
-            'id int PRIMARY KEY AUTO_INCREMENT', 
-            'login varchar(50)', 
-            'name varchar(50)', 
-            'pass varchar(50)', 
-            'hash_auth varchar(50)', 
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'login varchar(50)',
+            'name varchar(50)',
+            'pass varchar(50)',
+            'hash_auth varchar(50)',
             //'groups int'
         )
     );
@@ -32,21 +32,21 @@ if ($isRunConsole) {
         echo $br.'add admin user (and test user) = start';
 
         $res = $db->insertDb(
-            'users', 
+            'users',
             array(
-                'login' => 'admin', 
-                'name' => 'admin', 
-                'pass' =>   'admin', 
+                'login' => 'admin',
+                'name' => 'admin',
+                'pass' =>   'admin',
                 //'groups' => 1
             )
         );
 
         $res = $db->insertDb(
-            'users', 
+            'users',
             array(
-                'login' => 'asd', 
-                'name' => 'asd', 
-                'pass' =>  'asdasd', 
+                'login' => 'asd',
+                'name' => 'asd',
+                'pass' =>  'asdasd',
                 //'groups' => 2
             )
         );
@@ -84,18 +84,18 @@ if ($isRunConsole) {
     );
 
     $db->insertDb(
-        'action_user', 
+        'action_user',
         array(
-            'code' => 'action_all', 
-            'text' => 'Редактировать всё (Админ) | Edit All (Admin)', 
+            'code' => 'action_all',
+            'text' => 'Редактировать всё (Админ) | Edit All (Admin)',
         )
     );
 
     $db->insertDb(
-        'action_user', 
+        'action_user',
         array(
-            'code' => 'edit_users', 
-            'text' => 'Изменение пользователей (кроме админов) | Edit users (except admins)', 
+            'code' => 'edit_users',
+            'text' => 'Изменение пользователей (кроме админов) | Edit users (except admins)',
         )
     );
 
@@ -106,28 +106,28 @@ if ($isRunConsole) {
     // это группы (пользователей) прав доступа
     $res = $db->createTable(
         'access_group',
-        array( 
-            'id int PRIMARY KEY AUTO_INCREMENT', 
-            'code varchar(255)', 
-            'name varchar(255)', 
-            'text varchar(255)', 
+        array(
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'code varchar(255)',
+            'name varchar(255)',
+            'text varchar(255)',
             'code_action_user varchar(255)' // код действия пользователя, разрешённый для данной группы
         )
     );
 
     $db->insertDb(
-        'access_group', 
+        'access_group',
         array(
-            'code' => 'admins', 
+            'code' => 'admins',
             'name' => 'Админы | Admins',
             'text' => 'Админы, есть права на всё | Admins, have rights to everything',
             'code_action_user' => 'action_all'
         )
     );
     $db->insertDb(
-        'access_group', 
+        'access_group',
         array(
-            'code' => 'admins', 
+            'code' => 'admins',
             'name' => 'Админы | Admins',
             'text' => 'Админы, есть права на всё | Admins, have rights to everything',
             'code_action_user' => 'show_admin_panel'
@@ -135,9 +135,9 @@ if ($isRunConsole) {
     );
 
     $db->insertDb(
-        'access_group', 
+        'access_group',
         array(
-            'code' => 'content', 
+            'code' => 'content',
             'name' => 'Контент | Content',
             'text' => 'Те кто изменяют контент сайта | Those who change the content of the site',
             'code_action_user' => 'show_admin_panel'
@@ -145,20 +145,20 @@ if ($isRunConsole) {
     );
 
     $db->insertDb(
-        'access_group', 
+        'access_group',
         array(
-            'code' => 'user_admin', 
+            'code' => 'user_admin',
             'name' => 'Админи по пользователям | Admin for users',
-            'text' => 'Могут изменять только пользователей | Can change users', 
+            'text' => 'Могут изменять только пользователей | Can change users',
             'code_action_user' => 'edit_users'
         )
     );
     $db->insertDb(
-        'access_group', 
+        'access_group',
         array(
-            'code' => 'user_admin', 
+            'code' => 'user_admin',
             'name' => 'Админи по пользователям | Admin for users',
-            'text' => 'Могут изменять только пользователей | Can change users', 
+            'text' => 'Могут изменять только пользователей | Can change users',
             'code_action_user' => 'show_admin_panel'
         )
     );
@@ -169,27 +169,27 @@ if ($isRunConsole) {
     // в этой таблице будут группы и относящиеся к ним пользователи
     $res = $db->createTable(
         'users_in_groups',
-        array( 
-            'id int PRIMARY KEY AUTO_INCREMENT', 
-            'code_group varchar(255)', 
-            'id_user int', 
+        array(
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'code_group varchar(255)',
+            'id_user int',
         )
     );
 
 
 
     $db->insertDb(
-        'users_in_groups', 
+        'users_in_groups',
         array(
-            'code_group' => 'admins', 
+            'code_group' => 'admins',
             'id_user' => 1,
         )
     );
 
     $db->insertDb(
-        'users_in_groups', 
+        'users_in_groups',
         array(
-            'code_group' => 'user_admin', 
+            'code_group' => 'user_admin',
             'id_user' => 2,
         )
     );
@@ -201,10 +201,10 @@ if ($isRunConsole) {
     // таблица с общими свойствами (список общих свойств для всех пользователей)
     $res = $db->createTable(
         'create_all_users_property',
-        array( 
-            'id int PRIMARY KEY AUTO_INCREMENT', 
-            'name_property varchar(255)', 
-            'type_property int', 
+        array(
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'name_property varchar(255)',
+            'type_property int',
             'code varchar(255)',
         )
     );
@@ -212,31 +212,31 @@ if ($isRunConsole) {
     // типы общих свойств для пользователей
     $res = $db->createTable(
         'type_all_user_propertys',
-        array( 
-            'id int PRIMARY KEY AUTO_INCREMENT', 
-            'name_type varchar(255)', 
+        array(
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'name_type varchar(255)',
             'info varchar(255)',
             'code varchar(255)',
         )
     );
 
     $db->insertDb(
-        'type_all_user_propertys', 
-        array( 
-            'name_type' => 'text', 
+        'type_all_user_propertys',
+        array(
+            'name_type' => 'text',
             'info' => 'input type text',
             'code' => 'text',
         )
     );
 
-    // значения общего свойства типа текст 
+    // значения общего свойства типа текст
     $res = $db->createTable(
         'value_all_user_propertys_text',
-        array( 
-            'id int PRIMARY KEY AUTO_INCREMENT', 
-            'value varchar(255)', 
-            'id_users int',  
-            'id_property int',  
+        array(
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'value varchar(255)',
+            'id_users int',
+            'id_property int',
         )
     );
 

@@ -7,13 +7,13 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
  */
 class AccessUserGroup
 {
-    
+
     private static $tableNameAccessGroup = 'access_group';
     private static $tableNameUserActions = 'action_user';
     private static $tableNameUsersInGroupss = 'users_in_groups';
-    
+
     private static $cacheTimeGetData = 604800;
-    
+
     /**
      * checkAccessUserGroupsByUserAction - определить можно ли пользователю с заданным набором его групп 
      *   и данными по всем группам выполнить указанное действие 
@@ -42,7 +42,7 @@ class AccessUserGroup
         }
         return $arResult;
     }
-    
+
     /**
      * accessUser() - проверит разрешёно ли указанное действие заданному пользователю
      * 
@@ -79,7 +79,7 @@ class AccessUserGroup
         
         // получить данные по всем группам
         $dataAllGroups = self::getAccessGroup();
-        
+
         // определить пользователю с таким набором групп доступно ли указанное действие
         $arResult = self::checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $action);
 
@@ -142,7 +142,7 @@ class AccessUserGroup
      * @return array
      */
     public static function getUserAction()
-    { 
+    {
         $arResult = array();
 
         global $app;
@@ -184,7 +184,7 @@ class AccessUserGroup
             $arResult[$arRes['code_group']] = $arRes['code_group'];
         }
 
-        return $arResult;   
+        return $arResult;
     }
 
     /**
@@ -198,9 +198,9 @@ class AccessUserGroup
         $arResult = false;
         global $db;
         $res = $db->insertDb(
-            self::$tableNameUsersInGroupss, 
+            self::$tableNameUsersInGroupss,
             array(
-                'code_group' => $code_group, 
+                'code_group' => $code_group,
                 'id_user' => $id_user,
             )
         );
@@ -228,7 +228,7 @@ class AccessUserGroup
     }
 
     /**
-     * deleteAllActionsForGroup() 
+     * deleteAllActionsForGroup()
      * - удалить все заданные, разрешённые действия пользователей для указанной группы
      * 
      * @global type $db
@@ -236,7 +236,7 @@ class AccessUserGroup
      * @return boolean
      */
     public static function deleteAllActionsForGroup($codeUserGroup)
-    { 
+    {
         $arResult = false;
         global $db;
         $dataAllGroup = self::getAccessGroup();
@@ -252,7 +252,7 @@ class AccessUserGroup
             if ($res) {
                 // добавляем пустую группу
                 $res2 = $db->insertDb(
-                    self::$tableNameAccessGroup, 
+                    self::$tableNameAccessGroup,
                     $dataThisGroup
                 );
                 if ($res2) {
@@ -285,19 +285,19 @@ class AccessUserGroup
                 $dataThisGroup['code_action_user'] = $codeAction;
                 // если мы попали сюда то всего одна запись в БД соответствует этой группе её и обновляем
                 $res = $db->updateDb(
-                    self::$tableNameAccessGroup, 
-                    $dataThisGroup, 
+                    self::$tableNameAccessGroup,
+                    $dataThisGroup,
                     array(
                         '=' => array(
-                            'code', 
+                            'code',
                             "'".$codeUserGroup."'"
-                        ) 
+                        )
                     )
                 );
                 if ($res) {
                     $arResult = true;
-                }               
-            } else { // добавить копию группы с новым действием                
+                }
+            } else { // добавить копию группы с новым действием
                 $dataThisGroup['code_action_user'] = $codeAction;
                 $res = $db->insertDb(
                     self::$tableNameAccessGroup, 
@@ -328,12 +328,12 @@ class AccessUserGroup
     public static function addUserGroup($arDataNewGroup, $arActionUserThisGroup)
     {
         global $db;
-        $arResult = true; 
+        $arResult = true;
         foreach ($arActionUserThisGroup as $value) {
             $res = $db->insertDb(
-                self::$tableNameAccessGroup, 
+                self::$tableNameAccessGroup,
                 array(
-                    'code' => $arDataNewGroup['code'], 
+                    'code' => $arDataNewGroup['code'],
                     'name' => $arDataNewGroup['name'],
                     'text' => $arDataNewGroup['text'],
                     'code_action_user' => $value
@@ -348,7 +348,7 @@ class AccessUserGroup
 
         // сбросить кеш на получение разрешений для групп и всех данных по группам
         self::clearCacheForFunctionGetAccessGroup();
-        
+
         return $arResult;
     }
 

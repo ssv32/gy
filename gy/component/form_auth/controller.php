@@ -5,15 +5,15 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 // подключить модель // include model this component
 if (isset($this->model)) {
-    $this->model->includeModel(); 
+    $this->model->includeModel();
 }
 
 // были доступны параметры
 //echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';
 
 // если задан параметр idComponent значит сверить с пришедшим
-$isChackIdComponent = ( empty($this->arParam['idComponent']) 
-    || (!empty($this->arParam['idComponent']) && !empty($_REQUEST['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) ) 
+$isChackIdComponent = ( empty($this->arParam['idComponent'])
+    || (!empty($this->arParam['idComponent']) && !empty($_REQUEST['idComponent']) && ($this->arParam['idComponent'] == $_REQUEST['idComponent']) )
 );
 
 $isShowAdminPanel = false;
@@ -63,7 +63,7 @@ if ($isShowAdminPanel === true){
     }
 } else {
     if (!empty($_REQUEST['err'])) {
-        $arRes["err"] = $_REQUEST['err']; 
+        $arRes["err"] = $_REQUEST['err'];
     }
     $arRes['form_input']["auth"] = "auth";
     $arRes['form_input']["pass"] = "pass";

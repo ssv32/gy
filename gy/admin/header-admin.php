@@ -34,7 +34,7 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
             // меню доступное для текущего пользователя
             $menu[ $langTextThisFile->getMessage('index-page') ] = '/gy/admin/index.php';
 
-            if (AccessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()) { 
+            if (AccessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()) {
                 $menu[ $langTextThisFile->getMessage('users') ] = '/gy/admin/users.php';
             }
 
@@ -47,7 +47,7 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
                         !empty($module->getFlagShowButtonsAdminPanelByModule[$nameModule])
                         && AccessUserGroup::accessThisUserByAction( $module->getFlagShowButtonsAdminPanelByModule[$nameModule]) 
                     )
-                    || $user->isAdmin() 
+                    || $user->isAdmin()
                 ) {
                     foreach ($arButton as $buttonName => $buttonUrl) {
                         $menu[$buttonName] = $buttonUrl;

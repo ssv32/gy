@@ -175,7 +175,7 @@ $mess[\'eng\'] = array(
 );
 '
     );
-    
+
     return $arrayCodeByUrl[$page];
 }
 

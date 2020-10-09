@@ -15,17 +15,17 @@ $arRes['valuePropertysThisUser'] = generalUsersPropertys::getAllValueUserPropert
 // собираю общий массив
 $arRes['propertys'] = array();
 foreach ($arRes['allUsersCreatePropertys'] as $key => $value) {
-    
+
     $val = '';
     if (!empty($arRes['valuePropertysThisUser'][$value['id']])) {
         $val = $arRes['valuePropertysThisUser'][$value['id']]['value'];
     }
-    
+
 //    $id = '-';
 //    if(!empty($arRes['valuePropertysThisUser'][$value['id']])){
 //        $id = $arRes['valuePropertysThisUser'][$value['id']]['id'];
 //    }
-    
+
     $arRes['propertys'][] = array(
         'name_property' => $value['name_property'],
         //'id' => $id,
@@ -68,7 +68,7 @@ if (
     $arRes['stat'] = 'ok';
     // TODO может обработать возможные ошибки
 }
-    
+
 
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

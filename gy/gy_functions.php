@@ -10,4 +10,4 @@ function getMessageCore($code_text) {
         $msg = $arLong[$code_text];
     }
     return $msg;
-} 
+}

@@ -14,7 +14,7 @@ class AppFromConstructorPageComponent
     public $urlProject;
     public $options; // настройки проекта 
 
-    public function __construct($urlProject, $options) 
+    public function __construct($urlProject, $options)
     {
         $this->urlProject = $urlProject;
         $this->options = $options;
@@ -22,7 +22,7 @@ class AppFromConstructorPageComponent
 
     /**
      * getInfoAboutComponent
-     *  - получить информацию о компоненте если есть файл componentInfo.php 
+     *  - получить информацию о компоненте если есть файл componentInfo.php
      * 
      * @param string $name
      * @param string $template

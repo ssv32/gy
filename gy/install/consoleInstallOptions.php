@@ -27,7 +27,7 @@ function showHelpFromInstall(){
 }
 
 
-function parseOprions($optionsFromConsole){ 
+function parseOprions($optionsFromConsole){
     $arOptions = array();
     for ($i = 2; $i < (count($optionsFromConsole)-1); $i = $i+2) {
         if (empty($optionsFromConsole[$i+1])) {
@@ -40,9 +40,9 @@ function parseOprions($optionsFromConsole){
 
         if (strripos($optionsFromConsole[$i], 'db') !== false) {
             $arOptions['db_config'][$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];
-        
+
         } else {
-            $arOptions[$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];  
+            $arOptions[$optionsFromConsole[$i]] = $optionsFromConsole[$i+1];
         }
     }
 
@@ -53,7 +53,7 @@ function createTextForFileCofig($options){
     global $br;
     $fileText = '';
 
-    if (!empty($options)) { 
+    if (!empty($options)) {
 
         $fileText = '<?php '.$br.'
 if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$br.'

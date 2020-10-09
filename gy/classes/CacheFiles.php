@@ -14,12 +14,12 @@ class CacheFiles extends Cache
     private $cacheName = 'noneme';
     private $cacheTime = '';
     private $endUrl = '.php';
-    
+
     /**
      * 
      * @param type $urlProject - путь к проекту
      */
-    public function __construct($urlProject) 
+    public function __construct($urlProject)
     {
         $this->urlProject = $urlProject;
     }
@@ -38,7 +38,7 @@ class CacheFiles extends Cache
         if (file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)) {
             $cacheData = array();
             include $this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl;
-            
+
             if (!empty($cacheData)) {
                 $cacheData = json_decode($cacheData, true);
                 if (((int) $cacheData['createTime'] + (int) $cacheData['cacheTime']) > time()) {
@@ -48,7 +48,7 @@ class CacheFiles extends Cache
             }
         }
 
-        return !empty($this->data); 
+        return !empty($this->data);
     }
 
     /**
@@ -71,9 +71,9 @@ class CacheFiles extends Cache
             'data' => $data,
             'createTime' => time(),
             'cacheTime' => $this->cacheTime
-        );  
+        );
         if (file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)) {
-            file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<?php $cacheData = '."'". json_encode($cacheData)."';" );  
+            file_put_contents($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, '<?php $cacheData = '."'". json_encode($cacheData)."';" );
         }
         return true;
     }

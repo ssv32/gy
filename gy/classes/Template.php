@@ -18,7 +18,7 @@ class Template
             $this->urlFileStyle = $url.'/style.css';
         }
 
-        // если есть файл js 
+        // если есть файл js
         if (file_exists($url.'/script.js')) {
             $this->urlFileJs = $url.'/script.js';
         }

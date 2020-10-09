@@ -10,7 +10,7 @@ class User
     protected $admin = false; 
     public $tableName = 'users';
 
-    public function __construct() 
+    public function __construct()
     {
         $this->checkUserCookie();
     }
@@ -84,8 +84,8 @@ class User
      * @param type $pass - пароль
      * @return booleand
      */
-    protected function chackUser($log, $pass) 
-    { 
+    protected function chackUser($log, $pass)
+    {
         $result = false;
 
         global $db;
@@ -93,13 +93,13 @@ class User
 
         $res = $db->selectDb(
             $this->tableName, 
-            array('*'), 
+            array('*'),
             array(
                 'AND' => array( 
                     array('=' => array('login', "'".$log."'" ) ),
                     array( '=' => array('pass',"'".md5($pass.$crypto->getSole())."'") )
-                ),   
-            )    
+                ),
+            )
         );
 
         if ($arRes = $db->fetch($res)) {
@@ -124,13 +124,13 @@ class User
     {
         setcookie($this->nameCookie, $StringCookie, 0, '/');
         global $db;
-        
+
         $res = $db->updateDb(
-            $this->tableName, 
-            array('hash_auth' => $StringCookie), 
-            array( '=' => array('id' , $userId ) )    
+            $this->tableName,
+            array('hash_auth' => $StringCookie),
+            array( '=' => array('id' , $userId ) )
         );
-        
+
         return true;
     }
 
@@ -146,13 +146,13 @@ class User
         global $_COOKIE;
         unset($_COOKIE[$this->nameCookie]);
         global $db;
-        
+
         $res = $db->updateDb(
             $this->tableName, 
-            array('hash_auth' => 'NULL'), 
+            array('hash_auth' => 'NULL'),
             array( '=' => array('id' , $userId ) )
         );
-        
+
         return true;
     }
 
@@ -200,9 +200,9 @@ class User
         global $db;
 
         $res = $db->selectDb(
-            $this->tableName, 
+            $this->tableName,
             array('*'), 
-            array( '=' => array('hash_auth', "'".$cookie."'") ) 
+            array( '=' => array('hash_auth', "'".$cookie."'") )
         );
 
         if ($arRes = $db->fetch($res)) {
@@ -231,8 +231,8 @@ class User
         $result = array();
 
         global $db;
-        $res = $db->selectDb( 
-            $this->tableName, 
+        $res = $db->selectDb(
+            $this->tableName,
             array('*')
         );
         $result = $db->fetchAll($res, false);
@@ -254,21 +254,21 @@ class User
     public function getUserById($id)
     {
         $result = array();
-        global $db;		        
-        $res = $db->selectDb( 
-            $this->tableName, 
+        global $db;
+        $res = $db->selectDb(
+            $this->tableName,
             array('*'),
             array(
                 '=' => array('id', $id)
             )
         );
         $result = $db->fetch($res, false);
-        
+
         if (!empty($result)) {
             // получить группы текущего пользователя
             $result['groups'] = AccessUserGroup::getListGroupsByUser($id);
         }
-        
+
         return $result;
     }
 
@@ -306,15 +306,15 @@ class User
         $result = false;
 
         unset($arParams['id']);
-        
+
         global $db;
         $res = $db->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
-        
+
         if ($res) {
             $result = true;
         }
 
-        return $result; 
+        return $result;
     }
 
     /**

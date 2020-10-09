@@ -10,31 +10,31 @@ $arRes = array();
 * element-code - code элемента
 */
 if (!empty($this->arParam['container-data-code']) && !empty($this->arParam['element-code'])) {
-    
+
     $isCache = (!empty($this->arParam['cacheTime']) && is_numeric($this->arParam['cacheTime']));
-    
+
     if ($isCache) {
-        global $app; 
+        global $app;
         global $cacheClassName;
         $cache = new $cacheClassName($app->url);
         $initCache = $cache->cacheInit('component_container_data_element_show', $this->arParam['cacheTime']);
     }
-    
+
     if ($isCache && $initCache) {
         $arRes = $cache->getCacheData();
     }
-    
+
     if (!$isCache || ($isCache && !$initCache)) {
-                
+
         // найти container-data
         $dataContainerData = ContainerData::getContainerData(
             array(
-                '=' => array( 'code', "'".$this->arParam['container-data-code']."'") 
-            ), 
+                '=' => array( 'code', "'".$this->arParam['container-data-code']."'")
+            ),
             array('*')
         );
 
-        $dataContainerData = $dataContainerData[0]; 
+        $dataContainerData = $dataContainerData[0];
 
         // взять типы свойств что бы знать названия таблиц где их искать
         $dataTypeProperty = ContainerData::getAllTypePropertysContainerData();
@@ -43,10 +43,10 @@ if (!empty($this->arParam['container-data-code']) && !empty($this->arParam['elem
         $propertyContainerData = ContainerData::getPropertysContainerData(
             array(
                 '='=>array(
-                    'id_container_data', 
+                    'id_container_data',
                     $dataContainerData['id']
-                ) 
-            ) 
+                )
+            )
         );
 
         // найти элемент
@@ -64,17 +64,17 @@ if (!empty($this->arParam['container-data-code']) && !empty($this->arParam['elem
 
         foreach ($propertyContainerData as $val) {
             $arRes['ITEMS'][$val['id']] = ContainerData::getValuePropertysContainerData(
-                $dataContainerData['id'], 
-                $dataElement['id'], 
-                $val['id'],  
+                $dataContainerData['id'],
+                $dataElement['id'],
+                $val['id'],
                 $dataTypeProperty[$val['id_type_property']]['name_table']
             );
         }
-        
+
         if ($isCache) {
             $cache->setCacheData($arRes);
         }
-    }  
+    }
 }
 
 // показать шаблон

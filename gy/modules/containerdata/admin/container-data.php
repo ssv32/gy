@@ -12,7 +12,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
             '0',
             array()
         );
-        
+
     }
 
     include "../../gy/admin/footer-admin.php";

@@ -6,8 +6,8 @@ global $user;
 // если есть права просматривать админку
 if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
     // получить логин пользователя
-    $thisLogin = $user->getDataThisUser()['name'];	
-    $arRes["auth_user"] = $thisLogin;    
-    
+    $thisLogin = $user->getDataThisUser()['name'];
+    $arRes["auth_user"] = $thisLogin;
+
     $this->template->show($arRes, $this->arParam);
 }

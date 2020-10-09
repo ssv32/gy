@@ -5,7 +5,7 @@ $data = $_POST;
 
 if (!empty($data['ID']) && is_numeric($data['ID'])) {
     $res = ContainerData::deleteContainerData($data['ID']);
-    
+
     if ($res) {
         $arRes['status'] = 'del-ok';
     } else {

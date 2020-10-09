@@ -6,7 +6,7 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
  */
 class Image
 {
-    
+
     /** 
      * imageResized function compression image (jpeg)
      * imageResized - сжимает изображения (поддерживает пока jpeg)

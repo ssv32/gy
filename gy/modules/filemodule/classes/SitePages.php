@@ -9,7 +9,7 @@ class SitePages
 
     /**
      * разделы в которых нельзя редактировать страницы
-     * @var array 
+     * @var array
      */
     private $notEditPages = array(
         '/gy/',
@@ -24,7 +24,7 @@ class SitePages
 
     /**
      * путь до проекта
-     * @var string/false (false - пока не определён) 
+     * @var string/false (false - пока не определён)
      */
     private $urlProject = false;
 
@@ -56,7 +56,7 @@ class SitePages
         if (($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/')) {
             // если нет директории создать её
             if (file_exists($this->urlProject.$urlPage.'/') === false) { // TODO вынести в класс files
-                mkdir($this->urlProject.$urlPage.'/', 0755, true);   
+                mkdir($this->urlProject.$urlPage.'/', 0755, true);
             }            
             return Files::createFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
         } else {
@@ -65,8 +65,8 @@ class SitePages
     }
 
     /**
-     * deleteSitePage 
-     *  - удалить страницу сайта 
+     * deleteSitePage
+     *  - удалить страницу сайта
      * 
      * @param string $urlPage - путь к файлу (до раздела без index.php)
      * @return boolean
@@ -75,14 +75,14 @@ class SitePages
     {
         if (($this->urlProject !== false) && $this->checkUrl('/'.$urlPage.'/')) {
             $res = Files::deleteFile($this->urlProject.$urlPage.'/'.$this->nameFilePageSite);
-            
+
             // если файлов не осталось удалить директорию // TODO вынести в класс files
             if ($res !== false) {
                 if (count(scandir($this->urlProject.$urlPage.'/')) == 2) {  // 2ва т.е. . и .. в разделе всегда есть
                     rmdir( $this->urlProject.$urlPage.'/' );
                 }
             }
-            
+
             return $res;
         } else {
             return false;

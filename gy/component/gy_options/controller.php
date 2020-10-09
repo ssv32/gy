@@ -7,14 +7,14 @@ $data = $_POST;
 
 if (!empty($data['cacheClear'])) {
     // нужно удалить все файлы из раздела /gy/cache/
-       
-    $files = glob($app->url.'/cache/*'); 
+
+    $files = glob($app->url.'/cache/*');
     foreach ($files as $file) {
         if (is_file($file)) {
-            unlink($file); 
+            unlink($file);
         }
     }
-    $arRes['status'] = 'cacheClear-ok'; 
+    $arRes['status'] = 'cacheClear-ok';
 }
 
 $arRes['button'] = array(
@@ -45,12 +45,12 @@ if (!empty($data['save']) && in_array($data['lang'], $arRes['langs'])) {
     ob_end_clean();
 
     if ($consoleLog != "run set-option\nfinish set-option\n") {
-        $arRes['status'] = 'save-ok'; 
+        $arRes['status'] = 'save-ok';
     } else {
-        $arRes['status'] = 'save-err'; 
+        $arRes['status'] = 'save-err';
         $arRes['status-text'] = $consoleLog;
     }
-    
+
 }
 
 // показать шаблон

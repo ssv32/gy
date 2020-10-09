@@ -24,17 +24,17 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
         </div>
     </form>
 <?php } else {
-    if ( ($arRes['status'] != 'edit') 
-        && ($arRes['status'] != 'err') 
-        && ($arRes['status'] != 'constructor') 
-        && ($arRes['status'] != 'addConstructor') 
-        && ($arRes['status'] != 'error-not-component')          
-        && ($arRes['status'] != 'good-component')          
+    if ( ($arRes['status'] != 'edit')
+        && ($arRes['status'] != 'err')
+        && ($arRes['status'] != 'constructor')
+        && ($arRes['status'] != 'addConstructor')
+        && ($arRes['status'] != 'error-not-component')
+        && ($arRes['status'] != 'good-component')
     ) {?>
         <div class="gy-admin-good-message"><?=$this->lang->getMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-    <?php } elseif ($arRes['status'] == 'edit') { ?>       
+    <?php } elseif ($arRes['status'] == 'edit') { ?>
         <form method="post">
             <h4><?=$this->lang->getMessage('text-edit-page');?></h4>
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
@@ -55,17 +55,17 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
         <div class="gy-admin-error-message"><?=$this->lang->getMessage($arRes['status']);?></div>
         <br/>
         <a href="/gy/admin/get-admin-page.php?page=work-page-site" class="gy-admin-button"><?=$this->lang->getMessage('ok');?></a>
-    <?php } elseif ($arRes['status'] == 'constructor') {?>        
+    <?php } elseif ($arRes['status'] == 'constructor') {?>
         <h4><?=$this->lang->getMessage('title-action-5');?></h4>
         <?php
         $countIncludeComponentsInPageSite = count($arRes['dataIncludeAllComponentsInThisPageSite']);?>
-        
+
         <p><?=$this->lang->getMessage('text-include-components');?><?=$countIncludeComponentsInPageSite;?></p>
 
         <form method="post">
             <input type="hidden" name="url-site-page" value="<?=$arRes['url-site-page']?>" />
 
-            <input 
+            <input
                 class="gy-admin-button" 
                 type="submit" 
                 name="action_8['-1']" 
@@ -80,20 +80,19 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
                         <?=$this->lang->getMessage('name-template');?>
                         <input type="text" name="component[<?=$key;?>][tempalate]" value="<?=$component['template']?>">
                     </p>
-                   
-                    
+
                     <?php if (!empty($component['componentInfo']['v'])) {?>
                         <p>
-                            <?=$this->lang->getMessage('this_v_component');?>: <?=$component['componentInfo']['v']?>   
+                            <?=$this->lang->getMessage('this_v_component');?>: <?=$component['componentInfo']['v']?>
                         </p>
                     <?php }?>
                         
                     <?php if (!empty($component['componentInfo']['text-info'])) {?>
                         <p>
-                            <?=$this->lang->getMessage('this_component_text_info');?>: <?=$component['componentInfo']['text-info']?> 
+                            <?=$this->lang->getMessage('this_component_text_info');?>: <?=$component['componentInfo']['text-info']?>
                         </p>
-                    <?php }?>    
-                        
+                    <?php }?>
+
                     <p>
                         <?=$this->lang->getMessage('params-component');?>
                     </p>

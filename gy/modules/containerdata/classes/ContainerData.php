@@ -47,7 +47,7 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;		
+        global $db;
         $res = $db->insertDb(self::$table_container_data, $arParams);
 
         if ($res) {
@@ -68,7 +68,7 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;		
+        global $db;
         $res = $db->deleteDb(self::$table_container_data, array('=' => array('id', $id)));
 
         if ($res) {
@@ -76,28 +76,28 @@ class ContainerData
             //нужно удалить все элементы связанные с ним свойства и значения свойств
 
             $db->deleteDb( // удалить значения свойств свойств html
-                self::$table_value_propertys_type_html, 
-                array('=' => array('id_container_data', $id) )  
+                self::$table_value_propertys_type_html,
+                array('=' => array('id_container_data', $id) )
             );
             $db->deleteDb( // удалить значения свойств свойств number
                 self::$table_value_propertys_type_number, 
-                array('=' => array('id_container_data', $id) )  
+                array('=' => array('id_container_data', $id) )
             );
 
             $db->deleteDb( // удалить элементы container-data
-                self::$table_element_container_data, 
-                array('=' => array('id_container_data', $id) )  
+                self::$table_element_container_data,
+                array('=' => array('id_container_data', $id) )
             );
 
             $db->deleteDb( // удалить свойства container-data
-                self::$table_list_propertys_container_data, 
-                array('=' => array('id_container_data', $id) )  
+                self::$table_list_propertys_container_data,
+                array('=' => array('id_container_data', $id) )
             );
 
             $result = true;
         }
 
-        return $result; 
+        return $result;
     }
 
     /**
@@ -169,7 +169,7 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;		
+        global $db;
         $res = $db->insertDb(self::$table_list_propertys_container_data, $arParams);
 
         if ($res) {
@@ -198,9 +198,9 @@ class ContainerData
             array(
                 'AND' => array(
                     array('=' => array('id_container_data', $idContainerData) ),
-                    array('=' => array('id_element_container_data', $idElementContainerData) ), 
+                    array('=' => array('id_element_container_data', $idElementContainerData) ),
                     array('=' => array('id_property_container_data', $idProperty) ) 
-                )    
+                )
             )
         );
 

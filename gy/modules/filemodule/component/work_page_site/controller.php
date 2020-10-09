@@ -10,7 +10,7 @@ if (!empty($data['action-1'])) {
     
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
-        
+
     $res = $sitePage->createSitePage($data['url-site-page']);
     
     if ($res !== false) {
@@ -22,12 +22,12 @@ if (!empty($data['action-1'])) {
 
 // удаление страницы
 if (!empty($data['action-3']) && empty($arRes['status'])) {
-    
+
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
-        
+
     $res = $sitePage->deleteSitePage($data['url-site-page']);
-    
+
     if ($res !== false) {
         $arRes['status'] = 'del-ok';
     } else {
@@ -37,12 +37,12 @@ if (!empty($data['action-3']) && empty($arRes['status'])) {
 
 // изменение страницы
 if (!empty($data['action-2']) && empty($arRes['status'])) {
-    
+
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
-            
+
     $res = $sitePage->getContextPage($data['url-site-page']);
-    
+
     if ($res !== false) {
         $arRes['data-file'] = $res;
         $arRes['url-site-page'] = $data['url-site-page'];
@@ -53,10 +53,10 @@ if (!empty($data['action-2']) && empty($arRes['status'])) {
 }
 
 // изменение файла
-if (!empty($data['action-2-1'])  && !empty($data['url-site-page']) && !empty($data['new-text-page'])) {
+if (!empty($data['action-2-1']) && !empty($data['url-site-page']) && !empty($data['new-text-page'])) {
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
-        
+
     $res = $sitePage->putContextPage($data['url-site-page'], $data['new-text-page']);
     if ($res !== false) {
         $arRes['status'] = 'edit-ok';
@@ -74,12 +74,12 @@ if (!empty($data['action-5'])) {
     // сохраним основной app обьект
     global $app;
     $appGlobal = $app;
-    
+
     // переопределим app
     $app = new AppFromConstructorPageComponent($app->urlProject, $app->options );
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
-    
+
     include $url; // !! надо не подключать ядро
 
     $arRes['dataIncludeAllComponentsInThisPageSite'] = $app->getAllDataIncludeComponents();
@@ -94,9 +94,9 @@ if (!empty($data['action-5'])) {
             }
         }
     }
-    
+
     $arRes['url-site-page'] = $data['url-site-page'];
-    
+
     // вернём как было
     $app = $appGlobal;
     unset($appGlobal);
@@ -109,25 +109,25 @@ function getCodePageByArrayComponents($arrayComponents){
 global $app;
 
     ';
-    
+
     // добавить коды компонентов
     if (is_array($arrayComponents)) {
         foreach ($arrayComponents as $value) {
             $codeIncludeComponent = AppFromConstructorPageComponent::getCodeIncludeComponent($value['component'], $value['tempalate'], $value['params']);
             $codePage .= $codeIncludeComponent."\n";   
         }
-    }   
+    }
     return $codePage;
 }
 
 function savePageByArrayComponents($page, $arrayComponents){
     $codePage = getCodePageByArrayComponents($arrayComponents);
-    
+
     global $app;
     $sitePage = new SitePages($app->urlProject.'/');
-            
+
     $res = $sitePage->putContextPage( $page, $codePage);
-    
+
     global $arRes;
     if ($res !== false) {
         $arRes['status'] = 'edit-ok';
@@ -146,17 +146,17 @@ if (!empty($data['action7_2']) && is_array($data['action7_2'])) {
     foreach ($data['action7_2'] as $key => $value) {
         //
     }
-    
+
     if (!empty($data['component'][$key+1])) {
         $temp = $data['component'][$key];
         $data['component'][$key] = $data['component'][$key+1];
         $data['component'][$key+1] = $temp;
         unset($temp);
     }
-    
+
     // записать всё обратно из получившегося набора компонентов
     savePageByArrayComponents($data['url-site-page'], $data['component']);
-                
+
 }
 
 // перемещение компонента выше
@@ -164,14 +164,14 @@ if (!empty($data['action7_1']) && is_array($data['action7_1'])) {
     foreach ($data['action7_1'] as $key => $value) {
         //
     }
-    
+
     if (($key - 1) >= 0) {
         $temp = $data['component'][$key];
         $data['component'][$key] = $data['component'][$key-1];
         $data['component'][$key-1] = $temp;
         unset($temp);
     }
-    
+
     // записать всё обратно из получившегося набора компонентов
     savePageByArrayComponents($data['url-site-page'], $data['component']);
 }
@@ -181,7 +181,7 @@ if (!empty($data['action7_3']) && is_array($data['action7_3'])) {
     foreach ($data['action7_3'] as $key => $value) {
         //
     }
-    
+
     if (!empty($data['component'][$key])) {
         unset($data['component'][$key]);
     }
@@ -237,7 +237,7 @@ if (!empty($data['action_8_1'])) {
                 'template' => $data['name_new_template'],
                 'arParam' => $dataComponent['all-property'],
                 'componentInfo' => $dataComponent
-            );  
+            );
         } else {
             $arRes['status'] = 'error-not-component';
         }
@@ -250,29 +250,29 @@ if (!empty($data['action_8_1'])) {
 if( !empty($data['action_8_2']) 
     && !empty($data['url-site-page'])
     && (!empty($data['position_new_component']) || ($data['position_new_component'] == 0) )
-    && !empty($data['name_new_component']) 
+    && !empty($data['name_new_component'])
     && (!empty($data['name_new_template']) || ($data['name_new_template'] == 0) )
 ) {
     // надо взять все компоненты с редактируемой страницы
-    
+
     // сохраним основной app обьект
     global $app;
     $appGlobal = $app;
-    
+
     // переопределим app
     $app = new AppFromConstructorPageComponent($app->urlProject, $app->options );
 
     $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
-    
+
     include $url; // !! надо не подключать ядро
 
     $allComponentsThisPage = $app->getAllDataIncludeComponents();
     // вернём как было
     $app = $appGlobal;
     unset($appGlobal);
-    
+
     $newArrayComponents = array();
-    
+
     if ($data['position_new_component'] == "'-1'") {
         $newArrayComponents[] = array(
             'name' => $data['name_new_component'],
@@ -283,7 +283,7 @@ if( !empty($data['action_8_2'])
             $newArrayComponents[] = $value;
         }
     } elseif (is_numeric($data['position_new_component'])) {
-        $data['position_new_component']++; 
+        $data['position_new_component']++;
         $flagAdd = false;
         foreach ($allComponentsThisPage as $key => $value) {
             if ($data['position_new_component'] == $key) {
@@ -315,10 +315,10 @@ if( !empty($data['action_8_2'])
             'params' => $value['arParam']
         );
     }
-    
+
     // сохранить всё на страницу
     savePageByArrayComponents($data['url-site-page'], $trueNewArrayComponents);
-    
+
 }
 
 // показать шаблон

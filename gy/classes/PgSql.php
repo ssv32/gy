@@ -3,7 +3,7 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 /** 
  * PgSql - класс для работы с базой данных PostgreSQL
- * class work PostgreSQL 
+ * class work PostgreSQL
  */
 
 class PgSql extends Db
@@ -37,7 +37,7 @@ class PgSql extends Db
     }
 
     /*  close() - close connect database
-     * @param $db - resurs (create self::connect()) 
+     * @param $db - resurs (create self::connect())
      * @return true - ok OR false - not ok
      */
     public function close()
@@ -125,7 +125,7 @@ class PgSql extends Db
                 }
             }
             $value = array_shift($where);
-            
+
         }
         return $result;
     }
@@ -277,7 +277,7 @@ class PgSql extends Db
 
         $strPropertys = implode(",", $propertys);
 
-        if (!empty($where)) {            
+        if (!empty($where)) {
             $where = ' WHERE '.$this->parseWhereForQuery($where);
         } else {
             $where = '';
@@ -355,8 +355,8 @@ class PgSql extends Db
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$key.'='.$val;
         }
 
-        if (!empty($where)) {            
-            $where = ' WHERE '.$this->parseWhereForQuery($where); 
+        if (!empty($where)) {
+            $where = ' WHERE '.$this->parseWhereForQuery($where);
         } else {
             $where = '';
         }
@@ -369,7 +369,7 @@ class PgSql extends Db
     /**
      * createTable - создать таблицу в базе данных
      * @param string $tableName - имя таблицы
-     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
+     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...)
      * @return - false or object result query
      */
     public function createTable($tableName, $propertys)
@@ -388,7 +388,7 @@ class PgSql extends Db
 
         return  $this->query($query);
     }
-    
+
     /**
      * deleteDb - удаление строк из таблицы
      * @param string $tableName - имя таблицы
@@ -398,7 +398,7 @@ class PgSql extends Db
     public function deleteDb($tableName, $where)
     {
         $query = '';
-        if (!empty($where)) {            
+        if (!empty($where)) {
             $where = ' WHERE '.$this->parseWhereForQuery($where);
         } else {
             $where = '';

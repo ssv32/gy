@@ -35,7 +35,7 @@ class MySql extends Db
     }
     
     /*  close() - close connect database
-     * @param $db - resurs (create self::connect()) 
+     * @param $db - resurs (create self::connect())
      * @return true - ok OR false - not ok
      */
     public function close()
@@ -75,7 +75,7 @@ class MySql extends Db
         return $result;
     }
     
-    public function __construct($db_config) 
+    public function __construct($db_config)
     {
         if (empty($this->db)) {
             if (!empty($db_config)) {
@@ -83,16 +83,16 @@ class MySql extends Db
                     $db_config['db_port'] = ini_get("mysqli.default_port");
                 }
                 $this->connect(
-                    $db_config['db_host'], 
-                    $db_config['db_user'], 
-                    $db_config['db_pass'], 
-                    $db_config['db_name'], 
+                    $db_config['db_host'],
+                    $db_config['db_user'],
+                    $db_config['db_pass'],
+                    $db_config['db_name'],
                     $db_config['db_port']
                 );
             }
         }
     }
-        
+
     /**
      * isOneVersionWhere 
      *  (ru) - проверит соответствует ли условие, условию как ниже (первый вариант)
@@ -112,7 +112,7 @@ class MySql extends Db
      *        (ru) - условие (пример выше, что то типа дерева)
      *        (en) - condition (example above, something like a tree)
      * @return boolean
-     */        
+     */ 
     private function isOneVersionWhere($where)
     {
         $result = false;
@@ -127,7 +127,7 @@ class MySql extends Db
         }
         return $result;
     }
-    
+
     /**
      * isTwoVersionWhere 
      *  (ru) - проверит соответствует ли условие, условию как ниже (второй вариант)
@@ -163,7 +163,7 @@ class MySql extends Db
      *        (ru) - условие (пример выше, что то типа дерева)
      *        (en) - condition (example above, something like a tree)
      * @return boolean
-     */ 
+     */
     private function isTwoVersionWhere($where)
     {
         $result = true;
@@ -180,7 +180,7 @@ class MySql extends Db
         }
         return $result;
     }
-        
+
     /**
      * getStrOneTypeWhere
      *  (ru) - соберёт строчку с условием определённого вида,
@@ -202,7 +202,7 @@ class MySql extends Db
         }
         return $result;
     }
-    
+
     /**
      * getStrOneTypeWhere
      *  (ru) - соберёт строчку с условием определённого вида,
@@ -228,7 +228,7 @@ class MySql extends Db
         }
         return $result;
     }
-    
+
     /**
      * parseWhereForQuery - парсинг параметров where запроса
      *   массив будет в виде дерева, т.е. конечные массивы должны состоять из 2х элементов 
@@ -236,10 +236,10 @@ class MySql extends Db
      * @param type $i
      * @param type $key2
      * @return type
-     */    
+     */
     private function parseWhereForQuery($where)
     { 
-        
+
         $strWhere = '';
         if ($this->isOneVersionWhere($where)) {
             // (ru) - если условия 1 варианта
@@ -250,13 +250,13 @@ class MySql extends Db
             // (ru) - если условие 2 варианта
             // (en) - if condition 2 options
             $strWhere = $this->getStrTwoTypeWhere($where);
-        } 
+        }
         // (ru) - остальное пока не поддерживается
         // (en) - the rest is not yet supported
         
         return $strWhere;
     }
-        
+
      /**
      * selectDb - запрос типа select. на получение данных
      * @param $db - расурс, коннект к базе данных
@@ -270,17 +270,17 @@ class MySql extends Db
         $query = 'SELECT ';
         $strPropertys = implode(",", $propertys);
 
-        if (!empty($where)) {            
+        if (!empty($where)) {
             $where = ' WHERE '.$this->parseWhereForQuery($where);
         } else {
             $where = '';
         }
-              
+
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
-           
+
         return  $this->query($query);
     }
-    
+
     /**
      * insertDb - вставка, добавление новых строк в базу данных
      * @param string $tableName - имя таблицы 
@@ -290,7 +290,7 @@ class MySql extends Db
     public function insertDb($tableName, $propertys)
     {
         $query = '';
-        
+
         // разбить параметры на два списка через запятую // TODO вынести куда то
         global $crypto;
         $nameProperty = '';
@@ -314,7 +314,7 @@ class MySql extends Db
 
         return  $this->query($query);
     }
-    
+
     /**
      * updateDb - обновить поле таблицы
      * @param string $tableName - имя таблицы
@@ -339,8 +339,8 @@ class MySql extends Db
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$key.'='.$val;
         }
 
-        if (!empty($where)) {            
-            $where = ' WHERE '.$this->parseWhereForQuery($where); 
+        if (!empty($where)) {
+            $where = ' WHERE '.$this->parseWhereForQuery($where);
         } else {
             $where = '';
         }
@@ -353,7 +353,7 @@ class MySql extends Db
     /**
      * createTable - создать таблицу в базе данных
      * @param string $tableName - имя таблицы
-     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
+     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...)
      * @return - false or object result query
      */
     public function createTable($tableName, $propertys)
@@ -383,13 +383,13 @@ class MySql extends Db
         } else {
             $where = '';
         }
-        
+
         $query = 'DELETE FROM '.$tableName.$where;
-                    
+
         return  $this->query($query);
     }
     
-    public function __destruct() 
+    public function __destruct()
     {
         if (!empty($this->db)) {
             $this->close($this->db);

@@ -10,7 +10,7 @@ if ( !empty($data['add-group-name'])
     && !empty( $data['add-group-text'])
     && !empty( $data['groupsActions']['add-group-action-user'])
 ) {
-    
+
     $res = AccessUserGroup::addUserGroup(
         array(
             'code' => $data['add-group-code'],

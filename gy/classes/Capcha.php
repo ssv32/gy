@@ -6,16 +6,16 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
  */
 class Capcha
 {
-    
+
     // символы которые будут в капче
     //private static $letters = 'abcdefghijklmnopqrstuvwxyzABCDRFGHIJKLMNOPQRSTUVWXYZ0123456789';
     //  убрал ноль и буквы о, что бы не было путаниц
-    private static $letters = 'aAbBcCdDeEfFgG1hHiI2jJkK3lLm4MnN5p6PqQr7RsSt8TuUv9VwWxXyYzZ'; 
+    private static $letters = 'aAbBcCdDeEfFgG1hHiI2jJkK3lLm4MnN5p6PqQr7RsSt8TuUv9VwWxXyYzZ';
     
     private $count = 5; // количество символов
     private $code = 5; // код капчи
     private $urlFonts; // путь до шрифта (шрифт нужен что бы поворачивать буквы)
-    public static $defaultUrlFonts = "/fonts/18018.otf"; // 
+    public static $defaultUrlFonts = "/fonts/18018.otf"; //
     
     public function __construct($urlFonts = false)
     {
@@ -38,10 +38,10 @@ class Capcha
      */
     public static function chackCapcha( $code)
     {
-        $arResult = false; 
+        $arResult = false;
         // проверит код с капчи
         if ($_SESSION['capcha'] == mb_strtoupper($code)) { // всё приводится к верхнему регистру что бы пользователю проще было угадать капчу
-            $arResult = true; 
+            $arResult = true;
         }
         self::clearCapcha();
         return $arResult;
@@ -55,7 +55,7 @@ class Capcha
     {
         // задать код в классе
         $this->code = $value;
-        
+
         // записать в сессию значение
         $_SESSION['capcha'] = mb_strtoupper($this->code);
         
@@ -131,15 +131,15 @@ class Capcha
 
             $x = rand(3, 10);
 
-            if ($this->urlFonts == false) { 
+            if ($this->urlFonts == false) {
                 // если не задан шрифт то будет штатным рисоваться но без поворота букв
-                imagestring($img, $font, $x+($i*20), 10+$y,  $code[$i], $text_color);          
-                imagestring($img, $font, $x+1+($i*20), 11+$y,  $code[$i], $text_color); 
-            } else { 
+                imagestring($img, $font, $x+($i*20), 10+$y,  $code[$i], $text_color);
+                imagestring($img, $font, $x+1+($i*20), 11+$y,  $code[$i], $text_color);
+            } else {
                 // иначе заданным шрифтом рисует с поворотом букв
                 $a = 30 - rand(0, 60); // угол от -30 до 30
-                imagettftext($img, $font*3, $a, $x+($i*20), 30+$y, $text_color, $this->urlFonts, $code[$i]); 
-                imagettftext($img, $font*3, $a, $x+1+($i*20), 31+$y, $text_color, $this->urlFonts, $code[$i]); 
+                imagettftext($img, $font*3, $a, $x+($i*20), 30+$y, $text_color, $this->urlFonts, $code[$i]);
+                imagettftext($img, $font*3, $a, $x+1+($i*20), 31+$y, $text_color, $this->urlFonts, $code[$i]);
             }
         }
 

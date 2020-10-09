@@ -8,7 +8,7 @@ class Lang
 
     public function __construct($url, $fileName, $lang)
     {
-        $result = false; 
+        $result = false;
 
         if (!empty($url) && !empty($fileName) && !empty($lang)) {
             //load array text language
@@ -64,5 +64,5 @@ class Lang
 
         return $mess;
     }
-	
+
 }

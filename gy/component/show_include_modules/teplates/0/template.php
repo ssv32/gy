@@ -1,5 +1,5 @@
 <?php
-if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 ?>
 <h2><?=$this->lang->getMessage($arRes['h1']);?></h2>
 <?php if ($arRes['info-modules']) {?>

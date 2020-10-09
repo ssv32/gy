@@ -1,5 +1,5 @@
 <?php
-if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 ?>
 <h3><?=$this->lang->getMessage('title-add');?></h3>

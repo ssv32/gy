@@ -1,4 +1,4 @@
-<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+<?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 
 <div>
     <img src="?capcha_get_image=1" />

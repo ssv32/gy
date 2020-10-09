@@ -1,4 +1,4 @@
-<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+<?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 <h1><?=$this->lang->getMessage('title');?><?=$arParam['id']?></h1>
 
 <?php if (!empty($arRes['dataUser'])) {?>

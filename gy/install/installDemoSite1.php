@@ -146,7 +146,7 @@ function getCodeByUrlPage($page, $lang){
             );
 
         ',
-        'customDir\component\containerdata_element_show\teplates\0\template.php' => '<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+        'customDir\component\containerdata_element_show\teplates\0\template.php' => '<?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 
 <div class="user_custom_div">
     
@@ -164,7 +164,7 @@ function getCodeByUrlPage($page, $lang){
     color: #05ff07;
 }',
         'customDir\component\containerdata_element_show\teplates\0\lang_template.php' => '<?php // языковой файл для шаблона компонента
-if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 $mess[\'rus\'] = array(
     \'add-custom-text\' => \'Сейчас запущен кастомный (пользовательский) шаблон компонента\'

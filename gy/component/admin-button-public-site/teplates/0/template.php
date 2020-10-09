@@ -1,4 +1,4 @@
-<?php if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
+<?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 
 <div class="gy-admin-panel">
     <h2 class="gy-admin-logo">Админка gy framework</h2>

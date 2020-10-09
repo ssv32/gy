@@ -1,5 +1,5 @@
 <?php // шаблон компонента // template component form_auth_test
-if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 if (empty($arRes["auth_ok"])) :?>
     <form>

@@ -1,6 +1,6 @@
 <?php /*<H2><?=$this->lang->getMessage('hi');?></h2>*/?>
 <?php
-if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );
+if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 global $app;
 

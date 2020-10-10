@@ -11,7 +11,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
         if ((!empty($data['container-data-id']) && is_numeric($data['container-data-id'])) && (!empty($data['el-id']) && is_numeric($data['el-id']))) {
 
-            $app->component(
+            $APP->component(
                 'containerdata_element_property',
                 '0',
                 array(

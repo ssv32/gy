@@ -47,14 +47,14 @@ foreach ($arRes['allUsersGroups'] as $key => $value) {
     }
 }
 
-global $user;
+global $USER;
 
 // надо убрать админа из списка что бы права нельзя было менять никому
 unset($data['groupsActions']['admins']);
 
 if (!empty($data['button-form'])
     && ($data['button-form'] == 'Сохранить')
-    && $user->isAdmin() // TODO пока только админы могут это делать
+    && $USER->isAdmin() // TODO пока только админы могут это делать
     && !empty($data['groupsActions'])
 ) { // нужно сохранить новые настроки прав
     foreach ($data['groupsActions'] as $key => $listActionUser) {

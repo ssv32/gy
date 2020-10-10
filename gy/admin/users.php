@@ -1,7 +1,7 @@
 <?php
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 
 $data = $_REQUEST;
 
@@ -14,7 +14,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
         if (isset($data['show-id']) && is_numeric($data['show-id'])) {
             // если есть параметр show-id то просто просмотреть все данные 
             //   по конкретному пользователю
-            $app->component(
+            $APP->component(
                 'show_user',
                 '0',
                 array(
@@ -24,7 +24,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
         } else { // просмотр всех пользователей
             // таблица с пользователями
-            $app->component(
+            $APP->component(
                 'users_all_tables',
                 '0',
                 array()

@@ -78,8 +78,8 @@ class User
 
     /**
      * chackUser - проверить существует ли пользователь
-     * @global type $db
-     * @global type $crypto
+     * @global type $DB
+     * @global type $CRYPTO
      * @param type $log - логин
      * @param type $pass - пароль
      * @return booleand
@@ -88,24 +88,24 @@ class User
     {
         $result = false;
 
-        global $db;
-        global $crypto;
+        global $DB;
+        global $CRYPTO;
 
-        $res = $db->selectDb(
+        $res = $DB->selectDb(
             $this->tableName, 
             array('*'),
             array(
                 'AND' => array( 
                     array('=' => array('login', "'".$log."'" ) ),
-                    array( '=' => array('pass',"'".md5($pass.$crypto->getSole())."'") )
+                    array( '=' => array('pass',"'".md5($pass.$CRYPTO->getSole())."'") )
                 ),
             )
         );
 
-        if ($arRes = $db->fetch($res)) {
+        if ($arRes = $DB->fetch($res)) {
 
-            //$this->setUserCookie($arRes['id'] , $crypto->getRandString());
-            $this->setUserCookie($arRes['id'] , $crypto->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
+            //$this->setUserCookie($arRes['id'] , $CRYPTO->getRandString());
+            $this->setUserCookie($arRes['id'] , $CRYPTO->getStringForUserCookie($arRes['login'], $arRes['name'], $arRes['id']));
             $result = true;
         }
 
@@ -115,7 +115,7 @@ class User
 
     /**
      * setUserCookie - установить пользовательскую куку
-     * @global type $db
+     * @global type $DB
      * @param int $userId - id пользователя
      * @param string $StringCookie - строка, значение куки
      * @return boolean
@@ -123,9 +123,9 @@ class User
     protected function setUserCookie($userId, $StringCookie)
     {
         setcookie($this->nameCookie, $StringCookie, 0, '/');
-        global $db;
+        global $DB;
 
-        $res = $db->updateDb(
+        $res = $DB->updateDb(
             $this->tableName,
             array('hash_auth' => $StringCookie),
             array( '=' => array('id' , $userId ) )
@@ -137,7 +137,7 @@ class User
     /**
      * deleteUserCookie - удалить пользовательскую куку
      * @global type $_COOKIE
-     * @global type $db
+     * @global type $DB
      * @param int $userId - id пользователя
      * @return boolean
      */
@@ -145,9 +145,9 @@ class User
     {
         global $_COOKIE;
         unset($_COOKIE[$this->nameCookie]);
-        global $db;
+        global $DB;
 
-        $res = $db->updateDb(
+        $res = $DB->updateDb(
             $this->tableName, 
             array('hash_auth' => 'NULL'),
             array( '=' => array('id' , $userId ) )
@@ -189,7 +189,7 @@ class User
 
     /**
      * findUserByCookie - найти пользователя по значению куки
-     * @global type $db
+     * @global type $DB
      * @param string $cookie
      * @return array - данные пользователя
      */
@@ -197,15 +197,15 @@ class User
     {
         $result = false;
 
-        global $db;
+        global $DB;
 
-        $res = $db->selectDb(
+        $res = $DB->selectDb(
             $this->tableName,
             array('*'), 
             array( '=' => array('hash_auth', "'".$cookie."'") )
         );
 
-        if ($arRes = $db->fetch($res)) {
+        if ($arRes = $DB->fetch($res)) {
             $result = $arRes;
         }
 
@@ -223,19 +223,19 @@ class User
 
     /**
      * getAllDataUsers - получить данные по пользователю 
-     * @global type $db
+     * @global type $DB
      * @return array
      */
     public function getAllDataUsers()
     {
         $result = array();
 
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             $this->tableName,
             array('*')
         );
-        $result = $db->fetchAll($res, false);
+        $result = $DB->fetchAll($res, false);
 
         // получить группы пользователей
         foreach ($result as $key => $value) {
@@ -247,22 +247,22 @@ class User
 
     /**
      * getUserById - получить данные по пользователю по id
-     * @global type $db
+     * @global type $DB
      * @param type $id
      * @return array
      */
     public function getUserById($id)
     {
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             $this->tableName,
             array('*'),
             array(
                 '=' => array('id', $id)
             )
         );
-        $result = $db->fetch($res, false);
+        $result = $DB->fetch($res, false);
 
         if (!empty($result)) {
             // получить группы текущего пользователя
@@ -274,8 +274,7 @@ class User
 
     /**
      * addUsers - добавить пользователя
-     * @global type $db
-     * @global type $crypto
+     * @global type $DB
      * @param type $data
      * @return boolean
      */
@@ -284,8 +283,8 @@ class User
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;
-        $res = $db->insertDb($this->tableName, $data);
+        global $DB;
+        $res = $DB->insertDb($this->tableName, $data);
 
         if ($res) {
             $result = true;
@@ -296,7 +295,7 @@ class User
 
     /**
      * updateUserById - обновление данных пользователя
-     * @global type $db
+     * @global type $DB
      * @param int $userId - id пользователя
      * @param array $arParams - данные пользователя
      * @return boolean
@@ -307,8 +306,8 @@ class User
 
         unset($arParams['id']);
 
-        global $db;
-        $res = $db->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
+        global $DB;
+        $res = $DB->updateDb($this->tableName, $arParams, array('=' => array('id', $userId)));
 
         if ($res) {
             $result = true;
@@ -319,7 +318,7 @@ class User
 
     /**
      * deleteUserById - удалить пользователя
-     * @global type $db
+     * @global type $DB
      * @param int $id_user - id пользователя
      * @return string
      */
@@ -328,9 +327,9 @@ class User
         $result = false;
 
         if (is_numeric($id_user) && ($id_user != 1)) {
-            global $db;
+            global $DB;
 
-            $res = $db->deleteDb($this->tableName, array('='=>array('id', $id_user)));
+            $res = $DB->deleteDb($this->tableName, array('='=>array('id', $id_user)));
 
             if ($res) {
                 $result = true;

@@ -1,14 +1,14 @@
 <?php
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 
 if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
     include "../../gy/admin/header-admin.php";
 
     if (AccessUserGroup::accessThisUserByAction('action_all')) {
-        $app->component(
+        $APP->component(
             'gy_options',
             '0',
             array()

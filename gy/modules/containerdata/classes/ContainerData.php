@@ -26,14 +26,14 @@ class ContainerData
     public static function getContainerData($arFilter, $arProperty)
     {
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             self::$table_container_data,
             $arProperty,
             $arFilter
         );
 
-        $result = $db->fetchAll($res, false);
+        $result = $DB->fetchAll($res, false);
 
         return $result;
     }
@@ -47,8 +47,8 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;
-        $res = $db->insertDb(self::$table_container_data, $arParams);
+        global $DB;
+        $res = $DB->insertDb(self::$table_container_data, $arParams);
 
         if ($res) {
             $result = true;
@@ -59,7 +59,7 @@ class ContainerData
 
     /**
      * deleteContainerData - удалить ContainerData
-     * @global type $db
+     * @global type $DB
      * @param type $arParams
      * @return boolean
      */
@@ -68,28 +68,28 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;
-        $res = $db->deleteDb(self::$table_container_data, array('=' => array('id', $id)));
+        global $DB;
+        $res = $DB->deleteDb(self::$table_container_data, array('=' => array('id', $id)));
 
         if ($res) {
 
             //нужно удалить все элементы связанные с ним свойства и значения свойств
 
-            $db->deleteDb( // удалить значения свойств свойств html
+            $DB->deleteDb( // удалить значения свойств свойств html
                 self::$table_value_propertys_type_html,
                 array('=' => array('id_container_data', $id) )
             );
-            $db->deleteDb( // удалить значения свойств свойств number
+            $DB->deleteDb( // удалить значения свойств свойств number
                 self::$table_value_propertys_type_number, 
                 array('=' => array('id_container_data', $id) )
             );
 
-            $db->deleteDb( // удалить элементы container-data
+            $DB->deleteDb( // удалить элементы container-data
                 self::$table_element_container_data,
                 array('=' => array('id_container_data', $id) )
             );
 
-            $db->deleteDb( // удалить свойства container-data
+            $DB->deleteDb( // удалить свойства container-data
                 self::$table_list_propertys_container_data,
                 array('=' => array('id_container_data', $id) )
             );
@@ -102,7 +102,7 @@ class ContainerData
 
     /**
      * deleteContainerData - удалить ContainerData
-     * @global type $db
+     * @global type $DB
      * @param type $arParams
      * @return boolean
      */
@@ -110,8 +110,8 @@ class ContainerData
     {
         $result = false;
 
-        global $db;
-        $res = $db->updateDb(self::$table_container_data, $arParams, $where);
+        global $DB;
+        $res = $DB->updateDb(self::$table_container_data, $arParams, $where);
 
         if ($res) {
             $result = true;
@@ -128,14 +128,14 @@ class ContainerData
     {
 
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             self::$table_types_property_container_data,
             array('*'),
             array()
         );
 
-        $result = $db->fetchAll($res);
+        $result = $DB->fetchAll($res);
 
         return $result;
     }
@@ -147,14 +147,14 @@ class ContainerData
     public static function getPropertysContainerData($where)
     {
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             self::$table_list_propertys_container_data,
             array('*'),
             $where
         );
 
-        $result = $db->fetchAll($res);
+        $result = $DB->fetchAll($res);
 
         return $result;
     }
@@ -169,8 +169,8 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;
-        $res = $db->insertDb(self::$table_list_propertys_container_data, $arParams);
+        global $DB;
+        $res = $DB->insertDb(self::$table_list_propertys_container_data, $arParams);
 
         if ($res) {
             $result = true;
@@ -191,8 +191,8 @@ class ContainerData
     public static function getValuePropertysContainerData($idContainerData, $idElementContainerData, $idProperty,  $tableName)
     {
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             $tableName,
             array('*'),
             array(
@@ -204,7 +204,7 @@ class ContainerData
             )
         );
 
-        if ($arRes = $db->fetch($res)) {
+        if ($arRes = $DB->fetch($res)) {
             $result = $arRes;
         }
         return $result;
@@ -222,8 +222,8 @@ class ContainerData
     public static function addValuePropertyContainerData($idContainerData, $idElementContainerData, $idProperty,  $tableName, $value)
     {
         $result = false;
-        global $db;
-        $res = $db->insertDb(
+        global $DB;
+        $res = $DB->insertDb(
             $tableName, 
             array(
                 'id_container_data' => $idContainerData,
@@ -240,7 +240,7 @@ class ContainerData
 
     /**
      * updateValuePropertyContainerData - обновить значение свойства элемента container-data
-     * @global type $db
+     * @global type $DB
      * @param type $tableName
      * @param type $id
      * @param type $value
@@ -249,9 +249,9 @@ class ContainerData
     public static function updateValuePropertyContainerData($tableName, $id, $value)
     {
         $result = false;
-        global $db;
+        global $DB;
 
-        $res = $db->updateDb(
+        $res = $DB->updateDb(
             $tableName, 
             array('value' => $value), 
             array(
@@ -274,8 +274,8 @@ class ContainerData
     {
 
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             self::$table_element_container_data,
             array('*'),
             array(
@@ -283,7 +283,7 @@ class ContainerData
             )
         );
 
-        $result = $db->fetchAll($res, false);
+        $result = $DB->fetchAll($res, false);
         
         return $result;
     }
@@ -296,14 +296,14 @@ class ContainerData
     public static function getElementContainerData($where){
 
         $result = array();
-        global $db;
-        $res = $db->selectDb(
+        global $DB;
+        $res = $DB->selectDb(
             self::$table_element_container_data,
             array('*'),
             $where
         );
 
-        $result = $db->fetch($res, false);
+        $result = $DB->fetch($res, false);
 
         return $result;
     }
@@ -318,8 +318,8 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;
-        $res = $db->insertDb(self::$table_element_container_data, $arParams);
+        global $DB;
+        $res = $DB->insertDb(self::$table_element_container_data, $arParams);
 
         if ($res) {
             $result = true;
@@ -337,16 +337,16 @@ class ContainerData
     {
         $result = false;
 
-        global $db;
-        $res = $db->deleteDb(self::$table_element_container_data, array('=' => array('id', $id)));
+        global $DB;
+        $res = $DB->deleteDb(self::$table_element_container_data, array('=' => array('id', $id)));
 
         if ($res) {
             // надо удалить все свойства этого элемента
-            $db->deleteDb( // удалить всё для свойств html
+            $DB->deleteDb( // удалить всё для свойств html
                 self::$table_value_propertys_type_html, 
                 array('=' => array('id_element_container_data', $id) )  
             );
-            $db->deleteDb( // удалить всё для свойств number
+            $DB->deleteDb( // удалить всё для свойств number
                 self::$table_value_propertys_type_number, 
                 array('=' => array('id_element_container_data', $id) )  
             );
@@ -368,8 +368,8 @@ class ContainerData
         $result = false;
 
         // id, login, name, pass, groups
-        global $db;
-        $res = $db->updateDb(self::$table_element_container_data, $arParams, $where);
+        global $DB;
+        $res = $DB->updateDb(self::$table_element_container_data, $arParams, $where);
 
         if ($res) {
             $result = true;
@@ -387,7 +387,7 @@ class ContainerData
     public static function deletePropertyContainerData($idProperty, $containerData)
     {
         //---надо взять все имеющиеся для этого свойства значения у элементов и удалить тоже
-        global $db;
+        global $DB;
 
         // взять все типы контент блоков что бы знать в каких таблицах искать значения
         $dataTypeProperty = ContainerData::getAllTypePropertysContainerData();
@@ -405,10 +405,10 @@ class ContainerData
         $tableName = $dataTypeProperty[$propertyContainerData[$idProperty]['id_type_property']]['name_table'];
 
         // удалить для всех элементов значения свойства           
-        $db->deleteDb($tableName, array('=' => array('id_property_container_data', $idProperty) )  );
+        $DB->deleteDb($tableName, array('=' => array('id_property_container_data', $idProperty) )  );
 
         // удалить само свойство container-data
-        $db->deleteDb(static::$table_list_propertys_container_data, array('=' => array('id', $idProperty) )  );
+        $DB->deleteDb(static::$table_list_propertys_container_data, array('=' => array('id', $idProperty) )  );
 
         ////---
         return true; // TODO доделать что бы был ещё false

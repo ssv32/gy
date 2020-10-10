@@ -3,8 +3,8 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 $data = $_REQUEST;
 
-global $user;
-$arRes['allUsers'] = $user->getAllDataUsers();
+global $USER;
+$arRes['allUsers'] = $USER->getAllDataUsers();
 
 // взять все группы пользователей
 $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
@@ -15,7 +15,7 @@ if (!empty($data['del-id'])
     && ($data['del-id'] != 1)
     && AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
 ) {
-    $res = $user->deleteUserById($data['del-id']);
+    $res = $USER->deleteUserById($data['del-id']);
     if ($res) {
         $arRes['del-stat'] = 'ok';
     } else {

@@ -3,9 +3,9 @@
 <div class="gy-admin-panel">
     <h2 class="gy-admin-logo">Админка gy framework</h2>
     <?php
-    global $app;
-    if (!empty($app->options['v-gy'])) {?>
-        <span class="version-gy-core-admin-panel">v <?=$app->options['v-gy']?></span>
+    global $APP;
+    if (!empty($APP->options['v-gy'])) {?>
+        <span class="version-gy-core-admin-panel">v <?=$APP->options['v-gy']?></span>
         <br/>
     <?php }?>
     <div>

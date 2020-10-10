@@ -2,8 +2,8 @@
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 if (!empty($this->arParam['id']) && is_numeric($this->arParam['id'])) {
-    global $user;
-    $dateUser = $user->getUserById($this->arParam['id']);
+    global $USER;
+    $dateUser = $USER->getUserById($this->arParam['id']);
 
     if (!empty($dateUser)) {
         // взять все группы пользователей

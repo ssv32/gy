@@ -1,7 +1,7 @@
 <?php
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 $data = $_REQUEST;
 
 if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
@@ -15,7 +15,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     if (AccessUserGroup::accessThisUserByAction( 'edit_users')) {
 
         // редактирование общих свойств пользователей
-        $app->component(
+        $APP->component(
             'edit-users-propertys',
             '0',
             array(

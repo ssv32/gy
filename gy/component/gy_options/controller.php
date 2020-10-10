@@ -1,14 +1,14 @@
 <?php 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-global $app;
+global $APP;
 
 $data = $_POST;
 
 if (!empty($data['cacheClear'])) {
     // нужно удалить все файлы из раздела /gy/cache/
 
-    $files = glob($app->url.'/cache/*');
+    $files = glob($APP->url.'/cache/*');
     foreach ($files as $file) {
         if (is_file($file)) {
             unlink($file);
@@ -27,7 +27,7 @@ $arRes['langs'] = array(
     'eng'
 );
 
-$arRes['this-lang'] = $app->options['lang'];
+$arRes['this-lang'] = $APP->options['lang'];
 
 if (!empty($data['save']) && in_array($data['lang'], $arRes['langs'])) {
 

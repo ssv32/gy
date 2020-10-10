@@ -1,7 +1,7 @@
 <?php 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-//global $user;
+//global $USER;
 //$arRes['ITEMS'] = ContainerData::getContainerData(array(), array('*') );
 
 // найти текущие значения

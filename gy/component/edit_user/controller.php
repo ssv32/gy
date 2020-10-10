@@ -18,7 +18,7 @@ if ($notUpdatePass) {
     unset($arRes['user_property']['pass']);
 }
 
-global $user;
+global $USER;
 
 // взять все группы пользователей
 $arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
@@ -38,7 +38,7 @@ function checkProperty($arr, $arRes){
                 $result = false;
             }
 
-            if (!empty($arr['groups']['admins']) && !$user->isAdmin()) { // TODO протестировать
+            if (!empty($arr['groups']['admins']) && !$USER->isAdmin()) { // TODO протестировать
                 $result = false;
             }
         }
@@ -49,7 +49,7 @@ function checkProperty($arr, $arRes){
 
 // получить данные пользователя
 if (!empty($this->arParam['id-user'])) {
-    $arRes['userData'] = $user->getUserById($this->arParam['id-user']);
+    $arRes['userData'] = $USER->getUserById($this->arParam['id-user']);
     unset($arRes['userData']['pass']);
 }
 
@@ -76,8 +76,8 @@ if (!empty($data['Сохранить'])
         }
 
         // обновить данные пользователя
-        global $user;
-        $res = $user->updateUserById($data['edit-id'], $dataUpdateUser);
+        global $USER;
+        $res = $USER->updateUserById($data['edit-id'], $dataUpdateUser);
 
         if ($res) {
             $arRes["stat"] = 'ok';

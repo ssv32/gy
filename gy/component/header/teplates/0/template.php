@@ -1,5 +1,5 @@
 <?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
-global $app;
+global $APP;
 ?>
 
 <html>
@@ -7,7 +7,7 @@ global $app;
         <?php
         // вывести title и СЕО метатеги
         if (!empty($arParam['seo-meta-tag-head'])) {
-            $app->component(
+            $APP->component(
                 'hed-meta-tag-seo',
                 '0',
                 $arParam['seo-meta-tag-head']

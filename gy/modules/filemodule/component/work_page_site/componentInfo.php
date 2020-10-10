@@ -1,9 +1,9 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-global $app;
+global $APP;
 $utlThisComponent = "/gy/modules/filemodule/component/work_page_site/";
-$langComponentInfo = new Lang($app->urlProject.$utlThisComponent, 'componentInfo', $app->options['lang']);
+$langComponentInfo = new Lang($APP->urlProject.$utlThisComponent, 'componentInfo', $APP->options['lang']);
 
 $componentInfo = array(
     'name' => 'work_page_site',

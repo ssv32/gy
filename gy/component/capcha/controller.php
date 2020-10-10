@@ -1,11 +1,11 @@
 <?php 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-global $app;
+global $APP;
 
 $arRes = array();
 
-$capcha = new Capcha( $app->url.capcha::$defaultUrlFonts );
+$capcha = new Capcha( $APP->url.capcha::$defaultUrlFonts );
 
 $data = $_REQUEST;
 

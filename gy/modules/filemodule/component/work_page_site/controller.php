@@ -8,8 +8,8 @@ global $arRes;
 // создание страницы сайта
 if (!empty($data['action-1'])) {
     
-    global $app;
-    $sitePage = new SitePages($app->urlProject.'/');
+    global $APP;
+    $sitePage = new SitePages($APP->urlProject.'/');
 
     $res = $sitePage->createSitePage($data['url-site-page']);
     
@@ -23,8 +23,8 @@ if (!empty($data['action-1'])) {
 // удаление страницы
 if (!empty($data['action-3']) && empty($arRes['status'])) {
 
-    global $app;
-    $sitePage = new SitePages($app->urlProject.'/');
+    global $APP;
+    $sitePage = new SitePages($APP->urlProject.'/');
 
     $res = $sitePage->deleteSitePage($data['url-site-page']);
 
@@ -38,8 +38,8 @@ if (!empty($data['action-3']) && empty($arRes['status'])) {
 // изменение страницы
 if (!empty($data['action-2']) && empty($arRes['status'])) {
 
-    global $app;
-    $sitePage = new SitePages($app->urlProject.'/');
+    global $APP;
+    $sitePage = new SitePages($APP->urlProject.'/');
 
     $res = $sitePage->getContextPage($data['url-site-page']);
 
@@ -54,8 +54,8 @@ if (!empty($data['action-2']) && empty($arRes['status'])) {
 
 // изменение файла
 if (!empty($data['action-2-1']) && !empty($data['url-site-page']) && !empty($data['new-text-page'])) {
-    global $app;
-    $sitePage = new SitePages($app->urlProject.'/');
+    global $APP;
+    $sitePage = new SitePages($APP->urlProject.'/');
 
     $res = $sitePage->putContextPage($data['url-site-page'], $data['new-text-page']);
     if ($res !== false) {
@@ -72,17 +72,17 @@ if (!empty($data['action-4'])) {
 
 if (!empty($data['action-5'])) {
     // сохраним основной app обьект
-    global $app;
-    $appGlobal = $app;
+    global $APP;
+    $APPGlobal = $APP;
 
     // переопределим app
-    $app = new AppFromConstructorPageComponent($app->urlProject, $app->options );
+    $APP = new AppFromConstructorPageComponent($APP->urlProject, $APP->options );
 
-    $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
+    $url = $APPGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
 
     include $url; // !! надо не подключать ядро
 
-    $arRes['dataIncludeAllComponentsInThisPageSite'] = $app->getAllDataIncludeComponents();
+    $arRes['dataIncludeAllComponentsInThisPageSite'] = $APP->getAllDataIncludeComponents();
     
     // хочу найти поля обьявленные в компоненте как возможные но не заполненные в коде
     foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $value) {
@@ -98,15 +98,15 @@ if (!empty($data['action-5'])) {
     $arRes['url-site-page'] = $data['url-site-page'];
 
     // вернём как было
-    $app = $appGlobal;
-    unset($appGlobal);
+    $APP = $APPGlobal;
+    unset($APPGlobal);
     $arRes['status'] = 'constructor';
 }
 
 function getCodePageByArrayComponents($arrayComponents){
     $codePage = '<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
-global $app;
+global $APP;
 
     ';
 
@@ -123,8 +123,8 @@ global $app;
 function savePageByArrayComponents($page, $arrayComponents){
     $codePage = getCodePageByArrayComponents($arrayComponents);
 
-    global $app;
-    $sitePage = new SitePages($app->urlProject.'/');
+    global $APP;
+    $sitePage = new SitePages($APP->urlProject.'/');
 
     $res = $sitePage->putContextPage( $page, $codePage);
 
@@ -216,14 +216,14 @@ if (!empty($data['action_8_1'])) {
             $data['name_new_template'] = '0';
         }
 
-        global $app;
+        global $APP;
 
         // проверим есть ли такой компонент (точнее файл информации о нём)
         $dataComponent = AppFromConstructorPageComponent::getInfoAboutComponent(
             $data['name_new_component'], 
             $data['name_new_template'],
             array(),
-            $app->urlProject
+            $APP->urlProject
         );
 
         if (!empty($dataComponent)) {
@@ -256,20 +256,20 @@ if( !empty($data['action_8_2'])
     // надо взять все компоненты с редактируемой страницы
 
     // сохраним основной app обьект
-    global $app;
-    $appGlobal = $app;
+    global $APP;
+    $APPGlobal = $APP;
 
     // переопределим app
-    $app = new AppFromConstructorPageComponent($app->urlProject, $app->options );
+    $APP = new AppFromConstructorPageComponent($APP->urlProject, $APP->options );
 
-    $url = $appGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
+    $url = $APPGlobal->urlProject.((!empty($data['url-site-page']))? "/" : "").$data['url-site-page']."/index.php";
 
     include $url; // !! надо не подключать ядро
 
-    $allComponentsThisPage = $app->getAllDataIncludeComponents();
+    $allComponentsThisPage = $APP->getAllDataIncludeComponents();
     // вернём как было
-    $app = $appGlobal;
-    unset($appGlobal);
+    $APP = $APPGlobal;
+    unset($APPGlobal);
 
     $newArrayComponents = array();
 

@@ -10,8 +10,8 @@ if (empty($arRes["auth_ok"])) :?>
         <?php }?>
 
         <?php // показать капчу
-        global $app;
-        $app->component(
+        global $APP;
+        $APP->component(
             'capcha',
             '0',
             array( 

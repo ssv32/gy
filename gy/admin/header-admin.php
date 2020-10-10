@@ -1,12 +1,12 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
-global $app;
-global $user;
+global $APP;
+global $USER;
 
 $langTextThisFile = new Lang(
-    $app->urlProject."/gy/admin", 
+    $APP->urlProject."/gy/admin", 
     'header-admin', 
-    $app->options['lang']
+    $APP->options['lang']
 );
 ?>
 
@@ -24,9 +24,9 @@ $langTextThisFile = new Lang(
             <?=$langTextThisFile->getMessage('title')?>
         </h2>
         <?php
-        if (!empty($app->options['v-gy'])) {
+        if (!empty($APP->options['v-gy'])) {
         ?>
-            <span class="version-gy-core">v <?=$app->options['v-gy']?></span>
+            <span class="version-gy-core">v <?=$APP->options['v-gy']?></span>
             <br/>
         <?php
         }
@@ -44,7 +44,7 @@ $langTextThisFile = new Lang(
             $menu[$buttonName] = '/gy/admin/index.php';
 
             if (AccessUserGroup::accessThisUserByAction( 'edit_users') 
-                || $user->isAdmin()
+                || $USER->isAdmin()
             ) {
                 $buttonName = $langTextThisFile->getMessage('users');
                 $menu[$buttonName] = '/gy/admin/users.php';
@@ -60,7 +60,7 @@ $langTextThisFile = new Lang(
                             $module->getFlagShowButtonsAdminPanelByModule[$nameModule]
                         ) 
                     )
-                    || $user->isAdmin()
+                    || $USER->isAdmin()
                 ) {
                     foreach ($arButton as $buttonName => $buttonUrl) {
                         $menu[$buttonName] = $buttonUrl;
@@ -70,12 +70,12 @@ $langTextThisFile = new Lang(
 
             $menu[ $langTextThisFile->getMessage('modules') ] = '/gy/admin/modules.php';
             
-            if ($user->isAdmin()) {
+            if ($USER->isAdmin()) {
                 $menu[ $langTextThisFile->getMessage('options') ] = '/gy/admin/options.php';
             }
 
             // menu
-            $app->component(
+            $APP->component(
                 'menu',
                 '0',
                 array(

@@ -30,7 +30,7 @@ function checkProperty($arr, $arRes){
                 $result = false;
             }
 
-            if (!empty($arr['groups']['admins']) && !$user->isAdmin()) { // TODO протестировать
+            if (!empty($arr['groups']['admins']) && !$USER->isAdmin()) { // TODO протестировать
                 $result = false;
             }
         }
@@ -42,7 +42,7 @@ function checkProperty($arr, $arRes){
 if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
     if (checkProperty($data, $arRes)) {
         // добавление пользователя
-        global $user;
+        global $USER;
         $arDaraUser = array();
         foreach ($arRes['user_property'] as $val) {
             $arDaraUser[$val] = $data[$val];
@@ -51,21 +51,21 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
         // убрать группы из добавления
         unset($arDaraUser['groups']);
 
-        if ($user->addUsers($arDaraUser)) {
+        if ($USER->addUsers($arDaraUser)) {
             // найти id добавленного пользователя
-            global $db;
-            global $crypto;
-            $res = $db->selectDb(
-                $user->tableName,
+            global $DB;
+            global $CRYPTO;
+            $res = $DB->selectDb(
+                $USER->tableName,
                 array('*'),
                 array(
                     'AND' => array(
                         array('=' => array('login', "'".$arDaraUser['login']."'")),
-                        array('=' => array('pass', "'".md5($arDaraUser['pass'].$crypto->getSole())."'") )
+                        array('=' => array('pass', "'".md5($arDaraUser['pass'].$CRYPTO->getSole())."'") )
                     )
                 )
             );
-            $dataAddNewUser = $db->fetch($res);
+            $dataAddNewUser = $DB->fetch($res);
 
             // добавить пользователя к указанным группам
             AccessUserGroup::deleteUserInAllGroups($dataAddNewUser['id']);

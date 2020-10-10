@@ -7,7 +7,7 @@ $result = array(
 
 $data = $_REQUEST;
 
-global $user;
+global $USER;
 
 if ( AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
     && !empty($data['action'])
@@ -15,7 +15,7 @@ if ( AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     // действие удалить пользователя
     if (($data['action'] == 'user-del') && !empty($data['id-user'])) {
 
-        $res = $user->deleteUserById($data['id-user']);
+        $res = $USER->deleteUserById($data['id-user']);
         if ($res) {
             $result['stat'] = 'ok';
         }

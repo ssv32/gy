@@ -2,14 +2,14 @@
 
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 
-if ($user->isAdmin()) {
+if ($USER->isAdmin()) {
 
     include "../../gy/admin/header-admin.php";
 
     // редактирование общих свойств пользователей
-    $app->component(
+    $APP->component(
         'edit-all-users-propertys',
         '0',
         array()

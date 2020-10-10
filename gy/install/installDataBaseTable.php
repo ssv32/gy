@@ -3,18 +3,18 @@
 
 global $argv;
 $isRunConsole = isset($argv);
-$br = "\n";
+$BR = "\n";
 
 if ($isRunConsole) {
 
     include __DIR__."/../gy.php"; // подключить ядро // include core
 
-    echo $br.'-----install gy core taldes db-----';
-    echo $br.'install user table = start';
+    echo $BR.'-----install gy core taldes db-----';
+    echo $BR.'install user table = start';
 
-    global $db;
+    global $DB;
 
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'users',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -27,11 +27,11 @@ if ($isRunConsole) {
     );
 
    // if ($res === true){
-        echo $br.'install user table = OK!';
+        echo $BR.'install user table = OK!';
 
-        echo $br.'add admin user (and test user) = start';
+        echo $BR.'add admin user (and test user) = start';
 
-        $res = $db->insertDb(
+        $res = $DB->insertDb(
             'users',
             array(
                 'login' => 'admin',
@@ -41,7 +41,7 @@ if ($isRunConsole) {
             )
         );
 
-        $res = $db->insertDb(
+        $res = $DB->insertDb(
             'users',
             array(
                 'login' => 'asd',
@@ -52,20 +52,20 @@ if ($isRunConsole) {
         );
 
 //        if($res === true){
-            echo $br.'add admin user = OK!';
+            echo $BR.'add admin user = OK!';
 //        }else{
-//            echo $br.'add admin user = ERROR!';
+//            echo $BR.'add admin user = ERROR!';
 //        }
 //    }else{
-//        echo $br.'install user table = ERROR!';
+//        echo $BR.'install user table = ERROR!';
 //    }
 
     // задать группы прав доступа и действия разрешаемые для пользователей групп
-    echo $br.'install access users = start';
+    echo $BR.'install access users = start';
     
     // это действия пользователей к которые можно указать для группы пользователей
     //  суда нужно добавлять новые при появление нового в админке и прочего (модули если будут сделаны в этой версии)
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'action_user',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -75,7 +75,7 @@ if ($isRunConsole) {
     );
 
 
-    $db->insertDb(
+    $DB->insertDb(
         'action_user',
         array(
             'code' => 'show_admin_panel',
@@ -83,7 +83,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'action_user',
         array(
             'code' => 'action_all',
@@ -91,7 +91,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'action_user',
         array(
             'code' => 'edit_users',
@@ -100,11 +100,11 @@ if ($isRunConsole) {
     );
 
 
-    echo $br.'install access users = OK!';
+    echo $BR.'install access users = OK!';
 
-    echo $br.'install user groups (add action user) = start';
+    echo $BR.'install user groups (add action user) = start';
     // это группы (пользователей) прав доступа
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'access_group',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -115,7 +115,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'access_group',
         array(
             'code' => 'admins',
@@ -124,7 +124,7 @@ if ($isRunConsole) {
             'code_action_user' => 'action_all'
         )
     );
-    $db->insertDb(
+    $DB->insertDb(
         'access_group',
         array(
             'code' => 'admins',
@@ -134,7 +134,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'access_group',
         array(
             'code' => 'content',
@@ -144,7 +144,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'access_group',
         array(
             'code' => 'user_admin',
@@ -153,7 +153,7 @@ if ($isRunConsole) {
             'code_action_user' => 'edit_users'
         )
     );
-    $db->insertDb(
+    $DB->insertDb(
         'access_group',
         array(
             'code' => 'user_admin',
@@ -163,11 +163,11 @@ if ($isRunConsole) {
         )
     );
 
-    echo $br.'install user groups = OK!';
+    echo $BR.'install user groups = OK!';
 
-    echo $br.'add users in user groups = start';
+    echo $BR.'add users in user groups = start';
     // в этой таблице будут группы и относящиеся к ним пользователи
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'users_in_groups',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -178,7 +178,7 @@ if ($isRunConsole) {
 
 
 
-    $db->insertDb(
+    $DB->insertDb(
         'users_in_groups',
         array(
             'code_group' => 'admins',
@@ -186,7 +186,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'users_in_groups',
         array(
             'code_group' => 'user_admin',
@@ -194,12 +194,12 @@ if ($isRunConsole) {
         )
     );
 
-    echo $br.'add users in user groups = OK';
+    echo $BR.'add users in user groups = OK';
 
     // общие свойства для пользователей
-    echo $br.'install all users propertys = start';
+    echo $BR.'install all users propertys = start';
     // таблица с общими свойствами (список общих свойств для всех пользователей)
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'create_all_users_property',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -210,7 +210,7 @@ if ($isRunConsole) {
     );
 
     // типы общих свойств для пользователей
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'type_all_user_propertys',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -220,7 +220,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'type_all_user_propertys',
         array(
             'name_type' => 'text',
@@ -230,7 +230,7 @@ if ($isRunConsole) {
     );
 
     // значения общего свойства типа текст
-    $res = $db->createTable(
+    $res = $DB->createTable(
         'value_all_user_propertys_text',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -240,17 +240,17 @@ if ($isRunConsole) {
         )
     );
 
-    echo $br.'install all users propertys = OK';
+    echo $BR.'install all users propertys = OK';
 
-    echo $br.'install all modules db = start';
+    echo $BR.'install all modules db = start';
 
     // теперь установка частей БД относящихся к модулям
     $module = Module::getInstance();
     $module->installBdAllModules();
 
-    echo $br.'install all modules db = OK!';
+    echo $BR.'install all modules db = OK!';
 
-    echo $br.'-----install gy core taldes db = OK!-----'.$br;
+    echo $BR.'-----install gy core taldes db = OK!-----'.$BR;
 
 } else {
     echo '! Error. You need to run the script in the console';

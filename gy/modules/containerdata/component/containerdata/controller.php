@@ -13,7 +13,7 @@ if (!empty($data['ID']) && is_numeric($data['ID'])) {
     }
 }
 
-global $user;
+global $USER;
 $arRes['ITEMS'] = ContainerData::getContainerData(array(), array('*') );
 
 // показать шаблон

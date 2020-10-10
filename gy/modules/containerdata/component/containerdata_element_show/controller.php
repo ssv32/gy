@@ -14,9 +14,9 @@ if (!empty($this->arParam['container-data-code']) && !empty($this->arParam['elem
     $isCache = (!empty($this->arParam['cacheTime']) && is_numeric($this->arParam['cacheTime']));
 
     if ($isCache) {
-        global $app;
-        global $cacheClassName;
-        $cache = new $cacheClassName($app->url);
+        global $APP;
+        global $CACHE_CLASS_NAME;
+        $cache = new $CACHE_CLASS_NAME($APP->url);
         $initCache = $cache->cacheInit('component_container_data_element_show', $this->arParam['cacheTime']);
     }
 

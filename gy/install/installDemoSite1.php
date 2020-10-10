@@ -62,7 +62,7 @@ function getCodeByUrlPage($page, $lang){
     $arrayCodeByUrl = array(
         'index.php' => '<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
-            $app->component(
+            $APP->component(
                 \'header\',
                 \'0\',
                 array(
@@ -74,13 +74,13 @@ function getCodeByUrlPage($page, $lang){
                 )
             );
 
-            $app->component(
+            $APP->component(
                 \'admin-button-public-site\',
                 \'0\',
                 array()
             );
 
-            $app->component(
+            $APP->component(
                 \'includeHtml\',
                 \'0\',
                 array(
@@ -89,7 +89,7 @@ function getCodeByUrlPage($page, $lang){
             );
 
             // пример вызова одинаковых компонентов // example run two component 
-            $app->component(
+            $APP->component(
                 \'includeHtml\',
                 \'0\',
                 array(
@@ -97,7 +97,7 @@ function getCodeByUrlPage($page, $lang){
                 )
             );
 
-            $app->component(
+            $APP->component(
                 \'form_auth_test\',
                 \'0\',
                 array( 
@@ -107,7 +107,7 @@ function getCodeByUrlPage($page, $lang){
             );
 
              // пример вызова одинаковых компонентов // example run two component 
-            $app->component(
+            $APP->component(
                 \'includeHtml\',
                 \'0\',
                 array(
@@ -115,7 +115,7 @@ function getCodeByUrlPage($page, $lang){
                 )
             );
 
-            $app->component(
+            $APP->component(
                 \'form_auth_test\',
                 \'0\',
                 array( 
@@ -129,7 +129,7 @@ function getCodeByUrlPage($page, $lang){
               + пример использования кастомного (пользовательского) шаблона компонента
               (пользователя - разработчика использующего gy)
             */
-            $app->component(
+            $APP->component(
                 \'containerdata_element_show\',
                 \'0\',
                 array( 
@@ -139,7 +139,7 @@ function getCodeByUrlPage($page, $lang){
                 )
             );
 
-            $app->component(
+            $APP->component(
                 \'footer\',
                 \'0\',
                 array()

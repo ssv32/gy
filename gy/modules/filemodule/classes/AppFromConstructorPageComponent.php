@@ -53,14 +53,14 @@ class AppFromConstructorPageComponent
      *  - метод подключения компонента, а в нашем классе возьмёт просто информацию
      *    о подключаемом компоненте
      * 
-     * @global type $app
+     * @global type $APP
      * @param type $name
      * @param type $template
      * @param type $arParam
      */
     public function component($name, $template, $arParam  )
     {
-        global $app;
+        global $APP;
         $this->allDateIncludeComponents[$this->intKey] = array(
             'name' => $name,
             'template' => $template,
@@ -94,7 +94,7 @@ class AppFromConstructorPageComponent
     public static function getCodeIncludeComponent($componentName, $templateName, $arParams)
     {
 
-        $codeIncludeComponent = "\n".'$app->component('."\n";
+        $codeIncludeComponent = "\n".'$APP->component('."\n";
         $codeIncludeComponent .= "   '".$componentName."',"."\n";
         $codeIncludeComponent .= "   '".$templateName."',"."\n";
         $codeIncludeComponent .= '   array('."\n";

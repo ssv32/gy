@@ -1,9 +1,9 @@
 <?php
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 $module = Module::getInstance();
-global $app;
+global $APP;
 
 $data  = $_GET;
 
@@ -18,7 +18,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     // + подумать над безопасностью
     // если есть такая страница то подключить её
     if (!empty($module->nameModuleByNameAdminPage[$data['page']])) {
-        include_once( $app->url.'/modules/'.$module->nameModuleByNameAdminPage[$data['page']].'/admin/'.$data['page'].'.php' );
+        include_once( $APP->url.'/modules/'.$module->nameModuleByNameAdminPage[$data['page']].'/admin/'.$data['page'].'.php' );
     }
 
 } else {

@@ -161,11 +161,11 @@ class PhpFileSqlClientForGy extends Db
         // сбросить данные предыдущего вызова метода select
         $this->clearResultMethodSelect();
 
-        global $crypto;
+        global $CRYPTO;
 
         // если встречается пароль то засолить и зашифровать его
         if (!empty($propertys['pass'])) {
-            $propertys['pass'] = md5($propertys['pass'].$crypto->getSole());
+            $propertys['pass'] = md5($propertys['pass'].$CRYPTO->getSole());
         }
 
         return  $this->db->insertInto($tableName, $propertys);
@@ -187,9 +187,9 @@ class PhpFileSqlClientForGy extends Db
         $where = $this->createTrueArrayWhereFromPhpFileSql($where);
 
         // если встречается пароль то засолить и зашифровать его
-        global $crypto;
+        global $CRYPTO;
         if (!empty($propertys['pass'])) {
-            $propertys['pass'] = md5($propertys['pass'].$crypto->getSole());
+            $propertys['pass'] = md5($propertys['pass'].$CRYPTO->getSole());
         }
 
         return $this->db->update($tableName, $propertys, $where);

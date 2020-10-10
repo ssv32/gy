@@ -7,7 +7,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
     if (AccessUserGroup::accessThisUserByAction( 'edit_container_data')) {
 
-        $app->component(
+        $APP->component(
             'containerdata',
             '0',
             array()

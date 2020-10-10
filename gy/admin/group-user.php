@@ -1,14 +1,14 @@
 <?php
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 
-if ($user->isAdmin()) {
+if ($USER->isAdmin()) {
 
     include "../../gy/admin/header-admin.php";
 
     // таблица с пользователями
-    $app->component(
+    $APP->component(
         'users_group_manager',
         '0',
         array()

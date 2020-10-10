@@ -9,7 +9,7 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
  */
 
 // языковой файл
-global $lang;
+global $LANG;
 include 'lang_init.php';
 
 // компоненты которые есть в модуле
@@ -40,7 +40,7 @@ $adminPageThisModule = array(
 
 // кнопки для меню админки
 $pagesFromAdminMenu = array(
-    $mess[$lang]['name-button'] => '/gy/admin/get-admin-page.php?page=container-data'
+    $mess[$LANG]['name-button'] => '/gy/admin/get-admin-page.php?page=container-data'
 );
 
 // пользовательское действие, и если оно разрешено текущему пользователю то он увидит 

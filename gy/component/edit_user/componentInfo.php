@@ -1,9 +1,9 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-global $app;
+global $APP;
 $utlThisComponent = "/gy/component/edit_user/";
-$langComponentInfo = new Lang($app->urlProject.$utlThisComponent, 'componentInfo', $app->options['lang']);
+$langComponentInfo = new Lang($APP->urlProject.$utlThisComponent, 'componentInfo', $APP->options['lang']);
 
 $componentInfo = array(
     'name' => 'edit_user',

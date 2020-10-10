@@ -308,14 +308,14 @@ class PgSql extends Db
         $query = '';
 
         // разбить параметры на два списка через запятую // TODO вынести куда то
-        global $crypto;
+        global $CRYPTO;
         $nameProperty = '';
         $valueProperty = '';
         foreach ($propertys as $key=> $val) {
             $nameProperty .= (($nameProperty != '')? ', ': '').$key;
 
             if ($key == 'pass') {
-                $val = md5($val.$crypto->getSole());
+                $val = md5($val.$CRYPTO->getSole());
             }
 
             if (!is_numeric($val)) {
@@ -342,11 +342,11 @@ class PgSql extends Db
     {
         $query = 'UPDATE ';
         $textPropertys = '';
-        global $crypto;
+        global $CRYPTO;
         foreach ($propertys as $key => $val) {
 
             if ($key == 'pass') {
-                $val = md5($val.$crypto->getSole());
+                $val = md5($val.$CRYPTO->getSole());
             }
 
             if (!is_numeric($val)) {

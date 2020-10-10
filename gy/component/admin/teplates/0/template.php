@@ -2,9 +2,9 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-global $app;
+global $APP;
 
-$app->component(
+$APP->component(
     'form_auth',
     '0',
     array( 

@@ -2,28 +2,28 @@
 
 global $argv;
 $isRunConsole = isset($argv);
-global $br;
-$br = "\n";
+global $BR;
+$BR = "\n";
 
 //print_r($argv);
 
 function showHelpFromInstall(){
-    global $br;
-    echo $br."This script set options for gy framework".$br;
-    echo "===================================".$br;
-    echo ">php -f consoleInstallOptions.php <options>".$br;
-    echo $br;
-    echo "options:".$br;
-    echo "    help  - show help this script".$br;
-    echo "    set-all <array options> - set all options (clear options if not input)".$br;
-    echo "    set-option <array options> - set options (save old options if not input)".$br;
-    echo $br;
-    echo "  example: php -f consoleInstallOptions.php set-all sole 111 db_type mysql".$br;
-    echo "  example: php -f consoleInstallOptions.php set-option sole 111 db_type mysql".$br;
-    echo "  example: php -f consoleInstallOptions.php help".$br;
-    echo $br;
-    echo $br;
-    echo $br;
+    global $BR;
+    echo $BR."This script set options for gy framework".$BR;
+    echo "===================================".$BR;
+    echo ">php -f consoleInstallOptions.php <options>".$BR;
+    echo $BR;
+    echo "options:".$BR;
+    echo "    help  - show help this script".$BR;
+    echo "    set-all <array options> - set all options (clear options if not input)".$BR;
+    echo "    set-option <array options> - set options (save old options if not input)".$BR;
+    echo $BR;
+    echo "  example: php -f consoleInstallOptions.php set-all sole 111 db_type mysql".$BR;
+    echo "  example: php -f consoleInstallOptions.php set-option sole 111 db_type mysql".$BR;
+    echo "  example: php -f consoleInstallOptions.php help".$BR;
+    echo $BR;
+    echo $BR;
+    echo $BR;
 }
 
 
@@ -50,30 +50,30 @@ function parseOprions($optionsFromConsole){
 }
 
 function createTextForFileCofig($options){
-    global $br;
+    global $BR;
     $fileText = '';
 
     if (!empty($options)) {
 
-        $fileText = '<?php '.$br.'
-if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$br.'
+        $fileText = '<?php '.$BR.'
+if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$BR.'
 
-$gy_config = array('.$br;
+$gy_config = array('.$BR;
 
         foreach ($options as $key => $val) {
 
             if (!is_array($val)) {
-                $fileText .= '    "'.$key.'" => "'.$val.'",'.$br;
+                $fileText .= '    "'.$key.'" => "'.$val.'",'.$BR;
             } else {
-                $fileText .= '    "'.$key.'" => array('.$br;
+                $fileText .= '    "'.$key.'" => array('.$BR;
                 foreach ($val as $key2 => $val2) {
-                    $fileText .= '        "'.$key2.'" => "'.$val2.'",'.$br;
+                    $fileText .= '        "'.$key2.'" => "'.$val2.'",'.$BR;
                 }
-                $fileText .= '    ),'.$br;
+                $fileText .= '    ),'.$BR;
             }
 
         }
-        $fileText .= ');'.$br;
+        $fileText .= ');'.$BR;
     }
 
     return $fileText;
@@ -83,7 +83,7 @@ if ($isRunConsole) { // пока запускать только из консо
     if (empty($argv[1]) || ($argv[1] == 'help')) {
         showHelpFromInstall();
     } elseif ($argv[1] == 'set-all') {
-        echo 'run set-all'.$br;
+        echo 'run set-all'.$BR;
 
         $options = parseOprions($argv);
 
@@ -92,14 +92,14 @@ if ($isRunConsole) { // пока запускать только из консо
             fwrite($file, createTextForFileCofig($options) );
             fclose($file);
         }
-        echo 'finish set-all'.$br;
+        echo 'finish set-all'.$BR;
 
     } elseif ($argv[1] == 'set-option') {
-        echo 'run set-option'.$br;
+        echo 'run set-option'.$BR;
         $options = parseOprions($argv);
 
         include __DIR__."/../gy.php";
-        $old_options = $app->options;
+        $old_options = $APP->options;
 
         print_r($old_options);
 
@@ -119,7 +119,7 @@ if ($isRunConsole) { // пока запускать только из консо
             fwrite($file, createTextForFileCofig($old_options) );
             fclose($file);
         }
-        echo 'finish set-option'.$br;
+        echo 'finish set-option'.$BR;
 
     }
 

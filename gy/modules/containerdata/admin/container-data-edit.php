@@ -8,7 +8,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
     if (AccessUserGroup::accessThisUserByAction( 'edit_container_data') && is_numeric($_GET['ID'])) {
         $id = $_GET['ID'];
 
-        $app->component(
+        $APP->component(
             'containerdata_edit',
             '0',
             array(

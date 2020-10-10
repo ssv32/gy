@@ -9,13 +9,13 @@ if ($isRunConsole) {
 
 //    include __DIR__."/../gy.php"; // подключить ядро // include core
 
-    global $db;
+    global $DB;
 
     //---containerData---
     echo $br.$br.'--install table module - containerData = start--';
 
     echo $br.'install table module - containerData = start';
-    $res = $db->createTable( // containerData-ы
+    $res = $DB->createTable( // containerData-ы
         'container_data',
         array( 
             'id int PRIMARY KEY AUTO_INCREMENT', 
@@ -24,7 +24,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->createTable( // список свойств containerData
+    $res = $DB->createTable( // список свойств containerData
         'list_propertys_container_data',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -35,7 +35,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->createTable( // типы свойств containerData
+    $res = $DB->createTable( // типы свойств containerData
         'types_property_container_data',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -46,7 +46,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->insertDb(
+    $res = $DB->insertDb(
         'types_property_container_data',
         array(
             'name' => 'html',
@@ -56,7 +56,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->insertDb(
+    $res = $DB->insertDb(
         'types_property_container_data',
         array(
             'name' => 'number',
@@ -66,7 +66,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->createTable( // элементы containerData-а
+    $res = $DB->createTable( // элементы containerData-а
         'element_container_data',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -77,7 +77,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->createTable( // значения свойств containerData-а типа строка
+    $res = $DB->createTable( // значения свойств containerData-а типа строка
         'value_propertys_type_html',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -88,7 +88,7 @@ if ($isRunConsole) {
         )
     );
 
-    $res = $db->createTable( // значения свойств containerData-а типа число
+    $res = $DB->createTable( // значения свойств containerData-а типа число
         'value_propertys_type_number',
         array(
             'id int PRIMARY KEY AUTO_INCREMENT',
@@ -168,7 +168,7 @@ if ($isRunConsole) {
 
     echo $br.'add user group and action and user - containerData = start';
     // группы пользователей и права на действия
-    $db->insertDb(
+    $DB->insertDb(
         'action_user',
         array(
             'code' => 'edit_container_data',
@@ -176,7 +176,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'users_in_groups',
         array(
             'code_group' => 'content',
@@ -184,7 +184,7 @@ if ($isRunConsole) {
         )
     );
 
-    $db->insertDb(
+    $DB->insertDb(
         'access_group',
         array(
             'code' => 'content',

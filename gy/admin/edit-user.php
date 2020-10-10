@@ -2,7 +2,7 @@
 
 include "../../gy/gy.php"; // подключить ядро // include core
 
-global $user;
+global $USER;
 $data = $_REQUEST;
 
 if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
@@ -14,7 +14,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     include "../../gy/admin/header-admin.php";
 
     if (AccessUserGroup::accessThisUserByAction( 'edit_users')) {
-        $app->component(
+        $APP->component(
             'edit_user',
             '0',
             array(

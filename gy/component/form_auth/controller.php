@@ -22,7 +22,7 @@ if (!empty($_REQUEST['auth'])) {
     $thisLogin = $_REQUEST['auth'];
 }
 
-global $user;
+global $USER;
 
 $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
@@ -30,7 +30,7 @@ $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 if ($isShowAdminPanel === true){
 
-    $thisLogin = $user->getDataThisUser()['name'];
+    $thisLogin = $USER->getDataThisUser()['name'];
     $arRes["auth_ok"] = 'ok';
     $arRes["auth_user"] = $thisLogin;
 
@@ -38,7 +38,7 @@ if ($isShowAdminPanel === true){
 
     if (Capcha::chackCapcha($_REQUEST['capcha'])) {
 
-        $user->authorized($_REQUEST['auth'], $_REQUEST['pass']);
+        $USER->authorized($_REQUEST['auth'], $_REQUEST['pass']);
         $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
         if ($isShowAdminPanel === false) {
@@ -70,7 +70,7 @@ if ($isShowAdminPanel === true){
 }
 
 if (!empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST[ $this->lang->getMessage('button-exit') ])) {
-    if ($user->userExit()) {
+    if ($USER->userExit()) {
         header( 'Location: '.$redirectUrl );
     }
 }

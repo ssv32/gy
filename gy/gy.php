@@ -8,8 +8,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
     if (in_array($gy_config['lang'], array('rus', 'eng'))) {
-        global $lang;
-        $lang = $gy_config['lang'];
+        global $LANG;
+        $LANG = $gy_config['lang'];
     }
 
     // подключаем класс модуля 
@@ -17,29 +17,29 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     include_once(__DIR__ . '/classes/module.php');
 
     // подключить модули
-    //global $module;
-    $module = Module::getInstance();
-    $module->setUrlGyCore(__DIR__);
-    //$module->includeModule('containerdata');
-    $module->includeAllModules();
+    global $MODULE;
+    $MODULE = Module::getInstance();
+    $MODULE->setUrlGyCore(__DIR__);
+    //$MODULE->includeModule('containerdata');
+    $MODULE->includeAllModules();
 
     // путь к проекту
-    global $urlProject;
-    $urlProject = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
+    global $URL_PROJECT;
+    $URL_PROJECT = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
 
     // авто подключение классов
     function __autoload($calssname){ 
-        global $urlProject;
+        global $URL_PROJECT;
 
         // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
-        global $module;
-        $meyByClassModule = $module->getUrlModuleClassByNameClass($calssname);
+        global $MODULE;
+        $meyByClassModule = $MODULE->getUrlModuleClassByNameClass($calssname);
         if ($meyByClassModule !== false) {
             require_once( $meyByClassModule );
         } else {
 
-            if (file_exists($urlProject."/customDir/classes/".$calssname.".php" )) { // сюда будут подключаться пользовательские классы
-                require_once( $urlProject."/customDir/classes/".$calssname.".php" );
+            if (file_exists($URL_PROJECT."/customDir/classes/".$calssname.".php" )) { // сюда будут подключаться пользовательские классы
+                require_once( $URL_PROJECT."/customDir/classes/".$calssname.".php" );
             } elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )) {
                 require_once( "classes/$calssname.php" );
             } elseif (file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )) {
@@ -54,46 +54,46 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     // обезопасить получаемый конфиг
     $gy_config = Security::filterInputData($gy_config);
 
-    global $app;
+    global $APP;
     // добавлю версию ядра gy
     $gy_config['v-gy'] = '0.2-alpha';
-    $app = App::createApp($urlProject, $gy_config);
+    $APP = App::createApp($URL_PROJECT, $gy_config);
     unset($gy_config);
 
     // подключить класс работы с базой данный // include class work database
-    if (isset($app->options['db_config'])
-        && isset($app->options['db_config']['db_type'])
-        && isset($app->options['db_config']['db_host'])
-        && isset($app->options['db_config']['db_user'])
-        && isset($app->options['db_config']['db_pass'])
-        && isset($app->options['db_config']['db_name'])
+    if (isset($APP->options['db_config'])
+        && isset($APP->options['db_config']['db_type'])
+        && isset($APP->options['db_config']['db_host'])
+        && isset($APP->options['db_config']['db_user'])
+        && isset($APP->options['db_config']['db_pass'])
+        && isset($APP->options['db_config']['db_name'])
     ) {
-        global $db;
-        $db = new $app->options['db_config']['db_type']($app->options['db_config']); // mysql - for test work db mysql
+        global $DB;
+        $DB = new $APP->options['db_config']['db_type']($APP->options['db_config']); // mysql - for test work db mysql
     }
 
-    global $crypto;
-    $crypto = new Crypto();
-    if (!empty($app->options['sole'])) {
-        $crypto->setSole($app->options['sole']);
+    global $CRYPTO;
+    $CRYPTO = new Crypto();
+    if (!empty($APP->options['sole'])) {
+        $CRYPTO->setSole($APP->options['sole']);
     }
 
-    global $user;
-    $user = new User();
+    global $USER;
+    $USER = new User();
 
     // объявить имя класса для кеша // TODO пока так но сделать надо получше (заменить на фабрику или ещё какой патерн)
-    if (!isset($app->options['type_cache'])) {
-        $app->options['type_cache'] = 'cacheFiles';
+    if (!isset($APP->options['type_cache'])) {
+        $APP->options['type_cache'] = 'cacheFiles';
     }
-    global $cacheClassName;
-    $cacheClassName = $app->options['type_cache'];
+    global $CACHE_CLASS_NAME;
+    $CACHE_CLASS_NAME = $APP->options['type_cache'];
 
     session_start();
 
     // нужно обезопасить все входные данные
     // на этой странице не проверять, т.к. там могут сохраняться данные html (своства контейнера данных)
     // TODO - может как то это пофиксить
-    if( ($app->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')
+    if( ($APP->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')
         && ($_REQUEST['page'] != 'container-data-element-property' )
     ) {
         $_REQUEST = Security::filterInputData($_REQUEST);
@@ -107,9 +107,9 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
      (возможно не рабочие но можно увидеть логику работы)
 
     issues/24 - теперь будет так
-    global $db;
-    $res = $db->selectDb(
-        $db->db, 
+    global $DB;
+    $res = $DB->selectDb(
+        $DB->db, 
         'users', 
         array('*'), 
         array( 
@@ -123,8 +123,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     */
 
     /*
-    $res = $db->selectDb(
-        $db->db, 
+    $res = $DB->selectDb(
+        $DB->db, 
         'users', 
         array('*'), 
         array( 

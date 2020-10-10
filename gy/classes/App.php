@@ -10,7 +10,7 @@ final class App
     //public $db; // db
     public $urlProject; // урл как $this-url только без /gy в конце
 
-    private static $app;
+    private static $APP;
 
     private function  __construct($url, $options)
     {
@@ -34,10 +34,10 @@ final class App
      */
     public static function createApp($url, $options)
     {
-        if (static::$app === null) {
-            static::$app = new static($url, $options);
+        if (static::$APP === null) {
+            static::$APP = new static($url, $options);
         }
-        return static::$app;
+        return static::$APP;
     }
 
     /** 

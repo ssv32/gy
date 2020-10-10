@@ -44,11 +44,13 @@ final class App
      *  component отобразить компонент // show component
      *  @param string $name - имя компонента и контроллера сразу 
      *  @param string $template - имя шаблона 
-     *  @param array $arParam - параметры компонента (параметры кеша и прочие нюансы) // array component config
+     *  @param array $arParam - параметры компонента (параметры кеша и прочие нюансы) 
+     *      // array component config
      *  @param strung $url - url где лежит проект
      *  вернёт объект компонент
      * 
-     * TODO возможно понадобится сделать подключение модели // если делать универсальные модели для компонентов
+     * TODO возможно понадобится сделать подключение модели 
+     *     // если делать универсальные модели для компонентов
      *  или возможность подключать много моделей разных
      *  maybe includ many model in component
      */
@@ -59,7 +61,13 @@ final class App
             $arParam = Security::filterInputData($arParam);
         }
 
-        $component = new Component($name, $template, $arParam, $this->urlProject, $this->options['lang']);
+        $component = new Component(
+            $name, 
+            $template, 
+            $arParam, 
+            $this->urlProject, 
+            $this->options['lang']
+        );
         return $component;
     }
 

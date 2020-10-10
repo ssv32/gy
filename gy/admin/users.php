@@ -13,7 +13,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
         if (isset($data['show-id']) && is_numeric($data['show-id'])) {
             // если есть параметр show-id то просто просмотреть все данные 
-			//   по конкретному пользователю
+            //   по конкретному пользователю
             $app->component(
                 'show_user',
                 '0',

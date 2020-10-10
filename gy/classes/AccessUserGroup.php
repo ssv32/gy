@@ -15,36 +15,46 @@ class AccessUserGroup
     private static $cacheTimeGetData = 604800;
 
     /**
-     * checkAccessUserGroupsByUserAction - определить можно ли пользователю с заданным набором его групп 
-     *   и данными по всем группам выполнить указанное действие 
+     * checkAccessUserGroupsByUserAction - определить можно ли пользователю 
+     *     с заданным набором его групп 
+     *     и данными по всем группам выполнить указанное действие 
      * 
      * @param array $groupsThisUser - группы к каким относится пользователь
      * @param array $dataAllGroups - данные по всем группам
      * @param string $thisAction - проверяемое действие пользователя
      * @return boolean
      */
-    private static function checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $thisAction)
-    {
+    private static function checkAccessUserGroupsByUserAction(
+        $groupsThisUser, 
+        $dataAllGroups, 
+        $thisAction
+    ) {
         $arResult = false;
 
         // определить все действия разрешённые для данного пользователя
         $AllAccessActionsThisUser = array();
         foreach ($groupsThisUser as $nameGroup) {
             if ($dataAllGroups[$nameGroup]) {
-                $AllAccessActionsThisUser = array_merge($AllAccessActionsThisUser, $dataAllGroups[$nameGroup]['code_action_user']);
+                $AllAccessActionsThisUser = array_merge(
+                    $AllAccessActionsThisUser, 
+                    $dataAllGroups[$nameGroup]['code_action_user']
+                );
             }
         }
         
         // найти заданное действие среди разрешённых для данного пользователя
         // либо проверить на админа (т.е. разрешены любые действия)
-        if (in_array($thisAction , $AllAccessActionsThisUser) || in_array('action_all' , $AllAccessActionsThisUser)) {
+        if (in_array($thisAction , $AllAccessActionsThisUser) 
+            || in_array('action_all' , $AllAccessActionsThisUser)
+        ) {
             $arResult = true;
         }
         return $arResult;
     }
 
     /**
-     * accessUser() - проверит разрешёно ли указанное действие заданному пользователю
+     * accessUser() - проверит разрешёно ли указанное действие заданному 
+     *     пользователю
      * 
      * @param int $userId - id пользователя
      * @param string $actionUser - код пользовательского действия
@@ -60,8 +70,13 @@ class AccessUserGroup
         // получить данные по всем группам
         $dataAllGroups = self::getAccessGroup();
         
-        // определить пользователю с таким набором групп доступно ли указанное действие
-        return self::checkAccessUserGroupsByUserAction($dataUserFind['groups'], $dataAllGroups, $actionUser);
+        // определить пользователю с таким набором групп доступно ли указанное 
+        //     действие
+        return self::checkAccessUserGroupsByUserAction(
+            $dataUserFind['groups'], 
+            $dataAllGroups, 
+            $actionUser
+        );
     }
 
     /**
@@ -80,8 +95,13 @@ class AccessUserGroup
         // получить данные по всем группам
         $dataAllGroups = self::getAccessGroup();
 
-        // определить пользователю с таким набором групп доступно ли указанное действие
-        $arResult = self::checkAccessUserGroupsByUserAction($groupsThisUser, $dataAllGroups, $action);
+        // определить пользователю с таким набором групп доступно ли указанное 
+        //     действие
+        $arResult = self::checkAccessUserGroupsByUserAction(
+            $groupsThisUser, 
+            $dataAllGroups, 
+            $action
+        );
 
         return $arResult;
     }
@@ -148,7 +168,10 @@ class AccessUserGroup
         global $app;
         global $cacheClassName;
         $cache = new $cacheClassName($app->url);
-        $initCache = $cache->cacheInit('getUserAction', self::$cacheTimeGetData);
+        $initCache = $cache->cacheInit(
+            'getUserAction', 
+            self::$cacheTimeGetData
+        );
 
         if ($initCache) {
             $arResult = $cache->getCacheData();
@@ -168,7 +191,8 @@ class AccessUserGroup
     }
 
     /**
-     * getListGroupsByUser() - получить список групп к каким относится пользователь
+     * getListGroupsByUser() - получить список групп к каким относится 
+     *     пользователь
      * 
      * @param int $id_users - id пользователя
      * @return array
@@ -179,7 +203,11 @@ class AccessUserGroup
 
         // определить id групп к каким относится пользователь
         global $db;
-        $res = $db->selectDb(self::$tableNameUsersInGroupss, array('code_group'), array('='=>array('id_user', $id_users )));
+        $res = $db->selectDb(
+            self::$tableNameUsersInGroupss, 
+            array('code_group'), 
+            array('='=>array('id_user', $id_users ))
+        );
         while ($arRes = $db->fetch($res)) {
             $arResult[$arRes['code_group']] = $arRes['code_group'];
         }
@@ -220,7 +248,10 @@ class AccessUserGroup
     {
         $arResult = false;
         global $db;
-        $res = $db->deleteDb(self::$tableNameUsersInGroupss, array('=' => array('id_user', $id_user)) );
+        $res = $db->deleteDb(
+            self::$tableNameUsersInGroupss, 
+            array('=' => array('id_user', $id_user)) 
+        );
         if ($res) {
             $arResult = true;
         }
@@ -229,7 +260,8 @@ class AccessUserGroup
 
     /**
      * deleteAllActionsForGroup()
-     * - удалить все заданные, разрешённые действия пользователей для указанной группы
+     * - удалить все заданные, разрешённые действия пользователей для указанной 
+     *      группы
      * 
      * @global type $db
      * @param string $codeUserGroup
@@ -247,7 +279,15 @@ class AccessUserGroup
             $dataThisGroup['code_action_user'] = '';
 
             // удаляем все данные по этой группе из БД
-            $res = $db->deleteDb(self::$tableNameAccessGroup, array('=' => array('code', "'".$codeUserGroup."'")) );
+            $res = $db->deleteDb(
+                self::$tableNameAccessGroup, 
+                array(
+                    '=' => array(
+                        'code', 
+                        "'".$codeUserGroup."'"
+                    )
+                ) 
+            );
 
             if ($res) {
                 // добавляем пустую группу
@@ -280,10 +320,12 @@ class AccessUserGroup
         if (!empty($dataAllGroup[$codeUserGroup])) {
             $dataThisGroup = $dataAllGroup[$codeUserGroup];
 
-            // если действий для пользователя нет обновить группу (добавить действия)
+            // если действий для пользователя нет обновить группу 
+            //     (добавить действия)
             if (empty($dataThisGroup['code_action_user'])) {
                 $dataThisGroup['code_action_user'] = $codeAction;
-                // если мы попали сюда то всего одна запись в БД соответствует этой группе её и обновляем
+                // если мы попали сюда то всего одна запись в БД соответствует 
+                //     этой группе её и обновляем
                 $res = $db->updateDb(
                     self::$tableNameAccessGroup,
                     $dataThisGroup,
@@ -322,7 +364,8 @@ class AccessUserGroup
      * 
      * @global type $db
      * @param array $arDataNewGroup - массив с данными по группе (name, code, text)
-     * @param array $arActionUserThisGroup - массив с разрешёнными для этой группы действиями
+     * @param array $arActionUserThisGroup - массив с разрешёнными для этой группы 
+     *     действиями
      * @return boolean
      */
     public static function addUserGroup($arDataNewGroup, $arActionUserThisGroup)

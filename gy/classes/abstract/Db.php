@@ -15,7 +15,7 @@ abstract class Db
      * @param string $port - порт
      * @return resurs, false
      */
-    abstract public function connect($host, $user, $pass, $name_db, $port); // подключение к db // connect database
+    abstract public function connect($host, $user, $pass, $name_db, $port);
 
     /** query()  - out query in database
      * @param $db - resurs (create self::connect()), $query - string query
@@ -40,9 +40,11 @@ abstract class Db
 
     /**
      * fetchAll - тоже что и fetch только в получит всё в виде массива 
-     *   что будет ключём можно указать, либо false тогда вернёт массив с ключами по порядку
+     *     что будет ключём можно указать, либо false тогда вернёт массив 
+     *     с ключами по порядку
      * @param $res - результат отработки запроса в БД
-     * @param string $key - строка либо false, это что будет ключём в массиве (по умолчанию id записи)
+     * @param string $key - строка либо false, это что будет ключём в массиве 
+     *     (по умолчанию id записи)
      * @return array
     */
     abstract public function fetchAll($res, $key = 'id');
@@ -54,7 +56,8 @@ abstract class Db
      * @param $db - resurs (create self::connect())
      * @param string $tableName - имя таблици 
      * @param array $propertys - параметры (какие поля вернуть или * - все)
-     * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     * @param array $where - условия запроса, массив специальной структуры в виде 
+     *     дерева (может не быть)
      * @return - false or object result query
      */
     abstract public function selectDb($tableName, $propertys, $where = array());
@@ -71,7 +74,8 @@ abstract class Db
      * updateDb - обновить поле таблици
      * @param string $tableName - имя таблици 
      * @param array $propertys - параметры (поле = значение)
-     * @param array $where - условия запроса, массив специальной структуры в виде дерева (может не быть)
+     * @param array $where - условия запроса, массив специальной структуры 
+     *     в виде дерева (может не быть)
      * @return - false or object result query
      */
     abstract public function updateDb($tableName, $propertys, $where = array());
@@ -79,7 +83,8 @@ abstract class Db
     /**
      * createTable - создать таблицу в базе данных
      * @param string $tableName - имя таблици
-     * @param array $propertys - параметры (приер  login varchar(50), name varchar(50) ...) 
+     * @param array $propertys - параметры 
+     *     (приер  login varchar(50), name varchar(50) ...) 
      * @return - false or object result query
      */
     abstract public function createTable($tableName, $propertys);

@@ -40,7 +40,9 @@ class Capcha
     {
         $arResult = false;
         // проверит код с капчи
-        if ($_SESSION['capcha'] == mb_strtoupper($code)) { // всё приводится к верхнему регистру что бы пользователю проще было угадать капчу
+        // всё приводится к верхнему регистру что бы пользователю проще 
+        //     было угадать капчу
+        if ($_SESSION['capcha'] == mb_strtoupper($code)) { 
             $arResult = true;
         }
         self::clearCapcha();

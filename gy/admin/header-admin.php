@@ -3,7 +3,11 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 global $app;
 global $user;
 
-$langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app->options['lang']);
+$langTextThisFile = new Lang(
+    $app->urlProject."/gy/admin", 
+    'header-admin', 
+    $app->options['lang']
+);
 ?>
 
 <html>
@@ -16,7 +20,9 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
         
         
         
-        <h2 class="gy-admin-logo"><?=$langTextThisFile->getMessage('title')?></h2>
+        <h2 class="gy-admin-logo">
+            <?=$langTextThisFile->getMessage('title')?>
+        </h2>
         <?php
         if (!empty($app->options['v-gy'])) {
         ?>
@@ -25,17 +31,23 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
         <?php
         }
         ?>
-        <a href="/" class="gy-admin-button-min" ><?=$langTextThisFile->getMessage('site')?></a>
+        <a href="/" class="gy-admin-button-min" >
+            <?=$langTextThisFile->getMessage('site')?>
+        </a>
         <br/>
         <br/>
         <?php
         if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
             // меню доступное для текущего пользователя
-            $menu[ $langTextThisFile->getMessage('index-page') ] = '/gy/admin/index.php';
+            $buttonName = $langTextThisFile->getMessage('index-page');
+            $menu[$buttonName] = '/gy/admin/index.php';
 
-            if (AccessUserGroup::accessThisUserByAction( 'edit_users') || $user->isAdmin()) {
-                $menu[ $langTextThisFile->getMessage('users') ] = '/gy/admin/users.php';
+            if (AccessUserGroup::accessThisUserByAction( 'edit_users') 
+                || $user->isAdmin()
+            ) {
+                $buttonName = $langTextThisFile->getMessage('users');
+                $menu[$buttonName] = '/gy/admin/users.php';
             }
 
             // надо добавить пункты меню заданные в подключенных модулях
@@ -43,9 +55,10 @@ $langTextThisFile = new Lang($app->urlProject."/gy/admin", 'header-admin', $app-
             foreach ($module->getButtonsMenuAllModules() as $nameModule => $arButton) {
                 // условия показа пункта меню (задаётся модулем) или если админ
                 if (
-                    (
-                        !empty($module->getFlagShowButtonsAdminPanelByModule[$nameModule])
-                        && AccessUserGroup::accessThisUserByAction( $module->getFlagShowButtonsAdminPanelByModule[$nameModule]) 
+                    (!empty($module->getFlagShowButtonsAdminPanelByModule[$nameModule])
+                     && AccessUserGroup::accessThisUserByAction( 
+                            $module->getFlagShowButtonsAdminPanelByModule[$nameModule]
+                        ) 
                     )
                     || $user->isAdmin()
                 ) {

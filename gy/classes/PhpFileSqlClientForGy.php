@@ -31,14 +31,14 @@ class PhpFileSqlClientForGy extends Db
     * @param $host
     * @param $user
     * @param $pass 
-    * @param $name_db
+    * @param $nameDb
     * @param $port - не используется
     * @return resurs, false
     */
-    public function connect($dir, $login, $pass, $name_db, $port = false)
+    public function connect($dir, $login, $pass, $nameDb, $port = false)
     {
         $phpFileSql = new PhpFileSql($dir);
-        $phpFileSql->connect($login, $pass, $name_db);
+        $phpFileSql->connect($login, $pass, $nameDb);
         
         $this->db = $phpFileSql;
         return $this;
@@ -114,11 +114,11 @@ class PhpFileSqlClientForGy extends Db
         return $result;
     }
 
-    public function __construct($db_config)
+    public function __construct($dbConfig)
     {
         if ( empty($this->db)) {
-            if (!empty($db_config)) {
-                $this->connect($db_config['db_url'], $db_config['db_user'], $db_config['db_pass'], $db_config['db_name']);
+            if (!empty($dbConfig)) {
+                $this->connect($dbConfig['db_url'], $dbConfig['db_user'], $dbConfig['db_pass'], $dbConfig['db_name']);
             }
         }
     }

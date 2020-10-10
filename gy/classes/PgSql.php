@@ -17,13 +17,13 @@ class PgSql extends Db
     * @param $host
     * @param $user
     * @param $pass 
-    * @param $name_db
+    * @param $nameDb
     * @param $port
     * @return resurs, false
     */
-    public function connect($host, $user, $pass, $name_db, $port)
+    public function connect($host, $user, $pass, $nameDb, $port)
     {        
-        $this->db = pg_connect("host=".$host." port=".$port." dbname=".$name_db." user=".$user." password=".$pass);
+        $this->db = pg_connect("host=".$host." port=".$port." dbname=".$nameDb." user=".$user." password=".$pass);
         return $this->db;
     }
 
@@ -77,19 +77,19 @@ class PgSql extends Db
         return $result;
     }
 
-    public function __construct($db_config) 
+    public function __construct($dbConfig) 
     {
         if ( empty($this->db)) {
-            if (!empty($db_config)) {
-                if (empty($db_config['db_port'])) {
-                    $db_config['db_port'] = $this->defaultPort;
+            if (!empty($dbConfig)) {
+                if (empty($dbConfig['db_port'])) {
+                    $dbConfig['db_port'] = $this->defaultPort;
                 }
                 $this->connect(
-                    $db_config['db_host'], 
-                    $db_config['db_user'], 
-                    $db_config['db_pass'], 
-                    $db_config['db_name'], 
-                    $db_config['db_port']
+                    $dbConfig['db_host'], 
+                    $dbConfig['db_user'], 
+                    $dbConfig['db_pass'], 
+                    $dbConfig['db_name'], 
+                    $dbConfig['db_port']
                 );
             }
         }

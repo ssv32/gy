@@ -1,7 +1,7 @@
 <?php
 if (!defined("GY_CORE") && GY_CORE !== true ) die('err_core');
 
-$gy_config = array(
+$gyConfig = array(
     'lang' => 'rus', // eng
     'sole' => 'pass1021asz#_@)A',
     'db_config' => array(

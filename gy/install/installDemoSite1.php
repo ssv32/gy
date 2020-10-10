@@ -15,8 +15,8 @@ if ($isRunConsole) {
 
             define("GY_CORE", true); // хак
             include(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
-            if (!empty($gy_config['lang']) && in_array($gy_config['lang'], array('rus', 'eng'))) {
-                $lang = $gy_config['lang'];
+            if (!empty($gyConfig['lang']) && in_array($gyConfig['lang'], array('rus', 'eng'))) {
+                $lang = $gyConfig['lang'];
             } else {
                 $lang = 'rus';
             }

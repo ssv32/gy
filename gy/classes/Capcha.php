@@ -102,7 +102,7 @@ class Capcha
             $r = rand(50, 230);
             $g = rand(50, 230);
             $b = rand(50, 230);
-            $text_color = imagecolorallocate($img, $r, $g, $b);
+            $textColor = imagecolorallocate($img, $r, $g, $b);
             
             // Рисуем линию
             $x1 = rand(0, $gX);
@@ -110,7 +110,7 @@ class Capcha
             $y1 = rand(0, $gY);
             $y2 = rand(0, $gY);
             
-            imageline($img, $x1, $y1, $x2, $y2, $text_color);
+            imageline($img, $x1, $y1, $x2, $y2, $textColor);
         }
 
         // рисуется код капчи
@@ -120,7 +120,7 @@ class Capcha
             $r = rand(50, 230);
             $g = rand(50, 230);
             $b = rand(50, 230);
-            $text_color = imagecolorallocate($img, $r, $g, $b);
+            $textColor = imagecolorallocate($img, $r, $g, $b);
 
             $font = rand(5, 7); // размер шрифта
 
@@ -135,13 +135,13 @@ class Capcha
 
             if ($this->urlFonts == false) {
                 // если не задан шрифт то будет штатным рисоваться но без поворота букв
-                imagestring($img, $font, $x+($i*20), 10+$y,  $code[$i], $text_color);
-                imagestring($img, $font, $x+1+($i*20), 11+$y,  $code[$i], $text_color);
+                imagestring($img, $font, $x+($i*20), 10+$y,  $code[$i], $textColor);
+                imagestring($img, $font, $x+1+($i*20), 11+$y,  $code[$i], $textColor);
             } else {
                 // иначе заданным шрифтом рисует с поворотом букв
                 $a = 30 - rand(0, 60); // угол от -30 до 30
-                imagettftext($img, $font*3, $a, $x+($i*20), 30+$y, $text_color, $this->urlFonts, $code[$i]);
-                imagettftext($img, $font*3, $a, $x+1+($i*20), 31+$y, $text_color, $this->urlFonts, $code[$i]);
+                imagettftext($img, $font*3, $a, $x+($i*20), 30+$y, $textColor, $this->urlFonts, $code[$i]);
+                imagettftext($img, $font*3, $a, $x+1+($i*20), 31+$y, $textColor, $this->urlFonts, $code[$i]);
             }
         }
 

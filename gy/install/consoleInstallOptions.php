@@ -58,7 +58,7 @@ function createTextForFileCofig($options){
         $fileText = '<?php '.$BR.'
 if (!defined("GY_CORE") && GY_CORE !== true ) die("err_core");'.$BR.'
 
-$gy_config = array('.$BR;
+$gyConfig = array('.$BR;
 
         foreach ($options as $key => $val) {
 
@@ -99,24 +99,24 @@ if ($isRunConsole) { // пока запускать только из консо
         $options = parseOprions($argv);
 
         include __DIR__."/../gy.php";
-        $old_options = $APP->options;
+        $oldOptions = $APP->options;
 
-        print_r($old_options);
+        print_r($oldOptions);
 
         foreach ($options as $key => $val) {
             if (is_array($val)) {
-                //$tempArr = $old_options[$key];
+                //$tempArr = $oldOptions[$key];
                 foreach ($val as $key2 => $val2) {
-                    $old_options[$key][$key2] = $val2;
+                    $oldOptions[$key][$key2] = $val2;
                 }
             } else {
-                $old_options[$key] = $val;
+                $oldOptions[$key] = $val;
             }
         }
 
-        if (!empty($old_options)) {
+        if (!empty($oldOptions)) {
             $file = fopen(__DIR__.'/../config/gy_config.php', 'w');
-            fwrite($file, createTextForFileCofig($old_options) );
+            fwrite($file, createTextForFileCofig($oldOptions) );
             fclose($file);
         }
         echo 'finish set-option'.$BR;

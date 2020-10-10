@@ -7,9 +7,9 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     include_once("config/gy_config.php"); // подключение настроек ядра // include options
 
-    if (in_array($gy_config['lang'], array('rus', 'eng'))) {
+    if (in_array($gyConfig['lang'], array('rus', 'eng'))) {
         global $LANG;
-        $LANG = $gy_config['lang'];
+        $LANG = $gyConfig['lang'];
     }
 
     // подключаем класс модуля 
@@ -52,13 +52,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     }
 
     // обезопасить получаемый конфиг
-    $gy_config = Security::filterInputData($gy_config);
+    $gyConfig = Security::filterInputData($gyConfig);
 
     global $APP;
     // добавлю версию ядра gy
-    $gy_config['v-gy'] = '0.2-alpha';
-    $APP = App::createApp($URL_PROJECT, $gy_config);
-    unset($gy_config);
+    $gyConfig['v-gy'] = '0.2-alpha';
+    $APP = App::createApp($URL_PROJECT, $gyConfig);
+    unset($gyConfig);
 
     // подключить класс работы с базой данный // include class work database
     if (isset($APP->options['db_config'])

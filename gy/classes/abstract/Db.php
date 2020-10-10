@@ -11,11 +11,11 @@ abstract class Db
      * @param string $host - адрис хоста
      * @param string $user - логин
      * @param string $pass - пароль
-     * @param string $name_db - имя БД
+     * @param string $nameDb - имя БД
      * @param string $port - порт
      * @return resurs, false
      */
-    abstract public function connect($host, $user, $pass, $name_db, $port);
+    abstract public function connect($host, $user, $pass, $nameDb, $port);
 
     /** query()  - out query in database
      * @param $db - resurs (create self::connect()), $query - string query

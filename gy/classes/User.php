@@ -319,17 +319,17 @@ class User
     /**
      * deleteUserById - удалить пользователя
      * @global type $DB
-     * @param int $id_user - id пользователя
+     * @param int $idUser - id пользователя
      * @return string
      */
-    public function deleteUserById($id_user)
+    public function deleteUserById($idUser)
     {
         $result = false;
 
-        if (is_numeric($id_user) && ($id_user != 1)) {
+        if (is_numeric($idUser) && ($idUser != 1)) {
             global $DB;
 
-            $res = $DB->deleteDb($this->tableName, array('='=>array('id', $id_user)));
+            $res = $DB->deleteDb($this->tableName, array('='=>array('id', $idUser)));
 
             if ($res) {
                 $result = true;

@@ -1,13 +1,13 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-function getMessageCore($code_text) {
+function getMessageCore($codeText) {
     $msg = "gy: err core function getMessageCore";
 
-    global $arLong;
+    global $AR_LONG;
 
-    if (!empty($arLong)) {
-        $msg = $arLong[$code_text];
+    if (!empty($AR_LONG)) {
+        $msg = $arLong[$codeText];
     }
     return $msg;
 }

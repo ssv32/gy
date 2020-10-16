@@ -1,4 +1,12 @@
 <?php
+
+use Gy\Core\App;
+use Gy\Core\Security;
+use Gy\Core\Crypto;
+use Gy\Core\User\User;
+
+use Gy\Core\Test;
+
 // если ядро не подключено подключаем всё а если уже подключено то не надо
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
@@ -14,20 +22,21 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     // подключаем класс модуля 
     // (нужен для подключения модулей до определения авто подключения классов)
-    include_once(__DIR__ . '/classes/module.php');
-
+  //  include_once(__DIR__ . '/classes/module.php');
+/*
     // подключить модули
     global $MODULE;
     $MODULE = Module::getInstance();
     $MODULE->setUrlGyCore(__DIR__);
     //$MODULE->includeModule('containerdata');
     $MODULE->includeAllModules();
-
+*/
     // путь к проекту
     global $URL_PROJECT;
     $URL_PROJECT = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
 
     // авто подключение классов
+    /*
     function __autoload($calssname){ 
         global $URL_PROJECT;
 
@@ -50,7 +59,30 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
             }
         }
     }
+    */
+    
+    function autoload($className)
+    {
+        $className = ltrim($className, '\\');
+        $fileName  = '';
+        $namespace = '';
+        if ($lastNsPos = strrpos($className, '\\')) {
+            $namespace = substr($className, 0, $lastNsPos);
+            $className = substr($className, $lastNsPos + 1);
+            $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+        }
+        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
+        //var_dump($fileName);
+
+        require 'classes'.DIRECTORY_SEPARATOR.$fileName;
+    }
+    spl_autoload_register('autoload');
+    
+    //$asd = new Gy\Core\Test();
+    $asd = new Test();
+    $asd->test();
+    
     // обезопасить получаемый конфиг
     $gyConfig = Security::filterInputData($gyConfig);
 
@@ -69,7 +101,15 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         && isset($APP->options['db_config']['db_name'])
     ) {
         global $DB;
-        $DB = new $APP->options['db_config']['db_type']($APP->options['db_config']); // mysql - for test work db mysql
+        
+        if ($APP->options['db_config']['db_type'] == 'MySql') {
+            $DB = new Gy\Core\Db\MySql($APP->options['db_config']); 
+        } elseif ($APP->options['db_config']['db_type'] == 'PgSql') {
+            $DB = new Gy\Core\Db\PgSql($APP->options['db_config']); 
+        } elseif ($APP->options['db_config']['db_type'] == 'PhpFileSqlClientForGy') {
+            $DB = new Gy\Core\Db\PhpFileSqlClientForGy($APP->options['db_config']); 
+        }
+ 
     }
 
     global $CRYPTO;

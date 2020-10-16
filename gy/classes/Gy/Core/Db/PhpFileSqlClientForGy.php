@@ -1,11 +1,15 @@
 <?php
+
+namespace Gy\Core\Db;
+
+use Gy\Core\AbstractClasses\Db;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 /* PhpFileSqlClientForGy - класс для работы с базой данных PhpFileSql
  *   https://github.com/ssv32/PhpFileSql
  * class work PhpFileSql 
  */
-
 class PhpFileSqlClientForGy extends Db
 {
 

@@ -1,4 +1,13 @@
 <?php 
+
+namespace Gy\Core\Component;
+
+use Gy\Core\Lang;
+use Gy\Core\Module;
+use Gy\Core\Component\Mvc\Controller;
+use Gy\Core\Component\Mvc\Model;
+use Gy\Core\Component\Mvc\Template;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 class Component

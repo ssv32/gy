@@ -1,4 +1,9 @@
 <?php
+
+namespace Gy\Core\Component\Mvc;
+
+use Gy\Core\Lang;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 class Template

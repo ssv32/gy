@@ -1,4 +1,7 @@
 <?php
+
+namespace Gy\Core\User;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 class User

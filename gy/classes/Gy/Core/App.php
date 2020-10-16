@@ -1,4 +1,11 @@
 <?php 
+
+namespace Gy\Core;
+
+use Gy\Core\Component\Component;
+use Gy\Core\Lang;
+use Gy\Core\Security;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 final class App

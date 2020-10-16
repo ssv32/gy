@@ -1,18 +1,20 @@
 <?php
+
+namespace Gy\Core\Db;
+
+use Gy\Core\AbstractClasses\Db;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-/** 
- * PgSql - класс для работы с базой данных PostgreSQL
- * class work PostgreSQL
+/* MySql - класс для работы с базой данных mysql
+ * class work mysql 
  */
-
-class PgSql extends Db
+class MySql extends Db
 {
-
-    public $test = 'pgsql ok';
-    public $defaultPort = '5432';
+    
+    public $test = 'mysql ok';
     public $db;
-
+    
     /* connect() - create connect in database
     * @param $host
     * @param $user
@@ -22,29 +24,29 @@ class PgSql extends Db
     * @return resurs, false
     */
     public function connect($host, $user, $pass, $nameDb, $port)
-    {        
-        $this->db = pg_connect("host=".$host." port=".$port." dbname=".$nameDb." user=".$user." password=".$pass);
+    {
+        $this->db = mysqli_connect($host, $user, $pass, $nameDb, $port);
         return $this->db;
     }
-
+    
     /* query()  - out query in database
      * @param $db - resurs (create self::connect()), $query - string query
      * @return true - ok OR false - not ok
      */
     public function query($query)
     {
-        return pg_query($this->db, $query);
+        return mysqli_query($this->db, $query);
     }
-
+    
     /*  close() - close connect database
      * @param $db - resurs (create self::connect())
      * @return true - ok OR false - not ok
      */
     public function close()
     {
-        return pg_close($this->db);
+        return mysqli_close($this->db);
     }
-
+	
     /**
      * fetch - получить порцию (строку) данных, после выполнения запроса в БД
      * @param $res - результат отработки запроса в БД
@@ -54,11 +56,11 @@ class PgSql extends Db
     {
         $result = array();
         if ($res !== false) {
-            $result = pg_fetch_assoc($res);
+            $result = mysqli_fetch_assoc($res);
         }
         return $result;
     }
-
+	
     /**
      * fetchAll - тоже что и fetch только в получит всё в виде массива (с ключём id элемента)
      * @param $res - результат отработки запроса в БД
@@ -76,19 +78,19 @@ class PgSql extends Db
         }
         return $result;
     }
-
-    public function __construct($dbConfig) 
+    
+    public function __construct($dbConfig)
     {
-        if ( empty($this->db)) {
+        if (empty($this->db)) {
             if (!empty($dbConfig)) {
                 if (empty($dbConfig['db_port'])) {
-                    $dbConfig['db_port'] = $this->defaultPort;
+                    $dbConfig['db_port'] = ini_get("mysqli.default_port");
                 }
                 $this->connect(
-                    $dbConfig['db_host'], 
-                    $dbConfig['db_user'], 
-                    $dbConfig['db_pass'], 
-                    $dbConfig['db_name'], 
+                    $dbConfig['db_host'],
+                    $dbConfig['db_user'],
+                    $dbConfig['db_pass'],
+                    $dbConfig['db_name'],
                     $dbConfig['db_port']
                 );
             }
@@ -114,7 +116,7 @@ class PgSql extends Db
      *        (ru) - условие (пример выше, что то типа дерева)
      *        (en) - condition (example above, something like a tree)
      * @return boolean
-     */        
+     */ 
     private function isOneVersionWhere($where)
     {
         $result = false;
@@ -125,7 +127,7 @@ class PgSql extends Db
                 }
             }
             $value = array_shift($where);
-
+            
         }
         return $result;
     }
@@ -165,7 +167,7 @@ class PgSql extends Db
      *        (ru) - условие (пример выше, что то типа дерева)
      *        (en) - condition (example above, something like a tree)
      * @return boolean
-     */ 
+     */
     private function isTwoVersionWhere($where)
     {
         $result = true;
@@ -198,10 +200,8 @@ class PgSql extends Db
     {
         $result = false;
         if (!empty($where['='])) {
-            $where['='][0] = $where['='][0];
             $result = $where['='][0]." = ".$where['='][1];
-        } elseif (!empty($where['!='])) {
-            $where['!='][0] = $where['='][0];
+        } elseif ( !empty($where['!=']) ) {
             $result = $where['!='][0]." != ".$where['!='][1];
         }
         return $result;
@@ -221,11 +221,11 @@ class PgSql extends Db
     private function getStrTwoTypeWhere($where)
     {
         $result = '';
-        if( !empty($where['AND'])) {
+        if (!empty($where['AND'])) {
             foreach ($where['AND'] as $val) {
                 $result .= ((!empty($result))? ' AND ': '').$this->getStrOneTypeWhere( $val );
             }
-        } elseif (!empty($where['OR'])) {
+        } elseif ( !empty($where['OR'])) {
             foreach ($where['OR'] as $val) {
                 $result .= ((!empty($result))? ' OR ': '').$this->getStrOneTypeWhere($val);
             }
@@ -240,7 +240,7 @@ class PgSql extends Db
      * @param type $i
      * @param type $key2
      * @return type
-     */    
+     */
     private function parseWhereForQuery($where)
     { 
 
@@ -254,10 +254,10 @@ class PgSql extends Db
             // (ru) - если условие 2 варианта
             // (en) - if condition 2 options
             $strWhere = $this->getStrTwoTypeWhere($where);
-        } 
+        }
         // (ru) - остальное пока не поддерживается
         // (en) - the rest is not yet supported
-
+        
         return $strWhere;
     }
 
@@ -272,9 +272,6 @@ class PgSql extends Db
     public function selectDb($tableName, $propertys, $where = array())
     {
         $query = 'SELECT ';
-
-        //$propertys = $this->allValueArrayInMbStrtolower($propertys);
-
         $strPropertys = implode(",", $propertys);
 
         if (!empty($where)) {
@@ -286,15 +283,6 @@ class PgSql extends Db
         $query .= $strPropertys.' FROM '.$tableName.$where.';';
 
         return  $this->query($query);
-    }
-
-    private static function allValueArrayInMbStrtolower($array)
-    {
-
-        foreach ($array as $key => $value) {
-            $where[$key] = mb_strtolower($value);
-        }
-        return $where;
     }
 
     /**
@@ -343,7 +331,7 @@ class PgSql extends Db
         $query = 'UPDATE ';
         $textPropertys = '';
         global $CRYPTO;
-        foreach ($propertys as $key => $val) {
+        foreach ($propertys as $key => $val){
 
             if ($key == 'pass') {
                 $val = md5($val.$CRYPTO->getSole());
@@ -365,7 +353,7 @@ class PgSql extends Db
 
         return  $this->query($query);
     }
-
+    
     /**
      * createTable - создать таблицу в базе данных
      * @param string $tableName - имя таблицы
@@ -376,17 +364,13 @@ class PgSql extends Db
     {
         $query = '';
         $textPropertys = '';
-
         foreach ($propertys as $val) {
-            $strPos = strpos($val, 'int PRIMARY KEY AUTO_INCREMENT');
-            if ($strPos !== false) {
-                $val = str_replace('int PRIMARY KEY AUTO_INCREMENT', 'SERIAL PRIMARY KEY', $val);
-            }
             $textPropertys .= ((!empty($textPropertys))? ',': '').' '.$val;
         }
-        $query = 'CREATE TABLE IF NOT EXISTS '.$tableName.' ('.$textPropertys.');';
 
-        return  $this->query($query);
+        $query = 'CREATE TABLE '.$tableName.' ('.$textPropertys.');';
+
+        return $this->query($query);
     }
 
     /**
@@ -398,7 +382,7 @@ class PgSql extends Db
     public function deleteDb($tableName, $where)
     {
         $query = '';
-        if (!empty($where)) {
+        if (!empty($where)) {            
             $where = ' WHERE '.$this->parseWhereForQuery($where);
         } else {
             $where = '';
@@ -406,10 +390,10 @@ class PgSql extends Db
 
         $query = 'DELETE FROM '.$tableName.$where;
 
-        return $this->query($query);
+        return  $this->query($query);
     }
-
-    public function __destruct() 
+    
+    public function __destruct()
     {
         if (!empty($this->db)) {
             $this->close($this->db);

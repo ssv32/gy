@@ -1,4 +1,7 @@
 <?php
+
+namespace Gy\Core;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 /* Image class work with image // wrapper class php GD

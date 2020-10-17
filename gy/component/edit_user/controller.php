@@ -21,7 +21,7 @@ if ($notUpdatePass) {
 global $USER;
 
 // взять все группы пользователей
-$arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
+$arRes['allUsersGroups'] = Gy\Core\User\AccessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
     $result = true;
@@ -70,9 +70,9 @@ if (!empty($data['Сохранить'])
 
         // сохранить группы для пользователя
         unset($dataUpdateUser['groups']);
-        AccessUserGroup::deleteUserInAllGroups($data['edit-id']);
+        Gy\Core\User\AccessUserGroup::deleteUserInAllGroups($data['edit-id']);
         foreach ($data['groups'] as $value) {
-            AccessUserGroup::addUserInGroup($data['edit-id'], $value);
+            Gy\Core\User\AccessUserGroup::addUserInGroup($data['edit-id'], $value);
         }
 
         // обновить данные пользователя

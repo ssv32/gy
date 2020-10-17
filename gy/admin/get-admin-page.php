@@ -2,12 +2,12 @@
 include "../../gy/gy.php"; // подключить ядро // include core
 
 global $USER;
-$module = Module::getInstance();
+$module = Gy\Core\Module::getInstance();
 global $APP;
 
 $data  = $_GET;
 
-if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
+if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     && !empty($data['page']) 
 ) {
 

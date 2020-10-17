@@ -1,11 +1,11 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
-if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
+if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
     include "../../gy/admin/header-admin.php";
 
-    if (AccessUserGroup::accessThisUserByAction( 'edit_container_data') && is_numeric($_GET['ID'])) {
+    if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'edit_container_data') && is_numeric($_GET['ID'])) {
         $id = $_GET['ID'];
 
         $APP->component(

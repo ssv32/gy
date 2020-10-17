@@ -1,13 +1,15 @@
 <?php 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
+use Gy\Core\User\GeneralUsersPropertys;
+
 if (!empty($this->arParam['id']) && is_numeric($this->arParam['id'])) {
     global $USER;
     $dateUser = $USER->getUserById($this->arParam['id']);
 
     if (!empty($dateUser)) {
         // взять все группы пользователей
-        $allUsersGroups = AccessUserGroup::getAccessGroup();
+        $allUsersGroups = Gy\Core\User\AccessUserGroup::getAccessGroup();
         
         $arRes['dataUser'] = array(
             'id' => $dateUser['id'],

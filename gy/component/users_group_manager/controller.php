@@ -11,7 +11,7 @@ if ( !empty($data['add-group-name'])
     && !empty( $data['groupsActions']['add-group-action-user'])
 ) {
 
-    $res = AccessUserGroup::addUserGroup(
+    $res = Gy\Core\User\AccessUserGroup::addUserGroup(
         array(
             'code' => $data['add-group-code'],
             'text' => $data['add-group-text'],
@@ -25,15 +25,15 @@ if ( !empty($data['add-group-name'])
 // удалить группы, отмеченные для удаления
 if (!empty($data['delete'])) {
     foreach ($data['delete'] as $codeDeleteGroup => $val) {
-        AccessUserGroup::deleteUserGroupByCode($codeDeleteGroup);
+        Gy\Core\User\AccessUserGroup::deleteUserGroupByCode($codeDeleteGroup);
     }
 }
 
 // взять все группы пользователей
-$arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
+$arRes['allUsersGroups'] = Gy\Core\User\AccessUserGroup::getAccessGroup();
 
 // взять все дефствия поьзователей 
-$arRes['allActionUser'] = AccessUserGroup::getUserAction();
+$arRes['allActionUser'] = Gy\Core\User\AccessUserGroup::getUserAction();
 
 // коды групп пользователей которые даны по умолчанию (их нельзя будет удалять)
 $standartGroup = array(
@@ -59,10 +59,10 @@ if (!empty($data['button-form'])
 ) { // нужно сохранить новые настроки прав
     foreach ($data['groupsActions'] as $key => $listActionUser) {
         // удалить все настройки для определённой группы
-        AccessUserGroup::deleteAllActionsForGroup($key);
+        Gy\Core\User\AccessUserGroup::deleteAllActionsForGroup($key);
         
         foreach ($listActionUser as $nameActionsUser) {
-            AccessUserGroup::addOptionsGroup($key, $nameActionsUser);
+            Gy\Core\User\AccessUserGroup::addOptionsGroup($key, $nameActionsUser);
         }
     }
     $arRes['status'] = 'ok';

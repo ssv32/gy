@@ -1,6 +1,8 @@
 <?php
 
-namespace Gy\Core;
+namespace Gy\Core\Cache;
+
+use Gy\Core\AbstractClasses\Cache;
 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 

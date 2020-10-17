@@ -9,7 +9,7 @@ $data = $_REQUEST;
 
 global $USER;
 
-if ( AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
+if ( Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
     && !empty($data['action'])
 ) {
     // действие удалить пользователя

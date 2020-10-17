@@ -1,6 +1,8 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
+use Gy\Core\Lang;
+
 global $APP;
 $utlThisComponent = "/gy/component/users_group_manager/";
 $langComponentInfo = new Lang($APP->urlProject.$utlThisComponent, 'componentInfo', $APP->options['lang']);

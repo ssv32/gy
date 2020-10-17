@@ -1,6 +1,9 @@
 <?php 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
+use Gy\Core\Capcha;
+//use Gy\Core\User\AccessUserGroup;
+
 // контроллер компонента form_auth (форма авторизации)
 
 // подключить модель // include model this component
@@ -24,7 +27,7 @@ if (!empty($_REQUEST['auth'])) {
 
 global $USER;
 
-$isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
+$isShowAdminPanel = Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
@@ -39,7 +42,7 @@ if ($isShowAdminPanel === true){
     if (Capcha::chackCapcha($_REQUEST['capcha'])) {
 
         $USER->authorized($_REQUEST['auth'], $_REQUEST['pass']);
-        $isShowAdminPanel = AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
+        $isShowAdminPanel = Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel');
 
         if ($isShowAdminPanel === false) {
             $arRes["err"] = 'err1';

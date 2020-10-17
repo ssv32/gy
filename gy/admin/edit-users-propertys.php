@@ -4,7 +4,7 @@ include "../../gy/gy.php"; // подключить ядро // include core
 global $USER;
 $data = $_REQUEST;
 
-if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
+if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
     && !empty($data['edit-id'])
     && is_numeric($data['edit-id'])
     && ($data['edit-id'] != 1) 
@@ -12,7 +12,7 @@ if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
 
     include "../../gy/admin/header-admin.php";
 
-    if (AccessUserGroup::accessThisUserByAction( 'edit_users')) {
+    if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'edit_users')) {
 
         // редактирование общих свойств пользователей
         $APP->component(

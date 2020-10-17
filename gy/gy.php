@@ -3,8 +3,9 @@
 use Gy\Core\App;
 use Gy\Core\Security;
 use Gy\Core\Crypto;
+use Gy\Core\Module;
 use Gy\Core\User\User;
-
+//use Gy\Core\User\AccessUserGroup;
 use Gy\Core\Test;
 
 // если ядро не подключено подключаем всё а если уже подключено то не надо
@@ -110,8 +111,8 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
             $DB = new Gy\Core\Db\PhpFileSqlClientForGy($APP->options['db_config']); 
         }
  
-    }
-
+    }   
+    
     global $CRYPTO;
     $CRYPTO = new Crypto();
     if (!empty($APP->options['sole'])) {
@@ -126,7 +127,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         $APP->options['type_cache'] = 'cacheFiles';
     }
     global $CACHE_CLASS_NAME;
-    $CACHE_CLASS_NAME = $APP->options['type_cache'];
+    $CACHE_CLASS_NAME = 'Gy\\Core\\Cache\\'.$APP->options['type_cache'];   
 
     session_start();
 

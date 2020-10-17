@@ -1,6 +1,8 @@
 <?php 
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
+use Gy\Core\User\GeneralUsersPropertys;
+
 $data = $_REQUEST;
 
 // получить все возможные типы свойств

@@ -1,5 +1,8 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
+
+use Gy\Core\Lang;
+
 global $APP;
 global $USER;
 
@@ -37,13 +40,13 @@ $langTextThisFile = new Lang(
         <br/>
         <br/>
         <?php
-        if (AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
+        if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
 
             // меню доступное для текущего пользователя
             $buttonName = $langTextThisFile->getMessage('index-page');
             $menu[$buttonName] = '/gy/admin/index.php';
 
-            if (AccessUserGroup::accessThisUserByAction( 'edit_users') 
+            if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'edit_users') 
                 || $USER->isAdmin()
             ) {
                 $buttonName = $langTextThisFile->getMessage('users');
@@ -51,12 +54,12 @@ $langTextThisFile = new Lang(
             }
 
             // надо добавить пункты меню заданные в подключенных модулях
-            $module = Module::getInstance();
+            $module = Gy\Core\Module::getInstance();
             foreach ($module->getButtonsMenuAllModules() as $nameModule => $arButton) {
                 // условия показа пункта меню (задаётся модулем) или если админ
                 if (
                     (!empty($module->getFlagShowButtonsAdminPanelByModule[$nameModule])
-                     && AccessUserGroup::accessThisUserByAction( 
+                     && Gy\Core\User\AccessUserGroup::accessThisUserByAction( 
                             $module->getFlagShowButtonsAdminPanelByModule[$nameModule]
                         ) 
                     )

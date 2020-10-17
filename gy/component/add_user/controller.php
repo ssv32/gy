@@ -13,7 +13,7 @@ $arRes['user_property'] = array(
 $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 // взять все группы пользователей
-$arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
+$arRes['allUsersGroups'] = Gy\Core\User\AccessUserGroup::getAccessGroup();
 
 function checkProperty($arr, $arRes){
     $result = true;
@@ -68,9 +68,9 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
             $dataAddNewUser = $DB->fetch($res);
 
             // добавить пользователя к указанным группам
-            AccessUserGroup::deleteUserInAllGroups($dataAddNewUser['id']);
+            Gy\Core\User\AccessUserGroup::deleteUserInAllGroups($dataAddNewUser['id']);
             foreach ($data['groups'] as $value) {
-                AccessUserGroup::addUserInGroup($dataAddNewUser['id'], $value);
+                Gy\Core\User\AccessUserGroup::addUserInGroup($dataAddNewUser['id'], $value);
             }
 
             $arRes["stat"] = 'ok';

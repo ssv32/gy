@@ -33,7 +33,7 @@ class AppFromConstructorPageComponent
     public function getInfoAboutComponent( $name, $template, $arParam, $url )
     {
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
-        $module = Module::getInstance();
+        $module = Gy\Core\Module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
         $componentInfo = array();
 

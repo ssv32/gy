@@ -284,7 +284,7 @@ class Module
     /**
      * getFlagShowButtonsAdminPanelByModule
      *  - вернуть условие показа кнопок в админке,
-     *  это код для метода AccessUserGroup::accessThisUserByAction
+     *  это код для метода Gy\Core\User\AccessUserGroup::accessThisUserByAction
      *  т.е. действие и если оно разрешено пользователю то покажется пункты меню в админке
      *  
      * 

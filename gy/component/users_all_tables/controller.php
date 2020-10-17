@@ -7,13 +7,13 @@ global $USER;
 $arRes['allUsers'] = $USER->getAllDataUsers();
 
 // взять все группы пользователей
-$arRes['allUsersGroups'] = AccessUserGroup::getAccessGroup();
+$arRes['allUsersGroups'] = Gy\Core\User\AccessUserGroup::getAccessGroup();
 
 // если идёт удаление пользователя
 if (!empty($data['del-id'])
     && is_numeric($data['del-id'])
     && ($data['del-id'] != 1)
-    && AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
+    && Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')
 ) {
     $res = $USER->deleteUserById($data['del-id']);
     if ($res) {

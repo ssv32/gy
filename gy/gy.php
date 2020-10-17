@@ -5,8 +5,6 @@ use Gy\Core\Security;
 use Gy\Core\Crypto;
 use Gy\Core\Module;
 use Gy\Core\User\User;
-//use Gy\Core\User\AccessUserGroup;
-use Gy\Core\Test;
 
 // если ядро не подключено подключаем всё а если уже подключено то не надо
 if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
@@ -23,67 +21,51 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     // подключаем класс модуля 
     // (нужен для подключения модулей до определения авто подключения классов)
-  //  include_once(__DIR__ . '/classes/module.php');
-/*
+    include_once(__DIR__ . '/classes/Gy/Core/Module.php');
+
     // подключить модули
     global $MODULE;
     $MODULE = Module::getInstance();
     $MODULE->setUrlGyCore(__DIR__);
     //$MODULE->includeModule('containerdata');
     $MODULE->includeAllModules();
-*/
+
     // путь к проекту
     global $URL_PROJECT;
     $URL_PROJECT = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
-
+    
     // авто подключение классов
-    /*
-    function __autoload($calssname){ 
+    function autoload($className)
+    {
         global $URL_PROJECT;
-
-        // проверю есть ли класс в подключённых модулях и подключу, иначе как всегда всё
+        
+        // проверю есть ли класс в подключённых модулях и подключу (в модулях psr0 нет)
         global $MODULE;
-        $meyByClassModule = $MODULE->getUrlModuleClassByNameClass($calssname);
+        $meyByClassModule = $MODULE->getUrlModuleClassByNameClass($className);
+        
         if ($meyByClassModule !== false) {
             require_once( $meyByClassModule );
         } else {
-
-            if (file_exists($URL_PROJECT."/customDir/classes/".$calssname.".php" )) { // сюда будут подключаться пользовательские классы
-                require_once( $URL_PROJECT."/customDir/classes/".$calssname.".php" );
-            } elseif (file_exists(__DIR__ . '/classes/'.$calssname.'.php' )) {
-                require_once( "classes/$calssname.php" );
-            } elseif (file_exists(__DIR__ . '/classes/abstract/'.$calssname.'.php' )) {
-                // подключение abstract классов (что бы они хранились в отдельном разделе)
-                require_once( "classes/abstract/$calssname.php" );
-            } else {
-                die('class '.$calssname.' not find' );
+            $className = ltrim($className, '\\');
+            $fileName  = '';
+            $namespace = '';
+            if ($lastNsPos = strrpos($className, '\\')) {
+                $namespace = substr($className, 0, $lastNsPos);
+                $className = substr($className, $lastNsPos + 1);
+                $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            }
+            $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+                
+            // TODO можно сделать поддержку psr0 в customDir/classes или переименовать в вендор
+            if (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName)){
+                require $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName;
+            }else{ // в разделе gy/classes будет поддержка psr0
+                require 'classes'.DIRECTORY_SEPARATOR.$fileName;
             }
         }
     }
-    */
-    
-    function autoload($className)
-    {
-        $className = ltrim($className, '\\');
-        $fileName  = '';
-        $namespace = '';
-        if ($lastNsPos = strrpos($className, '\\')) {
-            $namespace = substr($className, 0, $lastNsPos);
-            $className = substr($className, $lastNsPos + 1);
-            $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-        }
-        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-
-        //var_dump($fileName);
-
-        require 'classes'.DIRECTORY_SEPARATOR.$fileName;
-    }
     spl_autoload_register('autoload');
-    
-    //$asd = new Gy\Core\Test();
-    $asd = new Test();
-    $asd->test();
-    
+        
     // обезопасить получаемый конфиг
     $gyConfig = Security::filterInputData($gyConfig);
 
@@ -141,36 +123,5 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         $_GET = Security::filterInputData($_GET);
         $_POST = Security::filterInputData($_POST);
     }
-
-
-    /*
-    Примеры как можно прокидывать where условия в запросы 
-     (возможно не рабочие но можно увидеть логику работы)
-
-    issues/24 - теперь будет так
-    global $DB;
-    $res = $DB->selectDb(
-        $DB->db, 
-        'users', 
-        array('*'), 
-        array( 
-            'AND' => array(
-                array('=' => array('logIn', "'admin'") ), 
-                array('=' => array('logIn', "'admin2'") ) 
-            ),  
-        )
-    );
-
-    */
-
-    /*
-    $res = $DB->selectDb(
-        $DB->db, 
-        'users', 
-        array('*'), 
-        array( 
-            '=' => array('id', 1 ), 
-        )
-    );*/
 
 }

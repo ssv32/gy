@@ -1,4 +1,9 @@
 <?php
+
+namespace Gy\Modules\filemodule\Classes;
+
+use Gy\Core\Module;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 /**
@@ -33,7 +38,7 @@ class AppFromConstructorPageComponent
     public function getInfoAboutComponent( $name, $template, $arParam, $url )
     {
         // нужно попробовать найти подключаемый компонент среди подключённых модулей
-        $module = Gy\Core\Module::getInstance();
+        $module = Module::getInstance();
         $urlComponentInModule = $module->getModulesComponent($name);
         $componentInfo = array();
 

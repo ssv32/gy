@@ -1,4 +1,7 @@
 <?php 
+
+use Gy\Modules\containerdata\Classes\ContainerData;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 //global $USER;

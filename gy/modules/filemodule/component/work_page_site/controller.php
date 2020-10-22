@@ -1,4 +1,8 @@
 <?php 
+
+use Gy\Modules\filemodule\Classes\AppFromConstructorPageComponent;
+use Gy\Modules\filemodule\Classes\SitePages;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 $data = $_POST;

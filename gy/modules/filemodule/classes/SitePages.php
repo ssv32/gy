@@ -1,4 +1,9 @@
 <?php
+
+namespace Gy\Modules\filemodule\Classes;
+
+use Gy\Modules\filemodule\Classes\Files;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 /**

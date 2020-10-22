@@ -37,32 +37,57 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     // авто подключение классов
     function autoload($className)
     {
+        //   1. для модулей завести пространство имён типа Gy\Modules\<имя модуля>\Classes\<имя класса>
+        //   2. потом подключать вначале customDir/vendor
+        //   3. уже потом из раздела gy/classes
+  
         global $URL_PROJECT;
         
-        // проверю есть ли класс в подключённых модулях и подключу (в модулях psr0 нет)
-        global $MODULE;
-        $meyByClassModule = $MODULE->getUrlModuleClassByNameClass($className);
-        
-        if ($meyByClassModule !== false) {
-            require_once( $meyByClassModule );
-        } else {
-            $className = ltrim($className, '\\');
-            $fileName  = '';
-            $namespace = '';
-            if ($lastNsPos = strrpos($className, '\\')) {
-                $namespace = substr($className, 0, $lastNsPos);
-                $className = substr($className, $lastNsPos + 1);
-                $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-            }
-            $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-                
-            // TODO можно сделать поддержку psr0 в customDir/classes или переименовать в вендор
-            if (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName)){
-                require $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName;
-            }else{ // в разделе gy/classes будет поддержка psr0
-                require 'classes'.DIRECTORY_SEPARATOR.$fileName;
-            }
+        // из пространства имён составляю путь к классу
+        $className = ltrim($className, '\\');
+        $fileName  = '';
+        $namespace = '';
+        if ($lastNsPos = strrpos($className, '\\')) {
+            $namespace = substr($className, 0, $lastNsPos);
+            $className = substr($className, $lastNsPos + 1);
+            $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
         }
+        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+
+        // определяю является ли путь и вызываемый класс, классом модуля,
+        //   если так то подключаю класс модуля 
+        //   пространство имён будет: Gy\Modules\<имя модуля>\Classes\<имя класса>
+        
+        // условие регулярки для такого пространства имён 
+        $br = DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR;
+        $pattern = "#^(Gy".$br."Modules".$br.")(.*)(".$br."Classes".$br.")(.*).php#";
+        
+        //var_dump(  "#^Gy".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR."Modules".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR."#" );
+        $parseUrl = array(); // тут результат парсинга
+        
+        if (preg_match( $pattern, $fileName, $parseUrl) == 1) {
+            //$parseUrl[2] - тут имя модуля
+            //$parseUrl[4] - Тут имя класса
+            
+            // TODO можно было бы подключить конкретный модуль но пока оставлю старую механику 
+            //   (когда подключаются все сразу до автозагрузки классов)
+            
+            // проверю есть ли класс в подключённых модулях и подключу (в модулях psr0 нет)
+            global $MODULE;
+            $meyByClassModule = $MODULE->getUrlModuleClassByNameClass($parseUrl[4]);
+            if ($meyByClassModule !== false) {
+                require_once( $meyByClassModule );
+            } else {
+                die('!Error class '.$className.' not founr');
+            }
+        } elseif (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName)) {
+            // иначе, если не класс модуля, ищу класс в разделе для кастомных (пользовательских) классов
+            require_once $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName;
+        } else { 
+            // иначе ищу класс в классах gy
+            require_once 'classes'.DIRECTORY_SEPARATOR.$fileName;
+        }
+
     }
     spl_autoload_register('autoload');
         

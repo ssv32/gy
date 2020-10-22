@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Gy\Modules\containerdata\Classes\ContainerData;
+
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 //global $USER;
@@ -31,6 +34,7 @@ if (!empty($data['ID'])) {
     }
 
 } else {
+    $arRes['data-this-nfo-box'] = array();
     if (!empty($this->arParam['ID'])) {
         $arRes['data-this-nfo-box'] = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['ID'])), array('*') );
     }

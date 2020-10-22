@@ -19,17 +19,6 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         $LANG = $gyConfig['lang'];
     }
 
-    // подключаем класс модуля 
-    // (нужен для подключения модулей до определения авто подключения классов)
-    include_once(__DIR__ . '/classes/Gy/Core/Module.php');
-
-    // подключить модули
-    global $MODULE;
-    $MODULE = Module::getInstance();
-    $MODULE->setUrlGyCore(__DIR__);
-    //$MODULE->includeModule('containerdata');
-    $MODULE->includeAllModules();
-
     // путь к проекту
     global $URL_PROJECT;
     $URL_PROJECT = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
@@ -70,11 +59,11 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
             //$parseUrl[4] - Тут имя класса
             
             // TODO можно было бы подключить конкретный модуль но пока оставлю старую механику 
-            //   (когда подключаются все сразу до автозагрузки классов)
+            //   (когда подключаются все сразу)
             
             // проверю есть ли класс в подключённых модулях и подключу (в модулях psr0 нет)
-            global $MODULE;
-            $meyByClassModule = $MODULE->getUrlModuleClassByNameClass($parseUrl[4]);
+            $module = Module::getInstance();
+            $meyByClassModule = $module->getUrlModuleClassByNameClass($parseUrl[4]);
             if ($meyByClassModule !== false) {
                 require_once( $meyByClassModule );
             } else {
@@ -90,7 +79,13 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
 
     }
     spl_autoload_register('autoload');
-        
+    
+    // подключить модули (пока сразу все)
+    $module = Module::getInstance();
+    $module->setUrlGyCore(__DIR__);
+    //$module->includeModule('containerdata'); - так подключается конкретный модуль
+    $module->includeAllModules();
+    
     // обезопасить получаемый конфиг
     $gyConfig = Security::filterInputData($gyConfig);
 

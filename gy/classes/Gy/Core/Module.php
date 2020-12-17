@@ -55,10 +55,10 @@ class Module
      */
     public function getInstance()
     {
-        if (static::$module === null) {
-            static::$module = new static();
+        if (self::$module === null) {
+            self::$module = new static();
         }
-        return static::$module;
+        return self::$module;
     }
 
     public function setUrlGyCore($urlGyCore)

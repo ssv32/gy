@@ -23,9 +23,25 @@ class Capcha
     public function __construct($urlFonts = false)
     {
         $this->urlFonts = $urlFonts;
-        $this->setCapchaValue( self::getRandLetters($this->count) );
+
+        $oldCodeCapcha = self::getCapchaValue();
+        if(!empty($oldCodeCapcha)){
+            $this->code = $oldCodeCapcha;
+        }else{
+            $this->setCapchaValue( self::getRandLetters($this->count) );
+        }
+        
     }
 
+    /**
+     * createNewCapchaData
+     *  - сгенерирует новые символы и сохранит
+     * 
+     */
+    public function createNewCapchaData(){
+        $this->setCapchaValue( self::getRandLetters($this->count) );
+    }
+    
     /**
      * clearCapcha - очистить текущий код капчи
      */
@@ -39,16 +55,23 @@ class Capcha
      * @param string $code
      * @return boolean
      */
-    public static function chackCapcha( $code)
-    {
+    public function chackCapcha( $code)
+    {       
         $arResult = false;
         // проверит код с капчи
         // всё приводится к верхнему регистру что бы пользователю проще 
         //     было угадать капчу
+        
         if ($_SESSION['capcha'] == mb_strtoupper($code)) { 
             $arResult = true;
         }
         self::clearCapcha();
+        
+        if($arResult === false){
+            // если проверка капчи не прошла то сгенерить новый код капчи
+            $this->createNewCapchaData();
+        }
+        
         return $arResult;
     }
 
@@ -57,7 +80,7 @@ class Capcha
      * @param type $value
      */
     private function setCapchaValue($value)
-    {
+    {       
         // задать код в классе
         $this->code = $value;
 
@@ -66,6 +89,17 @@ class Capcha
         
     }
 
+    /**
+     * getCapchaValue
+     *  - получить код капчи из сессии 
+     * 
+     * @return string
+     */
+    private function getCapchaValue()
+    {
+        return $_SESSION['capcha']; 
+    }
+    
     /**
      * getImageCapcha - вызовет createImageCapcha с нужным кодом
      * это всё чтобы нарисовать картинку капчи

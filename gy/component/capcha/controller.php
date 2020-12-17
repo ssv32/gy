@@ -7,14 +7,17 @@ global $APP;
 
 $arRes = array();
 
-$capcha = new Capcha( $APP->url.capcha::$defaultUrlFonts );
-
 $data = $_REQUEST;
 
-if (!empty($_REQUEST['capcha_get_image']) && ($_REQUEST['capcha_get_image'] == 1)) {
+if (!empty($data['capcha_get_image']) && ($data['capcha_get_image'] == 1)) {
+
+    $capcha = new Capcha( $APP->url.Capcha::$defaultUrlFonts );   
+    
     // нарисовать капчу
     $capcha->getImageCapcha();
+     
 } else {
     // показать шаблон
     $this->template->show($arRes, $this->arParam);
 }
+

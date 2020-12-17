@@ -39,7 +39,9 @@ if ($isShowAdminPanel === true){
 
 } elseif (!empty($_REQUEST['auth']) && !empty($_REQUEST['pass']) && !empty($_REQUEST['capcha'])) {
 
-    if (Capcha::chackCapcha($_REQUEST['capcha'])) {
+    $capcha = new Capcha($APP->url.Capcha::$defaultUrlFonts);
+    
+    if ($capcha->chackCapcha($_REQUEST['capcha'])) {
 
         $USER->authorized($_REQUEST['auth'], $_REQUEST['pass']);
         $isShowAdminPanel = Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel');

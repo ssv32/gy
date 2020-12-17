@@ -25,9 +25,9 @@ class Capcha
         $this->urlFonts = $urlFonts;
 
         $oldCodeCapcha = self::getCapchaValue();
-        if(!empty($oldCodeCapcha)){
+        if (!empty($oldCodeCapcha)) {
             $this->code = $oldCodeCapcha;
-        }else{
+        } else {
             $this->setCapchaValue( self::getRandLetters($this->count) );
         }
         
@@ -38,7 +38,8 @@ class Capcha
      *  - сгенерирует новые символы и сохранит
      * 
      */
-    public function createNewCapchaData(){
+    public function createNewCapchaData()
+    {
         $this->setCapchaValue( self::getRandLetters($this->count) );
     }
     
@@ -67,7 +68,7 @@ class Capcha
         }
         self::clearCapcha();
         
-        if($arResult === false){
+        if ($arResult === false) {
             // если проверка капчи не прошла то сгенерить новый код капчи
             $this->createNewCapchaData();
         }

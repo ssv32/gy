@@ -23,7 +23,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     global $URL_PROJECT;
     $URL_PROJECT = substr(__DIR__, 0, (strlen(__DIR__) - 3) );
     
-    // авто подключение классов
+    // авто подключение классов // кроме подключения классов модулей используется psr0
     function autoload($className)
     {
         //   1. для модулей завести пространство имён типа Gy\Modules\<имя модуля>\Classes\<имя класса>
@@ -67,19 +67,19 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
             if ($meyByClassModule !== false) {
                 require_once( $meyByClassModule );
             } else {
-                die('!Error class '.$className.' not founr');
+                //die('!Error class '.$className.' not found'); 
             }
         } elseif (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName)) {
             // иначе, если не класс модуля, ищу класс в разделе для кастомных (пользовательских) классов
             require_once $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'classes/'.DIRECTORY_SEPARATOR.$fileName;
-        } else { 
+        } elseif (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'gy/classes'.DIRECTORY_SEPARATOR.$fileName)) { 
             // иначе ищу класс в классах gy
             require_once 'classes'.DIRECTORY_SEPARATOR.$fileName;
         }
 
     }
     spl_autoload_register('autoload');
-    
+      
     // подключить модули (пока сразу все)
     $module = Module::getInstance();
     $module->setUrlGyCore(__DIR__);
@@ -144,4 +144,10 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         $_POST = Security::filterInputData($_POST);
     }
 
+}
+
+// подключаю customDir/gy/afterGyCore.php если он есть, тут можно кастомное дописать 
+//   или обьявить psr4 автозакрузку классов из любой желаемой директории
+if (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php')) {
+    require_once $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php';
 }

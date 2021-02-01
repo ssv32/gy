@@ -41,7 +41,7 @@ class PhpFileSqlClientForGy extends Db
     */
     public function connect($dir, $login, $pass, $nameDb, $port = false)
     {
-        $phpFileSql = new PhpFileSql($dir);
+        $phpFileSql = new \PhpFileSql($dir);
         $phpFileSql->connect($login, $pass, $nameDb);
         
         $this->db = $phpFileSql;

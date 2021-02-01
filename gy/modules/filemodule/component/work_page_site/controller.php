@@ -41,7 +41,6 @@ if (!empty($data['action-3']) && empty($arRes['status'])) {
 
 // изменение страницы
 if (!empty($data['action-2']) && empty($arRes['status'])) {
-
     global $APP;
     $sitePage = new SitePages($APP->urlProject.'/');
 
@@ -74,7 +73,8 @@ if (!empty($data['action-4'])) {
     header("Location: /".$data['url-site-page'] );
 }
 
-if (!empty($data['action-5'])) {
+if (!empty($data['action-5'])) {    
+    ob_start();
     // сохраним основной app обьект
     global $APP;
     $APPGlobal = $APP;
@@ -87,7 +87,7 @@ if (!empty($data['action-5'])) {
     include $url; // !! надо не подключать ядро
 
     $arRes['dataIncludeAllComponentsInThisPageSite'] = $APP->getAllDataIncludeComponents();
-    
+
     // хочу найти поля обьявленные в компоненте как возможные но не заполненные в коде
     foreach ($arRes['dataIncludeAllComponentsInThisPageSite'] as $key => $value) {
         if (!empty($value['componentInfo']['all-property'])) {
@@ -98,12 +98,13 @@ if (!empty($data['action-5'])) {
             }
         }
     }
-
     $arRes['url-site-page'] = $data['url-site-page'];
 
     // вернём как было
     $APP = $APPGlobal;
     unset($APPGlobal);
+    ob_end_clean();
+    
     $arRes['status'] = 'constructor';
 }
 
@@ -258,7 +259,9 @@ if( !empty($data['action_8_2'])
     && (!empty($data['name_new_template']) || ($data['name_new_template'] == 0) )
 ) {
     // надо взять все компоненты с редактируемой страницы
-
+    
+    ob_start();
+    
     // сохраним основной app обьект
     global $APP;
     $APPGlobal = $APP;
@@ -274,7 +277,9 @@ if( !empty($data['action_8_2'])
     // вернём как было
     $APP = $APPGlobal;
     unset($APPGlobal);
-
+    
+    ob_end_clean();
+    
     $newArrayComponents = array();
 
     if ($data['position_new_component'] == "'-1'") {
@@ -322,7 +327,7 @@ if( !empty($data['action_8_2'])
 
     // сохранить всё на страницу
     savePageByArrayComponents($data['url-site-page'], $trueNewArrayComponents);
-
+    
 }
 
 // показать шаблон

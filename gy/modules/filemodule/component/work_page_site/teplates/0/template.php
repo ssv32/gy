@@ -171,12 +171,12 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
             <input type="hidden" name="position_new_component" value="<?=$arRes['key']?>" />
             <p>
                 <?=$this->lang->getMessage('name-new-component');?>
-                <input type="text" name="name_new_component" value="<?=$component['template']?>">
+                <input type="text" name="name_new_component">
                 <?php // TODO сделать выбор из имеющихся + выводить описаие?>
             </p>
             <p>
                 <?=$this->lang->getMessage('name-new-template');?>
-                <input type="text" name="name_new_template" value="<?=$component['template']?>">
+                <input type="text" name="name_new_template" >
             </p>
             <input
                 class="gy-admin-button" 

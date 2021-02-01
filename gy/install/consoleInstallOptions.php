@@ -101,7 +101,7 @@ if ($isRunConsole) { // пока запускать только из консо
         include __DIR__."/../gy.php";
         $oldOptions = $APP->options;
 
-        print_r($oldOptions);
+        //print_r($oldOptions);
 
         foreach ($options as $key => $val) {
             if (is_array($val)) {

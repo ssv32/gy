@@ -1,5 +1,5 @@
 .gy-admin-panel{
-    width: 735px;
+    width: 800px;
     height: 140px;
     /*background-color: #adade4;*/
     margin-left: -10;
@@ -67,19 +67,19 @@
 }
 .div-button-admin-panel{
     float: left;
-    width: 70%;
+    width: 65%;
 }
 .div-login{
     float: left;
-    width: 30%;
+    width: 35%;
 }
 
 .version-gy-core-admin-panel{
     padding-left: 0px;
     position: absolute;
-    top: 30px;
+    top: 45px;
     font-size: 9pt;
     font-style: italic;
     background-color: aquamarine;
-    left: 270px;
+    left: 280px;
 }

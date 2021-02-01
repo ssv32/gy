@@ -62,7 +62,9 @@ class Lang
         // если есть файл с языковыми параметрами
         if (file_exists($urlFile) === true) {	
             include $urlFile;
-            $mess = $mess[$lang];
+            if(!empty($mess[$lang])){
+                $mess = $mess[$lang];
+            }
         }
 
         return $mess;

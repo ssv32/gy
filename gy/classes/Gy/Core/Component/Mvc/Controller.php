@@ -51,6 +51,7 @@ class Controller
      */
     public function run()
     {
+        $arRes = array();
         include $this->controller;
     }
 

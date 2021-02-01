@@ -7,7 +7,7 @@ use Gy\Core\Module;
 use Gy\Core\User\User;
 
 // если ядро не подключено подключаем всё а если уже подключено то не надо
-if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
+if ( !defined("GY_CORE") ) {
 
     ob_start();
     define("GY_CORE", true); // флаг о том что ядро подключено // flag include core
@@ -48,7 +48,7 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
         //   пространство имён будет: Gy\Modules\<имя модуля>\Classes\<имя класса>
         
         // условие регулярки для такого пространства имён 
-        $br = DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR;
+        $br = '/';
         $pattern = "#^(Gy".$br."Modules".$br.")(.*)(".$br."Classes".$br.")(.*).php#";
         
         //var_dump(  "#^Gy".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR."Modules".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR."#" );
@@ -137,17 +137,19 @@ if ( !defined("GY_CORE") && (GY_CORE !== true) ) {
     // на этой странице не проверять, т.к. там могут сохраняться данные html (своства контейнера данных)
     // TODO - может как то это пофиксить
     if( ($APP->getUrlTisPageNotGetProperty() != '/gy/admin/get-admin-page.php')
-        && ($_REQUEST['page'] != 'container-data-element-property' )
+        && ( !empty($_REQUEST['page']) && ($_REQUEST['page'] != 'container-data-element-property') )
     ) {
         $_REQUEST = Security::filterInputData($_REQUEST);
         $_GET = Security::filterInputData($_GET);
         $_POST = Security::filterInputData($_POST);
     }
 
+    
+    // подключаю customDir/gy/afterGyCore.php если он есть, тут можно кастомное дописать 
+    //   или обьявить psr4 автозакрузку классов из любой желаемой директории
+    if (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php')) {
+        require_once $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php';
+    }
+
 }
 
-// подключаю customDir/gy/afterGyCore.php если он есть, тут можно кастомное дописать 
-//   или обьявить psr4 автозакрузку классов из любой желаемой директории
-if (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php')) {
-    require_once $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php';
-}

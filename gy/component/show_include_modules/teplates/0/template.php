@@ -1,7 +1,7 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 ?>
-<h2><?=$this->lang->getMessage($arRes['h1']);?></h2>
+<h2><?=$this->lang->getMessage('h1');?></h2>
 <?php if ($arRes['info-modules']) {?>
 
     <table border="1" class="gy-table-all-users">

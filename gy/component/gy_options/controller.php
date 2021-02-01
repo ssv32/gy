@@ -43,8 +43,8 @@ if (!empty($data['save']) && in_array($data['lang'], $arRes['langs'])) {
     include $_SERVER["DOCUMENT_ROOT"].'/gy/install/consoleInstallOptions.php';
     $consoleLog = ob_get_contents();
     ob_end_clean();
-
-    if ($consoleLog != "run set-option\nfinish set-option\n") {
+   
+    if ($consoleLog == "run set-option\nfinish set-option\n") {
         $arRes['status'] = 'save-ok';
     } else {
         $arRes['status'] = 'save-err';

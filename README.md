@@ -33,31 +33,39 @@ Gy – это небольшой php framework, который включает 
 ### Документация
 <p>Имеются файлы wiki по работе с framework, описанием реализованного (с точки зрения админки и пояснения для разработчиков)
 https://github.com/ssv32/gy/wiki</p>
-<br/><br/>
 
+### Особенности проекта 
+ - Реализованы/поддерживаются стандарты PSR 0-4. 
+(PSR-4 - реализован не ожидаемо, можно прочитать тут https://github.com/ssv32/gy/wiki/16.-%D0%90%D0%B2%D1%82%D0%BE%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2-%7C-Class-autoloading) ;
+ - Пока релизы проекта помечаются как альфа версии, обратной поддержки framework gy нет (т.е. архитектура framework gy может меняться ) ;
+ - TODO - проекта https://github.com/ssv32/gy/projects/1 ;
+ - Discussions - https://github.com/ssv32/gy/discussions ;
+ - Описание в wiki может опережать текущий релиз .
+ 
 ### Пример подключения gy php framework
-`<?`<br/>
-`include "./gy/gy.php"; // подключить ядро // include core`<br/>
+
+    <?
+    include "./gy/gy.php"; // подключить ядро // include core
 
 ### Пример проверки подключено ли ядро gy php framework
-`<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>`
+
+    <?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 ### Пример вызова компонента:
 
-`<?`<br/>
-`include "./gy/gy.php"; // подключить ядро `<br/>
-<br/>
-`// пример вызова компонента `<br/>
-`$app->component(`<br/>
-`⋅⋅⋅⋅'form_auth',`<br/>
-`⋅⋅⋅⋅'0',`<br/>
-`⋅⋅⋅⋅array( `<br/>
-`⋅⋅⋅⋅⋅⋅⋅⋅'test' => 'asd',`<br/>
-`⋅⋅⋅⋅⋅⋅⋅⋅'idComponent' => 1,`<br/>
-`⋅⋅⋅⋅),`<br/>
-`);`<br/>
-<br/>
-
+    <?
+    include "./gy/gy.php"; // подключить ядро 
+    
+    // пример вызова компонента 
+    $app->component(
+        'form_auth',
+        '0',
+        array(
+            'test' => 'asd',
+            'idComponent' => 1,
+        ),
+    );
+    
 ### Основные цели
    Основная цель проекта gy framework/cms, сделать бесплатный, доступный всем, простой в освоение, простой в реализации и архитектуре инструмент для создания простых (небольших) сайтов.<br/><br/>
    Создаваемый инструмент должен быть максимально простым в освоение и не требующем от разработчика использующего gy каких либо сложных навыков или знаний, достаточно только основ php.<br/><br/>
@@ -97,34 +105,42 @@ Database weight: 208 Kb (with demo data).
 - There is a demo site, you can install it with a console script `gy/install/installDemoSite1.php` (Should be sent as the first parameter `start`, example `php -f gy/install/installDemoSite1.php start`).<br/>
 - The demo site is needed for a small demonstration, it includes a directory `customDir`, with an example of customizing a component template, section `classes` (for custom classes or overriding classes gy), and the main page file `index.php`.
 
-
 ### Documentation
 <p>There are wiki pages that show how to work with gy framework. (in terms of admin panel and explanation for developers)
 https://github.com/ssv32/gy/wiki </p>
-<br/><br/>
 
+### Features of the project
+ - Implemented / maintained standards PSR 0-4. 
+(PSR-4 - not normal, read here https://github.com/ssv32/gy/wiki/16.-%D0%90%D0%B2%D1%82%D0%BE%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2-%7C-Class-autoloading);
+ - While project releases are marked as alpha versions, there is no backward support for framework gy (framework gy architecture is subject to change );
+ - TODO - https://github.com/ssv32/gy/projects/1 ;
+ - Discussions - https://github.com/ssv32/gy/discussions ;
+ - Wiki description may be ahead of current release .
+ 
 ### Example сonnection gy php framework
-`<?`<br/>
-`include "./gy/gy.php"; // подключить ядро // include core`<br/>
+
+    <?
+    include "./gy/gy.php"; // подключить ядро // include core
 
 ### Example of checking if the kernel is connected gy php framework
-`<?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>`
+
+    <?if ( !defined("GY_CORE") && (GY_CORE !== true) ) die( "gy: err include core" );?>
 
 ### Example run component:
-`<?`<br/>
-`include "./gy/gy.php"; // include core`<br/>
-<br/>
-`// example run component`<br/>
-`$app->component(`<br/>
-`⋅⋅⋅⋅'form_auth',`<br/>
-`⋅⋅⋅⋅'0',`<br/>
-`⋅⋅⋅⋅array( `<br/>
-`⋅⋅⋅⋅⋅⋅⋅⋅'test' => 'asd',`<br/>
-`⋅⋅⋅⋅⋅⋅⋅⋅'idComponent' => 1,`<br/>
-`⋅⋅⋅⋅),`<br/>
-`);`<br/>
-<br/>
 
+    <?
+    include "./gy/gy.php"; // include core
+    
+    // example run component
+    $app->component(
+        'form_auth',
+        '0',
+        array( 
+            'test' => 'asd',
+            'idComponent' => 1,
+        ),
+    );
+    
 ### Basic goals
    The main goal of the gy framework/cms project is to make a free, accessible to everyone, easy to learn, easy to implement and architecture tool for creating simple (small) sites.<br/><br/>
    The created tool should be as simple as possible to learn and does not require any complex skills or knowledge from the developer using gy, just the basics of php are enough.<br/><br/>

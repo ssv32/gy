@@ -8,7 +8,8 @@
 Gy – это небольшой php framework, который включает в себя элементы cms. Нужен для создания небольших сайтов и веб проектов. 
 
 ### Системные требования:
-- php, необходимо скомпилировать с графической библиотекой GD, тестировалась на версиях версии 5.6, 7.0, 7.1 .
+- php, необходимо скомпилировать с графической библиотекой GD, тестировалась на версиях версиях:<br/>
+    5.6, 7.0, 7.1, 7.2 .
 - Поддерживаются базы данных (протестированы):
   -	mySQL 5.6 ;
   -	MariaDB-10.3 ;
@@ -23,7 +24,8 @@ Gy – это небольшой php framework, который включает 
   (имеется консольный и графический скрипт), или склонировать этот репозиторий;
 - После установки необходимо задать настройки ядра gy framework, это можно сделать скриптом `gy/install/consoleInstallOptions.php` 
   (или отредактировав файл `/gy/config/gy_config.php`);
-- Затем надо установить таблицы в базу данных скриптом gy/install/installDataBaseTable.php (предварительно нужно создать БД и задать доступы и её имя на шаге выше).
+- Затем надо установить таблицы в базу данных скриптом gy/install/installDataBaseTable.php (предварительно нужно создать БД и задать доступы и её имя на шаге выше);
+- Внимание! При установки на linux нужно задать права на файлы и папки, так что бы у пользователя веб (apache или nginx) были права выполнять php скрипты, создавать файлы и папки в директории проекта (это нужно что бы работал конструктор страниц и переключение языка в админке, без прав это не будет работать).
 
 ### После установки
 - В админ панель можно попасть из браузера так `<домен вашего проекта>/gy/admin/` (admin admin).<br/>
@@ -83,7 +85,8 @@ https://github.com/ssv32/gy/wiki</p>
 Gy – it is a small php framework that includes cms elements. Needed for creating small sites and web projects.
 
 ### System requirements:
-- php, you need to compile with the GD graphics library, tested on version versions 5.6, 7.0, 7.1 .
+- php, you need to compile with the GD graphics library, tested on version versions:<br/>
+    5.6, 7.0, 7.1 .
 - Databases supported (tested):
   -	mySQL 5.6 ;
   -	MariaDB-10.3 ;
@@ -98,7 +101,8 @@ Database weight: 208 Kb (with demo data).
   (there is a console and graphical script), or clone this repository;
 - After installation, you need to configure the gy framework core, this can be done with a script gy/install/consoleInstallOptions.php 
   (or edited file /gy/config/gy_config.php);
-- Then you need to install the table into the database with a script gy/install/installDataBaseTable.php (initial creation of the database and set access and its name in the step above).
+- Then you need to install the table into the database with a script gy/install/installDataBaseTable.php (initial creation of the database and set access and its name in the step above);
+- Attention! When installing on linux, you need to set the rights to files and folders, so that the web user (apache or nginx) has the rights to execute php scripts, create files and folders in the project directory (this is necessary for the page constructor to work and switch the language in the admin panel, without rights it will not work).
 
 ### After installation
 - You can get to the admin panel from the browser like this `<your project domain>/gy/admin/` (admin admin).<br/>

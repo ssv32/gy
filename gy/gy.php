@@ -48,9 +48,9 @@ if ( !defined("GY_CORE") ) {
         //   пространство имён будет: Gy\Modules\<имя модуля>\Classes\<имя класса>
         
         // условие регулярки для такого пространства имён 
-        $br = '/';
+        $br = preg_quote(DIRECTORY_SEPARATOR);
         $pattern = "#^(Gy".$br."Modules".$br.")(.*)(".$br."Classes".$br.")(.*).php#";
-        
+              
         //var_dump(  "#^Gy".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR."Modules".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR."#" );
         $parseUrl = array(); // тут результат парсинга
         

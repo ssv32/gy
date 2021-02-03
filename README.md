@@ -85,7 +85,7 @@ https://github.com/ssv32/gy/wiki</p>
 Gy – it is a small php framework that includes cms elements. Needed for creating small sites and web projects.
 
 ### System requirements:
-- php, you need to compile with the GD graphics library, tested on version versions:<br/>
+- php, you need to compile with the GD graphics library, tested on versions:<br/>
     5.6, 7.0, 7.1 .
 - Databases supported (tested):
   -	mySQL 5.6 ;

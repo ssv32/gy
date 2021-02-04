@@ -86,7 +86,7 @@ Gy – it is a small php framework that includes cms elements. Needed for creati
 
 ### System requirements:
 - php, you need to compile with the GD graphics library, tested on versions:<br/>
-    5.6, 7.0, 7.1 .
+    5.6, 7.0, 7.1, 7.2 .
 - Databases supported (tested):
   -	mySQL 5.6 ;
   -	MariaDB-10.3 ;

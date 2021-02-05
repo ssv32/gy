@@ -12,8 +12,10 @@ if ($isRunConsole) {
     if ($argv[1] == 'start') {
 
         if (!file_exists(__DIR__.'/../../index.php')) {
-
-            define("GY_CORE", true); // хак
+	
+            if(!defined('GY_CORE')){
+                define("GY_CORE", true); // хак
+            }
             include(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
             if (!empty($gyConfig['lang']) && in_array($gyConfig['lang'], array('rus', 'eng'))) {
                 $lang = $gyConfig['lang'];

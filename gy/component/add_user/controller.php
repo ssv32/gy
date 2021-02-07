@@ -39,7 +39,7 @@ function checkProperty($arr, $arRes){
     return $result;
 }
 
-if (!empty($data['Добавить']) && ($data['Добавить'] == 'Добавить')) {
+if (!empty($data[$this->lang->getMessage('button')]) && ($data[$this->lang->getMessage('button')] == $this->lang->getMessage('button'))) {
     if (checkProperty($data, $arRes)) {
         // добавление пользователя
         global $USER;
@@ -79,7 +79,7 @@ if (!empty($data['Добавить']) && ($data['Добавить'] == 'Доба
         }
 
     } else {
-        $arRes["stat-text"] = '! Не все поля заполнены';
+        $arRes["stat-text"] = $this->lang->getMessage('err_property') ; // ! Не все поля заполнены
         $arRes["stat"] = 'err';
     }
 

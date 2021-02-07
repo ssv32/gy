@@ -53,13 +53,12 @@ if (!empty($this->arParam['id-user'])) {
     unset($arRes['userData']['pass']);
 }
 
-if (!empty($data['Сохранить'])
-    && ($data['Сохранить'] == 'Сохранить')
+if (!empty($data[$this->lang->getMessage('button')])
+    && ($data[$this->lang->getMessage('button')] == $this->lang->getMessage('button'))
     && !empty($data['edit-id'])
     && is_numeric($data['edit-id'])
     && ($data['edit-id'] != 1)
 ) {
-
     if (checkProperty($data, $arRes)) {
 
         // подготовить массив данных для обновления пользователей
@@ -82,15 +81,14 @@ if (!empty($data['Сохранить'])
         if ($res) {
             $arRes["stat"] = 'ok';
         } else {
-            $arRes["stat-text"] = '! Не все поля заполнены';
+            $arRes["stat-text"] = $this->lang->getMessage('err_property'); 
             $arRes["stat"] = 'err';
         }
 
     } else {
-        $arRes["stat-text"] = '! Не все поля заполнены';
+        $arRes["stat-text"] = $this->lang->getMessage('err_property');
         $arRes["stat"] = 'err';
     }
-
 
 } elseif ((!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"])) {
     $arRes["stat"] = 'edit';

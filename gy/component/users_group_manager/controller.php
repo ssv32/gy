@@ -53,7 +53,7 @@ global $USER;
 unset($data['groupsActions']['admins']);
 
 if (!empty($data['button-form'])
-    && ($data['button-form'] == 'Сохранить')
+    && ($data['button-form'] == $this->lang->getMessage('button')) 
     && $USER->isAdmin() // TODO пока только админы могут это делать
     && !empty($data['groupsActions'])
 ) { // нужно сохранить новые настроки прав

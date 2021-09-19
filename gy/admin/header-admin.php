@@ -7,7 +7,7 @@ global $APP;
 global $USER;
 
 $langTextThisFile = new Lang(
-    $APP->urlProject."/gy/admin", 
+    $APP->urlProject."/gy/lang", 
     'header-admin', 
     $APP->options['lang']
 );

@@ -11,6 +11,10 @@ if (isset($this->model)) {
     $this->model->includeModel();
 }
 
+if (!empty($_REQUEST['secretKeyAdminPanel'])) {
+    $urlKey = '&secretKeyAdminPanel='.$_REQUEST['secretKeyAdminPanel'];
+}
+
 // были доступны параметры
 //echo '$arParam<pre>'; print_r($this->arParam); echo '</pre>';
 
@@ -54,17 +58,17 @@ if ($isShowAdminPanel === true){
             $arRes["auth_ok"] = 'ok';
             $arRes["auth_user"] = $thisLogin;
 
-            header( 'Location: '.$redirectUrl );
+            header( 'Location: '.$redirectUrl.$urlKey );
         } else {
             $arRes['form_input']["auth"] = "auth";
             $arRes['form_input']["pass"] = "pass";
-            header( 'Location: '.$redirectUrl.'?err=err1' );
+            header( 'Location: '.$redirectUrl.'?err=err1'.$urlKey );
 
         }
     } else {
         $arRes['form_input']["auth"] = "auth";
         $arRes['form_input']["pass"] = "pass";
-        header( 'Location: '.$redirectUrl.'?err=err_capcha' );
+        header( 'Location: '.$redirectUrl.'?err=err_capcha'.$urlKey );
     }
 } else {
     if (!empty($_REQUEST['err'])) {
@@ -76,7 +80,7 @@ if ($isShowAdminPanel === true){
 
 if (!empty($arRes["auth_ok"]) && ($arRes["auth_ok"] == 'ok') && !empty($_REQUEST[ $this->lang->getMessage('button-exit') ])) {
     if ($USER->userExit()) {
-        header( 'Location: '.$redirectUrl );
+        header( 'Location: '.$redirectUrl.$urlKey );
     }
 }
 

@@ -150,6 +150,24 @@ if ( !defined("GY_CORE") ) {
     if (file_exists($URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php')) {
         require_once $URL_PROJECT.DIRECTORY_SEPARATOR.'customDir'.DIRECTORY_SEPARATOR.'gy'.DIRECTORY_SEPARATOR.'afterGyCore.php';
     }
-
+   
+    // если задан secretKeyAuthorizationAdminPanel для админки, то без этого ключа (secretKeyAdminPanel в урле) не пускать в админку
+    if (!empty($APP->options['secretKeyAuthorizationAdminPanel']) ) {
+        
+        $isAdminPageGy = strripos($_SERVER['REQUEST_URI'], '/gy/') !== false;
+        $isTrueSecretKeyAuthorizationAdminPanel = ( !empty($_REQUEST['secretKeyAdminPanel']) && ($_REQUEST['secretKeyAdminPanel'] == $APP->options['secretKeyAuthorizationAdminPanel']));
+                
+        if (
+            $isAdminPageGy 
+            && ( !$isTrueSecretKeyAuthorizationAdminPanel && !Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel') 
+            )
+        ) {
+            if (!empty($URL_PROJECT.DIRECTORY_SEPARATOR.$APP->options['urlPage404'])) {
+                include($URL_PROJECT.DIRECTORY_SEPARATOR.$APP->options['urlPage404']);
+            } else {
+                include('404.php');
+            }
+        }
+    }
 }
 

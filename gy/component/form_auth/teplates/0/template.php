@@ -4,7 +4,10 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 if (empty($arRes["auth_ok"])) :?>
     <form>
         <input type="hidden" name="idComponent" value="<?=$arParam['idComponent']?>" />
-
+        <?if (!empty($_REQUEST['secretKeyAdminPanel'])) { ?>
+            <input type="hidden" name="secretKeyAdminPanel" value="<?=$_REQUEST['secretKeyAdminPanel']?>" />
+        <?}?>
+        
         <?php foreach ($arRes['form_input'] as $key => $value) { ?>
             <input type="<?=(($key == 'pass')? 'password': 'text');?>" name="<?=$key;?>"  /><br/>
         <?php }?>

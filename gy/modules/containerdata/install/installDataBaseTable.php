@@ -87,7 +87,7 @@ if ($isRunConsole) {
             'id_container_data int',
             'id_element_container_data int',
             'id_property_container_data int',
-            'value varchar(255)'
+            'value varchar(2500)'
         )
     );
 

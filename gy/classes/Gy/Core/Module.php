@@ -53,7 +53,7 @@ class Module
      * 
      * @return jbject this class
      */
-    public function getInstance()
+    static public function getInstance()
     {
         if (self::$module === null) {
             self::$module = new static();

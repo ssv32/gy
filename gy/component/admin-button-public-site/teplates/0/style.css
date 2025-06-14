@@ -8,6 +8,7 @@
     border-radius: 7px;
     background: url(/gy/images/fon.png) #9292ef;
     box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+    display: table-row;
 }
 
 .gy-admin-panel > H2{

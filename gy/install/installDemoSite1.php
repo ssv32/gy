@@ -345,7 +345,7 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
     echo '! Error. You need to run the script in the console';
 }
 
-function getCodeByUrlPage($page, $lang){ //TODO отступы в получившихся файлах убрать
+function getCodeByUrlPage($page, $lang){ 
     $arLang = array( // TODO
         'rus' => array(
             'html-title' => 'Пример использования gy CMS/framework',

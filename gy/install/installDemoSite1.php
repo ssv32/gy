@@ -360,8 +360,7 @@ function getCodeByUrlPage($page, $lang){
     );
 
     $arrayCodeByUrl = array(
-        'index.php' => '
-<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
+        'index.php' => '<?php include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
 
 $APP->component(
     \'header\',

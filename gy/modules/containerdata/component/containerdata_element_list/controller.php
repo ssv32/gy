@@ -60,7 +60,22 @@ if (!empty($data['del-el']) && !empty($data['id'])) {
     }
 }
 
+$flagTrueContainerDataId = false;
+
 if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])) {
+    $flagTrueContainerDataId = true;
+} elseif ($this->arParam['container-data-code']) {
+    $dataContainerDataId = ContainerData::getContainerData(array('=' => array('code', "'".$this->arParam['container-data-code']."'")), array('id'));
+    if (!empty($dataContainerDataId[0]['id'])) {    
+    $this->arParam['container-data-id'] = $dataContainerDataId[0]['id'];    
+    if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])) {
+        $flagTrueContainerDataId = true;
+    }
+        
+    }
+}
+
+if ($flagTrueContainerDataId){
     $arRes['ITEMS'] = ContainerData::getAllElementContainerData($this->arParam['container-data-id']);
 
     if (!empty($data['el-id']) && is_numeric($data['el-id']) && empty($arRes['stat-edit'])) {
@@ -73,6 +88,8 @@ if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['co
             }
         }
     }
+} else {
+    $arRes['ITEMS'] = array();
 }
 
 // показать шаблон

@@ -40,7 +40,7 @@ https://github.com/ssv32/gy/wiki</p>
  - Реализованы/поддерживаются стандарты PSR 0-4. 
 (PSR-4 - реализован не ожидаемо, можно прочитать тут https://github.com/ssv32/gy/wiki/16.-%D0%90%D0%B2%D1%82%D0%BE%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2-%7C-Class-autoloading) ;
  - Пока релизы проекта помечаются как альфа версии, обратной поддержки framework gy нет (т.е. архитектура framework gy может меняться ) ;
- - TODO - проекта https://github.com/ssv32/gy/projects/1 ;
+ - TODO - проекта [https://github.com/ssv32/gy/projects/1](https://github.com/users/ssv32/projects/2/views/1) ;
  - Discussions - https://github.com/ssv32/gy/discussions ;
  - Описание в wiki может опережать текущий релиз .
  
@@ -117,7 +117,7 @@ https://github.com/ssv32/gy/wiki </p>
  - Implemented / maintained standards PSR 0-4. 
 (PSR-4 - not normal, read here https://github.com/ssv32/gy/wiki/16.-%D0%90%D0%B2%D1%82%D0%BE%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2-%7C-Class-autoloading);
  - While project releases are marked as alpha versions, there is no backward support for framework gy (framework gy architecture is subject to change );
- - TODO - https://github.com/ssv32/gy/projects/1 ;
+ - TODO - [https://github.com/ssv32/gy/projects/1](https://github.com/users/ssv32/projects/2/views/1) ;
  - Discussions - https://github.com/ssv32/gy/discussions ;
  - Wiki description may be ahead of current release .
  

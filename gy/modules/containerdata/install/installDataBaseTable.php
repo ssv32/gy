@@ -106,7 +106,7 @@ if ($isRunConsole) {
     
     
     //--тестовый контент--
-    echo $br.'install sest content - containerData = start';
+    echo $br.'install test content - containerData = start';
 
     // добавить контейнер данных - контент
     ContainerData::addContainerData(array('code'=> 'Content','name'=> 'Контент2 | Content2'));
@@ -166,7 +166,7 @@ if ($isRunConsole) {
             '| Hello user, you are greeted by the gy php framework and the text is shown from its content part !!!'
     );
 
-    echo $br.'install sest content - containerData = OK!';
+    echo $br.'install test content - containerData = OK!';
     ////
 
     echo $br.'add user group and action and user - containerData = start';

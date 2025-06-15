@@ -3,21 +3,21 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 $data  = $_REQUEST;
 
-$arRes['user_property'] = array(
-    'login',
-    'name',
-    'pass',
-    'groups'
-);
+// подключить модель (файл php model этого компонента) // include model this component
+if (isset($this->model)) {
+    $this->model->includeModel();
+}
+
+$this->model->backUrl = $this->arParam['back-url'];
 
 $redirectUrl = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
 // взять все группы пользователей
-$arRes['allUsersGroups'] = Gy\Core\User\AccessUserGroup::getAccessGroup();
+$this->model->allUsersGroups = Gy\Core\User\AccessUserGroup::getAccessGroup();
 
-function checkProperty($arr, $arRes){
+function checkProperty($arr, $userProperty, $allUsersGroups){
     $result = true;
-    foreach ($arRes['user_property'] as $val) {
+    foreach ($userProperty as $val) {
         if (empty($arr[$val])) {
             $result = false;
         }
@@ -26,7 +26,7 @@ function checkProperty($arr, $arRes){
     if ($result) {
         foreach ($arr['groups'] as $value) {  // TODO протестировать
 
-            if (empty($arRes['allUsersGroups'][$value])) {
+            if (empty($allUsersGroups[$value])) {
                 $result = false;
             }
 
@@ -40,11 +40,11 @@ function checkProperty($arr, $arRes){
 }
 
 if (!empty($data[$this->lang->getMessage('button')]) && ($data[$this->lang->getMessage('button')] == $this->lang->getMessage('button'))) {
-    if (checkProperty($data, $arRes)) {
+    if (checkProperty($data, $this->model->userProperty, $this->model->allUsersGroups)) {
         // добавление пользователя
         global $USER;
         $arDaraUser = array();
-        foreach ($arRes['user_property'] as $val) {
+        foreach ($this->model->userProperty as $val) {
             $arDaraUser[$val] = $data[$val];
         }
 
@@ -73,25 +73,28 @@ if (!empty($data[$this->lang->getMessage('button')]) && ($data[$this->lang->getM
                 Gy\Core\User\AccessUserGroup::addUserInGroup($dataAddNewUser['id'], $value);
             }
 
-            $arRes["stat"] = 'ok';
+            $this->model->stat = 'ok';
         } else {
-            $arRes["stat"] = 'err';
+            $this->model->stat = 'err';
         }
 
     } else {
-        $arRes["stat-text"] = $this->lang->getMessage('err_property') ; // ! Не все поля заполнены
-        $arRes["stat"] = 'err';
+        $this->model->statText = $this->lang->getMessage('err_property') ; // ! Не все поля заполнены
+        $this->model->stat = 'err';
     }
 
-} elseif ((!empty($arRes["stat"]) && ($arRes["stat"] != 'err')) || empty($arRes["stat"])) {
-    $arRes["stat"] = 'add';
+} elseif ((!empty($this->model->stat) && ($this->model->stat != 'err')) || empty($this->model->stat)) {
+    $this->model->stat = 'add';
 }
 
 if (empty($data['stat'])) {
-    header( 'Location: '.$redirectUrl.'?stat='.$arRes["stat"] );
+    header( 'Location: '.$redirectUrl.'?stat='.$this->model->stat );
 } else {
-    $arRes["stat"] = $data['stat'];
+    $this->model->stat = $data['stat'];
 }
 
-// показать шаблон
-$this->template->show($arRes, $this->arParam);
+// установить модель этого компонента в шаблон (view)
+$this->template->setModel($this->model);
+
+// показать шаблон (view)
+$this->template->show();

@@ -13,6 +13,16 @@ class Template
     public $lang;
     private $urlFileStyle; // url на файл со стилями, для этого шаблона
     private $urlFileJs; // url для файла с js, для этого шаблона
+    public $model;
+    
+    /**
+     * setModel
+     * @param type $model
+     */
+    public function setModel($model)
+    { // установить ссылку на модель если есть
+        $this->model = $model;
+    }
     
     public function __construct($url, $lang)
     {
@@ -46,7 +56,7 @@ class Template
      * 
      * @return void - ничего не вернёт, подключится файл шаблона // include template
      */
-    public function show($arRes, $arParam)
+    public function show($arRes = array(), $arParam = array())
     {
 
         // если есть стили то добавить стили

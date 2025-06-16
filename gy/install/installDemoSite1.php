@@ -38,6 +38,7 @@ if ($isRunConsole) {
             mkdir(__DIR__.'/../../customDir/component/includeHtml/teplates/block_content/', 0755, true);
             
             mkdir(__DIR__.'/../../html/', 0755, true);
+            mkdir(__DIR__.'/../../documentation-for-content-manager/', 0755, true);
             
 
 
@@ -54,6 +55,8 @@ if ($isRunConsole) {
             
             file_put_contents(__DIR__.'/../../html/index.html', getCodeByUrlPage('./html/index.html', $lang));
             file_put_contents(__DIR__.'/../../html/main.css', getCodeByUrlPage('./html/main.css', $lang));
+            
+            file_put_contents(__DIR__.'/../../documentation-for-content-manager/index.php', getCodeByUrlPage('./documentation-for-content-manager/index.php', $lang));
             
             global $DB;
 
@@ -208,14 +211,14 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 $dataElement3['id'],
                 $prop['id'],
                 'value_propertys_type_html',
-                'Пример использования gy CMS/framework - Демо сайт 1'
+                'Пример использования gy CMS/framework<br/>Демо сайт 1'
             );
             ContainerData::addValuePropertyContainerData(
                 $dataContentContainerData[0]['id'],
                 $dataElement4['id'],
                 $prop['id'],
                 'value_propertys_type_html',
-                'Пример использования gy CMS/framework - Демо сайт 1 - '.date('Y')
+                'Пример использования gy CMS/framework<br/>Демо сайт 1<br/>'.date('Y').' г.'
             );
 
             // добавить контейнер данных - Блоки сайта
@@ -509,10 +512,18 @@ $APP->component(
     text-align: center;
 }
 .menu{
-    text-align: left;
+    text-align: center;
     background-color: #ced9dd;
     padding: 20px;
     font-size: 16pt;
+}
+.menu a:hover{
+    color: #fbfbfb;
+    background-color: #98adc7;
+    padding: inherit;
+}
+.menu a{
+    padding: inherit;
 }
 a{
     color: #4a5f7e;
@@ -521,9 +532,12 @@ a{
 a:hover{
     color: #252f3f;
 }
-h1 {
+.menu > a.active{
+    text-decoration: underline;
+}
+h1 {    
     color: #e3edf6;
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 40px;
     font-size: 20pt;
 }
@@ -533,7 +547,7 @@ body {
     background-color: #e5edf0;
     color: #4a5f7e;
     font-size: 14pt;
-
+    
 }
 .content{
     padding: 28px;
@@ -582,7 +596,8 @@ global $APP;
                 \'1\',
                 array( 
                     \'container-data-id\' => $val[\'id_container_data\'],
-                    \'el-id\' => $val[\'id\']
+                    \'el-id\' => $val[\'id\'],
+                    \'this-url\' => Gy\\Core\\Url::getThisUrlNotGetProperty()
                 )
             );
 
@@ -602,7 +617,7 @@ global $APP;
 $nameUrl = array_shift($arRes[\'PROPERTY_VALUE\'])[\'value\'];
 $url = array_shift($arRes[\'PROPERTY_VALUE\'])[\'value\'];
 ?>
-<a href="<?=$url;?>"><?=$nameUrl?></a> | 
+<a href="<?=$url;?>" <?=(($arParam[\'this-url\'] == $url)? \'class="active"\' : \'\');?>><?=$nameUrl?></a> | 
 
         
         ',
@@ -705,7 +720,7 @@ global $APP;
         }
 
         ?>
-        <link rel="stylesheet" href="html/main.css">
+        <link rel="stylesheet" href="/html/main.css">
     </head>
     <body>  
         ',
@@ -738,6 +753,85 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 </div>
 
         ',
+        './documentation-for-content-manager/index.php' => '<?php
+include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
+
+$APP->component(
+    \'header\',
+    \'header_example_site\',
+    array(
+        \'seo-meta-tag-head\' => array(
+            \'title\' => \'Пример простого сайта\',
+            \'descriptions\' => \'description пример простого сайта\',
+            \'keywords\' => \'description пример простого сайта\'
+        ) 
+    )
+);
+
+$APP->component(
+    \'admin-button-public-site\',
+    \'0\',
+    array()
+);
+
+$APP->component(
+    \'containerdata_element_list\',
+    \'menu\',
+    array( 
+        \'container-data-id\' => 3,
+        \'TITLE\' => array( 
+            \'container-data-code\' => \'site_block\',
+            \'element-code\' => \'title_h1\',
+            \'cacheTime\' => 86400, // закешить на 24 ч.
+        )  
+    )
+);  
+
+
+$APP->component(
+    \'includeHtml\',
+    \'0\',
+    array( 
+        \'html\' => \'<div class="content">
+            <h3>Документация для контент-менеджера (по текущему демо сайту 1) </h3>
+            <p>Нужна для редактирования выводимых данных на демо сайте 1.</p>
+            <p><b>Панель администрирования</b><br/> Для изменения данных необходимо зайти в панель администрирования, для этого нужно перейти по url <a href="/gy">/gy</a> и ввести логин и пароль admin (логин и пароль по умолчанию)</p>
+            <p><b>Шапка сайта</b><br/> Сейчас в шапке сайта текст “Пример использования gy&lt;br/&gt;CMS/framework&lt;/br&gt;Демо сайт 1” вы можете задать любой текст. Для этого нужно перейти в админ панели в раздел “Контейнеры данных” далее в таблице, по столбцу “name”,  найти строчку “Блоки сайта” нажать “ Работа с элементами контейнера данных” , далее по столбцу “name” найти “Заголовок h1” нажать “ Просмотреть свойства элемента” затем можно менять текст на любой, и после нажать кнопку “Сохранить”.</p>
+            <p><b>Подвал сайта</b><br/>
+            Текст меняется аналогично но нужен “Элементы контейнера данных” – “Текст в футоре”
+            </p>
+            <p>
+            <b>Основное содержимое главной странице</b><br/>
+            Состоит из двух блоков, меняется аналогично элементам выше только  в “Элементы контейнера данных” нужно найти “Текст блок 1” и “Текст блок 2”
+            </p>
+            <p>
+            <b>Меню</b><br/>
+            Для этого нужно перейти в админ панели в раздел “Контейнеры данных” далее в таблице, по столбцу “name”,  найти строчку “ Меню” нажать “ Работа с элементами контейнера данных”. Перед вами все пункты меню, для изменения нужно зайти в “Просмотреть свойства элемента” там будет имя и url ссылки. Также можно удалить пункты меню или добавить новые.
+            </p>
+            <p><b>Сброс кеша gy</b><br/>
+            Для этого нужно зайти в панель администрирования далее “Настройки” и нажать кнопку “Сбросить кеш”
+            </p>
+        </div>
+        \',    
+    )
+);
+
+$APP->component(
+    \'containerdata_element_show\',
+    \'footer_text\',
+    array( 
+        \'container-data-code\' => \'site_block\',
+        \'element-code\' => \'footer_text\',
+        \'cacheTime\' => 86400, // закешить на 24 ч.
+    )
+);
+
+$APP->component(
+    \'footer\',
+    \'0\',
+    array()
+);
+        '
         
     );
 

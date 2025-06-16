@@ -261,6 +261,14 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'id_container_data' => $dataContentContainerData[0]['id']
                 )
             );
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'documentation-for-content-manager',
+                    'name' => 'Документация для контент-менеджера (по текущему демо сайту)',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
             
 
             // взять типы свойств что бы знать названия таблиц где их искать
@@ -280,6 +288,14 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'AND' => array(
                         array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
                         array( '=' => array( 'code', "'page2'"))
+                    )
+                )
+            );
+            $dataElement3 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'documentation-for-content-manager'"))
                     )
                 )
             );
@@ -321,6 +337,21 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
             
             ContainerData::addValuePropertyContainerData(
                 $dataContentContainerData[0]['id'],
+                $dataElement3['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Документация для контент-менеджера (по текущему демо сайту)'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement3['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                '/documentation-for-content-manager/'
+            );
+            
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
                 $dataElement2['id'],
                 $prop1Id,
                 'value_propertys_type_html',
@@ -333,6 +364,7 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 'value_propertys_type_html',
                 'https://asisg.ru/projects/gy/'
             );
+           
 
             
             echo 'Install = OK!'; 

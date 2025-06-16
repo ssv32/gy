@@ -253,14 +253,8 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'id_container_data' => $dataContentContainerData[0]['id']
                 )
             );
-            ContainerData::addElementContainerData(
-                array(
-                    'section_id' => 0,
-                    'code' => 'page2',
-                    'name' => 'Страница 2',
-                    'id_container_data' => $dataContentContainerData[0]['id']
-                )
-            );
+            
+            
             ContainerData::addElementContainerData(
                 array(
                     'section_id' => 0,
@@ -269,6 +263,16 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'id_container_data' => $dataContentContainerData[0]['id']
                 )
             );
+            
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'page2',
+                    'name' => 'Страница 2',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
+            
             
 
             // взять типы свойств что бы знать названия таблиц где их искать
@@ -810,7 +814,7 @@ $APP->component(
     \'containerdata_element_list\',
     \'menu\',
     array( 
-        \'container-data-id\' => 3,
+        \'container-data-code\' => \'menu\',
         \'TITLE\' => array( 
             \'container-data-code\' => \'site_block\',
             \'element-code\' => \'title_h1\',

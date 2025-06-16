@@ -17,6 +17,7 @@ if ($isRunConsole) {
 	
             include $_SERVER["DOCUMENT_ROOT"]."/../gy.php"; // подключить ядро // include core 
 
+            // TODO брать из ядра настройки, выбранный язык
 //            include(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
 //            if (!empty($gyConfig['lang']) && in_array($gyConfig['lang'], array('rus', 'eng'))) {
 //                $lang = $gyConfig['lang'];
@@ -40,9 +41,7 @@ if ($isRunConsole) {
             mkdir(__DIR__.'/../../html/', 0755, true);
             mkdir(__DIR__.'/../../documentation-for-content-manager/', 0755, true);
             
-
-
-            
+   
             // записать файлы /customDir
             file_put_contents(__DIR__.'/../../customDir/component/containerdata_element_list/teplates/menu/template.php', getCodeByUrlPage('./customDir/component/containerdata_element_list/teplates/menu/template.php', $lang));
             file_put_contents(__DIR__.'/../../customDir/component/containerdata_element_property/teplates/1/template.php', getCodeByUrlPage('./customDir/component/containerdata_element_property/teplates/1/template.php', $lang));
@@ -385,7 +384,7 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
 }
 
 function getCodeByUrlPage($page, $lang){ 
-    $arLang = array( // TODO
+    $arLang = array( // TODO добавить eng текст , если в установке был выбран он
         'rus' => array(
             'html-title' => 'Пример использования gy CMS/framework',
             'title-show-component' => 'Вызов компонента',

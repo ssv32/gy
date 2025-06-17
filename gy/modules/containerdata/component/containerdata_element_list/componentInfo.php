@@ -12,9 +12,11 @@ $componentInfo = array(
     'text-info' => $langComponentInfo->getMessage('text-info'),
     'v' => '0.1',
     'all-property' => array(
-        'container-data-id'
+        'container-data-id',
+        'container-data-code'
     ),
     'all-property-text' => array(
         'container-data-id' => $langComponentInfo->getMessage('property-container-data-id'),
+        'container-data-code' => $langComponentInfo->getMessage('property-container-data-code'),
     )
 );

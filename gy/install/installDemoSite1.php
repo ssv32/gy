@@ -15,7 +15,7 @@ if ($isRunConsole) {
 
         if (!file_exists(__DIR__.'/../../index.php')) {
 	
-            include $_SERVER["DOCUMENT_ROOT"]."/../gy.php"; // подключить ядро // include core 
+            include __DIR__."/../gy.php"; // подключить ядро // include core 
 
             // TODO брать из ядра настройки, выбранный язык
 //            include(__DIR__.'/../../gy/config/gy_config.php'); // подключение настроек ядра // include options
@@ -40,6 +40,7 @@ if ($isRunConsole) {
             
             mkdir(__DIR__.'/../../html/', 0755, true);
             mkdir(__DIR__.'/../../documentation-for-content-manager/', 0755, true);
+            mkdir(__DIR__.'/../../news/', 0755, true);
             
    
             // записать файлы /customDir
@@ -53,9 +54,11 @@ if ($isRunConsole) {
             file_put_contents(__DIR__.'/../../customDir/component/includeHtml/teplates/block_content/template.php', getCodeByUrlPage('./customDir/component/includeHtml/teplates/block_content/template.php', $lang));
             
             file_put_contents(__DIR__.'/../../html/index.html', getCodeByUrlPage('./html/index.html', $lang));
+            file_put_contents(__DIR__.'/../../html/news.html', getCodeByUrlPage('./html/news.html', $lang));
             file_put_contents(__DIR__.'/../../html/main.css', getCodeByUrlPage('./html/main.css', $lang));
             
             file_put_contents(__DIR__.'/../../documentation-for-content-manager/index.php', getCodeByUrlPage('./documentation-for-content-manager/index.php', $lang));
+            file_put_contents(__DIR__.'/../../news/index.php', getCodeByUrlPage('./news/index.php', $lang));
             
             global $DB;
 
@@ -262,6 +265,14 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'id_container_data' => $dataContentContainerData[0]['id']
                 )
             );
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'news',
+                    'name' => 'Новости',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
             
             ContainerData::addElementContainerData(
                 array(
@@ -299,6 +310,14 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'AND' => array(
                         array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
                         array( '=' => array( 'code', "'documentation-for-content-manager'"))
+                    )
+                )
+            );
+            $dataElement4 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'news'"))
                     )
                 )
             );
@@ -367,8 +386,283 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 'value_propertys_type_html',
                 'https://asisg.ru/projects/gy/'
             );
+            
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement4['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Новости'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement4['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                '/news/'
+            );
            
 
+            // новости
+            // добавить контейнер данных - Новости
+            ContainerData::addContainerData(array('code'=> 'news','name'=> 'Новости'));
+
+            $dataContentContainerData = ContainerData::getContainerData(array('=' => array('code', "'news'")), array('*'));
+
+            //добавить свойство
+            ContainerData::addPropertyContainerData(
+                array(
+                    'id_type_property' => 1,
+                    'id_container_data' => $dataContentContainerData[0]['id'],
+                    'code' => 'detailed_text',
+                    'name' => 'Детальный текст'
+                )
+            );
+            ContainerData::addPropertyContainerData(
+                array(
+                    'id_type_property' => 1,
+                    'id_container_data' => $dataContentContainerData[0]['id'],
+                    'code' => 'preview_text',
+                    'name' => 'Превью текст'
+                )
+            );
+            ContainerData::addPropertyContainerData(
+                array(
+                    'id_type_property' => 1,
+                    'id_container_data' => $dataContentContainerData[0]['id'],
+                    'code' => 'date',
+                    'name' => 'Дата новости'
+                )
+            );
+
+            // добавить элемент контейнера данных
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'news1',
+                    'name' => 'Новости 1',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
+            
+            
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'news2',
+                    'name' => 'Новости 1',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'news3',
+                    'name' => 'Новости 3',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
+            
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'news4',
+                    'name' => 'Новости 4',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
+            
+            ContainerData::addElementContainerData(
+                array(
+                    'section_id' => 0,
+                    'code' => 'news5',
+                    'name' => 'Новости 5',
+                    'id_container_data' => $dataContentContainerData[0]['id']
+                )
+            );
+            
+            
+
+            // взять типы свойств что бы знать названия таблиц где их искать
+            $dataTypeProperty = ContainerData::getAllTypePropertysContainerData();
+            
+            // найти элемент
+            $dataElement1 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'news1'"))
+                    )
+                )
+            );
+            $dataElement2 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'news2'"))
+                    )
+                )
+            );
+            $dataElement3 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'news3'"))
+                    )
+                )
+            );
+            $dataElement4 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'news4'"))
+                    )
+                )
+            );
+            $dataElement5 = ContainerData::getElementContainerData(
+                array(
+                    'AND' => array(
+                        array( '=' => array( 'id_container_data', $dataContentContainerData[0]['id']) ),
+                        array( '=' => array( 'code', "'news5'"))
+                    )
+                )
+            );
+
+            // найти его свойства
+            $propertyContainerData = ContainerData::getPropertysContainerData(
+                array(
+                    '='=>array(
+                        'id_container_data', 
+                        $dataContentContainerData[0]['id']
+                    ) 
+                ) 
+            );
+            
+            foreach ($propertyContainerData as $val) {
+                if  ($val['code'] == 'detailed_text') {
+                    $prop1Id = $val['id'];
+                }
+                if  ($val['code'] == 'preview_text') {
+                    $prop2Id = $val['id'];
+                }
+                if  ($val['code'] == 'date') {
+                    $prop3Id = $val['id'];
+                }
+            }
+            
+            // добавить значение свойства для элемента созданного выше
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement1['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Детальный текст, новости 1'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement1['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                'Превью текст, новости 1'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement1['id'],
+                $prop3Id,
+                'value_propertys_type_html',
+                '14.06.2025'
+            );
+            
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement2['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Детальный текст, новости 2'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement2['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                'Превью текст, новости 2'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement2['id'],
+                $prop3Id,
+                'value_propertys_type_html',
+                '15.06.2025'
+            );
+            
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement3['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Детальный текст, новости 3'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement3['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                'Превью текст, новости 3'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement3['id'],
+                $prop3Id,
+                'value_propertys_type_html',
+                '16.06.2025'
+            );
+            
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement4['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Детальный текст, новости 4'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement4['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                'Превью текст, новости 4'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement4['id'],
+                $prop3Id,
+                'value_propertys_type_html',
+                '17.06.2025'
+            );
+            
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement5['id'],
+                $prop1Id,
+                'value_propertys_type_html',
+                'Детальный текст, новости 5'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement5['id'],
+                $prop2Id,
+                'value_propertys_type_html',
+                'Превью текст, новости 5'
+            );
+            ContainerData::addValuePropertyContainerData(
+                $dataContentContainerData[0]['id'],
+                $dataElement5['id'],
+                $prop3Id,
+                'value_propertys_type_html',
+                '18.06.2025'
+            );
+            
+           
+            
             
             echo 'Install = OK!'; 
         } else {
@@ -866,7 +1160,177 @@ $APP->component(
     \'0\',
     array()
 );
-        '
+        ',
+        './news/index.php' => '<?php
+include $_SERVER["DOCUMENT_ROOT"]."/gy/gy.php"; // подключить ядро // include core 
+
+$APP->component(
+    \'header\',
+    \'header_example_site\',
+    array(
+        \'seo-meta-tag-head\' => array(
+            \'title\' => \'Пример простого сайта\',
+            \'descriptions\' => \'description пример простого сайта\',
+            \'keywords\' => \'description пример простого сайта\'
+        ) 
+    )
+);
+
+$APP->component(
+    \'admin-button-public-site\',
+    \'0\',
+    array()
+);
+
+$APP->component(
+    \'containerdata_element_list\',
+    \'menu\',
+    array( 
+        \'container-data-id\' => 3,
+        \'TITLE\' => array( 
+            \'container-data-code\' => \'site_block\',
+            \'element-code\' => \'title_h1\',
+            \'cacheTime\' => 86400, // закешить на 24 ч.
+        )  
+    )
+);  
+
+$APP->component(
+    \'includeHtml\',
+    \'0\',
+    array( 
+        \'html\' => \'<div class="content">\',    
+    )
+);
+
+$APP->component(
+    \'news\',
+    \'0\',
+    array( 
+        \'container-data-code\' => \'news\',
+        \'title\' => \'Новости\',
+        \'cacheTime\' => 86400,
+        \'count-news-in-1-page\' => 2, 
+        \'show-pagination\' => 1,
+        \'show-property-news\' => array( 
+            \'detailed_text\',
+            \'preview_text\',
+            \'date\'
+        ),
+        \'show-in-url-code\' => 1, // TODO 1/0 чпу
+    )
+);
+
+$APP->component(
+    \'includeHtml\',
+    \'0\',
+    array( 
+        \'html\' => \'</div>\',    
+    )
+);
+
+$APP->component(
+    \'containerdata_element_show\',
+    \'footer_text\',
+    array( 
+        \'container-data-code\' => \'site_block\',
+        \'element-code\' => \'footer_text\',
+        \'cacheTime\' => 86400, // закешить на 24 ч.
+    )
+);
+
+$APP->component(
+    \'footer\',
+    \'0\',
+    array()
+);
+        ',
+        './html/news.html' => '<html>
+    <head>
+        <title>Пример простого сайта</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="description" content="description пример простого сайта"> 
+        
+        <link rel="stylesheet" href="main.css">
+        
+        
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-h1">
+                <h1>Пример простого сайта</h1>
+            </div>
+            <div class="menu">
+                <a href="">Страница 1</a>
+                <a href="page1.html">Страница 2</a>
+            </div>
+        </div>
+        <div class="content"> 
+            <h3>Новости</h3>
+            <div class="news" >
+                <div class="item">
+                    <p>
+                        <b>Новость 1</b><br/>
+                        текст 1
+                    </p>
+                </div>
+                <div class="item">
+                    <p>
+                        <b>Текст блок 2</b><br/>
+                        текст 2
+
+                    </p>
+                </div>
+                <div class="item">
+                    <p>
+                        <b>Текст блок 3</b><br/>
+                        текст 3
+
+                    </p>
+                </div>
+                <div class="item">
+                    <p>
+                        <b>Текст блок 4</b><br/>
+                        текст 4
+
+                    </p>
+                </div>
+                <div class="item">
+                    <p>
+                        <b>Текст блок 5</b><br/>
+                        текст 5
+
+                    </p>
+                </div>
+                
+                
+                <div class="item">
+                     (1) 2 3 ... 5 >
+                </div>
+                
+                <div class="item">
+                    < 1 (2) 3 ... 5 >
+                </div>
+                ???
+                <div class="item">
+                    < 1 (2) 3 ... 5 >
+                </div>
+                
+                <div class="item">
+                    < 1 (2) 3 ... 5 >
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="footer">
+            Пример простого сайта 2024
+        </div>
+    </body>
+</html>
+'
         
     );
 

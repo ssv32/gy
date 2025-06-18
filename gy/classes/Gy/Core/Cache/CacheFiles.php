@@ -26,6 +26,9 @@ class CacheFiles extends Cache
     public function __construct($urlProject)
     {
         $this->urlProject = $urlProject;
+        if (!file_exists($this->urlProject.$this->urlCache)) {
+             mkdir($this->urlProject.$this->urlCache, 0755, true);
+        }
     }
 
     /**
@@ -76,12 +79,12 @@ class CacheFiles extends Cache
             'createTime' => time(),
             'cacheTime' => $this->cacheTime
         );
-        if (file_exists($this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl)) {
-            file_put_contents(
-                $this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, 
-                '<?php $cacheData = '."'". json_encode($cacheData)."';" 
-            );
-        }
+       
+        file_put_contents(
+            $this->urlProject.$this->urlCache.$this->cacheName.$this->endUrl, 
+            '<?php $cacheData = '."'". json_encode($cacheData)."';" 
+        );
+
         return true;
     }
 

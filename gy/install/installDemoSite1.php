@@ -1186,7 +1186,7 @@ $APP->component(
     \'containerdata_element_list\',
     \'menu\',
     array( 
-        \'container-data-id\' => 3,
+        \'container-data-code\' => \'menu\',
         \'TITLE\' => array( 
             \'container-data-code\' => \'site_block\',
             \'element-code\' => \'title_h1\',

@@ -20,7 +20,8 @@ $componentsThisModule = array(
     'containerdata_element_list',
     'containerdata_element_property',
     'containerdata_element_show',
-    'containerdata_property_edit'
+    'containerdata_property_edit',
+    'news'
 );
 
 // классы этого можуля

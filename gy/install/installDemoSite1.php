@@ -426,7 +426,7 @@ $APP->component(
         \'TITLE\' => array( 
             \'container-data-code\' => \'site_block\',
             \'element-code\' => \'title_h1\',
-            \'cacheTime\' => 86400, // закешить на 24 ч.
+            \'cacheTime\' => 0, 
         )  
     )
 );  
@@ -440,13 +440,13 @@ $APP->component(
         \'block1\' => array( 
             \'container-data-code\' => \'site_block\',
             \'element-code\' => \'text_block_1\',
-            \'cacheTime\' => 86400, // закешить на 24 ч.
+            \'cacheTime\' => 0,
             \'class_name_block\' => \'block1\'
         ),
         \'block2\' => array( 
             \'container-data-code\' => \'site_block\',
             \'element-code\' => \'text_block_2\',
-            \'cacheTime\' => 86400, // закешить на 24 ч.
+            \'cacheTime\' => 0, 
             \'class_name_block\' => \'block2\'
         )
     )
@@ -458,7 +458,7 @@ $APP->component(
     array( 
         \'container-data-code\' => \'site_block\',
         \'element-code\' => \'footer_text\',
-        \'cacheTime\' => 86400, // закешить на 24 ч.
+        \'cacheTime\' => 0, 
     )
 );
 
@@ -817,7 +817,7 @@ $APP->component(
         \'TITLE\' => array( 
             \'container-data-code\' => \'site_block\',
             \'element-code\' => \'title_h1\',
-            \'cacheTime\' => 86400, // закешить на 24 ч.
+            \'cacheTime\' => 0, // закешить на 24 ч.
         )  
     )
 );  
@@ -857,7 +857,7 @@ $APP->component(
     array( 
         \'container-data-code\' => \'site_block\',
         \'element-code\' => \'footer_text\',
-        \'cacheTime\' => 86400, // закешить на 24 ч.
+        \'cacheTime\' => 0, // закешить на 24 ч.
     )
 );
 

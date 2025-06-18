@@ -25,31 +25,21 @@ if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['co
 }
 
 /*
-'cacheTime' => 86400, // TODO
-        'count-news-in-1-page' => 2, // TODO сколько новостей на 1 странице
-        'show-pagination' => 1, // TODO 1/0
-        'show-property-news' => array( // TODO
-            'detailed_text',
-            'preview_text'
-        ),
-        'show-in-url-code' => 1, // TODO 1/0 чпу
+    'show-in-url-code' => 1, // TODO 1/0 чпу
 */
-
-// TODO проверить правельность данных пришедших от вызова компонента и пагинации
 
 if ($flagTrueContainerDataId){
     
-//    global $APP; // TODO надо разобраться с кешем
-//    global $CACHE_CLASS_NAME;
-//    
-//    $cache = new $CACHE_CLASS_NAME($APP->url);
-//    $initCache = $cache->cacheInit('getItemsNews', $this->arParam['cacheTime']); // инициализация кеша
-//
-//    if ($initCache){ echo 1111;
-//        $arRes['ITEMS'] = $cache->getCacheData(); // получение данных из кеша
-//    }else{
+    global $APP; 
+    global $CACHE_CLASS_NAME;
+    
+    $cache = new $CACHE_CLASS_NAME($APP->url);
+    $initCache = $cache->cacheInit('getItemsNews', $this->arParam['cacheTime']); // инициализация кеша
 
-        echo 2222;
+    if ($initCache){ 
+        $arRes['ITEMS'] = $cache->getCacheData(); // получение данных из кеша
+    }else{
+
         // TODO это быстрое решение берётся всё сразу, для мелкого проекта норм, но можно брать только то что нужно
         $arRes['ITEMS'] = ContainerData::getAllElementContainerData($this->arParam['container-data-id']);
 
@@ -88,8 +78,8 @@ if ($flagTrueContainerDataId){
             }
         }
  
-//        $cache->setCacheData($arRes['ITEMS']); // запись данных в кеш
-//    }
+        $cache->setCacheData($arRes['ITEMS']); // запись данных в кеш
+    }
 } else {
     $arRes['ITEMS'] = array();
 }

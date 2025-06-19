@@ -18,7 +18,8 @@ $componentInfo = array(
         'count-news-in-1-page',
         'show-pagination', 
         'show-property-news', 
-        'show-in-url-code'
+        'show-in-url-code',
+        'this-url-dir'
     ),
     'all-property-text' => array(
         'container-data-id' => $langComponentInfo->getMessage('property-container-data-id'),
@@ -28,5 +29,6 @@ $componentInfo = array(
         'show-pagination' => $langComponentInfo->getMessage('show-pagination'),
         'show-property-news' => $langComponentInfo->getMessage('show-property-news'),
         'show-in-url-code' => $langComponentInfo->getMessage('show-in-url-code'),
+        'this-url-dir' => $langComponentInfo->getMessage('show-in-url-code'),
     )
 );

@@ -19,7 +19,9 @@ $componentInfo = array(
         'show-pagination', 
         'show-property-news', 
         'show-in-url-code',
-        'this-url-dir'
+        'this-url-dir',
+        'show-detail-url' => 1, // 1/0 детальный урл через параметр в запросе
+        'detail-url-property' => 'show',
     ),
     'all-property-text' => array(
         'container-data-id' => $langComponentInfo->getMessage('property-container-data-id'),
@@ -30,5 +32,7 @@ $componentInfo = array(
         'show-property-news' => $langComponentInfo->getMessage('show-property-news'),
         'show-in-url-code' => $langComponentInfo->getMessage('show-in-url-code'),
         'this-url-dir' => $langComponentInfo->getMessage('show-in-url-code'),
+        'show-detail-url' => $langComponentInfo->getMessage('show-detail-url'), 
+        'detail-url-property' => $langComponentInfo->getMessage('detail-url-property'),
     )
 );

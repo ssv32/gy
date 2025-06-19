@@ -2,7 +2,7 @@
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 $mess['rus'] = array(
-    'ITEMS-NULL' => '!Элементов ещё нет',
+    'ITEMS-NULL' => '!Таких элементов нет',
 );
 
 $mess['eng'] = array(

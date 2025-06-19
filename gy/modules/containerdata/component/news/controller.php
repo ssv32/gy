@@ -9,6 +9,9 @@ $arRes = array();
 
 $data = $_REQUEST;
 
+$urlDetailPageIsGetProperty = ($this->arParam['show-detail-url'] == 1) && !empty($this->arParam['detail-url-property']);
+$thisDetailPageNews = $urlDetailPageIsGetProperty && !empty($data[$this->arParam['detail-url-property']]) ;
+
 $flagTrueContainerDataId = false;
 
 if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])) {
@@ -16,17 +19,13 @@ if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['co
 } elseif ($this->arParam['container-data-code']) {
     $dataContainerDataId = ContainerData::getContainerData(array('=' => array('code', "'".$this->arParam['container-data-code']."'")), array('id'));
     if (!empty($dataContainerDataId[0]['id'])) {    
-    $this->arParam['container-data-id'] = $dataContainerDataId[0]['id'];    
-    if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])) {
-        $flagTrueContainerDataId = true;
-    }
+        $this->arParam['container-data-id'] = $dataContainerDataId[0]['id'];    
+        if (!empty($this->arParam['container-data-id']) && is_numeric($this->arParam['container-data-id'])) {
+            $flagTrueContainerDataId = true;
+        }
         
     }
 }
-
-/*
-    'show-in-url-code' => 1, // TODO 1/0 чпу
-*/
 
 if ($flagTrueContainerDataId){
     
@@ -84,20 +83,43 @@ if ($flagTrueContainerDataId){
     $arRes['ITEMS'] = array();
 }
 
-// пагинация 
-if ( ($this->arParam['show-pagination'] == 1) && !empty($arRes['ITEMS']) ) {
-    
-    
-//    for ($i = 0; $i<30; $i++){ // TEST
-//        $arRes['ITEMS'][] = $arRes['ITEMS'][0];
-//    }
-    
-    // даст html код пагинации
-    $arRes['HTML-CODE-PAGINATION'] = Pagination::getPaginationType2($arRes['ITEMS'], $this->arParam['count-news-in-1-page']);
-    // отсекёт данные, что бы осталось только на текущию страницу
-    $arRes['ITEMS'] = Pagination::getDataFrom1Page($arRes['ITEMS'], $this->arParam['count-news-in-1-page']);
-    
-}
+if (!$thisDetailPageNews) {
+    // пагинация 
+    if ( ($this->arParam['show-pagination'] == 1) && !empty($arRes['ITEMS']) ) {
 
+    //    for ($i = 0; $i<30; $i++){ // TEST
+    //        $arRes['ITEMS'][] = $arRes['ITEMS'][0];
+    //    }
+
+        // даст html код пагинации
+        $arRes['HTML-CODE-PAGINATION'] = Pagination::getPaginationType2($arRes['ITEMS'], $this->arParam['count-news-in-1-page']);
+        // отсекёт данные, что бы осталось только на текущию страницу
+        $arRes['ITEMS'] = Pagination::getDataFrom1Page($arRes['ITEMS'], $this->arParam['count-news-in-1-page']);
+
+    }
+
+    // add url detail news
+    if (!empty($arRes['ITEMS'])) {
+
+        foreach ($arRes['ITEMS'] as $key => $value){
+            $detailUrlItem = '';
+            if ($this->arParam['show-in-url-code'] == 1) { // TODO детального просмотра пока нет (пока не нужен)
+                $detailUrlItem = $this->arParam['this-url-dir'].$value['code'].'/';
+            } elseif ( $urlDetailPageIsGetProperty ) {
+                $detailUrlItem = '?'.$this->arParam['detail-url-property'].'='.$value['code'];
+            }
+
+            $arRes['ITEMS'][$key]['detail-url'] = $detailUrlItem;
+        }
+    }
+} else {
+    foreach ($arRes['ITEMS'] as $value) {
+        if ($value['code'] == $data[$this->arParam['detail-url-property']] ) {
+            $arRes['DETAIL_NEWS'] = $value;
+        }
+    }
+    unset($arRes['ITEMS']);
+}
+    
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

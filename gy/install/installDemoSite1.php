@@ -892,6 +892,9 @@ body {
     padding-bottom: 20px;
     font-size: 12pt;
 }
+.news .item{
+    padding: 10px;
+}
 
         ',
         './customDir/component/containerdata_element_list/teplates/menu/template.php' => '
@@ -1217,7 +1220,10 @@ $APP->component(
             \'preview_text\',
             \'date\'
         ),
-        \'show-in-url-code\' => 1, // TODO 1/0 чпу
+        //\'show-in-url-code\' => 0, // TODO 1/0 чпу
+        \'show-detail-url\' => 1, // 1/0 детальный урл через параметр в запросе
+        \'detail-url-property\' => \'show\',
+        \'this-url-dir\' => \'/news/\'
     )
 );
 

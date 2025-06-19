@@ -1,6 +1,8 @@
 <?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 
-<h3><?=$arParam['title'];?></H3>
+<?php if (empty($arRes['DETAIL_NEWS'])) { ?>
+    <h3><?=$arParam['title'];?></H3>
+<?php } ?>
 
 <div class="news" >
 <?php
@@ -9,8 +11,8 @@ if (!empty($arRes['ITEMS'])){ ?>
         <?php foreach ($arRes['ITEMS'] as $val) {?>
             <div class="item">
                 
-                <?php if ( $arParam['show-in-url-code'] == 1) {?>
-                    <a href="<?=$arParam['this-url-dir'].$val['code']?>/" >
+                <?php if ( !empty($val['detail-url'])) {?>
+                    <a href="<?=$val['detail-url']?>" >
                 <?php } else { ?>
                     <p>
                 <?php }?>
@@ -19,7 +21,7 @@ if (!empty($arRes['ITEMS'])){ ?>
                     <br/>
                     <?=$val['property']['date']['value']['value']?>
 
-                <?php if ( $arParam['show-in-url-code'] == 1) {?>
+                <?php if ( !empty($val['detail-url'])) {?>
                     </a>
                 <?php } else { ?>
                     </p>
@@ -39,12 +41,23 @@ if (!empty($arRes['ITEMS'])){ ?>
     }
     ?>
 
+<?php } elseif (!empty($arRes['DETAIL_NEWS'])) {?>
+    
+    <div class="item"> 
+        <p>
+            <b><?=$arRes['DETAIL_NEWS']['name']?></b><br/>
+            <?=$arRes['DETAIL_NEWS']['property']['date']['value']['value']?><br/><br/>
+            <?=$arRes['DETAIL_NEWS']['property']['detailed_text']['value']['value']?>
+            <br/>
+        </p>
+    </div>  
+    
 <?php } else {?>
     <div class="item">
         <p>
             <?=$this->lang->getMessage('ITEMS-NULL');?>
         </p>
     </div>
-<?php }?>
+<?php } ?>
 </div>
     

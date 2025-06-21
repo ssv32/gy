@@ -837,12 +837,12 @@ $APP->component(
         ',
         './html/main.css' => '
 .header {
-    background-color: #7999b0;
+    background: linear-gradient(#2f434f, #456274, #2f434f);
     text-align: center;
 }
 .menu{
     text-align: center;
-    background-color: #ced9dd;
+    background: linear-gradient(#ced9dd, #96a5af);
     padding: 20px;
     font-size: 16pt;
 }
@@ -866,8 +866,8 @@ a:hover{
 }
 h1 {    
     color: #e3edf6;
-    padding-top: 50px;
-    padding-bottom: 40px;
+    padding-top: 70px;
+    padding-bottom: 70px;
     font-size: 20pt;
 }
 body {
@@ -885,7 +885,7 @@ body {
     background: #d0e1ff;
 }
 .footer{
-    background-color: #456274;
+    background: linear-gradient(#2f434f, #456274);
     color: #ebffff;
     text-align: center;
     padding-top: 20px;

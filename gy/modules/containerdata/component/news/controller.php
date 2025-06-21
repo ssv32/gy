@@ -113,7 +113,7 @@ if (!$thisDetailPageNews) {
         }
     }
 } else {
-    foreach ($arRes['ITEMS'] as $value) {
+    foreach ($arRes['ITEMS'] as $value) { // TODO можно переделать в отдельный запрос и брать конкретное, но если мало данных (для маленького проекта) и так норм, ответы из БД закешированы
         if ($value['code'] == $data[$this->arParam['detail-url-property']] ) {
             $arRes['DETAIL_NEWS'] = $value;
         }

@@ -11,7 +11,8 @@ $mess['rus'] = array(
     'value' => 'Значение',
     'save-ok' => 'Свойства сохранены',
     'PROPERTY_NULL' => '! Элементов не найдено',
-    'ok' => 'ОК'
+    'ok' => 'ОК',
+    'del-file' => 'Удалить файл'
 );
 
 $mess['eng'] = array(
@@ -24,6 +25,7 @@ $mess['eng'] = array(
     'value' => 'Value',
     'save-ok' => 'Properties saved',
     'PROPERTY_NULL' => '! No items found',
-    'ok' => 'OK'
+    'ok' => 'OK',
+    'del-file' => 'Delete file'
 );
 

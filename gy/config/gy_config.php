@@ -9,13 +9,14 @@ $gyConfig = array(
     "db_config" => array(
         "db_type" => "MySql",
         "db_host" => "localhost",
-        "db_user" => "root",
-        "db_pass" => "",
-        "db_name" => "gy_db",
+        "db_user" => "mysql",
+        "db_pass" => "mysql",
+        "db_name" => "gy-test",
         "db_port" => "31006",
     ),
     "urlPage404" => "gy/404.php",
     //"secretKeyAuthorizationAdminPanel" => "0GJ9Hs7VRXfp0x0DJWAlxBmfKJPGG8qAlwm6l5JoJ4smB2",
     "type_cache" => "CacheFiles",
     "v-gy" => "0.3-alpha",
+    "dir_public_file" => 'public' // TODO добавить везде в инсталы и т.д.
 );

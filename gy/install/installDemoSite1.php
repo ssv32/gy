@@ -41,6 +41,7 @@ if ($isRunConsole) {
             mkdir(__DIR__.'/../../html/', 0755, true);
             mkdir(__DIR__.'/../../documentation-for-content-manager/', 0755, true);
             mkdir(__DIR__.'/../../news/', 0755, true);
+            mkdir(__DIR__.'/../../public/', 0755, true);
             
    
             // записать файлы /customDir
@@ -432,6 +433,22 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                     'id_container_data' => $dataContentContainerData[0]['id'],
                     'code' => 'date',
                     'name' => 'Дата новости'
+                )
+            );
+            ContainerData::addPropertyContainerData(
+                array(
+                    'id_type_property' => 3, // TODO id не очень надо коды
+                    'id_container_data' => $dataContentContainerData[0]['id'],
+                    'code' => 'detailed_img',
+                    'name' => 'Детальная картинка'
+                )
+            );
+            ContainerData::addPropertyContainerData(
+                array(
+                    'id_type_property' => 3,
+                    'id_container_data' => $dataContentContainerData[0]['id'],
+                    'code' => 'preview_img',
+                    'name' => 'Превью картинка'
                 )
             );
 

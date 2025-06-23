@@ -68,6 +68,16 @@ if ($isRunConsole) {
             'name_table' => 'value_propertys_type_number'
         )
     );
+    
+    $res = $DB->insertDb(
+        'types_property_container_data', // TODO названия таблиц брать из класса ContainerData
+        array(
+            'name' => 'public file',
+            'code' =>   'file',
+            'info' => 'property save date - file',
+            'name_table' => 'value_propertys_type_public_file'
+        )
+    );
 
     $res = $DB->createTable( // элементы containerData-а
         'element_container_data',
@@ -99,6 +109,17 @@ if ($isRunConsole) {
             'id_element_container_data int',
             'id_property_container_data int',
             'value int'
+        )
+    );
+    
+    $res = $DB->createTable( // значения свойств containerData-а типа file
+        'value_propertys_type_public_file',
+        array(
+            'id int PRIMARY KEY AUTO_INCREMENT',
+            'id_container_data int',
+            'id_element_container_data int',
+            'id_property_container_data int',
+            'value varchar(1000)',
         )
     );
     echo $br.'install table module - containerData = OK!';

@@ -12,6 +12,7 @@ class ContainerData
     public static $tableElementContainerData = 'element_container_data';
     public static $tableValuePropertysTypeHtml = 'value_propertys_type_html';
     public static $tableValuePropertysTypeNumber = 'value_propertys_type_number';
+    public static $tableValuePropertysTypePublicFile = 'value_propertys_type_public_file';
 
     public static $propertyTapleProperty = array(
         'id_type_property',
@@ -235,6 +236,32 @@ class ContainerData
                 'value' => $value
             )
         );
+        if ($res) {
+            $result = true;
+        }
+        return $result;
+    }
+    
+    /**
+     * deleteValuePropertyContainerData - удалить значение свойства элемента container-data
+     * @global type $DB
+     * @param type $tableName
+     * @param type $id
+     * @param type $value
+     * @return boolean
+     */
+    public static function deleteValuePropertyContainerData($tableName, $id)
+    {
+        $result = false;
+        global $DB;
+
+        $res = $DB->deleteDb(
+            $tableName, 
+            array(
+                '=' => array('id', $id)
+            )
+        );
+
         if ($res) {
             $result = true;
         }

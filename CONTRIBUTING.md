@@ -19,4 +19,4 @@ I'm really glad you're reading this, because we need volunteer developers to hel
 <br/>
 
 <h2>Do you want to contribute to the Gy documentation?</h2>
-- web@asisg.ru<br/>
+- ssv_32@mail.ru<br/>

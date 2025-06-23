@@ -11,11 +11,11 @@ I'm really glad you're reading this, because we need volunteer developers to hel
 - Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.<br/>
 <br/>
 <h2>Do you intend to add a new feature or change an existing one?</h2>
-- Suggest your change in the web@asisg.ru and start writing code;<br/>
+- Suggest your change in the ssv_32@mail.ru and start writing code;<br/>
 - Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.<br/>
 <br/>
 <h2>Do you have questions about the source code?</h2>
-- Ask any question about how to use gy php framework/CMS  in the web@asisg.ru.<br/>
+- Ask any question about how to use gy php framework/CMS  in the ssv_32@mail.ru.<br/>
 <br/>
 
 <h2>Do you want to contribute to the Gy documentation?</h2>

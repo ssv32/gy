@@ -10,6 +10,22 @@ global $argv;
 $isRunConsole = isset($argv);
 $br = "\n";
 
+function createTestImage($text, $src){
+    $img = imagecreatetruecolor(128,128);
+
+    // делаем фон белым
+    $white = imagecolorallocate($img, 150, 165, 175);
+    imagefill($img, 1, 1, $white);
+
+    // делаем надпись
+    $orange = imagecolorallocate($img, 16, 43, 61);
+    $px     = (imagesx($img) - 7.5 * strlen($text)) / 2;
+    imagestring($img, 3, $px, 50, $text, $orange);
+
+    // сохраняем картинку
+    return imagejpeg($img , $src, 100);
+}
+
 if ($isRunConsole) {
     if ($argv[1] == 'start') {
 
@@ -43,7 +59,15 @@ if ($isRunConsole) {
             mkdir(__DIR__.'/../../news/', 0755, true);
             mkdir(__DIR__.'/../../public/', 0755, true);
             
-   
+            $createImageForNews = false; 
+            if (
+                gd_info()
+                && createTestImage('Preview img',  __DIR__.'/../../public/preview_img.jpg') 
+                && createTestImage('Detailed img', __DIR__.'/../../public/detailed_img.jpg')    
+            ) {
+                $createImageForNews = false;
+            } 
+            
             // записать файлы /customDir
             file_put_contents(__DIR__.'/../../customDir/component/containerdata_element_list/teplates/menu/template.php', getCodeByUrlPage('./customDir/component/containerdata_element_list/teplates/menu/template.php', $lang));
             file_put_contents(__DIR__.'/../../customDir/component/containerdata_element_property/teplates/1/template.php', getCodeByUrlPage('./customDir/component/containerdata_element_property/teplates/1/template.php', $lang));
@@ -565,6 +589,12 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 if  ($val['code'] == 'date') {
                     $prop3Id = $val['id'];
                 }
+                if  ($val['code'] == 'detailed_img') {
+                    $prop4Id = $val['id'];
+                }
+                if  ($val['code'] == 'preview_img') {
+                    $prop5Id = $val['id'];
+                }
             }
             
             // добавить значение свойства для элемента созданного выше
@@ -589,6 +619,23 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 'value_propertys_type_html',
                 '14.06.2025'
             );
+            if ($createImageForNews) {
+                ContainerData::addValuePropertyContainerData(
+                    $dataContentContainerData[0]['id'],
+                    $dataElement1['id'],
+                    $prop4Id,
+                    'value_propertys_type_public_file',
+                    '/public/detailed_img.jpg'
+                );
+                ContainerData::addValuePropertyContainerData(
+                    $dataContentContainerData[0]['id'],
+                    $dataElement1['id'],
+                    $prop5Id,
+                    'value_propertys_type_public_file',
+                    '/public/preview_img.jpg'
+                );
+            }
+            
             
             ContainerData::addValuePropertyContainerData(
                 $dataContentContainerData[0]['id'],
@@ -611,6 +658,8 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 'value_propertys_type_html',
                 '15.06.2025'
             );
+
+            
             
             ContainerData::addValuePropertyContainerData(
                 $dataContentContainerData[0]['id'],

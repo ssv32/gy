@@ -18,5 +18,5 @@ $gyConfig = array(
     //"secretKeyAuthorizationAdminPanel" => "0GJ9Hs7VRXfp0x0DJWAlxBmfKJPGG8qAlwm6l5JoJ4smB2",
     "type_cache" => "CacheFiles",
     "v-gy" => "0.3-alpha",
-    "dir_public_file" => 'public' // TODO добавить везде в инсталы и т.д.
+    "dir_public_file" => 'public' 
 );

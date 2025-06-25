@@ -16,6 +16,10 @@ if (!empty($arRes['ITEMS'])){ ?>
                 <?php } else { ?>
                     <p>
                 <?php }?>
+                    <?php if (!empty($val['property']['preview_img']['value']['value'])) {?>
+                        <img src="<?=$val['property']['preview_img']['value']['value']?>" />
+                        <br/>
+                    <?php } ?>
                     <b><?=$val['name']?></b><br/>
                     <?=$val['property']['preview_text']['value']['value']?>
                     <br/>
@@ -45,6 +49,10 @@ if (!empty($arRes['ITEMS'])){ ?>
     
     <div class="item"> 
         <p>
+            <?php if (!empty($arRes['DETAIL_NEWS']['property']['detailed_img']['value']['value'])) {?>
+                <img src="<?=$arRes['DETAIL_NEWS']['property']['detailed_img']['value']['value']?>" />
+                <br/>
+            <?php } ?>
             <b><?=$arRes['DETAIL_NEWS']['name']?></b><br/>
             <?=$arRes['DETAIL_NEWS']['property']['date']['value']['value']?><br/><br/>
             <?=$arRes['DETAIL_NEWS']['property']['detailed_text']['value']['value']?>

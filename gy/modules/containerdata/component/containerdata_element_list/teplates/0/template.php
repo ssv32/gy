@@ -1,6 +1,18 @@
 <?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 
-<h4><?=$this->lang->getMessage('title');?></H4>
+<?php
+if ($arParam['show-bread-crumbs'] == 1) {
+    global $APP;
+    $APP->component(
+        'bread-crumbs',
+        '0',
+        array( 
+            'items' => $arParam['bread-crumbs-items']
+        )
+    );
+} ?>
+
+<h4><?=$this->lang->getMessage('title');?><?=((!empty($arRes['info'][0]['name']))? ' - '.$arRes['info'][0]['name'] : '')?></H4>
 
 <?php
 $isEdit = (!empty($arRes['stat-del']) && ($arRes['stat-del'] == 'edit'));

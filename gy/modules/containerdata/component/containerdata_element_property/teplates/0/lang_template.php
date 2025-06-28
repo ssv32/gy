@@ -4,7 +4,8 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 $mess['rus'] = array(
     'save' => 'Сохранить',
     'back' => 'Отменить',
-    'title' => 'Значения свойств элемента',
+    'title' => 'Значения свойств элемента - ',
+    'title2' => ', Контейнера данных - ',
     'name' =>  'Название',
     'code' =>  'Сode',
     'type'  => 'Тип свойства',
@@ -19,6 +20,7 @@ $mess['eng'] = array(
     'save' => 'Save',
     'back' => 'Cancel',
     'title' => 'Item property values',
+    'title2' => ', Container data -',
     'name' =>  'Name',
     'code' =>  'Сode',
     'type'  => 'Type property',

@@ -143,5 +143,17 @@ if (!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id'
     }
 }
 
+$arRes['info'] = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['container-data-id'])), array('*') );
+$arRes['elInfo'] = ContainerData::getElementContainerData(array( '=' =>array( 'id', $this->arParam['el-id'])));
+
+// если детальная страница добавим в хлебные крошки
+if (!empty($this->arParam['show-bread-crumbs']) 
+    && ($this->arParam['show-bread-crumbs'] == 1) 
+    && !empty($this->arParam['container-data-id'])
+) {
+    $this->arParam['bread-crumbs-items']['/gy/admin/get-admin-page.php?page=container-data-element-list&container-data-id='.$this->arParam['container-data-id']] = 'Контейнер данных - '.$arRes['info'][0]['name'];
+    $this->arParam['bread-crumbs-items'][] = 'Значения свойств элемента - '.$arRes['elInfo']['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

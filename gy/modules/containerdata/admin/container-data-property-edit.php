@@ -16,7 +16,7 @@ if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
                 'show-bread-crumbs' => 1,
                 'bread-crumbs-items' => array(
                     '/gy/admin/' => 'Главная админки',
-                    '/gy/admin/users.php' => 'Пользователи'
+                    '/gy/admin/get-admin-page.php?page=container-data' => 'Контейнеры данных'
                 )
             )
         );

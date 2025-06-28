@@ -92,5 +92,14 @@ if ($flagTrueContainerDataId){
     $arRes['ITEMS'] = array();
 }
 
+// если детальная страница добавим в хлебные крошки
+if (!empty($this->arParam['show-bread-crumbs']) 
+    && ($this->arParam['show-bread-crumbs'] == 1) 
+    && !empty($this->arParam['container-data-id'])
+) {
+    $arRes['info'] = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['container-data-id'])), array('*') );
+    $this->arParam['bread-crumbs-items'][] = 'Элементы контейнера данных - '.$arRes['info'][0]['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

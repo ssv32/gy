@@ -40,5 +40,10 @@ if (!empty($data['ID'])) {
     }
 }
 
+// если детальная страница добавим в хлебные крошки
+if (!empty($arRes['data-this-nfo-box'][0]['name'])) { 
+    $this->arParam['bread-crumbs-items'][] = 'Редактирование контейнера данных - '.$arRes['data-this-nfo-box'][0]['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

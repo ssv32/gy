@@ -7,6 +7,17 @@ if ($USER->isAdmin()) {
 
     include "../../gy/admin/header-admin.php";
 
+    $APP->component(
+        'bread-crumbs',
+        'admin',
+        array( 
+            'items' => array(
+                '/gy/admin/' => 'Главная админки',
+                '/gy/admin/modules.php' => 'Модули'
+            )
+        )
+    );
+    
     // таблица с пользователями
     $APP->component(
         'show_include_modules',

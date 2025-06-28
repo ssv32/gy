@@ -50,5 +50,14 @@ if (!empty($data['del-property-id']) && !empty($data['del-proprty-container-data
     }
 }
 
+// если детальная страница добавим в хлебные крошки
+if (!empty($this->arParam['show-bread-crumbs']) 
+    && ($this->arParam['show-bread-crumbs'] == 1) 
+    && !empty($this->arParam['container-data-id'])
+) {
+    $info = ContainerData::getContainerData(array( '=' =>array( 'id', $this->arParam['container-data-id'])), array('*') );
+    $this->arParam['bread-crumbs-items'][] = 'Редактировать свойства этого контейнера данных - '.$info[0]['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

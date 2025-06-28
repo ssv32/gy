@@ -2,6 +2,18 @@
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
 ?>
+<?php
+if ($arParam['show-bread-crumbs'] == 1) {
+    global $APP;
+    $APP->component(
+        'bread-crumbs',
+        '0',
+        array( 
+            'items' => $arParam['bread-crumbs-items']
+        )
+    );
+}?>
+
 <h3><?=$this->lang->getMessage('title');?></h3>
 <?php
 if (!empty($arParam['back-url']) && empty($arRes["stat"])) {?>

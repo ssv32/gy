@@ -12,7 +12,12 @@ if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
             'containerdata_edit',
             '0',
             array(
-                'ID' => $id
+                'ID' => $id,
+                'show-bread-crumbs' => 1,
+                'bread-crumbs-items' => array(
+                    '/gy/admin/' => 'Главная админки',
+                    '/gy/admin/get-admin-page.php?page=container-data' => 'Контейнеры данных'
+                )
             )
         );
 

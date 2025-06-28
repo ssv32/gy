@@ -100,5 +100,11 @@ if (empty($data['stat'])) {
     $arRes["stat"] = $data['stat'];
 }
 
+
+// если детальная страница добавим в хлебные крошки
+if (!empty($arRes['userData'])) { 
+    $this->arParam['bread-crumbs-items'][] = 'Изменение пользователя - '.$arRes['userData']['login'].'/'.$arRes['userData']['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

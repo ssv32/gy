@@ -1,6 +1,18 @@
 <?php
 if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
+
+if ($arParam['show-bread-crumbs'] == 1) {
+    global $APP;
+    $APP->component(
+        'bread-crumbs',
+        '0',
+        array( 
+            'items' => $arParam['bread-crumbs-items']
+        )
+    );
+}
+
 if (!empty($arRes['data-this-nfo-box'])) {
     $value = array_shift($arRes['data-this-nfo-box']);
     if (!empty($value)){

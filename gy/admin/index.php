@@ -3,6 +3,16 @@ include "../../gy/gy.php"; // подключить ядро // include core
 
 include "../../gy/admin/header-admin.php";
 
+$APP->component(
+    'bread-crumbs',
+    'admin',
+    array( 
+        'items' => array(
+            '/gy/admin/' => 'Главная админки',
+        )
+    )
+);
+
 // пример вызова компонента // example run component
 $APP->component(
     'admin',

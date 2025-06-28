@@ -55,5 +55,10 @@ if (!empty($this->arParam['id']) && is_numeric($this->arParam['id'])) {
 
 }
 
+// если детальная страница добавим в хлебные крошки
+if (!empty($arRes['dataUser'])) { 
+    $this->arParam['bread-crumbs-items'][] = 'Просмотр всех данных пользователя - '.$arRes['dataUser']['login'].'/'.$arRes['dataUser']['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

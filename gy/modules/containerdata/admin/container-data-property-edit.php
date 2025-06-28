@@ -12,7 +12,12 @@ if (Gy\Core\User\AccessUserGroup::accessThisUserByAction( 'show_admin_panel')) {
             'containerdata_property_edit',
             '0',
             array(
-                'container-data-id' => $id
+                'container-data-id' => $id,
+                'show-bread-crumbs' => 1,
+                'bread-crumbs-items' => array(
+                    '/gy/admin/' => 'Главная админки',
+                    '/gy/admin/users.php' => 'Пользователи'
+                )
             )
         );
 

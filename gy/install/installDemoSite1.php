@@ -1133,6 +1133,17 @@ if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );
 
     <?
     global $APP;
+    
+    $APP->component(
+        \'bread-crumbs\',
+        \'0\',
+        array( 
+            \'items\' => array(
+                \'/\' => \'Главная\',
+            )
+        )
+    );
+
     $APP->component(
         \'containerdata_element_show\',
         \'show_block_site\',
@@ -1159,9 +1170,9 @@ $APP->component(
     \'header_example_site\',
     array(
         \'seo-meta-tag-head\' => array(
-            \'title\' => \'Пример простого сайта\',
-            \'descriptions\' => \'description пример простого сайта\',
-            \'keywords\' => \'description пример простого сайта\'
+            \'title\' => \'Пример простого сайта - Документация для контент-менеджера (по текущему демо сайту)\',
+            \'descriptions\' => \'description пример простого сайта - Документация для контент-менеджера (по текущему демо сайту)\',
+            \'keywords\' => \'description пример простого сайта - Документация для контент-менеджера (по текущему демо сайту)\'
         ) 
     )
 );
@@ -1185,12 +1196,30 @@ $APP->component(
     )
 );  
 
+$APP->component(
+    \'includeHtml\',
+    \'0\',
+    array( 
+        \'html\' => \'<div class="content">\',    
+    )
+);
+
+$APP->component(
+    \'bread-crumbs\',
+    \'0\',
+    array( 
+        \'items\' => array(
+            \'/\' => \'Главная\',
+            \'/documentation-for-content-manager/\' => \'Документация для контент-менеджера (по текущему демо сайту 1)\'
+        )
+    )
+);
 
 $APP->component(
     \'includeHtml\',
     \'0\',
     array( 
-        \'html\' => \'<div class="content">
+        \'html\' => \'
             <h3>Документация для контент-менеджера (по текущему демо сайту 1) </h3>
             <p>Нужна для редактирования выводимых данных на демо сайте 1.</p>
             <p><b>Панель администрирования</b><br/> Для изменения данных необходимо зайти в панель администрирования, для этого нужно перейти по url <a href="/gy">/gy</a> и ввести логин и пароль admin (логин и пароль по умолчанию)</p>
@@ -1212,8 +1241,16 @@ $APP->component(
             <p><b>Сброс кеша gy</b><br/>
             Для этого нужно зайти в панель администрирования далее “Настройки” и нажать кнопку “Сбросить кеш”
             </p>
-        </div>
+        
         \',    
+    )
+);
+
+$APP->component(
+    \'includeHtml\',
+    \'0\',
+    array( 
+        \'html\' => \'</div>\',    
     )
 );
 
@@ -1241,9 +1278,9 @@ $APP->component(
     \'header_example_site\',
     array(
         \'seo-meta-tag-head\' => array(
-            \'title\' => \'Пример простого сайта\',
-            \'descriptions\' => \'description пример простого сайта\',
-            \'keywords\' => \'description пример простого сайта\'
+            \'title\' => \'Пример простого сайта - Новости\',
+            \'descriptions\' => \'description пример простого сайта - Новости\',
+            \'keywords\' => \'description пример простого сайта - Новости\'
         ) 
     )
 );

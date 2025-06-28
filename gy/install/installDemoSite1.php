@@ -65,7 +65,7 @@ if ($isRunConsole) {
                 && createTestImage('Preview img',  __DIR__.'/../../public/preview_img.jpg') 
                 && createTestImage('Detailed img', __DIR__.'/../../public/detailed_img.jpg')    
             ) {
-                $createImageForNews = false;
+                $createImageForNews = true;
             } 
             
             // записать файлы /customDir
@@ -491,7 +491,7 @@ Wiki проекта находтся тут <a href="https://github.com/ssv32/gy
                 array(
                     'section_id' => 0,
                     'code' => 'news2',
-                    'name' => 'Новости 1',
+                    'name' => 'Новости 2',
                     'id_container_data' => $dataContentContainerData[0]['id']
                 )
             );

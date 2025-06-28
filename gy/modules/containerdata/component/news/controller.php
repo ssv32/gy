@@ -121,5 +121,10 @@ if (!$thisDetailPageNews) {
     unset($arRes['ITEMS']);
 }
     
+// если детальная страница добавим в хлебные крошки
+if (!empty($arRes['DETAIL_NEWS'])) {
+    $this->arParam['bread-crumbs-items'][] = $arRes['DETAIL_NEWS']['name'];
+}
+
 // показать шаблон
 $this->template->show($arRes, $this->arParam);

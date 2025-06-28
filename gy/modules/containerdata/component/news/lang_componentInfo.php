@@ -13,6 +13,8 @@ $mess['rus'] = array(
     'this-url-dir' => 'раздел сайта где выводятся новости (нужен для чпу)',
     'show-detail-url' => 'показать ссылку, на детальную страницу новости в виде ссылки с get параметром  (1 \ 0) (+ нужно заполнить detail-url-property)', 
     'detail-url-property' => 'названия параметра куда указывать код новости (+нужно заполнить show-detail-url )',
+    'show-bread-crumbs' => 'показать хлебные крошки',
+    'bread-crumbs-items' => 'массив для хлебных крошек url => name page'
 );
 
 $mess['eng'] = array(
@@ -27,4 +29,6 @@ $mess['eng'] = array(
     'this-url-dir' => 'site dir news',
     'show-detail-url' => 'show a link to the detailed page of the news as a link with a get parameter (1 \ 0) (+ you need to fill in detail-url-property)', 
     'detail-url-property' => 'parameter names where to indicate the news code (+you need to fill in show-detail-url )',
+    'show-bread-crumbs' => 'show bread-crumbs',
+    'bread-crumbs-items' => 'array for bread-crumbs, url => name page'
 );

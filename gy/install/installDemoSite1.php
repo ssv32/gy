@@ -1294,7 +1294,12 @@ $APP->component(
         //\'show-in-url-code\' => 0, // TODO 1/0 чпу
         \'show-detail-url\' => 1, // 1/0 детальный урл через параметр в запросе
         \'detail-url-property\' => \'show\',
-        \'this-url-dir\' => \'/news/\'
+        \'this-url-dir\' => \'/news/\',
+        \'show-bread-crumbs\' => 1,
+        \'bread-crumbs-items\' => array(
+            \'/\' => \'Главная\',
+            \'/news/\' => \'Новости\'
+        )
     )
 );
 

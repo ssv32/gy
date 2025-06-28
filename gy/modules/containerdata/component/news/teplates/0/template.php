@@ -1,5 +1,17 @@
 <?php if (!defined("GY_CORE") && (GY_CORE !== true)) die( "gy: err include core" );?>
 
+<?php
+if ($arParam['show-bread-crumbs'] == 1) {
+    global $APP;
+    $APP->component(
+        'bread-crumbs',
+        '0',
+        array( 
+            'items' => $arParam['bread-crumbs-items']
+        )
+    );
+}?>
+
 <?php if (empty($arRes['DETAIL_NEWS'])) { ?>
     <h3><?=$arParam['title'];?></H3>
 <?php } ?>
@@ -7,6 +19,8 @@
 <div class="news" >
 <?php
 if (!empty($arRes['ITEMS'])){ ?>
+    
+   
     
         <?php foreach ($arRes['ITEMS'] as $val) {?>
             <div class="item">
@@ -49,12 +63,16 @@ if (!empty($arRes['ITEMS'])){ ?>
     
     <div class="item"> 
         <p>
+            <h3><?=$arRes['DETAIL_NEWS']['name']?></h3>
+            <?=$arRes['DETAIL_NEWS']['property']['date']['value']['value']?>
+            <br/>
+            <br/>
             <?php if (!empty($arRes['DETAIL_NEWS']['property']['detailed_img']['value']['value'])) {?>
                 <img src="<?=$arRes['DETAIL_NEWS']['property']['detailed_img']['value']['value']?>" />
                 <br/>
             <?php } ?>
-            <b><?=$arRes['DETAIL_NEWS']['name']?></b><br/>
-            <?=$arRes['DETAIL_NEWS']['property']['date']['value']['value']?><br/><br/>
+            
+            <br/><br/>
             <?=$arRes['DETAIL_NEWS']['property']['detailed_text']['value']['value']?>
             <br/>
         </p>

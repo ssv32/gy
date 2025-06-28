@@ -19,12 +19,30 @@ if (!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id'
 
     
 
-    // сохранить файлы // TODO тут надо проверить прова пользователя + потестить безопасность (что бы не удалялся произвольный файл)
+    // сохранить файлы 
     if (!empty($_FILES['propertyAdd']['tmp_name'])){
         foreach ($_FILES['propertyAdd']['tmp_name'] as $key => $val) {
             global $APP;
-            if (($val != '') && move_uploaded_file($val, $APP->urlProject.'/'.$APP->options['dir_public_file'].'/'.$_FILES['propertyAdd']['name'][$key] ) ) {
-                $data['propertyAdd'][$key] = '/'.$APP->options['dir_public_file'].'/'.$_FILES['propertyAdd']['name'][$key];
+            
+            if ( $val != '' ) {
+                $fileSave = false;
+                $i = 1;
+                while (!$fileSave && ($i < 5)) { // это на случай если файлы одинаковые добавляются
+                    $fileName = $_FILES['propertyAdd']['name'][$key];
+                    if ($i > 1){
+                        //$fileName .= '_'.$i;
+                        $prefixNameFile = md5(time() + $i);
+                        $arStr = explode('.', $fileName);
+                        $arStr[0] .= '_'.$prefixNameFile;
+                        $fileName = implode('.', $arStr);
+                    }
+                    if (!file_exists($APP->urlProject.'/'.$APP->options['dir_public_file'].'/'.$fileName)){
+                        
+                        $fileSave = move_uploaded_file($val, $APP->urlProject.'/'.$APP->options['dir_public_file'].'/'.$fileName);;
+                    }
+                    $i++;
+                }   
+                $data['propertyAdd'][$key] = '/'.$APP->options['dir_public_file'].'/'.$fileName;
             }
         }
     }
@@ -79,16 +97,17 @@ if (!empty($this->arParam['container-data-id']) && !empty($this->arParam['el-id'
 
             if ($arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['code'] == 'file') { // если файл удаляется , удалить его из раздела
                 global $APP;
-                if (unlink($APP->urlProject.$arRes['PROPERTY_VALUE'][$arKeyValue[$key]]['value']) ){
-                    
-                    $res = ContainerData::deleteValuePropertyContainerData(
-                        $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['name_table'],
-                        $key   
-                    );
-                    
-                } else {
-                    $res = false;
+                // если есть файл удалим // может быть такое что файла уже нет, а свойство записано ещё
+                if ( file_exists($APP->urlProject.$arRes['PROPERTY_VALUE'][$arKeyValue[$key]]['value']) ) {
+                    unlink($APP->urlProject.$arRes['PROPERTY_VALUE'][$arKeyValue[$key]]['value']);
                 }
+                
+                $res = ContainerData::deleteValuePropertyContainerData(
+                    $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['name_table'],
+                    $key   
+                );
+                    
+                
             } else {
                 $res = ContainerData::updateValuePropertyContainerData(
                     $arRes['PROPERTY_TYPE'][$arRes['PROPERTY'][$arKeyValue[$key]]['id_type_property']]['name_table'],
